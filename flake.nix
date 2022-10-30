@@ -17,7 +17,6 @@
     };
   };
 
-
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
   outputs = inputs @ { self, flake-utils, darwin, deploy-rs, nixpkgs, home-manager }:
@@ -43,7 +42,15 @@
     // # <- concatenates Nix attribute sets
     {
       homeConfigurations = {
-        mrene = inputs.home-manager.lib.homeManagerConfiguration {
+        "mrene@beast" = inputs.home-manager.lib.homeManagerConfiguration {
+          pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+          modules = [
+            ./nixpkgs/home-manager/beast.nix
+          ];
+          # extraSpecialArgs = { pkgsUnstable = inputs.nixpkgs.legacyPackages.aarch64-darwin; };
+        };
+
+        "mrene@Mathieus-MacBook-Pro" = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
           modules = [
             ./nixpkgs/home-manager/mac.nix
