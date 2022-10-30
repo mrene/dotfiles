@@ -39,6 +39,7 @@
     yarn
     python38
     jq
+    jless
     go
     # cloc
     docker

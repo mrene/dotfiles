@@ -43,7 +43,7 @@
     // # <- concatenates Nix attribute sets
     {
       homeConfigurations = {
-        Mathieus-MacBook-Pro = inputs.home-manager.lib.homeManagerConfiguration {
+        mrene = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
           modules = [
             ./nixpkgs/home-manager/mac.nix
