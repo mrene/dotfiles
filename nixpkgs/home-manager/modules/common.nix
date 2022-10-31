@@ -32,6 +32,7 @@
     sops
     kubectx
     kubectl
+    k9s
 
     # httpstat
     curlie
