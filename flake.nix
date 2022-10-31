@@ -50,7 +50,7 @@
           # extraSpecialArgs = { pkgsUnstable = inputs.nixpkgs.legacyPackages.aarch64-darwin; };
         };
 
-        "mrene@Mathieus-MacBook-Pro" = inputs.home-manager.lib.homeManagerConfiguration {
+        "mrene@Mathieus-MacBook-Pro.local" = inputs.home-manager.lib.homeManagerConfiguration {
           pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
           modules = [
             ./nixpkgs/home-manager/mac.nix
