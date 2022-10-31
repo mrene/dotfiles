@@ -16,6 +16,7 @@
     neofetch # fancy system + hardware info
     tealdeer # fast tldr
     zoxide # habitual `cd`
+    any-nix-shell # allows using fish for `nix shell`
 
     # Requires a patched font
     # https://github.com/ryanoasis/nerd-fonts/blob/master/readme.md#patched-fonts
@@ -26,7 +27,11 @@
     ripgrep
     graphviz
     # git-crypt
+
+    # Ops tools
     sops
+    kubectx
+    kubectl
 
     # httpstat
     curlie
@@ -38,7 +43,7 @@
     speedtest-cli
 
     yarn
-    python38
+    python39Full
     jq
     jless
     go
@@ -57,6 +62,10 @@
     # Nix VSC
     rnix-lsp
     nixpkgs-fmt
+    
+    # Rust 
+    rust-analyzer
+
     # needed for headless chrome
     # chromium
 
@@ -81,5 +90,7 @@
   programs.dircolors = {
     enable = true;
   };
+
+
 
 }

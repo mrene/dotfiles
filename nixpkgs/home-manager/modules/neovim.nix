@@ -20,6 +20,7 @@
       vim-javascript
       typescript-vim
       rust-vim
+      nvim-lspconfig
     ] ++ lib.optionals (pkgs.stdenv.system != "aarch64-linux") [
       vim-go
     ];

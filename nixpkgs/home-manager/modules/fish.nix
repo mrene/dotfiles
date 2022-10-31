@@ -29,6 +29,8 @@
       if command -v zoxide &>/dev/null
         zoxide init fish | source
       end
+
+      any-nix-shell fish --info-right | source
     '';
     functions = {
 
