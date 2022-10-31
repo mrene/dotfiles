@@ -26,6 +26,7 @@
     ripgrep
     graphviz
     # git-crypt
+    sops
 
     # httpstat
     curlie
