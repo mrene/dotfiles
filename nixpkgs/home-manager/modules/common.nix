@@ -46,7 +46,9 @@
     speedtest-cli
 
     yarn
-    python39Full
+    python39
+    poetry
+    
     jq
     jless
     go
@@ -68,6 +70,9 @@
     
     # Rust 
     rust-analyzer
+
+
+    comma
 
     # needed for headless chrome
     # chromium
