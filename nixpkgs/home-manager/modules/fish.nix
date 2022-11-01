@@ -43,8 +43,8 @@
       '';
 
       hm = ''
-        pushd ~/.config
-        home-manager switch --flake .#$argv[1]
+        pushd ~/dotfiles
+        home-manager switch --flake .
         popd
       '';
 
@@ -137,7 +137,7 @@
       gcl = "git clone";
 
       d = "docker";
-      dc = "docker compose";
+      k = "kubectl";
 
       ".." = "cd ..";
       "..." = "cd ../..";

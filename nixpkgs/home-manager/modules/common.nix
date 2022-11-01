@@ -6,7 +6,9 @@
   programs.direnv.nix-direnv.enable = true;
 
   home.packages = with pkgs; [
-    # gnupg
+    # Shell
+    starship
+
     tmux
     wget
     bat
