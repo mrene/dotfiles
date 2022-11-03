@@ -46,7 +46,8 @@
     speedtest-cli
 
     yarn
-    python39
+    python310
+    python310Packages.grpcio
     poetry
     
     jq

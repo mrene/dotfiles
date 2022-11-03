@@ -20,7 +20,7 @@
       set -x TERM xterm-256color
 
       # Enable color in grep
-      set -x GREP_OPTIONS '--color=auto'
+      # set -x GREP_OPTIONS '--color=auto'
       set -x GREP_COLOR '3;33'
 
       # language settings
