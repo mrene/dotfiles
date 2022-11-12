@@ -1,10 +1,26 @@
-Heavily inspired from: https://github.com/schickling/dotfiles/
 
+
+Heavily inspired from: https://github.com/schickling/dotfiles/
 Also see: https://github.com/malob/nixpkgs
 
-`nix build .#darwinConfigurations.Mathieus-MacBook-Pro.system` then `./result/sw/bin/darwin-rebuild switch --flake . --show-trace`
 
+## Installing on a new environment
+- [Install nix](https://nixos.org/download.html)
+- Enable flakes
+    - `mkdir -p ~/.config/nix/ && echo 'experimental-features = nix-command flakes' > ~/.config/nix/nix.conf`
+- For darwin:
+    - `nix build .#darwinConfigurations.Mathieus-MacBook-Pro.system` then `./result/sw/bin/darwin-rebuild switch --flake . --show-trace`
+- For linux:
+    - `nix-env -iA nixpkgs.home-manager`
+- Activate home-manager:
+    - if installed
+        - `home-manager switch --flake .`
+    - if not installed:
+        - `nix build .#homeConfigurations.mrene@beast.activationPackage && ./result/activate`
+
+## Scratchpad from whenever this was written
 - darwin-rebuild didn't properly activate the nix profile automatically, but this did: `nix run nixpkgs#home-manager -- switch --flake .`
 
-- There is a derivation that can be built in order to activate home manager
-ex: `nix build .#homeConfigurations.mrene.activationPackage`
+## Manually activating home-manager
+This works because the flake itself depends on home manager
+

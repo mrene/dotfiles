@@ -67,6 +67,7 @@
     # docker-compose
     # Nix VSC
     rnix-lsp
+    nil
     nixpkgs-fmt
     
     # Rust 

@@ -78,6 +78,20 @@
           inputs = { inherit darwin nixpkgs; };
         };
       };
+
+      nixosConfigurations = {
+        # sudo nixos-rebuild switch --flake .#homepi
+        homepi = inputs.nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          specialArgs = { common = self.common; inherit inputs; };
+          modules = [ ];
+        };
+      };
+
+      images = {
+        # nix build .#images.homepi
+        homepi = self.nixosConfigurations.homepi.config.system.build.sdImage;
+      };
       
       common = {
         sshKeys = [
