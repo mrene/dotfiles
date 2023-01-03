@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
-    nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,7 +34,14 @@
     flake-utils.lib.eachDefaultSystem
       (system:
         let
-          pkgs = import nixpkgs { inherit system; };
+          pkgs = import nixpkgs { 
+            inherit system; 
+            config = {
+              permittedInsecurePackages = [
+                "python3.10-poetry-1.2.2" # CVE-2022-42966 - Regex DoS
+              ];
+            };
+          };
           pkgsUnstable = import nixpkgsUnstable { inherit system; };
         in
         {
@@ -48,10 +54,20 @@
 
         })
     // # <- concatenates Nix attribute sets
+    (let pkgsConfig = {
+          permittedInsecurePackages = [
+            "python3.10-poetry-1.2.2" # CVE-2022-42966 - Regex DoS
+          ];
+        };
+        in
     {
       homeConfigurations = {
         "mrene@beast" = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+          # pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = import nixpkgs { 
+            system = "x86_64-linux";
+            config = pkgsConfig;
+          };
           modules = [
             ./nixpkgs/home-manager/beast.nix
             ({pkgs, ...}: {
@@ -66,8 +82,12 @@
           # };
         };
 
-        "mrene@Mathieus-MacBook-Pro.local" = inputs.home-manager.lib.homeManagerConfiguration {
-          pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
+        "mrene@Mathieus-MBP" = inputs.home-manager.lib.homeManagerConfiguration {
+          # pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
+          pkgs = import nixpkgs { 
+            system = "aarch64-darwin";
+            config = pkgsConfig;
+          };
           modules = [
             ./nixpkgs/home-manager/mac.nix
           ];
@@ -78,7 +98,7 @@
       darwinConfigurations = {
         # nix build .#darwinConfigurations.mbp2021.system
         # ./result/sw/bin/darwin-rebuild switch --flake .
-        Mathieus-MacBook-Pro = darwin.lib.darwinSystem {
+        Mathieus-MBP = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [
             ./nixpkgs/darwin/mbp2021/configuration.nix
@@ -114,5 +134,5 @@
           "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMDK9LCwU62BIcyn73TcaQlMqr12GgYnHYcw5dbDDNmYnpp2n/jfDQ5hEkXd945dcngW6yb7cmgsa8Sx9T1Uuo4= secretive@mbp2021"
         ];
       };
-    };
+    });
 }

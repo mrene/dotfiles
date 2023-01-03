@@ -16,7 +16,7 @@ Also see: https://github.com/malob/nixpkgs
     - if installed
         - `home-manager switch --flake .`
     - if not installed:
-        - `nix build .#homeConfigurations.mrene@beast.activationPackage && ./result/activate`
+        - `nix build .#homeConfigurations.mrene@Mathieus-MBP.activationPackage && ./result/activate`
 
 ## Scratchpad from whenever this was written
 - darwin-rebuild didn't properly activate the nix profile automatically, but this did: `nix run nixpkgs#home-manager -- switch --flake .`
