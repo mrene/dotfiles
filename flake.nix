@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/master";
-    # nixpkgsUnstable.url = "github:NixOS/nixpkgs/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
+    nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,11 +15,18 @@
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    minidsp = {
+      url = "github:mrene/minidsp-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    devenv.url = "github:cachix/devenv/v0.5";
   };
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, flake-utils, darwin, deploy-rs, nixpkgs, home-manager }:
+  outputs = inputs @ { self, flake-utils, darwin, deploy-rs, nixpkgs, nixpkgsUnstable, home-manager, ... }:
 
     # eachDefaultSystem basically replicates each attribute so it also exists as `<attr>.<system>`, any override can be done later using `//` to concat the attr sets
     # example: 
@@ -29,6 +36,7 @@
       (system:
         let
           pkgs = import nixpkgs { inherit system; };
+          pkgsUnstable = import nixpkgsUnstable { inherit system; };
         in
         {
 
@@ -46,8 +54,16 @@
           pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
           modules = [
             ./nixpkgs/home-manager/beast.nix
+            ({pkgs, ...}: {
+              home.packages = [
+                inputs.minidsp.packages.${pkgs.system}.default
+                inputs.devenv.packages.${pkgs.system}.devenv
+              ];
+            })
           ];
-          # extraSpecialArgs = { pkgsUnstable = inputs.nixpkgs.legacyPackages.aarch64-darwin; };
+          # extraSpecialArgs = { 
+          #   pkgsUnstable = inputs.nixpkgs.legacyPackages.aarch64-darwin;
+          # };
         };
 
         "mrene@Mathieus-MacBook-Pro.local" = inputs.home-manager.lib.homeManagerConfiguration {

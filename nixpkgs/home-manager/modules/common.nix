@@ -1,4 +1,4 @@
-{ config, pkgs, libs, ... }:
+{ config, pkgs, pkgsUnstable, libs, minidsp, ... }:
 {
 
   # https://github.com/nix-community/nix-direnv#via-home-manager
@@ -46,10 +46,9 @@
     speedtest-cli
 
     yarn
-    python310
-    python310Packages.grpcio
-    poetry
-    
+    # python310
+    # python310Packages.grpcio
+
     jq
     jless
     go
@@ -69,12 +68,13 @@
     rnix-lsp
     nil
     nixpkgs-fmt
-    
+
     # Rust 
     rust-analyzer
 
 
     comma
+    cachix
 
     # needed for headless chrome
     # chromium
