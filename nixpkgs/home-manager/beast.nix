@@ -19,6 +19,8 @@
     nodejs-16_x
 
     fishPlugins.foreign-env
+
+    logseq
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
