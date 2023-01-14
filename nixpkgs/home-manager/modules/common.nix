@@ -20,6 +20,10 @@
     zoxide # habitual `cd`
     any-nix-shell # allows using fish for `nix shell`
 
+    # Nix tools
+    nvd # nix package diff tool
+    manix # nix cli search tool
+
     # Requires a patched font
     # https://github.com/ryanoasis/nerd-fonts/blob/master/readme.md#patched-fonts
     lsd
