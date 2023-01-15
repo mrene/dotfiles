@@ -1,21 +1,33 @@
 {
   inputs = {
+    # Package channels
     nixpkgs.url = "github:NixOS/nixpkgs/release-22.11";
     nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    
+    # Nix tools
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils.url = "github:numtide/flake-utils";
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
+    
+    # Generate vm images and initial boot media
+    nixos-generators = {
+      #url = "github:nix-community/nixos-generators";
+      url = "/home/mrene/dev/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # flake-utils.url = "github:numtide/flake-utils";
+    # deploy-rs = {
+    #   url = "github:serokell/deploy-rs";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Packages sources from other flakes
     minidsp = {
       url = "github:mrene/minidsp-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +42,7 @@
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, flake-utils, darwin, deploy-rs, nixpkgs, nixpkgsUnstable, home-manager, vscode-server, ... }:
+  outputs = inputs @ { self, darwin, nixpkgs, nixpkgsUnstable, home-manager, vscode-server, nixos-generators, ... }:
     (
       let
         pkgsConfig = {
@@ -148,7 +160,56 @@
               }
               vscode-server.nixosModule
             ];
+          };
 
+          # sudo nixos-rebuild switch --flake .#qemu
+          qemu = inputs.nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            pkgs = import nixpkgs {
+              system = "x86_64-linux";
+              config = pkgsConfig;
+              overlays = [ (import ./nixpkgs/overlays/vscode-with-extensions.nix) ];
+            };
+            specialArgs = { common = self.common; inherit inputs; };
+            modules = [
+              ./nixpkgs/nixos/qemu/configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                # `home-manager` config
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.verbose = true;
+                home-manager.users.mrene = import ./nixpkgs/home-manager/utm.nix;
+              }
+              vscode-server.nixosModule
+            ];
+          };
+
+          qemu-img = nixos-generators.nixosGenerate {
+            system = "x86_64-linux";
+            pkgs = import nixpkgs {
+              system = "x86_64-linux";
+              config = pkgsConfig;
+              overlays = [ (import ./nixpkgs/overlays/vscode-with-extensions.nix) ];
+            };
+            specialArgs = { common = self.common; inherit inputs; };
+            modules = [
+              ./nixpkgs/nixos/utm/configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                # `home-manager` config
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.verbose = true;
+                home-manager.users.mrene = import ./nixpkgs/home-manager/utm.nix;
+              }
+              vscode-server.nixosModule
+              ({ ... }: {
+                # virtualisation.diskSize = 32768;
+                # system.build.qcow.diskSize = 16384;
+              })
+            ];
+            format = "qcow";
           };
         };
 
