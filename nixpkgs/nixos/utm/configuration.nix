@@ -2,12 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, common, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../minikube.nix
     ];
 
   nix = {
@@ -69,10 +70,18 @@
   users = {
     users.mrene = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ 
+        "wheel"   # Allow sudo
+        "docker"  # Allow docker access
+      ];
+      openssh.authorizedKeys.keys = common.sshKeys;
     };
 
     defaultUserShell = pkgs.fish;
+  };
+
+  virtualisation.docker = {
+    enable = true;
   };
 
   # List packages installed in system profile. To search, run:
@@ -83,11 +92,14 @@
     curl
     direnv
     nix-direnv
+
+    # Dev tooling
+    vscode-with-extensions
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
+  programs.mtr.enable = true;
   # programs.gnupg.agent = {
   #   enable = true;
   #   enableSSHSupport = true;

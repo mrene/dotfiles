@@ -31,45 +31,24 @@
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
   outputs = inputs @ { self, flake-utils, darwin, deploy-rs, nixpkgs, nixpkgsUnstable, home-manager, vscode-server, ... }:
-
-    # eachDefaultSystem basically replicates each attribute so it also exists as `<attr>.<system>`, any override can be done later using `//` to concat the attr sets
-    # example: 
-    # inputs.flake-utils.lib.eachDefaultSystem(f: { a = 42;})
-    # { a = { aarch64-darwin = 42; aarch64-linux = 42; i686-linux = 42; x86_64-darwin = 42; x86_64-linux = 42; }; }
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            config = {
-              permittedInsecurePackages = [
-                "python3.10-poetry-1.2.2" # CVE-2022-42966 - Regex DoS
-              ];
-            };
-          };
-          pkgsUnstable = import nixpkgsUnstable { inherit system; };
-        in
-        {
-
-          devShell = with pkgs; pkgs.mkShell {
-            buildInputs = [
-              # Just in case :)
-            ];
-          };
-
-        })
-    // # <- concatenates Nix attribute sets
     (
       let
         pkgsConfig = {
           permittedInsecurePackages = [
             "python3.10-poetry-1.2.2" # CVE-2022-42966 - Regex DoS
           ];
+          allowUnfree = true;
+        };
+
+        commonHomeManagerModules = { ... }: {
+          imports = [
+
+          ];
         };
       in
       {
         homeConfigurations = {
-          "mrene@beast" = inputs.home-manager.lib.homeManagerConfiguration {
+          "mrene@beast" = home-manager.lib.homeManagerConfiguration {
             # pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
             pkgs = import nixpkgs {
               system = "x86_64-linux";
@@ -89,7 +68,7 @@
             # };
           };
 
-          "mrene@utm" = inputs.home-manager.lib.homeManagerConfiguration {
+          "mrene@utm" = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
               system = "aarch64-linux";
               config = pkgsConfig;
@@ -108,7 +87,7 @@
             # };
           };
 
-          "mrene@Mathieus-MBP" = inputs.home-manager.lib.homeManagerConfiguration {
+          "mrene@Mathieus-MBP" = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
               system = "aarch64-darwin";
               config = pkgsConfig;
@@ -151,6 +130,11 @@
           # sudo nixos-rebuild switch --flake .#utm
           utm = inputs.nixpkgs.lib.nixosSystem {
             system = "aarch64-linux";
+            pkgs = import nixpkgs {
+              system = "aarch64-linux";
+              config = pkgsConfig;
+              overlays = [ (import ./nixpkgs/overlays/vscode-with-extensions.nix) ];
+            };
             specialArgs = { common = self.common; inherit inputs; };
             modules = [
               ./nixpkgs/nixos/utm/configuration.nix
