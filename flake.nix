@@ -22,11 +22,15 @@
     };
 
     devenv.url = "github:cachix/devenv/v0.5";
+    vscode-server = {
+      url = "github:msteen/nixos-vscode-server";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, flake-utils, darwin, deploy-rs, nixpkgs, nixpkgsUnstable, home-manager, ... }:
+  outputs = inputs @ { self, flake-utils, darwin, deploy-rs, nixpkgs, nixpkgsUnstable, home-manager, vscode-server, ... }:
 
     # eachDefaultSystem basically replicates each attribute so it also exists as `<attr>.<system>`, any override can be done later using `//` to concat the attr sets
     # example: 
@@ -158,6 +162,7 @@
                 home-manager.verbose = true;
                 home-manager.users.mrene = import ./nixpkgs/home-manager/utm.nix;
               }
+              vscode-server.nixosModule
             ];
 
           };
