@@ -95,6 +95,10 @@
 
     # Dev tooling
     vscode-with-extensions
+
+    # Messaging
+    slack
+    discord
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
