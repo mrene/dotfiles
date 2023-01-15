@@ -1,4 +1,9 @@
     final: prev:  (let 
+
+        pkgs = prev;
+        
+        # Generated from: https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/editors/vscode/extensions/update_installed_exts.sh
+        # Manually removed extensions that had a nixpkgs entry
         marketplaceExtensions = prev.vscode-utils.extensionsFromVscodeMarketplace [
             {
                 name = "python-environment-manager";
@@ -73,15 +78,12 @@
             vscodeExtensions = marketplaceExtensions ++ (with prev.vscode-extensions; [
                 bbenoist.nix                # Nix syntax
                 
-                # ms-azuretools.vscode-docker   # TODO: Exclude aarch64-linux
                 ms-vscode-remote.remote-ssh
 
                 matklad.rust-analyzer
                 github.copilot
                 matangover.mypy
                 jebbs.plantuml
-                # ms-vsliveshare.vsliveshare
-
 
                 # Jupyter notebook things
                 ms-toolsai.jupyter
@@ -97,7 +99,6 @@
                 bungcip.better-toml
                 tamasfe.even-better-toml
                 ms-python.vscode-pylance
-                # ms-python.python
 
                 # Nix
                 brettm12345.nixfmt-vscode
@@ -107,12 +108,16 @@
                 silvenon.mdx
                 redhat.vscode-yaml
                 ms-vscode.makefile-tools
-                # ms-vscode.cpptools
                 ms-vscode.cmake-tools
                 mechatroner.rainbow-csv
                 jnoortheen.nix-ide
                 github.vscode-pull-request-github
                 esbenp.prettier-vscode
+            ]) ++ pkgs.lib.optionals (! (pkgs.stdenv.isAarch64 && pkgs.stdenv.isLinux)) (with prev.vscode-extensions; [
+                ms-vscode.cpptools
+                ms-python.python
+                ms-vsliveshare.vsliveshare
+                ms-azuretools.vscode-docker
             ]);
         };
     })
