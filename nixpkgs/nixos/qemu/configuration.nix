@@ -46,7 +46,9 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
+  services.xserver.videoDrivers = [ "qxl" "virtio" ];
+  services.spice-vdagentd.enable = true;
+  services.qemuGuest.enable = true;
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
