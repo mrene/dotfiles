@@ -1,4 +1,4 @@
-{ config, pkgs, pkgsUnstable, libs, minidsp, ... }:
+{ config, pkgs, pkgsUnstable, libs, ... }:
 {
 
   # https://github.com/nix-community/nix-direnv#via-home-manager
@@ -19,6 +19,7 @@
     tealdeer # fast tldr
     zoxide # habitual `cd`
     any-nix-shell # allows using fish for `nix shell`
+    devenv
 
     # Nix tools
     nvd # nix package diff tool

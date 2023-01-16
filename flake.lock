@@ -234,17 +234,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1673824398,
-        "narHash": "sha256-WrniC+bnx3P9UigxxsHOxC83+g+HcVazTG6WLohlFA4=",
-        "ref": "refs/heads/master",
-        "rev": "b0948a2a6d959e7ed58f73fe230c2ed41a986309",
-        "revCount": 229,
-        "type": "git",
-        "url": "file:///home/mrene/dev/nixos-generators"
+        "lastModified": 1672682641,
+        "narHash": "sha256-940TLvtdT8YKuP5nXcPhUfNeK0A/leSjjG8hfqvWM84=",
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "rev": "30516cb2b01896e14ce66893e414b6e3eec71cac",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/mrene/dev/nixos-generators"
+        "owner": "nix-community",
+        "repo": "nixos-generators",
+        "type": "github"
       }
     },
     "nixpkgs": {

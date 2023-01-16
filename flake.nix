@@ -12,8 +12,8 @@
     
     # Generate vm images and initial boot media
     nixos-generators = {
-      #url = "github:nix-community/nixos-generators";
-      url = "/home/mrene/dev/nixos-generators";
+      url = "github:nix-community/nixos-generators";
+      #url = "/home/mrene/dev/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -52,62 +52,50 @@
           allowUnfree = true;
         };
 
-        commonHomeManagerModules = { ... }: {
-          imports = [
+        packageOverlay = final: prev: {
+          minidsp = inputs.minidsp.packages.${prev.system}.default;
+          devenv = inputs.devenv.packages.${prev.system}.devenv;
+        };
 
-          ];
+        packageOverlays = [
+          packageOverlay
+          (import ./nixpkgs/overlays/vscode-with-extensions.nix)
+        ];
+
+        homeManagerConfig = path: {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.verbose = true;
+            home-manager.users.mrene = import path;
         };
       in
       {
         homeConfigurations = {
           "mrene@beast" = home-manager.lib.homeManagerConfiguration {
-            # pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
             pkgs = import nixpkgs {
               system = "x86_64-linux";
               config = pkgsConfig;
+              overlays =  [ packageOverlay ];
             };
-            modules = [
-              ./nixpkgs/home-manager/beast.nix
-              ({ pkgs, ... }: {
-                home.packages = [
-                  inputs.minidsp.packages.${pkgs.system}.default
-                  inputs.devenv.packages.${pkgs.system}.devenv
-                ];
-              })
-            ];
-            # extraSpecialArgs = { 
-            #   pkgsUnstable = inputs.nixpkgs.legacyPackages.aarch64-darwin;
-            # };
+            modules = [ ./nixpkgs/home-manager/beast.nix ];
           };
 
           "mrene@utm" = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
               system = "aarch64-linux";
               config = pkgsConfig;
+              overlays =  [ packageOverlay ];
             };
-            modules = [
-              ./nixpkgs/home-manager/utm.nix
-              ({ pkgs, ... }: {
-                home.packages = [
-                  inputs.minidsp.packages.${pkgs.system}.default
-                  inputs.devenv.packages.${pkgs.system}.devenv
-                ];
-              })
-            ];
-            # extraSpecialArgs = { 
-            #   pkgsUnstable = inputs.nixpkgs.legacyPackages.aarch64-darwin;
-            # };
+            modules = [ ./nixpkgs/home-manager/utm.nix ];
           };
 
           "mrene@Mathieus-MBP" = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
               system = "aarch64-darwin";
               config = pkgsConfig;
+              overlays =  [ packageOverlay ];
             };
-            modules = [
-              ./nixpkgs/home-manager/mac.nix
-            ];
-            # extraSpecialArgs = { pkgsUnstable = inputs.nixpkgs.legacyPackages.aarch64-darwin; };
+            modules = [ ./nixpkgs/home-manager/mac.nix ];
           };
         };
 
@@ -119,13 +107,7 @@
             modules = [
               ./nixpkgs/darwin/mbp2021/configuration.nix
               home-manager.darwinModules.home-manager
-              {
-                # `home-manager` config
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.verbose = true;
-                home-manager.users.mrene = import ./nixpkgs/home-manager/mac.nix;
-              }
+              (homeManagerConfig ./nixpkgs/home-manager/mac.nix)
             ];
             inputs = { inherit darwin nixpkgs; };
           };
@@ -145,19 +127,13 @@
             pkgs = import nixpkgs {
               system = "aarch64-linux";
               config = pkgsConfig;
-              overlays = [ (import ./nixpkgs/overlays/vscode-with-extensions.nix) ];
+              overlays = packageOverlays;
             };
             specialArgs = { common = self.common; inherit inputs; };
             modules = [
               ./nixpkgs/nixos/utm/configuration.nix
               home-manager.nixosModules.home-manager
-              {
-                # `home-manager` config
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.verbose = true;
-                home-manager.users.mrene = import ./nixpkgs/home-manager/utm.nix;
-              }
+              (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
               vscode-server.nixosModule
             ];
           };
@@ -168,19 +144,13 @@
             pkgs = import nixpkgs {
               system = "x86_64-linux";
               config = pkgsConfig;
-              overlays = [ (import ./nixpkgs/overlays/vscode-with-extensions.nix) ];
+              overlays = packageOverlays;
             };
             specialArgs = { common = self.common; inherit inputs; };
             modules = [
               ./nixpkgs/nixos/qemu/configuration.nix
               home-manager.nixosModules.home-manager
-              {
-                # `home-manager` config
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.verbose = true;
-                home-manager.users.mrene = import ./nixpkgs/home-manager/utm.nix;
-              }
+              (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
               vscode-server.nixosModule
             ];
           };
@@ -190,24 +160,14 @@
             pkgs = import nixpkgs {
               system = "x86_64-linux";
               config = pkgsConfig;
-              overlays = [ (import ./nixpkgs/overlays/vscode-with-extensions.nix) ];
+              overlays = packageOverlays;
             };
             specialArgs = { common = self.common; inherit inputs; };
             modules = [
               ./nixpkgs/nixos/utm/configuration.nix
               home-manager.nixosModules.home-manager
-              {
-                # `home-manager` config
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.verbose = true;
-                home-manager.users.mrene = import ./nixpkgs/home-manager/utm.nix;
-              }
+              (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
               vscode-server.nixosModule
-              ({ ... }: {
-                # virtualisation.diskSize = 32768;
-                # system.build.qcow.diskSize = 16384;
-              })
             ];
             format = "qcow";
           };
@@ -221,6 +181,7 @@
         common = {
           sshKeys = [
             "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMDK9LCwU62BIcyn73TcaQlMqr12GgYnHYcw5dbDDNmYnpp2n/jfDQ5hEkXd945dcngW6yb7cmgsa8Sx9T1Uuo4= secretive@mbp2021"
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAeSvwegmfet4Rw8OBFEVUfx+5WmVcYR4/n20QSh4tAs mrene@beast"
           ];
         };
       }

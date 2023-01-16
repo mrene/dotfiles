@@ -21,6 +21,7 @@
     fishPlugins.foreign-env
 
     logseq
+    minidsp
   ];
 
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
