@@ -48,8 +48,9 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
+  # services.xserver.windowManager.awesome.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -70,7 +71,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -78,7 +79,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mrene = {
@@ -107,13 +108,46 @@
     curl
     direnv
     nix-direnv
+    git
+
+    google-chrome
 
     # Dev tooling
     vscode-with-extensions
+    jetbrains.goland
+    jetbrains.pycharm-professional
+    jetbrains.datagrip
+    jetbrains.clion
 
     # Messaging
     slack
     discord
+
+    # Notes 
+    logseq
+
+    _1password-gui
+    flameshot # Screenshot software
+
+    keybase
+    keybase-gui
+
+    simplescreenrecorder
+
+    #Audio
+    roomeqwizard
+    spotify
+    audacity
+
+    # HW support
+    #razergenie #mouse
+    openrazer-daemon
+    openrgb
+
+
+    screenfetch
+    alacritty
+    wezterm
   ];
 
   programs.mtr.enable = true;

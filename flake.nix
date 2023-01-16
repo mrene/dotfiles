@@ -34,6 +34,8 @@
     };
 
     devenv.url = "github:cachix/devenv/v0.5";
+
+    # NixOS fix so that vscode-server can run correctly
     vscode-server = {
       url = "github:msteen/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -52,6 +54,7 @@
           allowUnfree = true;
         };
 
+        # Overlay adding flake inputs inside `pkgs`
         packageOverlay = final: prev: {
           minidsp = inputs.minidsp.packages.${prev.system}.default;
           devenv = inputs.devenv.packages.${prev.system}.devenv;
@@ -75,7 +78,7 @@
             pkgs = import nixpkgs {
               system = "x86_64-linux";
               config = pkgsConfig;
-              overlays =  [ packageOverlay ];
+              overlays = packageOverlays;
             };
             modules = [ ./nixpkgs/home-manager/beast.nix ];
           };
@@ -84,7 +87,7 @@
             pkgs = import nixpkgs {
               system = "aarch64-linux";
               config = pkgsConfig;
-              overlays =  [ packageOverlay ];
+              overlays = packageOverlays;
             };
             modules = [ ./nixpkgs/home-manager/utm.nix ];
           };
@@ -93,7 +96,7 @@
             pkgs = import nixpkgs {
               system = "aarch64-darwin";
               config = pkgsConfig;
-              overlays =  [ packageOverlay ];
+              overlays = packageOverlays;
             };
             modules = [ ./nixpkgs/home-manager/mac.nix ];
           };
@@ -154,23 +157,25 @@
               vscode-server.nixosModule
             ];
           };
+        };
 
-          qemu-img = nixos-generators.nixosGenerate {
+
+        # Prepares a qemu script that launches the root FS from the host nix store, for quick tests
+        vm = nixos-generators.nixosGenerate {
+          system = "x86_64-linux";
+          pkgs = import nixpkgs {
             system = "x86_64-linux";
-            pkgs = import nixpkgs {
-              system = "x86_64-linux";
-              config = pkgsConfig;
-              overlays = packageOverlays;
-            };
-            specialArgs = { common = self.common; inherit inputs; };
-            modules = [
-              ./nixpkgs/nixos/utm/configuration.nix
-              home-manager.nixosModules.home-manager
-              (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
-              vscode-server.nixosModule
-            ];
-            format = "qcow";
+            config = pkgsConfig;
+            overlays = packageOverlays;
           };
+          specialArgs = { common = self.common; inherit inputs; };
+          modules = [
+            ./nixpkgs/nixos/utm/configuration.nix
+            home-manager.nixosModules.home-manager
+            (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
+            vscode-server.nixosModule
+          ];
+          format = "vm";
         };
 
         images = {
