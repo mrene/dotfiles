@@ -19,11 +19,12 @@
     tealdeer # fast tldr
     zoxide # habitual `cd`
     any-nix-shell # allows using fish for `nix shell`
-    devenv
+    igrep # interactive grep
 
     # Nix tools
     nvd # nix package diff tool
     manix # nix cli search tool
+    #devenv
 
     # Requires a patched font
     # https://github.com/ryanoasis/nerd-fonts/blob/master/readme.md#patched-fonts
