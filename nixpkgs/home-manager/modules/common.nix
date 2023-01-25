@@ -6,35 +6,12 @@
   programs.direnv.nix-direnv.enable = true;
 
   home.packages = with pkgs; [
-    # Shell
-    starship
-
-    tmux
-    wget
-    bat
-    bottom
-    fzf
-    rename
-    neofetch # fancy system + hardware info
-    tealdeer # fast tldr
-    zoxide # habitual `cd`
-    any-nix-shell # allows using fish for `nix shell`
-    igrep # interactive grep
 
     # Nix tools
-    nvd # nix package diff tool
     manix # nix cli search tool
-    nix-index
-
-    # Requires a patched font
-    # https://github.com/ryanoasis/nerd-fonts/blob/master/readme.md#patched-fonts
-    lsd
-    tree
-    # better du alternative
-    du-dust
-    ripgrep
-    graphviz
-    # git-crypt
+    comma # run any command with `, command`
+    nix-index # and nix-locate, search within prebuilt packages filenames
+    cachix # Alternative prebuilt cache for nix
 
     # Ops tools
     sops
@@ -42,50 +19,35 @@
     kubectl
     k9s
 
-    # httpstat
+    graphviz
     curlie
-
-    # https://github.com/sindresorhus/fkill
-    # nodePackages.fkill-cli
 
     youtube-dl
     speedtest-cli
 
+    # JS
     yarn
-    # python310
-    # python310Packages.grpcio
 
-    jq
-    jless
     go
-    # cloc
-    docker
-    tailscale
+    gopls # LSP
 
-    # ran # quick local webserver (`-r [folder]`)
+    # TODO: Should be in per-machine setup instead of common
+    tailscale
+    docker
 
     # compression
     zip
     pigz # parallel gzip
     lz4
 
-    # docker-compose
-    # Nix VSC
+    # Nix LSPs
     rnix-lsp
     nil
     nixpkgs-fmt
 
-    # Rust 
+    # Rust LSP
     rust-analyzer
-
-
-    comma
-    cachix
-
-    # needed for headless chrome
-    # chromium
-
-    git
+  
     # github cli
     gitAndTools.gh
 
@@ -97,16 +59,4 @@
 
     libuuid # `uuidgen` (already pre-installed on mac)
   ];
-
-  programs.tmux = {
-    enable = true;
-    clock24 = true;
-  };
-
-  programs.dircolors = {
-    enable = true;
-  };
-
-
-
 }

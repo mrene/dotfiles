@@ -58,46 +58,6 @@
         home-manager switch --flake .
         popd
       '';
-
-      # fixgpg = ''
-      #   ssh $argv 'killall gpg-agent'
-      #   rm ~/.ssh/sockets/*
-      #   killall gpg-agent
-      #   echo 'test' | gpg --clearsign
-      #   ssh $argv 'ls /run/user/1000/gnupg/'
-      #   ssh $argv 'echo 'test' | gpg --clearsign'
-      # '';
-
-      # fixssh = ''
-      #   ssh $argv 'rm "~/.ssh/sockets/*"'
-      #   rm ~/.ssh/sockets/*
-      #   killall ssh-agent
-      #   ssh $argv 'echo SSH_AUTH_SOCK: $SSH_AUTH_SOCK'
-      #   ssh -tt $argv 'ssh git@github.com'
-      # '';
-
-      # This is a workaround needed to "fix" VSC on NixOS which is self-updating
-      # fixremotevsc = ''
-      #   ssh $argv 'for DIR in ~/.vscode-server/bin/*; rm $DIR/node; ln -s (which node) $DIR/node; end'
-      # '';
-
-      # _git_fast = ''
-      #   if begin not type -q commitizen; and test -z $argv[1]; end
-      #     echo "No commit message provided or `commitizen` not installed"
-      #     exit 1
-      #   end
-
-      #   set -x WIP_BRANCH (git symbolic-ref --short HEAD)
-      #   git pull origin $WIP_BRANCH
-      #   git add -A
-      #   if test -z $argv[1]
-      #     git cz
-      #   else
-      #     git commit -m $argv[1]
-      #   end
-      #   and git push origin $WIP_BRANCH
-
-      # '';
     };
     plugins = [
       {
@@ -121,15 +81,9 @@
     ];
     shellAliases = {
       v = "nvim";
-      l = "lsd";
-      # gf = "_git_fast";
+      l = "exa";
       fz = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
       cdg = "cd (git rev-parse --show-toplevel)";
-      # cw =
-      #   "cargo watch -s 'clear; cargo check --tests --all-features --color=always 2>&1 | head -40'";
-      # cwa =
-      #   "cargo watch -s 'clear; cargo check --tests --features=all --color=always 2>&1 | head -40'";
-      # ls = "exa --git --icons";
     };
 
     shellAbbrs = {
@@ -137,7 +91,7 @@
 
       # git
       g = "git";
-      gs = "git status -s";
+      gs = "git status";
       ga = "git add";
       gl = "git log --pretty=format:'%C(yellow)%h %Cred%ar %Cblue%an%Cgreen%d %Creset%s' --date=short";
       gd = "git diff";

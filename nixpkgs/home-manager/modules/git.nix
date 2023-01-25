@@ -14,7 +14,6 @@
     };
 
     extraConfig = {
-      init.defaultBranch = "main";
       github.user = "mrene";
 
       push.autoSetupRemote = true;

@@ -157,6 +157,23 @@
               vscode-server.nixosModule
             ];
           };
+
+          # sudo nixos-rebuild switch --flake .#qemu
+          usbke = inputs.nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            pkgs = import nixpkgs {
+              system = "x86_64-linux";
+              config = pkgsConfig;
+              overlays = packageOverlays;
+            };
+            specialArgs = { common = self.common; inherit inputs; };
+            modules = [
+              ./nixpkgs/nixos/qemu/configuration.nix
+              home-manager.nixosModules.home-manager
+              (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
+              vscode-server.nixosModule
+            ];
+          };
         };
 
 
@@ -173,9 +190,9 @@
             ./nixpkgs/nixos/utm/configuration.nix
             home-manager.nixosModules.home-manager
             (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
-            vscode-server.nixosModule
+            #vscode-server.nixosModule
           ];
-          format = "vm";
+          format = "vm-bootloader";
         };
 
         images = {
