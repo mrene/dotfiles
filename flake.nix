@@ -83,15 +83,6 @@
             modules = [ ./nixpkgs/home-manager/beast.nix ];
           };
 
-          "mrene@utm" = home-manager.lib.homeManagerConfiguration {
-            pkgs = import nixpkgs {
-              system = "aarch64-linux";
-              config = pkgsConfig;
-              overlays = packageOverlays;
-            };
-            modules = [ ./nixpkgs/home-manager/utm.nix ];
-          };
-
           "mrene@Mathieus-MBP" = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
               system = "aarch64-darwin";
@@ -100,6 +91,16 @@
             };
             modules = [ ./nixpkgs/home-manager/mac.nix ];
           };
+
+          minimal = home-manager.lib.homeManagerConfiguration {
+            pkgs = import nixpkgs {
+              system = "x86_64-linux";
+              config = pkgsConfig;
+              overlays = packageOverlays;
+            };
+            modules = [ ./nixpkgs/home-manager/minimal.nix ];
+          };
+
         };
 
         darwinConfigurations = {
@@ -136,7 +137,7 @@
             modules = [
               ./nixpkgs/nixos/utm/configuration.nix
               home-manager.nixosModules.home-manager
-              (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
+              (homeManagerConfig ./nixpkgs/home-manager/minimal.nix)
               vscode-server.nixosModule
             ];
           };
@@ -159,7 +160,7 @@
           };
 
           # sudo nixos-rebuild switch --flake .#qemu
-          usbke = inputs.nixpkgs.lib.nixosSystem {
+          usbkey = inputs.nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             pkgs = import nixpkgs {
               system = "x86_64-linux";
@@ -174,25 +175,6 @@
               vscode-server.nixosModule
             ];
           };
-        };
-
-
-        # Prepares a qemu script that launches the root FS from the host nix store, for quick tests
-        vm = nixos-generators.nixosGenerate {
-          system = "x86_64-linux";
-          pkgs = import nixpkgs {
-            system = "x86_64-linux";
-            config = pkgsConfig;
-            overlays = packageOverlays;
-          };
-          specialArgs = { common = self.common; inherit inputs; };
-          modules = [
-            ./nixpkgs/nixos/utm/configuration.nix
-            home-manager.nixosModules.home-manager
-            (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
-            #vscode-server.nixosModule
-          ];
-          format = "vm-bootloader";
         };
 
         images = {

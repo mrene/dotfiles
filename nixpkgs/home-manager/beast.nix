@@ -22,6 +22,7 @@
     fishPlugins.foreign-env
 
     logseq
+    zotero  # Scientific paper manager
     minidsp
   ];
 
