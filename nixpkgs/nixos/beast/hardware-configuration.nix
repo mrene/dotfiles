@@ -13,17 +13,16 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/ubuntu" =
+  fileSystems."/" =
     { device = "/dev/disk/by-uuid/4d43879e-dad2-4159-a6af-844c23d04378";
       fsType = "ext4";
-      options = [ "ro" ];
       neededForBoot = true;
     };
 
-  # fileSystems."/boot/efi" =
-  #   { device = "/dev/disk/by-uuid/D6FD-510A";
-  #     fsType = "vfat";
-  #   };
+  fileSystems."/boot/efi" =
+     { device = "/dev/disk/by-uuid/D6FD-510A";
+       fsType = "vfat";
+     };
 
 
   swapDevices = [ ];

@@ -183,7 +183,6 @@
             specialArgs = { common = self.common; inherit inputs; };
             modules = [
               ./nixpkgs/nixos/beast/hardware-configuration.nix
-              ./nixpkgs/nixos/beast/root-tmpfs.nix
               ./nixpkgs/nixos/beast/configuration.nix
               home-manager.nixosModules.home-manager
               (homeManagerConfig ./nixpkgs/home-manager/beast-gnome.nix)
