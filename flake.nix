@@ -160,7 +160,7 @@
           };
 
           # sudo nixos-rebuild switch --flake .#qemu
-          usbkey = inputs.nixpkgs.lib.nixosSystem {
+          beast = inputs.nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             pkgs = import nixpkgs {
               system = "x86_64-linux";
@@ -169,9 +169,11 @@
             };
             specialArgs = { common = self.common; inherit inputs; };
             modules = [
-              ./nixpkgs/nixos/qemu/configuration.nix
+              ./nixpkgs/nixos/beast/hardware-configuration.nix
+              ./nixpkgs/nixos/beast/root-tmpfs.nix
+              ./nixpkgs/nixos/beast/configuration.nix
               home-manager.nixosModules.home-manager
-              (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
+              (homeManagerConfig ./nixpkgs/home-manager/beast.nix)
               vscode-server.nixosModule
             ];
           };
