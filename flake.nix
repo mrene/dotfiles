@@ -186,7 +186,7 @@
               ./nixpkgs/nixos/beast/root-tmpfs.nix
               ./nixpkgs/nixos/beast/configuration.nix
               home-manager.nixosModules.home-manager
-              (homeManagerConfig ./nixpkgs/home-manager/beast.nix)
+              (homeManagerConfig ./nixpkgs/home-manager/beast-gnome.nix)
               vscode-server.nixosModule
             ];
           };

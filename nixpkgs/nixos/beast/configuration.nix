@@ -7,7 +7,10 @@
 {
   imports = [
     ../minikube.nix
+    ./desktop.nix
   ];
+
+  nix.settings.experimental-features = [ "flakes" "nix-command" ];
 
   # Bootloader.
   boot.loader.grub.enable = true;
@@ -16,10 +19,6 @@
 
   networking.hostName = "beast"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -46,10 +45,7 @@
   hardware.opengl.enable = true;
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
-
-  # services.xserver.windowManager.awesome.enable = true;
+  
 
   # Configure keymap in X11
   services.xserver = {
@@ -88,7 +84,6 @@
   };
   users.defaultUserShell = pkgs.fish;
   security.sudo.wheelNeedsPassword = false;
-
 
   virtualisation.docker = {
     enable = true;
