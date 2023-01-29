@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "github:numtide/flake-utils";
     # deploy-rs = {
     #   url = "github:serokell/deploy-rs";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -44,7 +44,20 @@
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, darwin, nixpkgs, nixpkgsUnstable, home-manager, vscode-server, nixos-generators, ... }:
+  outputs = inputs @ { self, darwin, nixpkgs, nixpkgsUnstable, home-manager, vscode-server, nixos-generators, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem(system: (let
+        pkgs = import nixpkgs {        
+          inherit system;
+        };
+        in {
+          devShells.default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              nixos-generators.packages.${system}.nixos-generate
+              nixos-install-tools
+            ];
+          };
+        }
+      )) //
     (
       let
         pkgsConfig = {
