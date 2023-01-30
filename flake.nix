@@ -93,7 +93,7 @@
               config = pkgsConfig;
               overlays = packageOverlays;
             };
-            modules = [ ./nixpkgs/home-manager/beast.nix ];
+            modules = [ ./nixpkgs/home-manager/beast-gnome.nix ];
           };
 
           "mrene@Mathieus-MBP" = home-manager.lib.homeManagerConfiguration {

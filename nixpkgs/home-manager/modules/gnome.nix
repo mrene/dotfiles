@@ -61,6 +61,14 @@
     "org/gnome/desktop/interface/gtk-theme" = {
       name = "WhiteSur-Dark";
     };
+
+    "org/gnome/shell/extensions/dash-to-panel" = {
+      panel-sizes = ''{"0":32,"1":32}'';
+      panel-positions = true;
+      multi-monitors = true;
+      dot-style-unfocused = "DOTS";
+      dot-style-focused = "CILIORA";
+    };
   };
 
   home.packages = with pkgs; [

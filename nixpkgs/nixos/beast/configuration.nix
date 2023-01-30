@@ -52,6 +52,7 @@
 
   # Graphics
   hardware.opengl.enable = true;
+  hardware.opengl.driSupport32Bit = true;
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   
@@ -96,6 +97,7 @@
 
   virtualisation.docker = {
     enable = true;
+    enableNvidia = true;
   };
 
   # Allow unfree packages
@@ -104,6 +106,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    usbutils
+    
     neovim
     wget
     curl
