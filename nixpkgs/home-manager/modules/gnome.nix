@@ -69,6 +69,22 @@
       dot-style-unfocused = "DOTS";
       dot-style-focused = "CILIORA";
     };
+
+    "org/gnome/desktop/wm/preferences" = {
+      button-layout = "appmenu:minimize,close";
+    };
+
+    "org/gnome/desktop/background" = {
+      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/blobs-l.svg";
+      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/blobs-d.svg";
+      primary-color = "#241f31";
+    };
+
+    "org/gnome/desktop/screensaver" = {
+      picture-uri = "file:///run/current-system/sw/share/backgrounds/gnome/blobs-l.svg";
+      picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/blobs-d.svg";
+      primary-color = "#241f31";
+    };
   };
 
   home.packages = with pkgs; [

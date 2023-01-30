@@ -83,6 +83,10 @@
     #media-session.enable = true;
   };
 
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
@@ -127,6 +131,7 @@
     git
 
     google-chrome
+    firefox
 
     # Dev tooling
     vscode-with-extensions
@@ -158,8 +163,6 @@
     # HW support
     #razergenie #mouse
     openrazer-daemon
-    openrgb
-
 
     screenfetch
     alacritty
