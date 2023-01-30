@@ -85,15 +85,24 @@
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.mrene = {
-    isNormalUser = true;
-    description = "mathieu";
-    extraGroups = [ "networkmanager" "wheel" "docker"];
-    openssh.authorizedKeys.keys = common.sshKeys;
-    initialHashedPassword = "";
+  users = {
+    users = {
+      mrene = {
+        isNormalUser = true;
+        description = "mathieu";
+        extraGroups = [ "networkmanager" "wheel" "docker"];
+        openssh.authorizedKeys.keys = common.sshKeys;
+        initialHashedPassword = "";
+      };
+      root = {
+        openssh.authorizedKeys.keys = common.sudoSshKeys;
+      };
+    };
+
+    defaultUserShell = pkgs.fish;
   };
-  users.defaultUserShell = pkgs.fish;
-  security.sudo.wheelNeedsPassword = false;
+  security.sudo.wheelNeedsPassword = true;
+  security.pam.enableSSHAgentAuth = true;
 
   virtualisation.docker = {
     enable = true;
@@ -107,6 +116,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     usbutils
+    pciutils
+    lm_sensors
     
     neovim
     wget
