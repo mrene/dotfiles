@@ -13,7 +13,7 @@
   dconf.settings = {
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
       binding = "<Control><Alt>space";
-      command = "rofi -modi window,drun,top -show window -show-icons";
+      command = "rofi -modi window,drun,top -show window -show-icons -dpi 175";
       name = "rofi";
     };
   };
