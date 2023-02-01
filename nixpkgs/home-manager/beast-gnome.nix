@@ -10,6 +10,7 @@
     ./modules/git.nix
     ./modules/neovim.nix
     ./modules/gnome.nix
+    ./modules/rofi.nix
   ];
 
   home.stateVersion = "20.09";

@@ -10,6 +10,7 @@
       fzf 
       ripgrep 
       fd
+      exa
       neofetch # fancy system + hardware info
       tealdeer # fast tldr
       zoxide # habitual `cd`

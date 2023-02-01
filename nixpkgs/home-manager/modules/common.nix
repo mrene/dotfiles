@@ -44,6 +44,7 @@
     rnix-lsp
     nil
     nixpkgs-fmt
+    nurl
 
     # Rust
     rust-analyzer
