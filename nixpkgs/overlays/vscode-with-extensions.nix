@@ -50,8 +50,8 @@
             {
                 name = "remote-containers";
                 publisher = "ms-vscode-remote";
-                version = "0.270.0";
-                sha256 = "0xavin241g1cmsvxyg8x0mjl7wx8klh8m3n9ckxlc0r0zbz603si";
+                version = "0.266.1";
+                sha256 = "sha256-D0nwLKGojvvRuviGRI9zo4SZmpZgee7ZpHLWjUK3LWA=";
             }
             {
                 name = "cpptools-themes";

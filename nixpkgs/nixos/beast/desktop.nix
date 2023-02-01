@@ -16,4 +16,15 @@
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
   ];
+
+  services.mopidy = {
+    enable = true;
+    extensionPackages = with pkgs; [ 
+      mopidy-mpd
+      mopidy-ytmusic
+      mopidy-soundcloud
+      mopidy-iris
+      mopidy-bandcamp
+    ];
+  };
 }

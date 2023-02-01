@@ -68,6 +68,7 @@
       multi-monitors = true;
       dot-style-unfocused = "DOTS";
       dot-style-focused = "CILIORA";
+      show-window-previews-timeout = 125;
     };
 
     "org/gnome/desktop/wm/preferences" = {

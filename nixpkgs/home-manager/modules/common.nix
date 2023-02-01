@@ -45,8 +45,10 @@
     nil
     nixpkgs-fmt
 
-    # Rust LSP
+    # Rust
     rust-analyzer
+    rustup
+    cargo-edit
   
     # github cli
     gitAndTools.gh

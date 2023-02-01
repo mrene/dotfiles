@@ -7,6 +7,7 @@
 {
   imports = [
     ../minikube.nix
+    ../cachix.nix
     ./desktop.nix
   ];
 
@@ -167,6 +168,14 @@
     screenfetch
     alacritty
     wezterm
+
+    nvtop-nvidia  # htop-like gpu load viewer
+
+
+    # Fixing this so Goland works
+    gcc
+    llvmPackages.libclang llvmPackages.libcxxClang
+    distrobox
   ];
 
   programs.mtr.enable = true;
@@ -179,6 +188,9 @@
   services.vscode-server.enable = true;
 
   services.openssh.enable = true;
+  
+  services.tailscale.enable = true;
+  networking.firewall.checkReversePath = "loose";
 
 
   # This value determines the NixOS release from which the default
