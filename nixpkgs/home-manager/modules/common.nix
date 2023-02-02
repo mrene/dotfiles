@@ -30,6 +30,8 @@
 
     go
     gopls # LSP
+    delve
+    go-tools
 
     # TODO: Should be in per-machine setup instead of common
     tailscale
@@ -44,7 +46,7 @@
     rnix-lsp
     nil
     nixpkgs-fmt
-    nurl
+    # pkgsUnstable.nurl
 
     # Rust
     rust-analyzer

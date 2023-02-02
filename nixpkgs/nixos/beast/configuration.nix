@@ -176,6 +176,8 @@
     gcc
     llvmPackages.libclang llvmPackages.libcxxClang
     distrobox
+
+    mypy
   ];
 
   programs.mtr.enable = true;
