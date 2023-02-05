@@ -8,8 +8,10 @@
     ./modules/neovim.nix
 
     ./modules/minimal.nix
+    ./modules/common.nix
   ];
 
+  home.username = "mrene";
   home.homeDirectory = "/Users/mrene";
 
   programs.fish.interactiveShellInit = ''
