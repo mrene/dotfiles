@@ -6,7 +6,7 @@
     ./modules/fish.nix
     ./modules/git.nix
     ./modules/neovim.nix
-    
+
     ./modules/minimal.nix
   ];
 
@@ -29,4 +29,6 @@
     # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/default.nix
     # nerdfonts
   ];
+
+  home.stateVersion = "20.09";
 }

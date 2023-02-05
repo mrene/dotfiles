@@ -6,7 +6,7 @@
     ./modules/fish.nix
     ./modules/git.nix
     ./modules/neovim.nix
-    
+
     ./modules/minimal.nix
     ./modules/gnome.nix
     ./modules/hyprland.nix
@@ -19,4 +19,6 @@
 
     fishPlugins.foreign-env
   ];
+
+  home.stateVersion = "20.09";
 }
