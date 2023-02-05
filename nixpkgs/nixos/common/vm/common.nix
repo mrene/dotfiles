@@ -1,6 +1,6 @@
 # Common relaxed configuration for use with VMs running on trusted hardware
 
-{ common, pkgs }: 
+{ common, pkgs, ... }: 
 
 {
   users = {
