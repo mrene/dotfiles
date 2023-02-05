@@ -7,7 +7,7 @@
     ./modules/fish.nix
     ./modules/git.nix
     ./modules/neovim.nix
-    
+
     ./modules/minimal.nix
   ];
 
