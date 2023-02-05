@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       # ./hardware-configuration.nix
       ../minikube.nix
       ../qemu-guest.nix
@@ -88,7 +89,7 @@
   users.users.mrene = {
     isNormalUser = true;
     description = "mathieu";
-    extraGroups = [ "networkmanager" "wheel" "docker"];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     openssh.authorizedKeys.keys = common.sshKeys;
     initialHashedPassword = "";
   };

@@ -6,8 +6,9 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
-       ./hardware-configuration.nix
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
       ../minikube.nix
     ];
 
@@ -16,7 +17,7 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-   };
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -25,7 +26,7 @@
   boot.loader.timeout = 5;
 
   networking.hostName = "utm-nixos";
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   #services.xserver.enable = true;
   #services.xserver.desktopManager.gnome.enable = true;
@@ -52,16 +53,16 @@
   users = {
     users.mrene = {
       isNormalUser = true;
-      extraGroups = [ 
-        "wheel"   # Allow sudo
-        "docker"  # Allow docker access
+      extraGroups = [
+        "wheel" # Allow sudo
+        "docker" # Allow docker access
       ];
       openssh.authorizedKeys.keys = common.sshKeys;
       initialHashedPassword = "";
     };
 
     users.root.password = "nixos";
-    mutableUsers = true; 
+    mutableUsers = true;
 
     defaultUserShell = pkgs.fish;
   };

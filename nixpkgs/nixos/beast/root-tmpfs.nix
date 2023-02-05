@@ -1,7 +1,8 @@
 { config, lib, pkgs, modulesPath, ... }:
 {
   fileSystems."/" =
-    { device = "none";
+    {
+      device = "none";
       fsType = "tmpfs";
       options = [ "size=8G" "mode=755" ]; # mode=755 so only root can write to those files
     };

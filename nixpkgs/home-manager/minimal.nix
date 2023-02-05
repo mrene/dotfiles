@@ -5,7 +5,7 @@
   imports = [
     ./modules/home-manager.nix
     ./modules/fish.nix
-    ./modules/minimal.nix
+    ./modules/common.nix
     ./modules/git.nix
     ./modules/neovim.nix
   ];

@@ -57,7 +57,7 @@
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.modesetting.enable = true;
-  
+
 
   # Configure keymap in X11
   services.xserver = {
@@ -96,7 +96,7 @@
       mrene = {
         isNormalUser = true;
         description = "mathieu";
-        extraGroups = [ "networkmanager" "wheel" "docker"];
+        extraGroups = [ "networkmanager" "wheel" "docker" ];
         openssh.authorizedKeys.keys = common.sshKeys;
         initialHashedPassword = "";
       };
@@ -126,7 +126,7 @@
     lm_sensors
     lshw
     file
-    
+
     neovim
     wget
     curl
@@ -172,12 +172,13 @@
     alacritty
     wezterm
 
-    nvtop-nvidia  # htop-like gpu load viewer
+    nvtop-nvidia # htop-like gpu load viewer
 
 
     # Fixing this so Goland works
     gcc
-    llvmPackages.libclang llvmPackages.libcxxClang
+    llvmPackages.libclang
+    llvmPackages.libcxxClang
     distrobox
 
     mypy
@@ -193,7 +194,7 @@
   services.vscode-server.enable = true;
 
   services.openssh.enable = true;
-  
+
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
 

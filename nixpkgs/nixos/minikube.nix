@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 {
-    environment.systemPackages = with pkgs; [
-        minikube
-        conntrack-tools
-    ];
+  environment.systemPackages = with pkgs; [
+    minikube
+    conntrack-tools
+  ];
 }

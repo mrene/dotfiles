@@ -3,7 +3,7 @@
     # Package channels
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    
+
     # Nix tools
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -14,7 +14,7 @@
       url = "github:hyprwm/Hyprland/main";
       # inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     # Generate vm images and initial boot media
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -50,11 +50,14 @@
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
   outputs = inputs @ { self, darwin, nixpkgs, nixpkgsUnstable, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem(system: (let
-        pkgs = import nixpkgs {        
-          inherit system;
-        };
-        in {
+    flake-utils.lib.eachDefaultSystem
+      (system: (
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+          };
+        in
+        {
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
               nixos-generators.packages.${system}.nixos-generate
@@ -70,7 +73,7 @@
             "python3.10-poetry-1.2.2" # CVE-2022-42966 - Regex DoS
             "electron-19.0.7" # EOL, but many deps are still using it
           ];
-          
+
           allowUnfree = true;
         };
 
@@ -87,10 +90,10 @@
         ];
 
         homeManagerConfig = path: {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.verbose = true;
-            home-manager.users.mrene = import path;
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.verbose = true;
+          home-manager.users.mrene = import path;
         };
       in
       {
@@ -101,9 +104,9 @@
               config = pkgsConfig;
               overlays = packageOverlays;
             };
-            modules = [ 
+            modules = [
               hyprland.homeManagerModules.default
-              ./nixpkgs/home-manager/beast-gnome.nix 
+              ./nixpkgs/home-manager/beast-gnome.nix
             ];
           };
 
@@ -161,7 +164,7 @@
             modules = [
               ./nixpkgs/nixos/utm/configuration.nix
               home-manager.nixosModules.home-manager
-              (homeManagerConfig ./nixpkgs/home-manager/minimal.nix)
+              (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
               vscode-server.nixosModule
             ];
           };

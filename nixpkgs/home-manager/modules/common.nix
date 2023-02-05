@@ -52,7 +52,7 @@
     rust-analyzer
     rustup
     cargo-edit
-  
+
     # github cli
     gitAndTools.gh
 

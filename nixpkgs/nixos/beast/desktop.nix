@@ -4,7 +4,7 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.displayManager.gdm.wayland = false;
   services.xserver.desktopManager.gnome.enable = true;
-  
+
   programs.hyprland.enable = true;
   xdg.portal = {
     enable = true;
@@ -25,7 +25,7 @@
 
   services.mopidy = {
     enable = true;
-    extensionPackages = with pkgs; [ 
+    extensionPackages = with pkgs; [
       mopidy-mpd
       mopidy-ytmusic
       mopidy-soundcloud

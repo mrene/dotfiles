@@ -2,7 +2,8 @@
 
 {
   imports =
-    [ (modulesPath + "/profiles/qemu-guest.nix")
+    [
+      (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
   services.xserver.videoDrivers = [ "qxl" "virtio" ];
@@ -15,6 +16,6 @@
   fileSystems."/host-home" = {
     device = "home";
     fsType = "9p";
-    options = ["trans=virtio" "version=9p2000.L" "rw" "loose" "msize=104857600"];
+    options = [ "trans=virtio" "version=9p2000.L" "rw" "loose" "msize=104857600" ];
   };
 }
