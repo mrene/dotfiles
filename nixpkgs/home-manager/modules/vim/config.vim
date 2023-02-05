@@ -3,7 +3,7 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " syntax enable
 
 " colorscheme solarized
-colorscheme gruvbox
+colorscheme nordfox
 
 set background=dark
 set number " enable line numbers

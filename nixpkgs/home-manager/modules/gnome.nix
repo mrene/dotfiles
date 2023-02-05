@@ -11,8 +11,8 @@
     };
 
     theme = {
-      name = "whitesur";
-      package = pkgs.whitesur-gtk-theme;
+      name = "nordic";
+      package = pkgs.nordic;
     };
 
     cursorTheme = {
@@ -33,7 +33,7 @@
     };
   };
 
-  home.sessionVariables.GTK_THEME = "palenight";
+  home.sessionVariables.GTK_THEME = "Nordic";
 
   dconf.settings = {
     # ...
@@ -51,7 +51,7 @@
       ];
     };
     "org/gnome/shell/extensions/user-theme" = {
-      name = "WhiteSur-Dark";
+      name = "Nordic";
     };
 
     "org/gnome/desktop/interface/icon-theme" = {
@@ -59,7 +59,7 @@
     };
 
     "org/gnome/desktop/interface/gtk-theme" = {
-      name = "WhiteSur-Dark";
+      name = "Nordic";
     };
 
     "org/gnome/shell/extensions/dash-to-panel" = {
@@ -73,6 +73,7 @@
 
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "appmenu:minimize,close";
+      theme = "Nordic";
     };
 
     "org/gnome/desktop/background" = {
@@ -102,8 +103,9 @@
     gnomeExtensions.sound-output-device-chooser
     gnomeExtensions.space-bar
 
-    palenight-theme
-    whitesur-gtk-theme
-    whitesur-icon-theme
+    # palenight-theme
+    # whitesur-gtk-theme
+    # whitesur-icon-theme
+    nordic
   ];
 }

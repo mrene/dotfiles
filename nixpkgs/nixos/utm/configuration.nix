@@ -16,6 +16,7 @@
       ../beast/desktop.nix
       ../common/common.nix
       ../common/vm/common.nix
+      ../common/gui/base.nix
     ];
 
   nix = {

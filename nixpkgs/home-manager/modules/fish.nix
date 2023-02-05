@@ -42,6 +42,8 @@
       end
 
       any-nix-shell fish --info-right | source
+
+      set -g theme_color_scheme nord
     '';
     functions = {
 
@@ -103,6 +105,7 @@
 
       d = "docker";
       k = "kubectl";
+      b = "bat";
 
       ".." = "cd ..";
       "..." = "cd ../..";

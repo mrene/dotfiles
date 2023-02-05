@@ -12,6 +12,7 @@
     ./modules/gnome.nix
     ./modules/hyprland.nix
     ./modules/rofi.nix
+    ./modules/wezterm.nix
   ];
 
   home.stateVersion = "20.09";

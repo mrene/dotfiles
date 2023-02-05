@@ -10,6 +10,7 @@
       lightline-vim
       tmuxline-vim
       gruvbox
+      nightfox-nvim
 
       # Tools
       nerdtree
