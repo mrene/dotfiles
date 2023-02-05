@@ -86,6 +86,11 @@
       picture-uri-dark = "file:///run/current-system/sw/share/backgrounds/gnome/blobs-d.svg";
       primary-color = "#241f31";
     };
+
+    # Prevent auto-suspend
+    "org/gnome/settings-daemon/plugins/power" = {
+      sleep-inactive-ac-type = "nothing";
+    };
   };
 
   home.packages = with pkgs; [

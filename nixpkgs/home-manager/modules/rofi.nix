@@ -8,6 +8,7 @@
       rofimoji
     ];
     theme = "${./rofi}/theme.rasi";
+    package = pkgs.rofi-wayland;
   };
 
   dconf.settings = {

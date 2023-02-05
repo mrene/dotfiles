@@ -1,13 +1,18 @@
 {
   inputs = {
     # Package channels
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
     nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     
     # Nix tools
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland/main";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     
     # Generate vm images and initial boot media
@@ -44,7 +49,7 @@
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, darwin, nixpkgs, nixpkgsUnstable, home-manager, vscode-server, nixos-generators, flake-utils, ... }:
+  outputs = inputs @ { self, darwin, nixpkgs, nixpkgsUnstable, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem(system: (let
         pkgs = import nixpkgs {        
           inherit system;
@@ -73,6 +78,7 @@
         packageOverlay = final: prev: {
           minidsp = inputs.minidsp.packages.${prev.system}.default;
           devenv = inputs.devenv.packages.${prev.system}.devenv;
+          pkgsUnstable = nixpkgsUnstable.packages.${prev.system};
         };
 
         packageOverlays = [
@@ -95,7 +101,10 @@
               config = pkgsConfig;
               overlays = packageOverlays;
             };
-            modules = [ ./nixpkgs/home-manager/beast-gnome.nix ];
+            modules = [ 
+              hyprland.homeManagerModules.default
+              ./nixpkgs/home-manager/beast-gnome.nix 
+            ];
           };
 
           "mrene@Mathieus-MBP" = home-manager.lib.homeManagerConfiguration {
@@ -174,7 +183,7 @@
             ];
           };
 
-          # sudo nixos-rebuild switch --flake .#qemu
+          # sudo nixos-rebuild switch --flake .#beast
           beast = inputs.nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             pkgs = import nixpkgs {
@@ -186,8 +195,15 @@
             modules = [
               ./nixpkgs/nixos/beast/hardware-configuration.nix
               ./nixpkgs/nixos/beast/configuration.nix
+              hyprland.nixosModules.default
               home-manager.nixosModules.home-manager
               (homeManagerConfig ./nixpkgs/home-manager/beast-gnome.nix)
+              {
+                home-manager.sharedModules = [
+                  # XXX: Hack
+                  hyprland.homeManagerModules.default
+                ];
+              }
               vscode-server.nixosModule
             ];
           };

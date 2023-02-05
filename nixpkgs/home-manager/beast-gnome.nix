@@ -10,6 +10,7 @@
     ./modules/git.nix
     ./modules/neovim.nix
     ./modules/gnome.nix
+    ./modules/hyprland.nix
     ./modules/rofi.nix
   ];
 

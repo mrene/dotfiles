@@ -56,6 +56,7 @@
   hardware.opengl.driSupport32Bit = true;
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.modesetting.enable = true;
   
 
   # Configure keymap in X11
@@ -123,6 +124,8 @@
     usbutils
     pciutils
     lm_sensors
+    lshw
+    file
     
     neovim
     wget
