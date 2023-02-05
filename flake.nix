@@ -12,6 +12,7 @@
 
     hyprland = {
       url = "github:hyprwm/Hyprland/main";
+      # Following nixpkgs would not use pre-built binaries from the cachix cache 
       # inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -106,7 +107,7 @@
             };
             modules = [
               hyprland.homeManagerModules.default
-              ./nixpkgs/home-manager/beast-gnome.nix
+              ./nixpkgs/home-manager/beast.nix
             ];
           };
 
@@ -207,7 +208,7 @@
               ./nixpkgs/nixos/beast/configuration.nix
               hyprland.nixosModules.default
               home-manager.nixosModules.home-manager
-              (homeManagerConfig ./nixpkgs/home-manager/beast-gnome.nix)
+              (homeManagerConfig ./nixpkgs/home-manager/beast.nix)
               {
                 home-manager.sharedModules = [
                   # XXX: Hack

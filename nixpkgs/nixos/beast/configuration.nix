@@ -6,12 +6,14 @@
 
 {
   imports = [
-    ../minikube.nix
-    ../cachix.nix
-    ./desktop.nix
+    ../common/cachix.nix
+    ../common/minikube.nix
+    ../common/common.nix
+    ../common/gui/dev-kitchen-sink.nix
+    ../common/gui/desktop.nix
+    ../common/gui/base.nix
+    ../common/gui/messaging.nix
   ];
-
-  nix.settings.experimental-features = [ "flakes" "nix-command" ];
 
   # Bootloader.
   boot.loader = {
@@ -27,29 +29,9 @@
     };
   };
 
-  networking.hostName = "beast"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "America/New_York";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
+  networking.hostName = "beast";
+  #networking.wireless.enable = true;
 
   # Graphics
   hardware.opengl.enable = true;
@@ -57,16 +39,6 @@
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.modesetting.enable = true;
-
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -77,12 +49,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
     jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   services.hardware.openrgb = {
@@ -107,6 +74,7 @@
 
     defaultUserShell = pkgs.fish;
   };
+
   security.sudo.wheelNeedsPassword = true;
   security.pam.enableSSHAgentAuth = true;
 
@@ -115,49 +83,11 @@
     enableNvidia = true;
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
-    usbutils
-    pciutils
-    lm_sensors
-    lshw
-    file
-
-    neovim
-    wget
-    curl
-    direnv
-    nix-direnv
-    git
-
-    google-chrome
-    firefox
-
-    # Dev tooling
-    vscode-with-extensions
-    jetbrains.goland
-    jetbrains.pycharm-professional
-    jetbrains.datagrip
-    jetbrains.clion
-
-    # Messaging
-    slack
-    discord
+    minidsp
 
     # Notes 
     logseq
-
-    _1password-gui
-    flameshot # Screenshot software
-
-    keybase
-    keybase-gui
-
-    simplescreenrecorder
 
     #Audio
     roomeqwizard
@@ -168,47 +98,14 @@
     #razergenie #mouse
     openrazer-daemon
 
-    screenfetch
-    alacritty
-    wezterm
-
     nvtop-nvidia # htop-like gpu load viewer
-
-
-    # Fixing this so Goland works
-    gcc
-    llvmPackages.libclang
-    llvmPackages.libcxxClang
-    distrobox
-
-    mypy
   ];
 
-  programs.mtr.enable = true;
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-
   services.vscode-server.enable = true;
-
   services.openssh.enable = true;
 
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
-
-  services.mopidy = {
-    enable = true;
-    extensionPackages = with pkgs; [
-      mopidy-mpd
-      mopidy-ytmusic
-      mopidy-soundcloud
-      mopidy-iris
-      mopidy-bandcamp
-    ];
-  };
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

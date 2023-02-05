@@ -9,8 +9,10 @@
     [
       # Include the results of the hardware scan.
       # ./hardware-configuration.nix
-      ../minikube.nix
-      ../qemu-guest.nix
+      ../common/minikube.nix
+      ../common/vm/beast-qemu-guest.nix
+
+      ../common/gui/dev-kitchen-sink.nix
     ];
 
   # Bootloader.
@@ -18,52 +20,23 @@
   boot.loader.grub.device = "/dev/vda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "America/New_York";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+  networking = {
+    hostName = "nixos-qemu";
+    networkmanager.enable = true;
   };
+
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "qxl" "virtio" ];
   services.spice-vdagentd.enable = true;
   services.qemuGuest.enable = true;
+
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
   # services.xserver.windowManager.awesome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -85,43 +58,18 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.mrene = {
-    isNormalUser = true;
-    description = "mathieu";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-    openssh.authorizedKeys.keys = common.sshKeys;
-    initialHashedPassword = "";
-  };
-  users.defaultUserShell = pkgs.fish;
-  security.sudo.wheelNeedsPassword = false;
-
-
   virtualisation.docker = {
     enable = true;
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim
-    wget
-    curl
-    direnv
-    nix-direnv
-    git
-
     google-chrome
 
     # Dev tooling
     vscode-with-extensions
-    jetbrains.goland
-    jetbrains.pycharm-professional
-    jetbrains.datagrip
-    jetbrains.clion
+
 
     # Messaging
     slack
@@ -154,33 +102,9 @@
     wezterm
   ];
 
-  programs.mtr.enable = true;
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-  };
-
   services.vscode-server.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
