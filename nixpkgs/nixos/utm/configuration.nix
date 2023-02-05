@@ -2,11 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, common, ... }:
+{ config, pkgs, common, inputs, ... }:
 
 {
   imports =
     [
+      inputs.home-manager.nixosModules.home-manager
+      inputs.vscode-server.nixosModule
+
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../common/minikube.nix
@@ -35,6 +38,15 @@
 
   virtualisation.docker = {
     enable = true;
+  };
+
+  home-manager = {
+    users.mrene = import ../../home-manager/utm.nix;
+
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    verbose = true;
+    extraSpecialArgs = { inherit inputs; };
   };
 
   # This value determines the NixOS release from which the default

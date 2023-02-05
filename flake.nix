@@ -24,10 +24,12 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils";
-    # deploy-rs = {
-    #   url = "github:serokell/deploy-rs";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -70,11 +72,7 @@
     (
       let
         pkgsConfig = {
-          permittedInsecurePackages = [
-            "python3.10-poetry-1.2.2" # CVE-2022-42966 - Regex DoS
-            "electron-19.0.7" # EOL, but many deps are still using it
-          ];
-
+          permittedInsecurePackages = [ ];
           allowUnfree = true;
         };
 
@@ -82,20 +80,17 @@
         packageOverlay = final: prev: {
           minidsp = inputs.minidsp.packages.${prev.system}.default;
           devenv = inputs.devenv.packages.${prev.system}.devenv;
-          pkgsUnstable = nixpkgsUnstable.packages.${prev.system};
+          pkgsUnstable = import nixpkgsUnstable {
+            inherit (prev) system;
+            config = pkgsConfig;
+            overlays = packageOverlays;
+          };
         };
 
         packageOverlays = [
           packageOverlay
           (import ./nixpkgs/overlays/vscode-with-extensions.nix)
         ];
-
-        homeManagerConfig = path: {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.verbose = true;
-          home-manager.users.mrene = import path;
-        };
       in
       {
         homeConfigurations = {
@@ -105,10 +100,8 @@
               config = pkgsConfig;
               overlays = packageOverlays;
             };
-            modules = [
-              hyprland.homeManagerModules.default
-              ./nixpkgs/home-manager/beast.nix
-            ];
+            modules = [ ./nixpkgs/home-manager/beast.nix ];
+            extraSpecialArgs = { inherit inputs; };
           };
 
           "mrene@Mathieus-MBP" = home-manager.lib.homeManagerConfiguration {
@@ -118,6 +111,7 @@
               overlays = packageOverlays;
             };
             modules = [ ./nixpkgs/home-manager/mac.nix ];
+            extraSpecialArgs = { inherit inputs; };
           };
 
           minimal = home-manager.lib.homeManagerConfiguration {
@@ -127,8 +121,8 @@
               overlays = packageOverlays;
             };
             modules = [ ./nixpkgs/home-manager/minimal.nix ];
+            extraSpecialArgs = { inherit inputs; };
           };
-
         };
 
         darwinConfigurations = {
@@ -136,22 +130,18 @@
           # ./result/sw/bin/darwin-rebuild switch --flake .
           Mathieus-MBP = darwin.lib.darwinSystem {
             system = "aarch64-darwin";
-            modules = [
-              ./nixpkgs/darwin/mbp2021/configuration.nix
-              home-manager.darwinModules.home-manager
-              (homeManagerConfig ./nixpkgs/home-manager/mac.nix)
-            ];
-            inputs = { inherit darwin nixpkgs; };
+            modules = [ ./nixpkgs/darwin/mbp2021/configuration.nix ];
+            inputs = { inherit inputs darwin nixpkgs; };
           };
         };
 
         nixosConfigurations = {
           # sudo nixos-rebuild switch --flake .#homepi
-          homepi = inputs.nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            specialArgs = { common = self.common; inherit inputs; };
-            modules = [ ];
-          };
+          # homepi = inputs.nixpkgs.lib.nixosSystem {
+          #   system = "aarch64-linux";
+          #   specialArgs = { common = self.common; inherit inputs; };
+          #   modules = [ ];
+          # };
 
           # sudo nixos-rebuild switch --flake .#utm
           utm = inputs.nixpkgs.lib.nixosSystem {
@@ -162,19 +152,7 @@
               overlays = packageOverlays;
             };
             specialArgs = { common = self.common; inherit inputs; };
-            modules = [
-              ./nixpkgs/nixos/utm/configuration.nix
-              home-manager.nixosModules.home-manager
-              (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
-              {
-                home-manager.sharedModules = [
-                  # XXX: Hack
-                  hyprland.homeManagerModules.default
-                ];
-              }
-              vscode-server.nixosModule
-              hyprland.nixosModules.default
-            ];
+            modules = [ ./nixpkgs/nixos/utm/configuration.nix ];
           };
 
           # sudo nixos-rebuild switch --flake .#qemu
@@ -186,12 +164,7 @@
               overlays = packageOverlays;
             };
             specialArgs = { common = self.common; inherit inputs; };
-            modules = [
-              ./nixpkgs/nixos/qemu/configuration.nix
-              home-manager.nixosModules.home-manager
-              (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
-              vscode-server.nixosModule
-            ];
+            modules = [ ./nixpkgs/nixos/qemu/configuration.nix ];
           };
 
           # sudo nixos-rebuild switch --flake .#beast
@@ -203,20 +176,7 @@
               overlays = packageOverlays;
             };
             specialArgs = { common = self.common; inherit inputs; };
-            modules = [
-              ./nixpkgs/nixos/beast/hardware-configuration.nix
-              ./nixpkgs/nixos/beast/configuration.nix
-              hyprland.nixosModules.default
-              home-manager.nixosModules.home-manager
-              (homeManagerConfig ./nixpkgs/home-manager/beast.nix)
-              {
-                home-manager.sharedModules = [
-                  # XXX: Hack
-                  hyprland.homeManagerModules.default
-                ];
-              }
-              vscode-server.nixosModule
-            ];
+            modules = [ ./nixpkgs/nixos/beast/configuration.nix ];
           };
         };
 
