@@ -1,5 +1,8 @@
 { config, pkgs, pkgsUnstable, libs, ... }:
 {
+  imports = [
+    ./minimal.nix
+  ];
 
   # https://github.com/nix-community/nix-direnv#via-home-manager
   programs.direnv.enable = true;

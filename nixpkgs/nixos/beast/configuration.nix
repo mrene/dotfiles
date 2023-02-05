@@ -88,6 +88,7 @@
 
     # Notes 
     logseq
+    zotero
 
     #Audio
     roomeqwizard

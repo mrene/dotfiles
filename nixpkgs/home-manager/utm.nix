@@ -2,6 +2,11 @@
 
 {
   imports = [
+    ./modules/home-manager.nix
+    ./modules/fish.nix
+    ./modules/git.nix
+    ./modules/neovim.nix
+    
     ./modules/minimal.nix
     ./modules/gnome.nix
     ./modules/hyprland.nix

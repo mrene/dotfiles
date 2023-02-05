@@ -5,9 +5,10 @@
   imports = [
     ./modules/home-manager.nix
     ./modules/fish.nix
-    ./modules/common.nix
     ./modules/git.nix
     ./modules/neovim.nix
+    
+    ./modules/minimal.nix
   ];
 
   home.stateVersion = "20.09";

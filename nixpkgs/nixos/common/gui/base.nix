@@ -20,7 +20,7 @@
   ];
 
   programs.firefox = {
-    enabled = true;
+    enable = true;
     # TODO: Add extensions
   };
 }

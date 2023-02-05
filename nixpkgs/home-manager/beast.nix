@@ -2,7 +2,13 @@
 
 {
   imports = [
+    ./modules/home-manager.nix
+    ./modules/fish.nix
+    ./modules/git.nix
+    ./modules/neovim.nix
+
     ./modules/minimal.nix
+    ./modules/common.nix
     ./modules/gnome.nix
     ./modules/hyprland.nix
     ./modules/rofi.nix
