@@ -24,10 +24,12 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils";
-    # deploy-rs = {
-    #   url = "github:serokell/deploy-rs";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -70,11 +72,7 @@
     (
       let
         pkgsConfig = {
-          permittedInsecurePackages = [
-            "python3.10-poetry-1.2.2" # CVE-2022-42966 - Regex DoS
-            "electron-19.0.7" # EOL, but many deps are still using it
-          ];
-
+          permittedInsecurePackages = [ ];
           allowUnfree = true;
         };
 
@@ -82,20 +80,17 @@
         packageOverlay = final: prev: {
           minidsp = inputs.minidsp.packages.${prev.system}.default;
           devenv = inputs.devenv.packages.${prev.system}.devenv;
-          pkgsUnstable = nixpkgsUnstable.packages.${prev.system};
+          pkgsUnstable = import nixpkgsUnstable {
+            inherit (prev) system;
+            config = pkgsConfig;
+            overlays = packageOverlays;
+          };
         };
 
         packageOverlays = [
           packageOverlay
           (import ./nixpkgs/overlays/vscode-with-extensions.nix)
         ];
-
-        homeManagerConfig = path: {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.verbose = true;
-          home-manager.users.mrene = import path;
-        };
       in
       {
         homeConfigurations = {

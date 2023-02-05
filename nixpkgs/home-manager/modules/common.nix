@@ -1,4 +1,4 @@
-{ config, pkgs, pkgsUnstable, libs, ... }:
+{ config, pkgs, libs, inputs, ... }:
 {
   imports = [
     ./minimal.nix
@@ -49,7 +49,7 @@
     rnix-lsp
     nil
     nixpkgs-fmt
-    # pkgsUnstable.nurl
+    pkgsUnstable.nurl
 
     # Rust
     rust-analyzer
