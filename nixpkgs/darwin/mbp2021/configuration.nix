@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, inputs, ... }:
 {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -7,6 +7,7 @@
   #   ];
 
   imports = [
+    inputs.home-manager.darwinModules.home-manager
   ];
 
   # Auto upgrade nix package and the daemon service.
@@ -63,6 +64,15 @@
     home = "/Users/mrene";
     shell = "${pkgs.fish}/bin/fish";
   };
+
+  home-manager = {
+    users.mrene = import ../../home-manager/mac.nix;
+
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    verbose = true;
+  };
+
   users.users.root = {
     home = "/var/root";
     shell = "${pkgs.fish}/bin/fish";

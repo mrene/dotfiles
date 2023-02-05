@@ -2,10 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, common, pkgs, ... }:
+{ config, common, pkgs, inputs, ... }:
 
 {
   imports = [
+    inputs.home-manager.nixosModules.home-manager
+    inputs.hyprland.nixosModules.default
+    inputs.vscode-server.nixosModule
+    
+    ./hardware-configuration.nix
     ../common/cachix.nix
     ../common/minikube.nix
     ../common/common.nix
@@ -73,6 +78,15 @@
     };
 
     defaultUserShell = pkgs.fish;
+  };
+
+  home-manager = {
+    users.mrene = import ../../home-manager/beast.nix;
+
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    verbose = true;
+    extraSpecialArgs = { inherit inputs; };
   };
 
   security.sudo.wheelNeedsPassword = true;

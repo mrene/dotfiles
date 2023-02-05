@@ -2,11 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, common, pkgs, ... }:
+{ config, common, pkgs, inputs, ... }:
 
 {
   imports =
     [
+      inputs.home-manager.nixosModules.home-manager
+      inputs.vscode-server.nixosModule
+
       # Include the results of the hardware scan.
       # ./hardware-configuration.nix
       ../common/minikube.nix
@@ -14,6 +17,15 @@
 
       ../common/gui/dev-kitchen-sink.nix
     ];
+
+  home-manager = {
+    users.mrene = import ../../home-manager/utm.nix;
+
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    verbose = true;
+    extraSpecialArgs = { inherit inputs; };
+  };
 
   # Bootloader.
   boot.loader.grub.enable = true;
