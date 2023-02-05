@@ -1,13 +1,7 @@
 { pkgs, config, lib, inputs, ... }:
 {
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  # environment.systemPackages =
-  #   [ pkgs.vim
-  #   ];
-
-  imports = [
-    inputs.home-manager.darwinModules.home-manager
+  environment.systemPackages = with pkgs; [
+    fish
   ];
 
   # Auto upgrade nix package and the daemon service.
@@ -25,7 +19,6 @@
     experimental-features = nix-command flakes
   '';
 
-  nixpkgs.config.allowUnfree = true;
   system.activationScripts.extraActivation.text = ''
     # For TouchID to work in `op` 1Password CLI, it needs to be at `/usr/local/bin`
     # (Hopefully this requirement will be lifted by 1Password at some point)

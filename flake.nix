@@ -6,7 +6,7 @@
 
     # Nix tools
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -130,8 +130,16 @@
           # ./result/sw/bin/darwin-rebuild switch --flake .
           Mathieus-MBP = darwin.lib.darwinSystem {
             system = "aarch64-darwin";
-            modules = [ ./nixpkgs/darwin/mbp2021/configuration.nix ];
-            inputs = { inherit inputs darwin nixpkgs; };
+            pkgs = import nixpkgs {
+              system = "aarch64-darwin";
+              config = pkgsConfig;
+              overlays = packageOverlays;
+            };
+            modules = [
+              home-manager.darwinModules.home-manager
+              ./nixpkgs/darwin/mbp2021/configuration.nix
+            ];
+            inputs = { inherit inputs darwin; };
           };
         };
 
