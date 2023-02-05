@@ -198,6 +198,17 @@
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
 
+  services.mopidy = {
+    enable = true;
+    extensionPackages = with pkgs; [
+      mopidy-mpd
+      mopidy-ytmusic
+      mopidy-soundcloud
+      mopidy-iris
+      mopidy-bandcamp
+    ];
+  };
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

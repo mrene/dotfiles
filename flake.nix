@@ -165,7 +165,14 @@
               ./nixpkgs/nixos/utm/configuration.nix
               home-manager.nixosModules.home-manager
               (homeManagerConfig ./nixpkgs/home-manager/utm.nix)
+              {
+                home-manager.sharedModules = [
+                  # XXX: Hack
+                  hyprland.homeManagerModules.default
+                ];
+              }              
               vscode-server.nixosModule
+              hyprland.nixosModules.default
             ];
           };
 
