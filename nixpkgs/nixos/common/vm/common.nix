@@ -1,6 +1,6 @@
 # Common relaxed configuration for use with VMs running on trusted hardware
 
-{ common, pkgs, ... }: 
+{ common, pkgs, ... }:
 
 {
   users = {
@@ -23,9 +23,9 @@
     mutableUsers = true;
     defaultUserShell = pkgs.fish;
   };
-  
+
   security.sudo.wheelNeedsPassword = false;
-  
+
   services.openssh.enable = true;
   networking.networkmanager.enable = true;
 }

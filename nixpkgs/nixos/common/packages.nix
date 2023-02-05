@@ -19,7 +19,7 @@
   ];
 
   programs.mtr.enable = true;
-  
+
   programs.neovim = {
     enable = true;
     viAlias = true;

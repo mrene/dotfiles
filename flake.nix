@@ -171,7 +171,7 @@
                   # XXX: Hack
                   hyprland.homeManagerModules.default
                 ];
-              }              
+              }
               vscode-server.nixosModule
               hyprland.nixosModules.default
             ];
