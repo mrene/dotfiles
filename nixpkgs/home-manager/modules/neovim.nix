@@ -9,6 +9,8 @@
       # UI
       lualine-nvim  # https://github.com/nvim-lualine/lualine.nvim
       lualine-lsp-progress
+      # bufferline-nvim # Top bar 
+
 
       # Theme
       nightfox-nvim
@@ -19,9 +21,15 @@
       # Git commit browser https://github.com/junegunn/gv.vim/
       gv-vim
       vim-fugitive
- 
+
+      
       # Tools
-      nerdtree
+      #nerdtree
+      nvim-tree-lua  # File tree
+      project-nvim
+
+      true-zen-nvim # zen mode
+
       nerdcommenter
       telescope-nvim # https://github.com/nvim-telescope/telescope.nvim
 
@@ -43,10 +51,11 @@
       (builtins.readFile ./vim/config.vim)
       (builtins.readFile ./vim/mappings.vim)
       (builtins.readFile ./vim/plugin.go.vim)
-      (builtins.readFile ./vim/plugin.nerdtree.vim)
-      # (builtins.readFile ./vim/plugin.tmuxline.vim)
+       (builtins.readFile ./vim/plugin.projectnvim.vim)
+      (builtins.readFile ./vim/plugin.nvimtree.vim)
       (builtins.readFile ./vim/plugin.lualine.vim)
       (builtins.readFile ./vim/plugin.telescope.vim)
+      (builtins.readFile ./vim/plugin.truezen.vim)
       (builtins.readFile ./vim/plugin.lsp.vim)
     ]);
   };

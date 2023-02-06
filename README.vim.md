@@ -22,6 +22,12 @@ Ctrl+K: Signature Help
 gr Find References
 <space>f Format
 
+# File navigation
+Ctrl-e Toggle Tree
+
+### In tree:
+Q close
+
 
 ### Workspaces
 <space>wa Add workspace folder
