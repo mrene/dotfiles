@@ -78,6 +78,8 @@ in
       cmp-nvim-lsp-document-symbol
       nvim-highlight-colors
 
+      vim-flatbuffers
+
       # Debugger IDE
       vimspector
     ] ++ lib.optionals (pkgs.stdenv.system != "aarch64-linux") [

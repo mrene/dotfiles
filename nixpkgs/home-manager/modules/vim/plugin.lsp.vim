@@ -39,12 +39,14 @@ local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
 }
+
+vim.lsp.set_log_level('trace')
+
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {  'pyright', 'tsserver', 'nil_ls','jsonnet_ls' }
--- rust_analyzer is handled in plugins.rust-tools, gopls by go
+local servers = {  'pyright', 'tsserver', 'nil_ls','jsonnet_ls', 'bufls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
-    -- on_attach = my_custom_on_attach,
+    on_attach = on_attach,
     capabilities = capabilities,
   }
 end

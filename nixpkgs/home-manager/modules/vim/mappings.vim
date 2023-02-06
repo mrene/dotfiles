@@ -32,7 +32,6 @@ imap <C-w> <C-o><C-w>
 noremap <leader>l :bn<CR>
 noremap <leader>h :bp<CR>
 noremap <leader>n :bp<bar>bd #<CR>
-noremap <leader>b :BufOnly<CR>
 noremap <leader><leader> :e #<CR>
 
 nnoremap <Leader>o :CtrlP<CR>
