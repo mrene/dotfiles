@@ -40,8 +40,8 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {  'pyright', 'tsserver', 'nil_ls', 'gopls', 'jsonnet_ls' }
--- rust_analyzer is handled in plugins.rust-tools
+local servers = {  'pyright', 'tsserver', 'nil_ls','jsonnet_ls' }
+-- rust_analyzer is handled in plugins.rust-tools, gopls by go
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     -- on_attach = my_custom_on_attach,
@@ -102,6 +102,35 @@ cmp.setup.cmdline('/', {
   }),
 
   mapping = cmp.mapping.preset.cmdline(),
+})
+
+
+require('rust-tools').setup({
+  server = {
+    on_attach = on_attach
+  },
+})
+
+require('go').setup({
+    lsp_cfg = true,
+    lsp_on_attach = on_attach,
+})
+
+-- Inlay hints
+require("lsp-inlayhints").setup()
+
+vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = "LspAttach_inlayhints",
+  callback = function(args)
+    if not (args.data and args.data.client_id) then
+      return
+    end
+
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    require("lsp-inlayhints").on_attach(client, bufnr)
+  end,
 })
 
 END

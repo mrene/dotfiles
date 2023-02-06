@@ -24,6 +24,7 @@ gr Find References
 
 # File navigation
 Ctrl-e Toggle Tree
+Ctrl-f Show current file in tree
 
 ### In tree:
 q close

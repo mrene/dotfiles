@@ -1,5 +1,5 @@
-lua <<<END
+lua << END
+-- moved to plugin.lsp.vim
 
-require('rust-tools').setup()
 
 END
