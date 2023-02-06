@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   ray-x-go-nvim = pkgs.vimUtils.buildVimPlugin {
-    name = "vim-better-whitespace";
+    name = "ray-x-go-nvim";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "go.nvim";
