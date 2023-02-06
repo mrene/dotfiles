@@ -56,6 +56,9 @@
     rustup
     cargo-edit
 
+    # Microsoft's python LSP
+    nodePackages.pyright
+
     # github cli
     gitAndTools.gh
 

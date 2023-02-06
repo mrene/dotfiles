@@ -7,11 +7,19 @@
 
     plugins = with pkgs.vimPlugins; [
       # UI
-      lightline-vim
-      tmuxline-vim
-      gruvbox
+      lualine-nvim  # https://github.com/nvim-lualine/lualine.nvim
+      lualine-lsp-progress
+
+      # Theme
       nightfox-nvim
 
+      # Goto anything
+      ctrlp-vim
+
+      # Git commit browser https://github.com/junegunn/gv.vim/
+      gv-vim
+      vim-fugitive
+ 
       # Tools
       nerdtree
       nerdcommenter
@@ -24,6 +32,9 @@
       typescript-vim
       rust-vim
       nvim-lspconfig
+
+      # Debugger IDE
+      vimspector
     ] ++ lib.optionals (pkgs.stdenv.system != "aarch64-linux") [
       vim-go
     ];
@@ -33,8 +44,10 @@
       (builtins.readFile ./vim/mappings.vim)
       (builtins.readFile ./vim/plugin.go.vim)
       (builtins.readFile ./vim/plugin.nerdtree.vim)
-      (builtins.readFile ./vim/plugin.tmuxline.vim)
+      # (builtins.readFile ./vim/plugin.tmuxline.vim)
+      (builtins.readFile ./vim/plugin.lualine.vim)
       (builtins.readFile ./vim/plugin.telescope.vim)
+      (builtins.readFile ./vim/plugin.lsp.vim)
     ]);
   };
 }

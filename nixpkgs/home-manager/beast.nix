@@ -13,6 +13,7 @@
     ./modules/hyprland.nix
     ./modules/rofi.nix
     ./modules/wezterm.nix
+    ./modules/neofetch.nix
   ];
 
   home.stateVersion = "20.09";

@@ -11,8 +11,8 @@ nnoremap <silent> <leader>tt :TagbarToggle<CR>
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
 noremap k gk
-nnoremap <leader>a :call NERDComment('n', 'Toggle')<CR>
-vnoremap <leader>a :call NERDComment('x', 'Toggle')<CR>
+nnoremap <leader>a :call nerdcommenter#Comment('n', 'Toggle')<CR>
+vnoremap <leader>a :call nerdcommenter#Comment('x', 'Toggle')<CR>
 
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)

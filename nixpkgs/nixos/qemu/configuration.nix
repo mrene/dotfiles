@@ -11,7 +11,7 @@
       inputs.vscode-server.nixosModule
 
       # Include the results of the hardware scan.
-      # ./hardware-configuration.nix
+       ./hardware-configuration.nix
       ../common/minikube.nix
       ../common/vm/beast-qemu-guest.nix
       ../common/gui/base.nix
