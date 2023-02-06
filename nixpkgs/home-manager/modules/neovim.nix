@@ -55,6 +55,7 @@ in
 
       nerdcommenter
       telescope-nvim # https://github.com/nvim-telescope/telescope.nvim
+      toggleterm-nvim
 
       # Languages
       vim-nix
@@ -89,7 +90,7 @@ in
     extraConfig = (builtins.concatStringsSep "\n" [
       (builtins.readFile ./vim/config.vim)
       (builtins.readFile ./vim/mappings.vim)
-      (builtins.readFile ./vim/plugin.go.vim)
+      (builtins.readFile ./vim/plugin.toggleterm.vim)
       (builtins.readFile ./vim/plugin.projectnvim.vim)
       (builtins.readFile ./vim/plugin.nvimtree.vim)
       (builtins.readFile ./vim/plugin.lualine.vim)
