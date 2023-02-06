@@ -50,6 +50,7 @@
     nil
     nixpkgs-fmt
     pkgsUnstable.nurl
+    pkgsUnstable.jsonnet-language-server
 
     # Rust
     rust-analyzer

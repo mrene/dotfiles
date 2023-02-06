@@ -9,6 +9,7 @@
 
     ./modules/minimal.nix
     ./modules/common.nix
+    ./modules/wezterm.nix
   ];
 
   home.username = "mrene";

@@ -48,7 +48,7 @@ noremap <leader>/ :nohl<CR>
 noremap <leader>] :ToggleBackground<CR>
 
 " fugitive (git)
-noremap <leader>g :Gstatus<CR>
+noremap <leader>g :G<CR>  
 
 " vpaste
 map <leader>\ :exe "w !vpaste ft=".&ft<CR><CR>

@@ -1,4 +1,15 @@
 { config, lib, pkgs, ... }:
+let
+  ray-x-go-nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "vim-better-whitespace";
+    src = pkgs.fetchFromGitHub {
+      owner = "ray-x";
+      repo = "go.nvim";
+      rev = "10349e1e430d00bc314c1d4abb043ac66ed219d9";
+      hash = "sha256-oQmnhdypRWqnFeDBpyeeXb4UYDxgmZQuzdM+pyFDYZU=";
+    };
+  };
+in
 {
   programs.neovim = {
     enable = true;
@@ -38,8 +49,17 @@
       vim-markdown
       vim-javascript
       typescript-vim
-      rust-vim
       nvim-lspconfig
+      rust-tools-nvim
+      ray-x-go-nvim
+
+      luasnip
+      nvim-cmp # Auto-completion
+      cmp_luasnip
+      cmp-nvim-lsp
+      cmp-nvim-lsp-signature-help
+      cmp-nvim-lsp-document-symbol
+      nvim-highlight-colors
 
       # Debugger IDE
       vimspector
@@ -57,6 +77,8 @@
       (builtins.readFile ./vim/plugin.telescope.vim)
       (builtins.readFile ./vim/plugin.truezen.vim)
       (builtins.readFile ./vim/plugin.lsp.vim)
+      (builtins.readFile ./vim/plugin.rust-tools.vim)
+      (builtins.readFile ./vim/plugin.go.vim)
     ]);
   };
 }
