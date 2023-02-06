@@ -26,13 +26,8 @@ gr Find References
 Ctrl-e Toggle Tree
 
 ### In tree:
-Q close
-
-
-### Workspaces
-<space>wa Add workspace folder
-<space>wr Remove workspace folder
-<space>wl List  workspace folders
+q close
+g? Show commands
 
 # NERDCommender
 <leader>a Toggle comment

@@ -51,7 +51,7 @@
       (builtins.readFile ./vim/config.vim)
       (builtins.readFile ./vim/mappings.vim)
       (builtins.readFile ./vim/plugin.go.vim)
-       (builtins.readFile ./vim/plugin.projectnvim.vim)
+      (builtins.readFile ./vim/plugin.projectnvim.vim)
       (builtins.readFile ./vim/plugin.nvimtree.vim)
       (builtins.readFile ./vim/plugin.lualine.vim)
       (builtins.readFile ./vim/plugin.telescope.vim)
