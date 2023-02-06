@@ -30,7 +30,7 @@ in
 
     plugins = with pkgs.vimPlugins; [
       # UI
-      lualine-nvim  # https://github.com/nvim-lualine/lualine.nvim
+      lualine-nvim # https://github.com/nvim-lualine/lualine.nvim
       lualine-lsp-progress
       # bufferline-nvim # Top bar 
 
@@ -45,10 +45,10 @@ in
       gv-vim
       vim-fugitive
 
-      
+
       # Tools
       #nerdtree
-      nvim-tree-lua  # File tree
+      nvim-tree-lua # File tree
       project-nvim
 
       true-zen-nvim # zen mode

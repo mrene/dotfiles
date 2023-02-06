@@ -64,6 +64,8 @@
     # github cli
     gitAndTools.gh
 
+    update-nix-fetchgit
+
   ] ++ lib.optionals stdenv.isDarwin [
     coreutils # provides `dd` with --status=progress
     wifi-password

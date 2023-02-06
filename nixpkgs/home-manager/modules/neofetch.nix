@@ -1,5 +1,5 @@
 { config, pkgs, lib, libs, ... }:
-let 
+let
   themes = pkgs.fetchFromGitHub {
     owner = "Chick2D";
     repo = "neofetch-themes";

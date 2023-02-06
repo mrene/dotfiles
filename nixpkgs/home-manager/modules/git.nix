@@ -1,5 +1,5 @@
 { config, pkgs, lib, libs, ... }:
-let 
+let
   delta = pkgs.fetchFromGitHub {
     owner = "dandavison";
     repo = "delta";
@@ -16,7 +16,7 @@ in
     delta = {
       enable = true;
       options = {
-        navigate = true;  # N to switch files
+        navigate = true; # N to switch files
         syntax-theme = "Nord";
         side-by-side = false;
         features = "chameleon-mod";

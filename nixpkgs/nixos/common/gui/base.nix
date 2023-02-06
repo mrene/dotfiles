@@ -16,7 +16,7 @@
     alacritty
 
     gnvim
-    
+
     # The nixpkgs-unstable version fixes a bug around bad window dragging performance
     # https://github.com/wez/wezterm/issues/2530
     pkgs.pkgsUnstable.wezterm
