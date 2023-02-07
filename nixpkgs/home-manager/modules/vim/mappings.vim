@@ -4,9 +4,9 @@
 
 " format the entire file
 nnoremap <leader>fef :normal! gg=G``<CR>
-nnoremap <silent> <leader>x :call JsBeautify()<cr>
+"nnoremap <silent> <leader>x :call JsBeautify()<cr>
 
-nnoremap <silent> <leader>tt :TagbarToggle<CR>
+"nnoremap <silent> <leader>tt :TagbarToggle<CR>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
@@ -44,7 +44,7 @@ map Q :wqa<CR>
 noremap <leader>/ :nohl<CR>
 
 " toggle color schema
-noremap <leader>] :ToggleBackground<CR>
+"noremap <leader>] :ToggleBackground<CR>
 
 " fugitive (git)
 noremap <leader>g :G<CR>  

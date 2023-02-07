@@ -1,4 +1,6 @@
 lua << END
+local navic = require("nvim-navic")
+
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -37,7 +39,11 @@ require('lualine').setup {
   tabline = {
     lualine_a = {'buffers'},
   },
-  winbar = {},
+  winbar = {
+    lualine_c = {
+      { navic.get_location, cond = navic.is_available },
+    },
+  },
   inactive_winbar = {},
   extensions = { 'nerdtree', 'fugitive', 'fzf' }
 }

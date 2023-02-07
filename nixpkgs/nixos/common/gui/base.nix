@@ -12,7 +12,9 @@
   };
 
   environment.systemPackages = with pkgs; [
-    google-chrome
+    pkgsUnstable.google-chrome
+    pkgsUnstable.chromium
+
     alacritty
 
     gnvim
@@ -31,5 +33,23 @@
   programs.firefox = {
     enable = true;
     # TODO: Add extensions
+  };
+
+  programs.chromium = {
+    enable = true;
+
+    extensions = [
+      "aomjjhallfgjeglblehebfpbcfeobpgk" # 1password
+      "gighmmpiobklfepjocnamgkkbiglidom" # adblock
+      "dcpbedhdekgkhigjgmlcbmcjoeaebbfm" # block and focus
+      "eimadpbcbfnmbkopoojfekhnkhdbieeh" # dark reader
+      "nakplnnackehceedgkgkokbgbmfghain" # fake spot
+      "blkggjdmcfjdbmmmlfcpplkchpeaiiab" # omnivore
+      "kbmfpngjjgdllneeigpgjifpgocmfgmb" # reddit enhancement suite
+      "ennpfpdlaclocpomkiablnmbppdnlhoh" # rust search extension
+      "okphadhbbjadcifjplhifajfacbkkbod" # sabnzbd connect
+      "mnjggcdmjocbbbhaepdhchncahnbgone" # sponsorblock
+      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+    ];
   };
 }

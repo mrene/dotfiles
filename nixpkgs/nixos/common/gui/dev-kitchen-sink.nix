@@ -12,5 +12,7 @@
     llvmPackages.libclang
     llvmPackages.libcxxClang
     mypy
+    glibc.dev
+    libclang.lib
   ];
 }

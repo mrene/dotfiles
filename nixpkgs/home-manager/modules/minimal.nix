@@ -6,6 +6,12 @@
     tmux
 
     bat # cat with syntax highlighting
+    bat-extras.prettybat
+    bat-extras.batwatch
+    bat-extras.batpipe
+    bat-extras.batman
+    bat-extras.batgrep
+    bat-extras.batdiff
 
     fzf
     ripgrep

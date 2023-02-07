@@ -193,6 +193,12 @@
           homepi = self.nixosConfigurations.homepi.config.system.build.sdImage;
         };
 
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config = pkgsConfig;
+          overlays = packageOverlays;
+        };
+
         common = {
           sshKeys = [
             "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMDK9LCwU62BIcyn73TcaQlMqr12GgYnHYcw5dbDDNmYnpp2n/jfDQ5hEkXd945dcngW6yb7cmgsa8Sx9T1Uuo4= secretive@mbp2021"

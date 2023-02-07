@@ -44,6 +44,7 @@
       any-nix-shell fish --info-right | source
 
       set -g theme_color_scheme nord
+      set -x BAT_THEME "Nord"
     '';
     functions = {
 
@@ -67,8 +68,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "oh-my-fish";
           repo = "theme-bobthefish";
-          rev = "e69150081b0e576ebb382487c1ff2cb35e78bb35";
-          sha256 = "sha256-/x1NlbhxRZjrsk4C0mkSQi4zzpOaxL1O1vvzDHhGQk0=";
+          rev = "2dcfcab653ae69ae95ab57217fe64c97ae05d8de";
+          sha256 = "118hj100c4bb8hyhr22mrsjhg97pyd24cwb1l39bhryd0k9yc5lc";
         };
       }
       {
@@ -77,7 +78,7 @@
           owner = "halostatue";
           repo = "fish-docker";
           rev = "e925cd39231398b3842db1106af7acb4ec68dc79";
-          sha256 = "sha256-vFWSa4TlygBylWSqFFH195KZM3dE2G3RZjOMTkEhKW8=";
+          sha256 = "0vr9450lx31kcv8nvn24fwrrk4ppym8i9ak4jmr01jp5himr4mdw";
         };
       }
     ];
@@ -106,6 +107,8 @@
       d = "docker";
       k = "kubectl";
       b = "bat";
+
+      nr = "nix run nixpkgs#";
 
       ".." = "cd ..";
       "..." = "cd ../..";

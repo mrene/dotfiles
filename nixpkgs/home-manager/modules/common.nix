@@ -52,6 +52,7 @@
     pkgsUnstable.nurl
     pkgsUnstable.jsonnet-language-server
     buf-language-server
+    marksman # markdown lsp
 
     # Rust
     rust-analyzer
@@ -60,6 +61,7 @@
 
     # Microsoft's python LSP
     nodePackages.pyright
+    nodePackages.typescript-language-server
 
     # github cli
     gitAndTools.gh

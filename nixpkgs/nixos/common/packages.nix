@@ -8,6 +8,8 @@
     direnv
     nix-direnv
     git
+    zip
+    unzip
 
     usbutils
     pciutils

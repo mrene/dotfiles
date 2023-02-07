@@ -7,9 +7,14 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
+local navic = require("nvim-navic")
+navic.setup()
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  navic.attach(client, bufnr)
+
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -40,17 +45,18 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
-vim.lsp.set_log_level('trace')
-
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
 local servers = {  'pyright', 'tsserver', 'nil_ls','jsonnet_ls', 'bufls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
-    on_attach = on_attach,
+    --on_attach = on_attach,
     capabilities = capabilities,
   }
 end
 
+lspconfig['marksman'].setup {
+   --on_attach = on_attach,
+}
 local luasnip = require 'luasnip'
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -106,20 +112,30 @@ cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
 })
 
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
 
 require('rust-tools').setup({
   server = {
-    on_attach = on_attach
+    --on_attach = on_attach
   },
 })
 
 require('go').setup({
     lsp_cfg = true,
-    lsp_on_attach = on_attach,
+    --lsp_on_attach = on_attach,
+    lsp_diag_underline = false,
 })
 
 -- Inlay hints
-require("lsp-inlayhints").setup()
+--require("lsp-inlayhints").setup()
 
 vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -131,7 +147,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
-    require("lsp-inlayhints").on_attach(client, bufnr)
+    --require("lsp-inlayhints").on_attach(client, bufnr)
+    on_attach(client, bufnr)
   end,
 })
 

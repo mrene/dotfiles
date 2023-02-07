@@ -66,7 +66,7 @@ augroup END
 
 " filetypes
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,Procfile,Guardfile,config.ru,*.rake} set ft=ruby
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=mkd
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn,txt} set ft=markdown
 au BufRead,BufNewFile *.{coffee} set ft=coffee
 au BufRead,BufNewFile *.{go} set ft=go
 au BufRead,BufNewFile *.{swift} set ft=swift
@@ -78,8 +78,8 @@ au BufRead,BufNewFile *.{toml} set ft=toml
 au BufRead,BufNewFile *.{fish} set ft=fish
 au BufRead,BufNewFile *.{ts,tsx} set ft=typescript colorcolumn=120
 au BufRead,BufNewFile Dockerfile set ft=Dockerfile
-au BufRead,BufNewFile *.{js} set colorcolumn=80
-au BufRead,BufNewFile *.{go} silent SyntasticToggleMode
+"au BufRead,BufNewFile *.{js} set colorcolumn=80
+"au BufRead,BufNewFile *.{go} silent SyntasticToggleMode
 
 " Display tabs and trailing spaces visually
 set list listchars=tab:\ \ ,trail:·

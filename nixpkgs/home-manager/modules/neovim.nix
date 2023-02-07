@@ -21,6 +21,18 @@ let
       hash = "sha256-gz0hd8TyCLlZOnG5mfXdxKkXL3rpP8f3P3/X6jNa5c8=";
     };
   };
+
+  nvim-lspconfig = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "nvim-lspconfig";
+    version = "unstable-2023-02-06";
+    src = pkgs.fetchFromGitHub {
+      owner = "neovim";
+      repo = "nvim-lspconfig";
+      rev = "d3c82d2f9a6fd91ec1ffee645664d2cc57e706d9";
+      sha256 = "0kjqxhd4yqy799nnd743azj6c6v5q4g0j01sw4mp115yrqb7ffy0";
+    };
+    meta.homepage = "https://github.com/neovim/nvim-lspconfig/";
+  };
 in
 {
   programs.neovim = {
@@ -67,6 +79,7 @@ in
       ray-x-go-nvim
       ray-x-guihua
       lsp-inlayhints-nvim
+      nvim-navic
 
       # needed by go-nvim
       pkgs.pkgsUnstable.vimPlugins.nvim-treesitter.withAllGrammars
@@ -80,6 +93,8 @@ in
       nvim-highlight-colors
 
       vim-flatbuffers
+      fzf-vim
+      zoxide-vim
 
       # Debugger IDE
       vimspector

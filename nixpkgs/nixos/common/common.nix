@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
@@ -11,6 +11,12 @@
     #   experimental-features = nix-command flakes
     # '';
     settings.experimental-features = [ "flakes" "nix-command" ];
+
+    registry = {
+      self.flake = inputs.self;
+      nixpkgs.flake = inputs.nixpkgs;
+      nixpkgsUnstable.flake = inputs.nixpkgsUnstable;
+    };
   };
 
   # Set your time zone.
