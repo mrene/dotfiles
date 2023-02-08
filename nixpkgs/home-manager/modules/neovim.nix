@@ -83,6 +83,7 @@ in
 
       # needed by go-nvim
       pkgs.pkgsUnstable.vimPlugins.nvim-treesitter.withAllGrammars
+      pkgs.pkgsUnstable.vimPlugins.nvim-treesitter-textobjects
 
       luasnip
       nvim-cmp # Auto-completion
