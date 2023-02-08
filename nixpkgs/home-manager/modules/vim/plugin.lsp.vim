@@ -13,7 +13,9 @@ navic.setup()
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  navic.attach(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -95,6 +97,7 @@ cmp.setup {
     end, { 'i', 's' }),
   }),
   sources = {
+    { name = "copilot" },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'nvim_lsp_signature_help' },
@@ -151,5 +154,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
     on_attach(client, bufnr)
   end,
 })
+
+require("copilot").setup({
+  suggestion = { enabled = false },
+  panel = { enabled = false },
+})
+
+-- Recommended
+require("copilot_cmp").setup {
+  method = "getCompletionsCycling",
+}
+
+
 
 END

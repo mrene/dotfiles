@@ -97,6 +97,9 @@ in
       fzf-vim
       zoxide-vim
 
+      pkgs.pkgsUnstable.vimPlugins.copilot-lua
+      pkgs.pkgsUnstable.vimPlugins.copilot-cmp
+
       # Debugger IDE
       vimspector
     ] ++ lib.optionals (pkgs.stdenv.system != "aarch64-linux") [

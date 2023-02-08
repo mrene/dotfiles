@@ -68,6 +68,9 @@
 
     update-nix-fetchgit
 
+    # Copilot requirement
+    nodejs-16_x
+
   ] ++ lib.optionals stdenv.isDarwin [
     coreutils # provides `dd` with --status=progress
     wifi-password
