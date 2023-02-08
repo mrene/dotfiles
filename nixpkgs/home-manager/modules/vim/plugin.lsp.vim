@@ -46,17 +46,17 @@ local lsp_flags = {
 }
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {  'pyright', 'tsserver', 'nil_ls','jsonnet_ls', 'bufls' }
+local servers = {  'pyright', 'tsserver', 'nil_ls','jsonnet_ls', 'bufls', 'marksman' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
-    --on_attach = on_attach,
     capabilities = capabilities,
   }
 end
 
-lspconfig['marksman'].setup {
-   --on_attach = on_attach,
-}
+--lspconfig['marksman'].setup {
+--  cmd = { '/home/mrene/dotfiles/marksman.sh' }
+--}
+
 local luasnip = require 'luasnip'
 -- nvim-cmp setup
 local cmp = require 'cmp'
