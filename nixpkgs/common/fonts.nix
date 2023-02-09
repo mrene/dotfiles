@@ -7,7 +7,9 @@
     noto-fonts-cjk
     noto-fonts-emoji
     powerline-fonts
-    powerline-symbols
+
+    # Part of nerdfonts
+    #powerline-symbols
 
     nerdfonts
   ];

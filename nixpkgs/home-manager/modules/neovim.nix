@@ -107,6 +107,9 @@ in
 
       # Start screen
       vim-startify
+
+      # Github
+      octo-nvim
     ] ++ lib.optionals (pkgs.stdenv.system != "aarch64-linux") [
       vim-go
     ];
@@ -123,6 +126,7 @@ in
       (builtins.readFile ./vim/plugin.lsp.vim)
       (builtins.readFile ./vim/plugin.rust-tools.vim)
       (builtins.readFile ./vim/plugin.treesitter.vim)
+      (builtins.readFile ./vim/plugin.octo.vim)
     ]);
   };
 }

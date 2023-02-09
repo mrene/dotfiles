@@ -61,6 +61,9 @@
           };
         in
         {
+          packages = {
+            pathfind = pkgs.callPackage ./nixpkgs/packages/pathfind { };
+          };
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
               nixos-generators.packages.${system}.nixos-generate
@@ -85,6 +88,7 @@
             config = pkgsConfig;
             overlays = packageOverlays;
           };
+          pathfind = prev.callPackage ./nixpkgs/packages/pathfind { };
         };
 
         packageOverlays = [
@@ -136,7 +140,7 @@
               overlays = packageOverlays;
             };
             modules = [
-              home-manager.darwinModules.home-manager
+              #home-manager.darwinModules.home-manager
               ./nixpkgs/darwin/mbp2021/configuration.nix
             ];
             inputs = { inherit inputs darwin; };
