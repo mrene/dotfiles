@@ -136,7 +136,7 @@
               overlays = packageOverlays;
             };
             modules = [
-              home-manager.darwinModules.home-manager
+              #home-manager.darwinModules.home-manager
               ./nixpkgs/darwin/mbp2021/configuration.nix
             ];
             inputs = { inherit inputs darwin; };

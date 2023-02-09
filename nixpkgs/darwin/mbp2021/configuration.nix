@@ -1,5 +1,9 @@
 { pkgs, config, lib, inputs, ... }:
 {
+  imports = [
+    ../../common/fonts.nix
+  ];
+
   environment.systemPackages = with pkgs; [
     fish
   ];
@@ -33,19 +37,20 @@
   };
 
   environment.shells = [ pkgs.fish ];
+  fonts.fontDir.enable = true;
 
   users.users.mrene = {
     home = "/Users/mrene";
     shell = "${pkgs.fish}/bin/fish";
   };
 
-  home-manager = {
-    users.mrene = import ../../home-manager/mac.nix;
+  #home-manager = {
+    #users.mrene = import ../../home-manager/mac.nix;
 
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    verbose = true;
-  };
+    #useGlobalPkgs = true;
+    #useUserPackages = true;
+    #verbose = true;
+  #};
 
   users.users.root = {
     home = "/var/root";

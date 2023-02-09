@@ -29,8 +29,6 @@
 
   home.packages = with pkgs; [
     minidsp
-    # https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerdfonts/default.nix
-    # nerdfonts
   ];
 
   home.stateVersion = "20.09";

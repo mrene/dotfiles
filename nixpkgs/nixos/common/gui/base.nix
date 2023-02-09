@@ -2,7 +2,7 @@
 {
 
   imports = [
-    ./fonts.nix
+    ../../../common/fonts.nix
   ];
 
   # Configure keymap in X11
