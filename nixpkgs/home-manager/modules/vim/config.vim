@@ -78,6 +78,8 @@ au BufRead,BufNewFile *.{toml} set ft=toml
 au BufRead,BufNewFile *.{fish} set ft=fish
 au BufRead,BufNewFile *.{ts,tsx} set ft=typescript colorcolumn=120
 au BufRead,BufNewFile Dockerfile set ft=Dockerfile
+au BufRead,BufNewFile *.{jsonnet,libsonnet} set ft=jsonnet
+
 "au BufRead,BufNewFile *.{js} set colorcolumn=80
 "au BufRead,BufNewFile *.{go} silent SyntasticToggleMode
 
@@ -107,3 +109,15 @@ if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 endif
+
+" start screen
+function! GetUniqueSessionName()
+  let path = fnamemodify(getcwd(), ':~:t')
+  let path = empty(path) ? 'no-project' : path
+  let branch = fugitive#Head()
+  let branch = empty(branch) ? '' : '-' . branch
+  return substitute(path . branch, '/', '-', 'g')
+endfunction
+
+"autocmd User        StartifyReady silent execute 'SLoad '  . GetUniqueSessionName()
+autocmd VimLeavePre *             silent execute 'SSave! ' . GetUniqueSessionName()

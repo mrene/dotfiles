@@ -57,6 +57,8 @@ in
       gv-vim
       vim-fugitive
 
+      vim-gitgutter # Show diffs on the left of line numbers
+
 
       # Tools
       #nerdtree
@@ -102,6 +104,9 @@ in
 
       # Debugger IDE
       vimspector
+
+      # Start screen
+      vim-startify
     ] ++ lib.optionals (pkgs.stdenv.system != "aarch64-linux") [
       vim-go
     ];
