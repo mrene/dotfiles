@@ -29,6 +29,7 @@
 
   home.packages = with pkgs; [
     minidsp
+    pathfind
   ];
 
   home.stateVersion = "20.09";
