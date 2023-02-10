@@ -43,6 +43,7 @@ in
     plugins = with pkgs.vimPlugins; [
       # UI
       lualine-nvim # https://github.com/nvim-lualine/lualine.nvim
+      nvim-web-devicons
       lualine-lsp-progress
       # bufferline-nvim # Top bar 
 

@@ -18,6 +18,8 @@
     file
 
     distrobox
+    yq-go
+    jq
   ];
 
   programs.mtr.enable = true;

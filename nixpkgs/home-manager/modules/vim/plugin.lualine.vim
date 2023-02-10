@@ -43,8 +43,12 @@ require('lualine').setup {
     lualine_c = {
       { navic.get_location, cond = navic.is_available },
     },
+    lualine_x = {
+      {'filename', path = 3, icon_only = true, shortening_target = 0, file_status = false },
+    },
   },
-  inactive_winbar = {},
+  inactive_winbar = {
+  },
   extensions = { 'nerdtree', 'fugitive', 'fzf' }
 }
 END

@@ -121,3 +121,7 @@ endfunction
 
 "autocmd User        StartifyReady silent execute 'SLoad '  . GetUniqueSessionName()
 autocmd VimLeavePre *             silent execute 'SSave! ' . GetUniqueSessionName()
+
+" In order for gitgutter to refresh its signs faster
+set updatetime=100
+

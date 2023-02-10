@@ -132,9 +132,22 @@ require('rust-tools').setup({
 })
 
 require('go').setup({
-    lsp_cfg = true,
-    --lsp_on_attach = on_attach,
-    lsp_diag_underline = false,
+    lsp_cfg = {
+      settings = {
+        gopls = {
+          staticcheck = true,
+          analyses = {
+            ST1003 = false,
+            ST1020 = false,
+            ST1021 = false,
+            ST1022 = false,
+            ST1023 = false,
+          },
+        },
+      },
+    },
+    lsp_diag_underline = true,
+    lsp_keymaps = false,
 })
 
 -- Inlay hints

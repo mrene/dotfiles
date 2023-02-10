@@ -50,7 +50,7 @@
   };
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.modesetting.enable = true;
+  #hardware.nvidia.modesetting.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -84,7 +84,7 @@
       };
     };
 
-    defaultUserShell = pkgs.fish;
+    defaultUserShell = pkgs.pkgsUnstable.fish;
   };
 
   home-manager = {
