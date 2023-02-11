@@ -108,7 +108,7 @@
             extraSpecialArgs = { inherit inputs; };
           };
 
-          "mrene@Mathieus-MBP" = home-manager.lib.homeManagerConfiguration {
+          "mrene@Mathieus-MacBook-Pro.local" = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
               system = "aarch64-darwin";
               config = pkgsConfig;

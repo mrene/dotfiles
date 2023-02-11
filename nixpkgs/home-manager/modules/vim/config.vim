@@ -3,7 +3,8 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " syntax enable
 
 " colorscheme solarized
-colorscheme nordfox
+colorscheme catppuccin-mocha " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+
 
 set background=dark
 set number " enable line numbers

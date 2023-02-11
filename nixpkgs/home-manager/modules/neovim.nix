@@ -49,7 +49,8 @@ in
 
 
       # Theme
-      nightfox-nvim
+      #nightfox-nvim
+      catppuccin-nvim
 
       # Goto anything
       ctrlp-vim
@@ -130,4 +131,6 @@ in
       (builtins.readFile ./vim/plugin.octo.vim)
     ]);
   };
+  # Create directory so startify can store its sessions
+  xdg.dataFile."nvim/session/.keep".text = "";
 }

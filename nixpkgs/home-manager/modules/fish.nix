@@ -44,8 +44,7 @@
 
       any-nix-shell fish --info-right | source
 
-      set -g theme_color_scheme nord
-      set -x BAT_THEME "Nord"
+      set -g theme_color_scheme "Catppuccin Mocha"
     '';
     functions = {
 
@@ -80,6 +79,15 @@
           repo = "fish-docker";
           rev = "e925cd39231398b3842db1106af7acb4ec68dc79";
           sha256 = "0vr9450lx31kcv8nvn24fwrrk4ppym8i9ak4jmr01jp5himr4mdw";
+        };
+      }
+      {
+        name = "cattpuccin";
+        src = pkgs.fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "fish";
+          rev = "b90966686068b5ebc9f80e5b90fdf8c02ee7a0ba";
+          hash = "sha256-wQlYQyqklU/79K2OXRZXg5LvuIugK7vhHgpahpLFaOw=";
         };
       }
     ];

@@ -9,12 +9,12 @@
     package = pkgs.pkgsUnstable.wezterm;
     extraConfig = ''
       return {
-        color_scheme = "nordfox",
+        color_scheme = "Catppuccin Mocha",
         window_decorations = "RESIZE",
 
         window_frame = {
-          active_titlebar_bg = '#3b4252',
-          inactive_titlebar_bg = '#3b4252',
+          --active_titlebar_bg = '#3b4252',
+          --inactive_titlebar_bg = '#3b4252',
         },
       }
     '';
