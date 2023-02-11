@@ -24,15 +24,27 @@ let
 
   nvim-lspconfig = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "nvim-lspconfig";
-    version = "unstable-2023-02-06";
+    version = "unstable-2023-02-11";
     src = pkgs.fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lspconfig";
-      rev = "d3c82d2f9a6fd91ec1ffee645664d2cc57e706d9";
-      sha256 = "0kjqxhd4yqy799nnd743azj6c6v5q4g0j01sw4mp115yrqb7ffy0";
+      rev = "27e6eb27f31d1ef41427e1008029284c02dc856f";
+      sha256 = "1n1hz672vsxk26wrx4f904iif1lxmcap1lcb9wj081pgixwmh6np";
     };
     meta.homepage = "https://github.com/neovim/nvim-lspconfig/";
   };
+
+
+  # Bleeding edge themes!
+  catppuccin-nvim = pkgs.pkgsUnstable.vimPlugins.catppuccin-nvim.overrideAttrs(old: {
+    src = pkgs.fetchFromGitHub {
+      owner = "catppuccin";
+      repo = "nvim";
+      rev = "4606b68140ee7003d32892fc297bce66e2348df2";
+      hash = "sha256-KTtyMhKPBnRW3OLXWSLwJ9ZO2MyU5eZ1ZjlXgbmHEsQ=";
+    };
+  });
+
 in
 {
   programs.neovim = {
@@ -46,7 +58,6 @@ in
       nvim-web-devicons
       lualine-lsp-progress
       # bufferline-nvim # Top bar 
-
 
       # Theme
       #nightfox-nvim
@@ -83,9 +94,12 @@ in
       ray-x-go-nvim
       ray-x-guihua
       lsp-inlayhints-nvim
+
+      # Show LSP-aware context in file (current function, scope names)
       nvim-navic
 
       # needed by go-nvim
+      # TODO: Trim down languages
       pkgs.pkgsUnstable.vimPlugins.nvim-treesitter.withAllGrammars
       pkgs.pkgsUnstable.vimPlugins.nvim-treesitter-textobjects
 
@@ -112,8 +126,6 @@ in
 
       # Github
       octo-nvim
-    ] ++ lib.optionals (pkgs.stdenv.system != "aarch64-linux") [
-      vim-go
     ];
 
     extraConfig = (builtins.concatStringsSep "\n" [
@@ -131,6 +143,7 @@ in
       (builtins.readFile ./vim/plugin.octo.vim)
     ]);
   };
+
   # Create directory so startify can store its sessions
   xdg.dataFile."nvim/session/.keep".text = "";
 }

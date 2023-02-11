@@ -9,7 +9,7 @@ let
 in
 {
   home.packages = [ pkgs.neofetch ];
-  home.file.".config/neofetch/config.conf" = {
+  xdg.configFile."neofetch/config.conf" = {
     source = "${themes}/normal/config.conf";
   };
 }

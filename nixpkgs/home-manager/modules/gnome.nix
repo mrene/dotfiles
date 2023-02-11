@@ -11,14 +11,27 @@
     };
 
     theme = {
-      name = "nordic";
-      package = pkgs.nordic;
+      name = "Catppuccin-Mocha-Standard-Pink-Dark";
+      package = pkgs.catppuccin-gtk.overrideAttrs(old: {
+        accents = ["pink"];
+        variant = "mocha";
+      });
     };
 
     cursorTheme = {
-      name = "Numix-Cursor";
-      package = pkgs.numix-cursor-theme;
+      name = "Cattpuccin Mocha Pink";
+      package = pkgs.catppuccin-cursors.mochaPink;
     };
+
+    #theme = {
+      #name = "nordic";
+      #package = pkgs.nordic;
+    #};
+
+    #cursorTheme = {
+      #name = "Numix-Cursor";
+      #package = pkgs.numix-cursor-theme;
+    #};
 
     gtk3.extraConfig = {
       Settings = ''
@@ -33,7 +46,7 @@
     };
   };
 
-  home.sessionVariables.GTK_THEME = "Nordic";
+  home.sessionVariables.GTK_THEME = "Catppuccin-Mocha-Standard-Pink-Dark";
 
   dconf.settings = {
     # ...
@@ -51,7 +64,7 @@
       ];
     };
     "org/gnome/shell/extensions/user-theme" = {
-      name = "Nordic";
+      name = "Catppuccin-Dark";
     };
 
     "org/gnome/desktop/interface/icon-theme" = {
@@ -59,7 +72,7 @@
     };
 
     "org/gnome/desktop/interface/gtk-theme" = {
-      name = "Nordic";
+      name = "Catppuccin-Pink-Dark";
     };
 
     "org/gnome/shell/extensions/dash-to-panel" = {
@@ -106,6 +119,6 @@
     # palenight-theme
     # whitesur-gtk-theme
     # whitesur-icon-theme
-    nordic
+    #nordic
   ];
 }

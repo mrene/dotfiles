@@ -126,9 +126,30 @@ autocmd VimLeavePre *             silent execute 'SSave! ' . GetUniqueSessionNam
 " In order for gitgutter to refresh its signs faster
 set updatetime=100
 
+" Toggle relative line numbers on insert
 set number
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
   autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
 augroup END
+
+
+" A helper to preserve the cursor location with filters
+function! Preserve(command)
+  let w = winsaveview()
+  execute a:command
+  call winrestview(w)
+endfunction
+
+" Nix:
+" Update fetcher under cursor, note that this might take a little while if the
+" fetched path is large.
+autocmd FileType nix map <nowait> <leader>U :call Preserve("%!update-nix-fetchgit --location=" . line(".") . ":" . col("."))<CR>
+
+
+" Nix: Wrap nurl
+function! Nurl(url)
+  let @a = system("nurl " . shellescape(a:url) . " 2>/dev/null")
+endfunction
+autocmd FileType nix map <nowait> <leader>n :call Nurl(expand('<cfile>'))<CR>

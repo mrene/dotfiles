@@ -43,6 +43,9 @@
 
     devenv.url = "github:cachix/devenv/v0.5";
 
+    # Nix LSP
+    nil.url = "github:oxalica/nil";
+
     # NixOS fix so that vscode-server can run correctly
     vscode-server = {
       url = "github:msteen/nixos-vscode-server";

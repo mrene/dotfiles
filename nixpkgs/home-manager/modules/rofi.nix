@@ -20,7 +20,7 @@
     };
   };
 
-  home.file."${config.xdg.configHome}/rofi/config.top" = {
+  xdg.configFile."rofi/config.top" = {
     # Sort by CPU, order Descending
     text = ''
       [general]

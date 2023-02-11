@@ -47,7 +47,7 @@
 
     # Nix LSPs
     rnix-lsp
-    nil
+    inputs.nil.packages.${system}.default
     nixpkgs-fmt
     pkgsUnstable.nurl
     pkgsUnstable.jsonnet-language-server
