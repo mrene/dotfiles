@@ -112,7 +112,7 @@ endif
 
 " start screen
 function! GetUniqueSessionName()
-  let path = fnamemodify(getcwd(), ':~:t')
+  let path = fnamemodify(FugitiveWorkTree(), ':~:t')
   let path = empty(path) ? 'no-project' : path
   let branch = fugitive#Head()
   let branch = empty(branch) ? '' : '-' . branch
@@ -125,3 +125,9 @@ autocmd VimLeavePre *             silent execute 'SSave! ' . GetUniqueSessionNam
 " In order for gitgutter to refresh its signs faster
 set updatetime=100
 
+set number
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
