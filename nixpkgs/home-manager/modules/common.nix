@@ -56,7 +56,6 @@
 
     # Rust
     rust-analyzer
-    rustup
     cargo-edit
 
     # Microsoft's python LSP
