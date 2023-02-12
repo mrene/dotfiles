@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -20,6 +20,8 @@
     distrobox
     yq-go
     jq
+
+    inputs.home-manager.packages.${system}.default
   ];
 
   programs.mtr.enable = true;
