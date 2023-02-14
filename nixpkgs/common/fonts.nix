@@ -11,6 +11,12 @@
     # Part of nerdfonts
     #powerline-symbols
 
-    nerdfonts
+    #nerdfonts
+    (nerdfonts.override { fonts = [ "SourceCodePro" ]; })
+    freefont_ttf
+    ibm-plex
+    # Part of powerline-fonts
+    #hack-font
+    fira-code
   ];
 }
