@@ -125,9 +125,15 @@ cmp.setup.cmdline(':', {
   })
 })
 
-require('rust-tools').setup({
+local rt = require('rust-tools')
+rt.setup({
   server = {
-    --on_attach = on_attach
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>cg", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
   },
 })
 
@@ -148,6 +154,7 @@ require('go').setup({
     },
     lsp_diag_underline = true,
     lsp_keymaps = false,
+    gofmt = 'gofmt',
 })
 
 -- Inlay hints
@@ -166,6 +173,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
     --require("lsp-inlayhints").on_attach(client, bufnr)
     on_attach(client, bufnr)
   end,
+})
+
+local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   require('go.format').goimport()
+  end,
+  group = format_sync_grp,
 })
 
 require("copilot").setup({

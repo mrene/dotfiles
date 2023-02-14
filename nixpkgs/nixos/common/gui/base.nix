@@ -12,7 +12,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    pkgsUnstable.google-chrome
+    #pkgsUnstable.google-chrome
+    (pkgsUnstable.google-chrome.override(old: { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; }))
     pkgsUnstable.chromium
 
     alacritty

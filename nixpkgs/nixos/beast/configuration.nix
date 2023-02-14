@@ -69,6 +69,12 @@
     motherboard = "amd";
   };
 
+  hardware.openrazer = {
+    enable = true;
+    mouseBatteryNotifier = true;
+    users = [ "mrene" ];
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     users = {
@@ -121,6 +127,8 @@
     openrazer-daemon
 
     nvtop-nvidia # htop-like gpu load viewer
+    nvitop
+    rgb-auto-toggle
   ];
 
   services.vscode-server.enable = true;

@@ -4,7 +4,7 @@ let
     owner = "Chick2D";
     repo = "neofetch-themes";
     rev = "2885c6e39fff30bc8bbb7687107eaae087737704";
-    hash = "sha256-mH+3DmQrD8bjcu927D8z9QCW6gwvn+ecrHlMs+OVyoo=";
+    sha256 = "12najpiv6k3rmjffg7rg1km9c07m6czyqxpgfbiwc3rbch7bfzwq";
   };
 in
 {

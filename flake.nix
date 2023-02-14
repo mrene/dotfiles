@@ -66,6 +66,7 @@
         {
           packages = {
             pathfind = pkgs.callPackage ./nixpkgs/packages/pathfind { };
+            rgb-auto-toggle = pkgs.callPackage ./nixpkgs/packages/rgb-auto-toggle { };
           };
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
@@ -83,15 +84,23 @@
         };
 
         # Overlay adding flake inputs inside `pkgs`
-        packageOverlay = final: prev: {
+        packageOverlay = final: prev: rec {
           minidsp = inputs.minidsp.packages.${prev.system}.default;
           devenv = inputs.devenv.packages.${prev.system}.devenv;
           pkgsUnstable = import nixpkgsUnstable {
             inherit (prev) system;
             config = pkgsConfig;
-            overlays = packageOverlays;
           };
           pathfind = prev.callPackage ./nixpkgs/packages/pathfind { };
+          rgb-auto-toggle = prev.callPackage ./nixpkgs/packages/rgb-auto-toggle { };
+          openrgb = (pkgsUnstable.openrgb.overrideAttrs(old: {
+            src = prev.fetchFromGitLab {
+              owner = "CalcProgrammer1";
+              repo = "OpenRGB";
+              rev = "04ebe3e70212791e735b99b8c99c4bf089925fe1";
+              sha256 = "0pa9mk89rhacb3jajb5bwwmx11x9h1b9k9xp7rkliqy60m8jimal";
+            };
+          }));
         };
 
         packageOverlays = [

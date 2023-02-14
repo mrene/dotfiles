@@ -87,7 +87,7 @@
           owner = "catppuccin";
           repo = "fish";
           rev = "b90966686068b5ebc9f80e5b90fdf8c02ee7a0ba";
-          hash = "sha256-wQlYQyqklU/79K2OXRZXg5LvuIugK7vhHgpahpLFaOw=";
+          sha256 = "1v38qn98cnha3vhvnax0ifwfz4l3awb5v3mdykxlz5d4591mh2f1";
         };
       }
     ];
@@ -107,6 +107,7 @@
       gs = "git status";
       ga = "git add";
       gl = "git log --pretty=format:'%C(yellow)%h %Cred%ar %Cblue%an%Cgreen%d %Creset%s' --date=short";
+      gt = "git tag --format='%(creatordate:short)%09%(refname:strip=2)' --sort=creatordate | tail -n10";
       gd = "git diff";
       gp = "git pull";
       gps = "git push";

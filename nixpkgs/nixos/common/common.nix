@@ -7,10 +7,10 @@
 
   nix = {
     package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
-    # extraOptions = ''
-    #   experimental-features = nix-command flakes
-    # '';
-    settings.experimental-features = [ "flakes" "nix-command" ];
+    settings = {
+      experimental-features = [ "flakes" "nix-command" ];
+      auto-optimise-store = true;
+    };
 
     registry = {
       self.flake = inputs.self;

@@ -36,6 +36,8 @@
     delve
     go-tools
 
+    lldb # For lldb-vscode in nvim-dap
+
     # TODO: Should be in per-machine setup instead of common
     tailscale
     docker
@@ -52,8 +54,16 @@
     pkgsUnstable.nurl
     pkgsUnstable.jsonnet-language-server
     buf-language-server
-    marksman # markdown lsp
 
+    # markdown lsp
+    (marksman.overrideAttrs(old: {
+      src = pkgs.fetchFromGitHub {
+        owner = "artempyanykh";
+        repo = "marksman";
+        rev = "670524e9dff15db45ae2c8aa8c7586917ead4f1f";
+        sha256 = "045537j859wqnpfxp0bm3z9wwx8bqa8485lb2l7yr90fglcz7w8r";
+      };
+    }))
     # Rust
     rust-analyzer
     cargo-edit
@@ -66,7 +76,15 @@
     # github cli
     gitAndTools.gh
 
-    update-nix-fetchgit
+    #(update-nix-fetchgit.overrideAttrs(old: {
+      #src = fetchFromGitHub {
+        #owner = "expipiplus1";
+        #repo = "update-nix-fetchgit";
+        #rev = "78133d1b61c05cfe0a251defb3bcd4729fab9513";
+        #sha256 = _;
+      #};
+    #}))
+    pkgsUnstable.update-nix-fetchgit
 
     # Copilot requirement
     nodejs-16_x

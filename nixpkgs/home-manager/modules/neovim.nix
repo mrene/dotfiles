@@ -2,34 +2,34 @@
 let
   ray-x-go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "ray-x-go-nvim";
-    version = "2023-02-05";
+    version = "unstable-2023-02-12";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "go.nvim";
-      rev = "10349e1e430d00bc314c1d4abb043ac66ed219d9";
-      hash = "sha256-oQmnhdypRWqnFeDBpyeeXb4UYDxgmZQuzdM+pyFDYZU=";
+      rev = "4977d3165d6ee8a06781f7b3443484fe7e91c9a3";
+      sha256 = "1ghy0xg9pkcif580gqd3l1vmzp0ilnlxnzssij65cnh04hr99y62";
     };
   };
 
   ray-x-guihua = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "ray-x-guihua";
-    version = "2023-02-05";
+    version = "unstable-2023-02-12";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "guihua.lua";
-      rev = "dca755457a994d99f3fe63ee29dbf8e2ac20ae3a";
-      hash = "sha256-gz0hd8TyCLlZOnG5mfXdxKkXL3rpP8f3P3/X6jNa5c8=";
+      rev = "5cebe5bd6ce1820cab526f4ba5876d441a752460";
+      sha256 = "1hkw7h6lzvfv63viqnlphcrlk7m6zj4d09sv32rjyn1a8pwjhdv3";
     };
   };
 
   nvim-lspconfig = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "nvim-lspconfig";
-    version = "unstable-2023-02-11";
+    version = "unstable-2023-02-12";
     src = pkgs.fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lspconfig";
-      rev = "27e6eb27f31d1ef41427e1008029284c02dc856f";
-      sha256 = "1n1hz672vsxk26wrx4f904iif1lxmcap1lcb9wj081pgixwmh6np";
+      rev = "1712672e4da3003a0dd9f771d30389600b360f42";
+      sha256 = "18dpijknw3w82rag39acw60vwc6q0apc8hm82x6103gqsimcs3as";
     };
     meta.homepage = "https://github.com/neovim/nvim-lspconfig/";
   };
@@ -40,8 +40,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "catppuccin";
       repo = "nvim";
-      rev = "4606b68140ee7003d32892fc297bce66e2348df2";
-      hash = "sha256-KTtyMhKPBnRW3OLXWSLwJ9ZO2MyU5eZ1ZjlXgbmHEsQ=";
+      rev = "a5f3ed5d3b1d9ea21183718a8a89a6653bd6ea48";
+      sha256 = "1vx7p3f8339v1w9ww9l1lg3s6wf699q2bp762aqkmwmh88ykhi8i";
     };
   });
 
@@ -90,7 +90,7 @@ in
       vim-javascript
       typescript-vim
       nvim-lspconfig
-      rust-tools-nvim
+      pkgs.pkgsUnstable.vimPlugins.rust-tools-nvim
       ray-x-go-nvim
       ray-x-guihua
       lsp-inlayhints-nvim
@@ -119,7 +119,13 @@ in
       pkgs.pkgsUnstable.vimPlugins.copilot-cmp
 
       # Debugger IDE
-      vimspector
+      #vimspector
+      nvim-dap
+      nvim-dap-ui
+      nvim-dap-go
+      nvim-dap-python
+      plenary-nvim
+
 
       # Start screen
       vim-startify
