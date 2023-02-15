@@ -2,6 +2,7 @@
 {
   imports = [
     ./minimal.nix
+    ./jira.nix
   ];
 
   # https://github.com/nix-community/nix-direnv#via-home-manager

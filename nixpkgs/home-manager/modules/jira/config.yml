@@ -1,0 +1,213 @@
+board:
+    id: 7
+    name: HumanFirst board
+    type: simple
+epic:
+    name: customfield_10005
+    link: customfield_10008
+installation: Cloud
+issue:
+    fields:
+        custom:
+            - name: End date
+              key: customfield_10071
+              schema:
+                datatype: date
+            - name: Baseline start date
+              key: customfield_10072
+              schema:
+                datatype: date
+            - name: Baseline end date
+              key: customfield_10073
+              schema:
+                datatype: date
+            - name: Task progress
+              key: customfield_10074
+              schema:
+                datatype: number
+            - name: Team
+              key: customfield_10035
+              schema:
+                datatype: option2
+            - name: Account
+              key: customfield_10036
+              schema:
+                datatype: option2
+            - name: Request Type
+              key: customfield_10060
+              schema:
+                datatype: sd-customerrequesttype
+            - name: Request participants
+              key: customfield_10061
+              schema:
+                datatype: array
+                items: user
+            - name: Story point estimate
+              key: customfield_10062
+              schema:
+                datatype: number
+            - name: Issue color
+              key: customfield_10063
+              schema:
+                datatype: string
+            - name: Satisfaction
+              key: customfield_10068
+              schema:
+                datatype: sd-feedback
+            - name: Acceptance tests
+              key: customfield_10069
+              schema:
+                datatype: string
+            - name: Locked forms
+              key: customfield_10090
+              schema:
+                datatype: number
+            - name: Total forms
+              key: customfield_10091
+              schema:
+                datatype: number
+            - name: Compass
+              key: customfield_10092
+              schema:
+                datatype: string
+            - name: Category
+              key: customfield_10094
+              schema:
+                datatype: option
+            - name: Estimated complexity
+              key: customfield_10052
+              schema:
+                datatype: option
+            - name: Sub-task status
+              key: customfield_10053
+              schema:
+                datatype: option
+            - name: Conversation log
+              key: customfield_10054
+              schema:
+                datatype: string
+            - name: Sprint
+              key: customfield_10010
+              schema:
+                datatype: array
+                items: json
+            - name: Rank
+              key: customfield_10011
+              schema:
+                datatype: any
+            - name: Story Points
+              key: customfield_10055
+              schema:
+                datatype: number
+            - name: Flagged
+              key: customfield_10056
+              schema:
+                datatype: array
+                items: option
+            - name: '[CHART] Date of First Response'
+              key: customfield_10012
+              schema:
+                datatype: datetime
+            - name: '[CHART] Time in Status'
+              key: customfield_10013
+              schema:
+                datatype: any
+            - name: Affected project
+              key: customfield_10058
+              schema:
+                datatype: option
+            - name: Start date
+              key: customfield_10059
+              schema:
+                datatype: date
+            - name: Architecture
+              key: customfield_10049
+              schema:
+                datatype: string
+            - name: Epic Status
+              key: customfield_10006
+              schema:
+                datatype: option
+            - name: Epic Colour
+              key: customfield_10007
+              schema:
+                datatype: string
+            - name: Parent Link
+              key: customfield_10009
+              schema:
+                datatype: any
+            - name: Target start
+              key: customfield_10082
+              schema:
+                datatype: date
+            - name: Target end
+              key: customfield_10083
+              schema:
+                datatype: date
+            - name: Aha! Reference
+              key: customfield_10040
+              schema:
+                datatype: string
+            - name: Score
+              key: customfield_10086
+              schema:
+                datatype: number
+            - name: BoostSecurity Id
+              key: customfield_10087
+              schema:
+                datatype: string
+            - name: Open forms
+              key: customfield_10088
+              schema:
+                datatype: number
+            - name: Development
+              key: customfield_10000
+              schema:
+                datatype: any
+            - name: Submitted forms
+              key: customfield_10089
+              schema:
+                datatype: number
+            - name: Team
+              key: customfield_10001
+              schema:
+                datatype: any
+            - name: Organizations
+              key: customfield_10004
+              schema:
+                datatype: array
+                items: sd-customerorganization
+    types:
+        - id: "10009"
+          name: Story
+          handle: Story
+          subtask: false
+        - id: "10010"
+          name: Epic
+          handle: Epic
+          subtask: false
+        - id: "10011"
+          name: Task
+          handle: Task
+          subtask: false
+        - id: "10012"
+          name: Bug
+          handle: Bug
+          subtask: false
+        - id: "10013"
+          name: Subtask
+          handle: Subtask
+          subtask: true
+        - id: "10014"
+          name: Idea
+          handle: Idea
+          subtask: false
+        - id: "10020"
+          name: Design
+          handle: Design
+          subtask: false
+login: mathieu@humanfirst.ai
+project:
+    key: PB
+    type: next-gen
+server: https://zia-ai.atlassian.net
