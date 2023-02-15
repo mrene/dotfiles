@@ -46,8 +46,8 @@ set undodir=$HOME/.vimundo
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
 
-let mapleader = "\<Space>"
-set clipboard=unnamed
+let mapleader = "\\"
+set clipboard=unnamedplus
 set visualbell
 set noerrorbells
 set mouse=a

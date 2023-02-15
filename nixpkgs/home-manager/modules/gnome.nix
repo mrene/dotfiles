@@ -19,7 +19,7 @@
     };
 
     cursorTheme = {
-      name = "Cattpuccin Mocha Pink";
+      name = "Catppuccin Mocha Pink";
       package = pkgs.catppuccin-cursors.mochaPink;
     };
 

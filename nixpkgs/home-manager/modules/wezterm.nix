@@ -10,7 +10,7 @@
     extraConfig = ''
       return {
         color_scheme = "Catppuccin Mocha",
-        font = wezterm.font 'IBMPlexMono-Regular',
+        font = wezterm.font 'IBM Plex Mono',
         window_decorations = "RESIZE",
 
         window_frame = {

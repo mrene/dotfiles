@@ -48,6 +48,9 @@ require('lualine').setup {
     },
   },
   inactive_winbar = {
+    lualine_x = {
+      {'filename', path = 3, icon_only = true, shortening_target = 0, file_status = false },
+    },
   },
   extensions = { 'nerdtree', 'fugitive', 'fzf' }
 }

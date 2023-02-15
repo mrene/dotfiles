@@ -4,7 +4,11 @@
   imports = [
     ../../../common/fonts.nix
   ];
+  fonts.fontconfig = {
+    enable = true; 
+  };
 
+  fonts.fontDir.enable = true;
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -29,6 +33,9 @@
     _1password-gui
     keybase
     keybase-gui
+
+    xclip
+    xsel
   ];
 
   programs.firefox = {

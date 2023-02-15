@@ -62,11 +62,24 @@
           pkgs = import nixpkgs {
             inherit system;
           };
+
+          pkgsUnstable = import nixpkgsUnstable {
+            inherit system;
+          };
+
+          openrgb = (pkgsUnstable.openrgb.overrideAttrs(old: {
+            src = pkgs.fetchFromGitLab {
+              owner = "CalcProgrammer1";
+              repo = "OpenRGB";
+              rev = "04ebe3e70212791e735b99b8c99c4bf089925fe1";
+              sha256 = "0pa9mk89rhacb3jajb5bwwmx11x9h1b9k9xp7rkliqy60m8jimal";
+            };
+          }));
         in
         {
           packages = {
             pathfind = pkgs.callPackage ./nixpkgs/packages/pathfind { };
-            rgb-auto-toggle = pkgs.callPackage ./nixpkgs/packages/rgb-auto-toggle { };
+            rgb-auto-toggle = pkgs.callPackage ./nixpkgs/packages/rgb-auto-toggle { inherit openrgb; };
           };
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
