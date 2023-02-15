@@ -2,9 +2,6 @@ board:
     id: 7
     name: HumanFirst board
     type: simple
-epic:
-    name: customfield_10005
-    link: customfield_10008
 installation: Cloud
 issue:
     fields:
