@@ -1,3 +1,10 @@
+
+lua << END
+require("catppuccin").setup({
+  compile_path = vim.fn.stdpath "cache" .. "/catppuccin"
+})
+END
+
 syntax on
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 " syntax enable
@@ -153,3 +160,5 @@ function! Nurl(url)
   let @a = system("nurl " . shellescape(a:url) . " 2>/dev/null")
 endfunction
 autocmd FileType nix map <nowait> <leader>n :call Nurl(expand('<cfile>'))<CR>
+
+
