@@ -30,13 +30,25 @@
     flameshot # Screenshot software
     simplescreenrecorder
 
-    _1password-gui
     keybase
     keybase-gui
 
     xclip
     xsel
   ];
+
+  programs._1password = {
+    enable = true;
+    package = pkgs.pkgsUnstable._1password;
+  };
+
+  programs._1password-gui = {
+    enable = true;
+    package = pkgs.pkgsUnstable._1password-gui;
+    polkitPolicyOwners = [ "mrene "];
+  };
+
+  security.polkit.enable = true;
 
   programs.firefox = {
     enable = true;

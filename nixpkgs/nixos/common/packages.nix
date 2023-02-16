@@ -16,6 +16,7 @@
     lm_sensors
     lshw
     file
+    lsof
 
     distrobox
     yq-go

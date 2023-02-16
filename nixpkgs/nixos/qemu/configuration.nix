@@ -91,7 +91,6 @@
     # Notes 
     logseq
 
-    _1password-gui
     flameshot # Screenshot software
 
     keybase

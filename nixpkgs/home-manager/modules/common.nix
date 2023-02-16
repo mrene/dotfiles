@@ -1,4 +1,5 @@
 { config, pkgs, libs, inputs, ... }:
+
 {
   imports = [
     ./minimal.nix
