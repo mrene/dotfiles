@@ -71,8 +71,8 @@
             src = pkgs.fetchFromGitLab {
               owner = "CalcProgrammer1";
               repo = "OpenRGB";
-              rev = "04ebe3e70212791e735b99b8c99c4bf089925fe1";
-              sha256 = "0pa9mk89rhacb3jajb5bwwmx11x9h1b9k9xp7rkliqy60m8jimal";
+              rev = "a0422d7ea5250a0ab0c6aaa27f286e1d46b42716";
+              sha256 = "1w9mmwx0i82z8wf1c15mwpp6zd0hscd9984w8wj9drk3grd9w4pk";
             };
           }));
         in
@@ -110,8 +110,8 @@
             src = prev.fetchFromGitLab {
               owner = "CalcProgrammer1";
               repo = "OpenRGB";
-              rev = "04ebe3e70212791e735b99b8c99c4bf089925fe1";
-              sha256 = "0pa9mk89rhacb3jajb5bwwmx11x9h1b9k9xp7rkliqy60m8jimal";
+              rev = "a0422d7ea5250a0ab0c6aaa27f286e1d46b42716";
+              sha256 = "1w9mmwx0i82z8wf1c15mwpp6zd0hscd9984w8wj9drk3grd9w4pk";
             };
           }));
         };
