@@ -73,9 +73,9 @@
     cargo-edit
 
     # Microsoft's python LSP
-    nodePackages.pyright
-    nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted
+    pkgsUnstable.nodePackages.pyright
+    pkgsUnstable.nodePackages.typescript-language-server
+    pkgsUnstable.nodePackages.vscode-langservers-extracted
 
     # github cli
     gitAndTools.gh
