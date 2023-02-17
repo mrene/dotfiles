@@ -2,23 +2,23 @@
 let
   ray-x-go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "ray-x-go-nvim";
-    version = "unstable-2023-02-16";
+    version = "unstable-2023-02-17";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "go.nvim";
-      rev = "9c7a802472e53a2c2a1f54f4b326cb77bef1f93c";
-      sha256 = "0q1jzjjblfqn72iy2rn7win4c35bkclvcxv3446qp307zyrfv8fq";
+      rev = "b9f161c18efd948becbbd7cfb37e4677cf2f31b9";
+      sha256 = "00l5cw59pyqky6fd35967fj3aacb9kqza1cclxiqc0lffy05593n";
     };
   };
 
   ray-x-guihua = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "ray-x-guihua";
-    version = "unstable-2023-02-15";
+    version = "unstable-2023-02-16";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "guihua.lua";
-      rev = "ca33e21520da255dc97ecd40cdd7c3c454068979";
-      sha256 = "02gqi5fkhy3d5izf6fd2gdnnwmrkdp45dbqf19jpvr935az3shr7";
+      rev = "a19ac4447021f21383fadd7a9e1fc150d0b67e1f";
+      sha256 = "0kl2ry3ngfwrw40igi2983gnmpmj78ipqm1wdlp7vphyh64a8lk4";
     };
   };
 
@@ -40,8 +40,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "catppuccin";
       repo = "nvim";
-      rev = "b0ab85552b0f60ab7a0aa46f432e709c124f8153";
-      sha256 = "06c0cr5df3fmvqpzkxdnfr7dff0bab28ycngaq7i5bsbrd6pbjn3";
+      rev = "60f8f40df0db92b5715642b3ea7074380c4b7995";
+      sha256 = "0hgm542vdav33gj9dacy43anh9ql7x8jr1ihwbx11jlxqr5vhhp7";
     };
   });
 
