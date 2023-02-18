@@ -49,7 +49,6 @@
     pigz # parallel gzip
     lz4
 
-    pkgsUnstable.jira-cli-go
 
     # Nix LSPs
     rnix-lsp

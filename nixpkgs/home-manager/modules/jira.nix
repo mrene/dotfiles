@@ -3,6 +3,11 @@
 {
   # TODO: Add api token via sops-nix
   xdg.configFile.".jira/.config.yaml".source = ./jira/config.yml;
+
+  home.packages = with pkgs; [
+    pkgsUnstable.jira-cli-go
+  ];
+
   programs.fish.functions.j = ''
       set SEARCH_QUERY 'jira sprint list --current -a(jira me) --plain --columns "key,summary,status" --order-by rank --reverse'
       env FZF_DEFAULT_COMMAND=$SEARCH_QUERY fzf \
