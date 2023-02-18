@@ -1,7 +1,7 @@
 {
   inputs = {
     # Package channels
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Nix tools
