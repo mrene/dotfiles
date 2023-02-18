@@ -6,7 +6,7 @@
 
     # The nixpkgs-unstable version fixes a bug around bad window dragging performance
     # https://github.com/wez/wezterm/issues/2530
-    package = pkgs.pkgsUnstable.wezterm;
+    package = pkgs.wezterm;
     extraConfig = ''
       return {
         color_scheme = "Catppuccin Mocha",
