@@ -15,7 +15,6 @@
     registry = {
       self.flake = inputs.self;
       nixpkgs.flake = inputs.nixpkgs;
-      nixpkgsUnstable.flake = inputs.nixpkgsUnstable;
     };
   };
 

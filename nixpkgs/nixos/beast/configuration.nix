@@ -94,7 +94,7 @@
       };
     };
 
-    defaultUserShell = pkgs.pkgsUnstable.fish;
+    defaultUserShell = pkgs.fish;
   };
 
   home-manager = {

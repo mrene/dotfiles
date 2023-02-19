@@ -36,7 +36,7 @@ let
 
 
   # Bleeding edge themes!
-  catppuccin-nvim = pkgs.pkgsUnstable.vimPlugins.catppuccin-nvim.overrideAttrs (old: {
+  catppuccin-nvim = pkgs.vimPlugins.catppuccin-nvim.overrideAttrs (old: {
     src = pkgs.fetchFromGitHub {
       owner = "catppuccin";
       repo = "nvim";
@@ -90,7 +90,7 @@ in
       vim-javascript
       typescript-vim
       nvim-lspconfig
-      pkgs.pkgsUnstable.vimPlugins.rust-tools-nvim
+      pkgs.vimPlugins.rust-tools-nvim
       ray-x-go-nvim
       ray-x-guihua
       lsp-inlayhints-nvim
@@ -100,8 +100,8 @@ in
 
       # needed by go-nvim
       # TODO: Trim down languages
-      pkgs.pkgsUnstable.vimPlugins.nvim-treesitter.withAllGrammars
-      pkgs.pkgsUnstable.vimPlugins.nvim-treesitter-textobjects
+      pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+      pkgs.vimPlugins.nvim-treesitter-textobjects
 
       luasnip
       nvim-cmp # Auto-completion
@@ -116,8 +116,8 @@ in
       fzf-vim
       zoxide-vim
 
-      pkgs.pkgsUnstable.vimPlugins.copilot-lua
-      pkgs.pkgsUnstable.vimPlugins.copilot-cmp
+      pkgs.vimPlugins.copilot-lua
+      pkgs.vimPlugins.copilot-cmp
 
       # Debugger IDE
       #vimspector

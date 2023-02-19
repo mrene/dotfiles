@@ -54,8 +54,8 @@
     rnix-lsp
     inputs.nil.packages.${system}.default
     nixpkgs-fmt
-    pkgsUnstable.nurl
-    pkgsUnstable.jsonnet-language-server
+    nurl
+    jsonnet-language-server
     buf-language-server
 
     # markdown lsp
@@ -72,9 +72,9 @@
     cargo-edit
 
     # Microsoft's python LSP
-    pkgsUnstable.nodePackages.pyright
-    pkgsUnstable.nodePackages.typescript-language-server
-    pkgsUnstable.nodePackages.vscode-langservers-extracted
+    nodePackages.pyright
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted
 
     # github cli
     gitAndTools.gh
@@ -87,7 +87,7 @@
     #sha256 = _;
     #};
     #}))
-    pkgsUnstable.update-nix-fetchgit
+    update-nix-fetchgit
 
     # Copilot requirement
     nodejs-16_x

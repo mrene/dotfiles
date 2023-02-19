@@ -5,7 +5,7 @@
   xdg.configFile.".jira/.config.yaml".source = ./jira/config.yml;
 
   home.packages = with pkgs; [
-    pkgsUnstable.jira-cli-go
+    jira-cli-go
   ];
 
   programs.fish.functions.j = ''

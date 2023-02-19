@@ -16,7 +16,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    pkgsUnstable.chromium
+   chromium
 
     alacritty
 
@@ -34,17 +34,17 @@
     xsel
   ] ++ pkgs.lib.optionals pkgs.stdenv.isx86_64 [
     keybase-gui
-    (pkgsUnstable.google-chrome.override (old: { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; }))
+    (google-chrome.override (old: { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; }))
   ];
 
   programs._1password = {
     enable = true;
-    package = pkgs.pkgsUnstable._1password;
+    package = pkgs._1password;
   };
 
   programs._1password-gui = {
     enable = true;
-    package = pkgs.pkgsUnstable._1password-gui;
+    package = pkgs._1password-gui;
     polkitPolicyOwners = [ "mrene " ];
   };
 

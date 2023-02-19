@@ -10,24 +10,34 @@
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nix;
 
-  nix.extraOptions = ''
-    keep-outputs = true
-    keep-derivations = true
-    auto-optimise-store = true
+  nix = {
+    package = pkgs.nix; 
+    settings = {
+      experimental-features = [ "flakes" "nix-command" ];
+      auto-optimise-store = true;
+    };
 
-    # assuming the builder has a faster internet connection
-    builders-use-substitutes = true
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+    };
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+      auto-optimise-store = true
 
-    experimental-features = nix-command flakes
-  '';
+      # assuming the builder has a faster internet connection
+      builders-use-substitutes = true
+
+      experimental-features = nix-command flakes
+    '';
+  };
 
   system.activationScripts.extraActivation.text = ''
     # For TouchID to work in `op` 1Password CLI, it needs to be at `/usr/local/bin`
     # (Hopefully this requirement will be lifted by 1Password at some point)
     # NOTE we don't install `op` via nix but simply copy the binary
-    cp ${pkgs.pkgsUnstable._1password}/bin/op /usr/local/bin/op
+    cp ${pkgs._1password}/bin/op /usr/local/bin/op
   '';
 
   security.pam.enableSudoTouchIdAuth = true;
