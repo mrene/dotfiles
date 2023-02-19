@@ -116,27 +116,15 @@
           }));
 
           wezterm = pkgsUnstable.wezterm.overrideAttrs(old: rec {
-            src = prev.fetchFromGitHub {
-              owner = "wez";
-              repo = "wezterm";
-              rev = "3b39aa551da19ba4c0138cd3b19a4bffcc219cf1";
-              hash = "sha256-68ykmwFxrQBa+EZD3GBbz6zi9EL0g6SYHIhjZuTS/O0=";
-              fetchSubmodules = true;
-            };
+            patches = [
+              # fix build with rust 1.67
+              (prev.fetchpatch {
+                url = "https://github.com/wez/wezterm/commit/36519f0d90e1875fb4b3f11f6cbf94c7d716ef78.patch";
+                sha256 = "sha256-sOGFmDan1uO1xOBCpvlGrSotjfw01MjRg0KVqa5omig=";
+              })
+            ];
 
-            nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ prev.breakpointHook ];
-
-            # Check fails becase of libgit2-sys's build.rs trying to copy files over existing files that are readonly
-            doCheck = false;
-
-            cargoDeps = prev.rustPlatform.importCargoLock {
-              lockFile = "${src}/Cargo.lock";
-              outputHashes = {
-                "libssh-rs-0.1.5" = "sha256-qi1H6EPYkHtpkeptTDXLNJIhxYMG4EfKfukl0o+EVcE=";
-                "xcb-imdkit-0.2.0" = "sha256-QOT9HLlA26DVPUF4ViKH2ckexUsu45KZMdJwoUhW+hA=";
-              };
-
-            };
+            checkFlags = [];
           });
         };
 
