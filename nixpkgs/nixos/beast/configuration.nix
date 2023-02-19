@@ -11,6 +11,7 @@
     inputs.vscode-server.nixosModule
 
     ./hardware-configuration.nix
+    ./ryzen.nix
     ../common/cachix.nix
     ../common/minikube.nix
     ../common/common.nix
