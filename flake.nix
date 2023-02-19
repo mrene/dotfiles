@@ -56,42 +56,8 @@
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
   outputs = inputs @ { self, darwin, nixpkgs, nixpkgsUnstable, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem
-      (system: (
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-          };
-
-          pkgsUnstable = import nixpkgsUnstable {
-            inherit system;
-          };
-
-          openrgb = (pkgsUnstable.openrgb.overrideAttrs (old: {
-            src = pkgs.fetchFromGitLab {
-              owner = "CalcProgrammer1";
-              repo = "OpenRGB";
-              rev = "a0422d7ea5250a0ab0c6aaa27f286e1d46b42716";
-              sha256 = "1w9mmwx0i82z8wf1c15mwpp6zd0hscd9984w8wj9drk3grd9w4pk";
-            };
-          }));
-        in
-        {
-          packages = {
-            pathfind = pkgs.callPackage ./nixpkgs/packages/pathfind { };
-            rgb-auto-toggle = pkgs.callPackage ./nixpkgs/packages/rgb-auto-toggle { inherit openrgb; };
-          };
-          devShells.default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              nixos-generators.packages.${system}.nixos-generate
-              nixos-install-tools
-            ];
-          };
-        }
-      )) //
-    (
       let
-        pkgsConfig = {
+        config = {
           permittedInsecurePackages = [ ];
           allowUnfree = true;
         };
@@ -102,7 +68,7 @@
           devenv = inputs.devenv.packages.${prev.system}.devenv;
           pkgsUnstable = import nixpkgsUnstable {
             inherit (prev) system;
-            config = pkgsConfig;
+            inherit config;
           };
           pathfind = prev.callPackage ./nixpkgs/packages/pathfind { };
           rgb-auto-toggle = prev.callPackage ./nixpkgs/packages/rgb-auto-toggle { };
@@ -128,18 +94,39 @@
           });
         };
 
-        packageOverlays = [
+        overlays = [
           packageOverlay
           (import ./nixpkgs/overlays/vscode-with-extensions.nix)
         ];
-      in
-      {
+
+    in
+
+    flake-utils.lib.eachDefaultSystem
+      (system: (
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+          };
+
+          pkgsUnstable = import nixpkgsUnstable {
+            inherit system;
+          };
+
+          openrgb = (pkgsUnstable.openrgb.overrideAttrs (old: {
+            src = pkgs.fetchFromGitLab {
+              owner = "CalcProgrammer1";
+              repo = "OpenRGB";
+              rev = "a0422d7ea5250a0ab0c6aaa27f286e1d46b42716";
+              sha256 = "1w9mmwx0i82z8wf1c15mwpp6zd0hscd9984w8wj9drk3grd9w4pk";
+            };
+          }));
+        in
+        {
+
         homeConfigurations = {
           "mrene@beast" = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
-              system = "x86_64-linux";
-              config = pkgsConfig;
-              overlays = packageOverlays;
+              inherit system overlays config;
             };
             modules = [ ./nixpkgs/home-manager/beast.nix ];
             extraSpecialArgs = { inherit inputs; };
@@ -147,9 +134,7 @@
 
           "mrene@Mathieus-MBP" = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
-              system = "aarch64-darwin";
-              config = pkgsConfig;
-              overlays = packageOverlays;
+              inherit system overlays config;
             };
             modules = [ ./nixpkgs/home-manager/mac.nix ];
             extraSpecialArgs = { inherit inputs; };
@@ -157,14 +142,26 @@
 
           minimal = home-manager.lib.homeManagerConfiguration {
             pkgs = import nixpkgs {
-              system = "x86_64-linux";
-              config = pkgsConfig;
-              overlays = packageOverlays;
+              inherit system overlays config;
             };
             modules = [ ./nixpkgs/home-manager/minimal.nix ];
             extraSpecialArgs = { inherit inputs; };
           };
         };
+
+          packages = {
+            pathfind = pkgs.callPackage ./nixpkgs/packages/pathfind { };
+            rgb-auto-toggle = pkgs.callPackage ./nixpkgs/packages/rgb-auto-toggle { inherit openrgb; };
+          };
+          devShells.default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              nixos-generators.packages.${system}.nixos-generate
+              nixos-install-tools
+            ];
+          };
+        }
+      )) //
+      {
 
         darwinConfigurations = {
           # nix build .#darwinConfigurations.mbp2021.system
@@ -172,9 +169,8 @@
           Mathieus-MBP = darwin.lib.darwinSystem {
             system = "aarch64-darwin";
             pkgs = import nixpkgs {
+              inherit config overlays;
               system = "aarch64-darwin";
-              config = pkgsConfig;
-              overlays = packageOverlays;
             };
             modules = [
               #home-manager.darwinModules.home-manager
@@ -196,9 +192,8 @@
           utm = inputs.nixpkgs.lib.nixosSystem {
             system = "aarch64-linux";
             pkgs = import nixpkgs {
+              inherit config overlays;
               system = "aarch64-linux";
-              config = pkgsConfig;
-              overlays = packageOverlays;
             };
             specialArgs = { common = self.common; inherit inputs; };
             modules = [ ./nixpkgs/nixos/utm/configuration.nix ];
@@ -208,9 +203,8 @@
           qemu = inputs.nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             pkgs = import nixpkgs {
+              inherit config overlays;
               system = "x86_64-linux";
-              config = pkgsConfig;
-              overlays = packageOverlays;
             };
             specialArgs = { common = self.common; inherit inputs; };
             modules = [ ./nixpkgs/nixos/qemu/configuration.nix ];
@@ -220,9 +214,8 @@
           beast = inputs.nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             pkgs = import nixpkgs {
+              inherit config overlays;
               system = "x86_64-linux";
-              config = pkgsConfig;
-              overlays = packageOverlays;
             };
             specialArgs = { common = self.common; inherit inputs; };
             modules = [ ./nixpkgs/nixos/beast/configuration.nix ];
@@ -235,9 +228,8 @@
         };
 
         pkgs = import nixpkgs {
+          inherit config overlays;
           system = "x86_64-linux";
-          config = pkgsConfig;
-          overlays = packageOverlays;
         };
 
         common = {
@@ -250,6 +242,5 @@
             "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMpIqFppmJu+oXgUA9t+KK7xY07FAy1ZpMQ2xe03fhnaufg8UAT35cTMvf5KpCDRiCRsdv37tXpmfmgV27eiFWA= Remote-sudo@secretive.Mathieu’s-MacBook-Pro.local"
           ];
         };
-      }
-    );
+      };
 }
