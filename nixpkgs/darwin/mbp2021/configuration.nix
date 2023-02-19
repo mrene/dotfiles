@@ -45,11 +45,11 @@
   };
 
   #home-manager = {
-    #users.mrene = import ../../home-manager/mac.nix;
+  #users.mrene = import ../../home-manager/mac.nix;
 
-    #useGlobalPkgs = true;
-    #useUserPackages = true;
-    #verbose = true;
+  #useGlobalPkgs = true;
+  #useUserPackages = true;
+  #verbose = true;
   #};
 
   users.users.root = {

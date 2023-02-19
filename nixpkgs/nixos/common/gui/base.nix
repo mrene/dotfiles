@@ -5,7 +5,7 @@
     ../../../common/fonts.nix
   ];
   fonts.fontconfig = {
-    enable = true; 
+    enable = true;
   };
 
   fonts.fontDir.enable = true;
@@ -16,8 +16,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    #pkgsUnstable.google-chrome
-    (pkgsUnstable.google-chrome.override(old: { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; }))
     pkgsUnstable.chromium
 
     alacritty
@@ -31,10 +29,12 @@
     simplescreenrecorder
 
     keybase
-    keybase-gui
 
     xclip
     xsel
+  ] ++ pkgs.lib.optionals pkgs.stdenv.isx86_64 [
+    keybase-gui
+    (pkgsUnstable.google-chrome.override (old: { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; }))
   ];
 
   programs._1password = {
@@ -45,7 +45,7 @@
   programs._1password-gui = {
     enable = true;
     package = pkgs.pkgsUnstable._1password-gui;
-    polkitPolicyOwners = [ "mrene "];
+    polkitPolicyOwners = [ "mrene " ];
   };
 
   security.polkit.enable = true;

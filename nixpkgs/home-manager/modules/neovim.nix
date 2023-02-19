@@ -36,7 +36,7 @@ let
 
 
   # Bleeding edge themes!
-  catppuccin-nvim = pkgs.pkgsUnstable.vimPlugins.catppuccin-nvim.overrideAttrs(old: {
+  catppuccin-nvim = pkgs.pkgsUnstable.vimPlugins.catppuccin-nvim.overrideAttrs (old: {
     src = pkgs.fetchFromGitHub {
       owner = "catppuccin";
       repo = "nvim";

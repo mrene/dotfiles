@@ -9,22 +9,16 @@
     [
       inputs.home-manager.nixosModules.home-manager
       inputs.vscode-server.nixosModule
+      inputs.hyprland.nixosModules.default
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../common/minikube.nix
-      ../beast/desktop.nix
+      ../common/gui/desktop.nix
       ../common/common.nix
       ../common/vm/common.nix
       ../common/gui/base.nix
     ];
-
-  nix = {
-    package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

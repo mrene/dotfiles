@@ -59,7 +59,7 @@
     buf-language-server
 
     # markdown lsp
-    (marksman.overrideAttrs(old: {
+    (marksman.overrideAttrs (old: {
       src = pkgs.fetchFromGitHub {
         owner = "artempyanykh";
         repo = "marksman";
@@ -80,12 +80,12 @@
     gitAndTools.gh
 
     #(update-nix-fetchgit.overrideAttrs(old: {
-      #src = fetchFromGitHub {
-        #owner = "expipiplus1";
-        #repo = "update-nix-fetchgit";
-        #rev = "78133d1b61c05cfe0a251defb3bcd4729fab9513";
-        #sha256 = _;
-      #};
+    #src = fetchFromGitHub {
+    #owner = "expipiplus1";
+    #repo = "update-nix-fetchgit";
+    #rev = "78133d1b61c05cfe0a251defb3bcd4729fab9513";
+    #sha256 = _;
+    #};
     #}))
     pkgsUnstable.update-nix-fetchgit
 

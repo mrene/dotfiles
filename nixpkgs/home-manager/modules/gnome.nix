@@ -12,8 +12,8 @@
 
     theme = {
       name = "Catppuccin-Mocha-Standard-Pink-Dark";
-      package = pkgs.catppuccin-gtk.overrideAttrs(old: {
-        accents = ["pink"];
+      package = pkgs.catppuccin-gtk.overrideAttrs (old: {
+        accents = [ "pink" ];
         variant = "mocha";
       });
     };
@@ -24,13 +24,13 @@
     };
 
     #theme = {
-      #name = "nordic";
-      #package = pkgs.nordic;
+    #name = "nordic";
+    #package = pkgs.nordic;
     #};
 
     #cursorTheme = {
-      #name = "Numix-Cursor";
-      #package = pkgs.numix-cursor-theme;
+    #name = "Numix-Cursor";
+    #package = pkgs.numix-cursor-theme;
     #};
 
     gtk3.extraConfig = {

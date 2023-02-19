@@ -60,7 +60,7 @@
         pushd ~/dotfiles
         home-manager switch --flake .
         popd
-        '';
+      '';
     };
     plugins = [
       {

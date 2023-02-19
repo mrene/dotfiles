@@ -67,7 +67,7 @@
             inherit system;
           };
 
-          openrgb = (pkgsUnstable.openrgb.overrideAttrs(old: {
+          openrgb = (pkgsUnstable.openrgb.overrideAttrs (old: {
             src = pkgs.fetchFromGitLab {
               owner = "CalcProgrammer1";
               repo = "OpenRGB";
@@ -106,7 +106,7 @@
           };
           pathfind = prev.callPackage ./nixpkgs/packages/pathfind { };
           rgb-auto-toggle = prev.callPackage ./nixpkgs/packages/rgb-auto-toggle { };
-          openrgb = (pkgsUnstable.openrgb.overrideAttrs(old: {
+          openrgb = (pkgsUnstable.openrgb.overrideAttrs (old: {
             src = prev.fetchFromGitLab {
               owner = "CalcProgrammer1";
               repo = "OpenRGB";
@@ -115,7 +115,7 @@
             };
           }));
 
-          wezterm = pkgsUnstable.wezterm.overrideAttrs(old: rec {
+          wezterm = pkgsUnstable.wezterm.overrideAttrs (old: rec {
             patches = [
               # fix build with rust 1.67
               (prev.fetchpatch {
@@ -124,7 +124,7 @@
               })
             ];
 
-            checkFlags = [];
+            checkFlags = [ ];
           });
         };
 
