@@ -9,10 +9,10 @@
 
     # These need to be in the global PATH for goland to work correctly
     gcc
-    llvmPackages.libclang
-    llvmPackages.libcxxClang
     mypy
     glibc.dev
-    libclang.lib
+
+    clang-tools_15
+    clang_15
   ];
 }

@@ -34,6 +34,9 @@
     };
   };
 
+  # Sensors
+  boot.kernelModules = [ "nct6775" ];
+
   networking.networkmanager.enable = true;
   networking.hostName = "beast";
   #networking.wireless.enable = true;

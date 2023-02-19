@@ -48,7 +48,7 @@ local lsp_flags = {
 }
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-local servers = {  'pyright', 'tsserver', 'nil_ls','jsonnet_ls', 'bufls', 'marksman', 'jsonls' }
+local servers = {  'pyright', 'tsserver', 'nil_ls','jsonnet_ls', 'bufls', 'marksman', 'jsonls', 'clangd' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,
@@ -193,7 +193,5 @@ require("copilot").setup({
 require("copilot_cmp").setup {
   method = "getCompletionsCycling",
 }
-
-
 
 END

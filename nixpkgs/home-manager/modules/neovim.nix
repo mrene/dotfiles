@@ -105,6 +105,7 @@ in
 
       luasnip
       nvim-cmp # Auto-completion
+      cmp-cmdline
       cmp_luasnip
       cmp-nvim-lsp
       cmp-nvim-lsp-signature-help
