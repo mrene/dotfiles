@@ -14,6 +14,7 @@
       ./hardware-configuration.nix
       ../common/minikube.nix
       ../common/vm/beast-qemu-guest.nix
+      ../common/vm/common.nix
       ../common/gui/base.nix
 
       ../common/gui/dev-kitchen-sink.nix
