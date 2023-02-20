@@ -24,6 +24,8 @@
     kubectl
     k9s
     kubectl-view-allocations
+    # TODO : Move to work-specific env
+    (google-cloud-sdk.withExtraComponents(with google-cloud-sdk.components; [gke-gcloud-auth-plugin]))
 
     graphviz
     curlie
