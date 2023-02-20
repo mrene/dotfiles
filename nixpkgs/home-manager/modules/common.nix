@@ -23,6 +23,7 @@
     kubectx
     kubectl
     k9s
+    kubectl-view-allocations
 
     graphviz
     curlie
@@ -62,8 +63,8 @@
       src = pkgs.fetchFromGitHub {
         owner = "artempyanykh";
         repo = "marksman";
-        rev = "670524e9dff15db45ae2c8aa8c7586917ead4f1f";
-        sha256 = "045537j859wqnpfxp0bm3z9wwx8bqa8485lb2l7yr90fglcz7w8r";
+        rev = "7c9b1453011ecea38d536e66340250017e005eac";
+        sha256 = "0f3j39nqhp0ryj4i7xyzahsqc24j4mqxvb8qaygyvqhcm4lmmhfi";
       };
     }))
     # Rust
@@ -92,6 +93,7 @@
     nodejs-16_x
 
     nix-output-monitor
+    nix-init
   ] ++ lib.optionals stdenv.isDarwin [
     coreutils # provides `dd` with --status=progress
     wifi-password

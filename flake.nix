@@ -51,6 +51,11 @@
       url = "github:msteen/nixos-vscode-server";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-init = {
+      url = "github:nix-community/nix-init";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # the @ operator binds the left side attribute set to the right side
@@ -116,8 +121,8 @@
             src = pkgs.fetchFromGitLab {
               owner = "CalcProgrammer1";
               repo = "OpenRGB";
-              rev = "a0422d7ea5250a0ab0c6aaa27f286e1d46b42716";
-              sha256 = "1w9mmwx0i82z8wf1c15mwpp6zd0hscd9984w8wj9drk3grd9w4pk";
+              rev = "907c64017b9ceac718c2a21962b20a74d517c46f";
+              sha256 = "0v56jnsfrfjdipcaxmdjbvw8sa6rr6nj0p7ca77j3m2j2d899ihx";
             };
           }));
         in
@@ -152,6 +157,7 @@
           packages = {
             pathfind = pkgs.callPackage ./nixpkgs/packages/pathfind { };
             rgb-auto-toggle = pkgs.callPackage ./nixpkgs/packages/rgb-auto-toggle { inherit openrgb; };
+            kubectl-view-allocations = pkgs.callPackage ./nixpkgs/packages/kubectl-view-allocations { };
           };
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
@@ -161,6 +167,64 @@
           };
         }
       )) //
+    (
+      let
+        pkgsConfig = {
+          permittedInsecurePackages = [ ];
+          allowUnfree = true;
+        };
+
+        # Overlay adding flake inputs inside `pkgs`
+        packageOverlay = final: prev: rec {
+          minidsp = inputs.minidsp.packages.${prev.system}.default;
+          devenv = inputs.devenv.packages.${prev.system}.devenv;
+          nix-init = inputs.nix-init.packages.${prev.system}.default;
+          pkgsUnstable = import nixpkgsUnstable {
+            inherit (prev) system;
+            config = pkgsConfig;
+          };
+          kubectl-view-allocations = prev.callPackage ./nixpkgs/packages/kubectl-view-allocations { };
+          pathfind = prev.callPackage ./nixpkgs/packages/pathfind { };
+          rgb-auto-toggle = prev.callPackage ./nixpkgs/packages/rgb-auto-toggle { };
+          openrgb = (pkgsUnstable.openrgb.overrideAttrs(old: {
+            src = prev.fetchFromGitLab {
+              owner = "CalcProgrammer1";
+              repo = "OpenRGB";
+              rev = "907c64017b9ceac718c2a21962b20a74d517c46f";
+              sha256 = "0v56jnsfrfjdipcaxmdjbvw8sa6rr6nj0p7ca77j3m2j2d899ihx";
+            };
+          }));
+
+          wezterm = pkgsUnstable.wezterm.overrideAttrs(old: rec {
+            src = prev.fetchFromGitHub {
+              owner = "wez";
+              repo = "wezterm";
+              rev = "3b39aa551da19ba4c0138cd3b19a4bffcc219cf1";
+              hash = "sha256-68ykmwFxrQBa+EZD3GBbz6zi9EL0g6SYHIhjZuTS/O0=";
+              fetchSubmodules = true;
+            };
+
+            nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ prev.breakpointHook ];
+
+            # Check fails becase of libgit2-sys's build.rs trying to copy files over existing files that are readonly
+            doCheck = false;
+
+            cargoDeps = prev.rustPlatform.importCargoLock {
+              lockFile = "${src}/Cargo.lock";
+              outputHashes = {
+                "libssh-rs-0.1.5" = "sha256-qi1H6EPYkHtpkeptTDXLNJIhxYMG4EfKfukl0o+EVcE=";
+                "xcb-imdkit-0.2.0" = "sha256-QOT9HLlA26DVPUF4ViKH2ckexUsu45KZMdJwoUhW+hA=";
+              };
+
+            };
+          });
+        };
+
+        packageOverlays = [
+          packageOverlay
+          (import ./nixpkgs/overlays/vscode-with-extensions.nix)
+        ];
+      in
       {
 
         darwinConfigurations = {
@@ -242,5 +306,5 @@
             "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMpIqFppmJu+oXgUA9t+KK7xY07FAy1ZpMQ2xe03fhnaufg8UAT35cTMvf5KpCDRiCRsdv37tXpmfmgV27eiFWA= Remote-sudo@secretive.Mathieu’s-MacBook-Pro.local"
           ];
         };
-      };
+      });
 }

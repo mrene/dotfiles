@@ -240,11 +240,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1676630258,
-        "narHash": "sha256-pc3aIr2LgmJFcTQwICpz3d4/u5/xHDI14qY/zEhGM3k=",
+        "lastModified": 1676890964,
+        "narHash": "sha256-vuNbKdsUpykJkqXDSHdaxx07hJzgoeDLfiWZYR/DAC8=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "be2e4d9dd1e58991a4f54078a331cbcbd8265c7f",
+        "rev": "784cdd76380b844bec286416de297daca3fbcdc7",
         "type": "github"
       },
       "original": {
@@ -358,6 +358,26 @@
         "type": "github"
       }
     },
+    "nix-init": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1676840532,
+        "narHash": "sha256-HhjLB+BEUse7vlYBcPWWlBgOF+zCig/4y1/GJ/xBPvU=",
+        "owner": "nix-community",
+        "repo": "nix-init",
+        "rev": "8d7fa2ec8dd47b8bd7be710f315d6ca89db889ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-init",
+        "type": "github"
+      }
+    },
     "nixlib": {
       "locked": {
         "lastModified": 1636849918,
@@ -444,11 +464,11 @@
     },
     "nixpkgsUnstable": {
       "locked": {
-        "lastModified": 1676549890,
-        "narHash": "sha256-sq/WcOEAl7gWrrfGkWdnyYazRyTf+enEim/o6LOQzI8=",
+        "lastModified": 1676790509,
+        "narHash": "sha256-W9uWAWokgS8US8rJf79qBLS2M+ZgIscfoz+KsNE7VGQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8c66bd1b68f4708c90dcc97c6f7052a5a7b33257",
+        "rev": "a1291d0d020a200c7ce3c48e96090bfa4890a475",
         "type": "github"
       },
       "original": {
@@ -508,11 +528,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1676569297,
-        "narHash": "sha256-2n4C4H3/U+3YbDrQB6xIw7AaLdFISCCFwOkcETAigqU=",
+        "lastModified": 1676721149,
+        "narHash": "sha256-mN2EpTGxxVNnFZLoLWRwh6f7UWhXy4qE+wO2CZyrXps=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ac1f5b72a9e95873d1de0233fddcb56f99884b37",
+        "rev": "5f4e07deb7c44f27d498f8df9c5f34750acf52d2",
         "type": "github"
       },
       "original": {
@@ -560,6 +580,7 @@
         "hyprland": "hyprland",
         "minidsp": "minidsp",
         "nil": "nil",
+        "nix-init": "nix-init",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs_5",
         "nixpkgsUnstable": "nixpkgsUnstable",
