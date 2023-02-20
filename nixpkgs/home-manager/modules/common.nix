@@ -49,7 +49,6 @@
     pigz # parallel gzip
     lz4
 
-
     # Nix LSPs
     rnix-lsp
     inputs.nil.packages.${system}.default
@@ -92,6 +91,7 @@
     # Copilot requirement
     nodejs-16_x
 
+    nix-output-monitor
   ] ++ lib.optionals stdenv.isDarwin [
     coreutils # provides `dd` with --status=progress
     wifi-password
