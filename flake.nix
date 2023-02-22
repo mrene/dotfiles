@@ -111,29 +111,14 @@
       (system: (
         let
           pkgs = import nixpkgs {
-            inherit system;
+            inherit system overlays config;
           };
-
-          pkgsUnstable = import nixpkgsUnstable {
-            inherit system;
-          };
-
-          openrgb = (pkgsUnstable.openrgb.overrideAttrs (old: {
-            src = pkgs.fetchFromGitLab {
-              owner = "CalcProgrammer1";
-              repo = "OpenRGB";
-              rev = "907c64017b9ceac718c2a21962b20a74d517c46f";
-              sha256 = "0v56jnsfrfjdipcaxmdjbvw8sa6rr6nj0p7ca77j3m2j2d899ihx";
-            };
-          }));
         in
         {
 
         homeConfigurations = {
           "mrene@beast" = home-manager.lib.homeManagerConfiguration {
-            pkgs = import nixpkgs {
-              inherit system overlays config;
-            };
+            inherit pkgs;
             modules = [ ./nixpkgs/home-manager/beast.nix ];
             extraSpecialArgs = { inherit inputs; };
           };
@@ -147,9 +132,7 @@
           };
 
           minimal = home-manager.lib.homeManagerConfiguration {
-            pkgs = import nixpkgs {
-              inherit system overlays config;
-            };
+            inherit pkgs;
             modules = [ ./nixpkgs/home-manager/minimal.nix ];
             extraSpecialArgs = { inherit inputs; };
           };
@@ -157,7 +140,7 @@
 
           packages = {
             pathfind = pkgs.callPackage ./nixpkgs/packages/pathfind { };
-            rgb-auto-toggle = pkgs.callPackage ./nixpkgs/packages/rgb-auto-toggle { inherit openrgb; };
+            rgb-auto-toggle = pkgs.callPackage ./nixpkgs/packages/rgb-auto-toggle { };
             kubectl-view-allocations = pkgs.callPackage ./nixpkgs/packages/kubectl-view-allocations { };
           };
           devShells.default = pkgs.mkShell {
