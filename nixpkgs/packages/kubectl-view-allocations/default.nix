@@ -1,13 +1,14 @@
 { lib
+, stdenv
 , rustPlatform
 , fetchFromGitHub
 , pkg-config
 , openssl
 , breakpointHook
-, perl
+, darwin ? null
 }:
 
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "kubectl-view-allocations";
   version = "unstable-2023-02-13";
 
@@ -21,13 +22,12 @@ rustPlatform.buildRustPackage rec {
   cargoHash = "sha256-Dreg8agLmDFb806REtK8cTsmQ7Iq5R4+Arlw3O4AV7w=";
   cargoPatches = [ ./add-cargo-lock.patch ./openssl-no-vendor.patch ];
 
-  nativeBuildInputs = [ pkg-config breakpointHook  ];
-  buildInputs = [ openssl ];
+  nativeBuildInputs = [ pkg-config ];
+  buildInputs = [ openssl ] ++ lib.optionals stdenv.isDarwin (with darwin.apple_sdk.frameworks; [ Security ]);
 
   meta = with lib; {
     description = "kubectl plugin to list allocations (cpu, memory, gpu,... X utilization, requested, limit, allocatable,...)";
     homepage = "https://github.com/davidB/kubectl-view-allocations";
     license = licenses.cc0;
-    maintainers = with maintainers; [ ];
   };
 }
