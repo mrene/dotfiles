@@ -129,4 +129,6 @@
       findport = "sudo lsof -iTCP -sTCP:LISTEN -n -P | grep";
     };
   };
+
+  programs.starship.enable = true;
 }
