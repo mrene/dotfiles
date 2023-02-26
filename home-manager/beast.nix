@@ -23,7 +23,7 @@
     };
 
     Service = {
-      After = ["openrgb.service"];
+      After = [ "openrgb.service" ];
       ExecStart = "${lib.getExe pkgs.rgb-auto-toggle}";
     };
   };

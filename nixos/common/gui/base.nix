@@ -16,7 +16,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-   chromium
+    chromium
 
     alacritty
 
