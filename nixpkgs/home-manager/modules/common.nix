@@ -65,8 +65,8 @@
       src = pkgs.fetchFromGitHub {
         owner = "artempyanykh";
         repo = "marksman";
-        rev = "7c9b1453011ecea38d536e66340250017e005eac";
-        sha256 = "0f3j39nqhp0ryj4i7xyzahsqc24j4mqxvb8qaygyvqhcm4lmmhfi";
+        rev = "53a0c9794d738b47cde814a1700665af6d433408";
+        sha256 = "1mg9x7g8y1r15avfzz42sr6431h9h2pp5zl53zwbvhzz1834yhs6";
       };
     }))
     # Rust
