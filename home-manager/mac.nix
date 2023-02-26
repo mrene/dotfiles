@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -28,7 +28,7 @@
   '';
 
   home.packages = with pkgs; [
-    minidsp
+    inputs.minidsp.packages.${system}.default
     pathfind
   ];
 

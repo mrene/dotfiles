@@ -2,100 +2,51 @@
   inputs = {
     # Package channels
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgsUnstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Nix tools
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.11";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    hyprland = {
-      url = "github:hyprwm/Hyprland/main";
-      # Following nixpkgs would not use pre-built binaries from the cachix cache 
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    
+    hyprland.url = "github:hyprwm/Hyprland/main";
 
     # Generate vm images and initial boot media
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      #url = "/home/mrene/dev/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-generators.url = "github:nix-community/nixos-generators";
 
     flake-utils.url = "github:numtide/flake-utils";
-
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    darwin = {
-      url = "github:lnl7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    deploy-rs.url = "github:serokell/deploy-rs";
+    darwin.url = "github:lnl7/nix-darwin/master";
 
     # Packages sources from other flakes
-    minidsp = {
-      url = "github:mrene/minidsp-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    devenv.url = "github:cachix/devenv/v0.5";
-
+    minidsp.url = "github:mrene/minidsp-rs";
     # Nix LSP
     nil.url = "github:oxalica/nil";
-
     # NixOS fix so that vscode-server can run correctly
-    vscode-server = {
-      url = "github:msteen/nixos-vscode-server";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-init = {
-      url = "github:nix-community/nix-init";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    vscode-server.url = "github:msteen/nixos-vscode-server";
+    # Tool to scaffold new packages automatically
+    nix-init.url = "github:nix-community/nix-init";
   };
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, darwin, nixpkgs, nixpkgsUnstable, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, ... }:
+  outputs = inputs @ { self, darwin, nixpkgs, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, ... }:
       let
         config = {
-          permittedInsecurePackages = [ ];
           allowUnfree = true;
         };
 
-        # Overlay adding flake inputs inside `pkgs`
-        packageOverlay = final: prev: rec {
-          minidsp = inputs.minidsp.packages.${prev.system}.default;
-          devenv = inputs.devenv.packages.${prev.system}.devenv;
-          kubectl-view-allocations = prev.callPackage ./nixpkgs/packages/kubectl-view-allocations { };
-          pkgsUnstable = import nixpkgsUnstable {
-            inherit (prev) system;
-            inherit config;
-          };
-          pathfind = prev.callPackage ./nixpkgs/packages/pathfind { };
-          rgb-auto-toggle = prev.callPackage ./nixpkgs/packages/rgb-auto-toggle { };
-
-          wezterm = pkgsUnstable.wezterm.overrideAttrs (old: rec {
-            patches = [
-              # fix build with rust 1.67
-              (prev.fetchpatch {
-                url = "https://github.com/wez/wezterm/commit/36519f0d90e1875fb4b3f11f6cbf94c7d716ef78.patch";
-                sha256 = "sha256-sOGFmDan1uO1xOBCpvlGrSotjfw01MjRg0KVqa5omig=";
-              })
-            ];
-
-            checkFlags = [ ];
-          });
+        # Add custom packages to nixpkgs
+        packageOverlay = final: prev: {
+          kubectl-view-allocations = prev.callPackage ./packages/kubectl-view-allocations { };
+          pathfind = prev.callPackage ./packages/pathfind { };
+          rgb-auto-toggle = prev.callPackage ./packages/rgb-auto-toggle { };
         };
 
         overlays = [
           packageOverlay
-          (import ./nixpkgs/overlays/vscode-with-extensions.nix)
-          (import ./nixpkgs/overlays/openrgb)
+          (import ./overlays/vscode-with-extensions.nix)
+          (import ./overlays/openrgb)
         ];
 
     in
@@ -103,16 +54,14 @@
     flake-utils.lib.eachDefaultSystem
       (system: (
         let
-          pkgs = import nixpkgs {
-            inherit system overlays config;
-          };
+          pkgs = import nixpkgs { inherit system overlays config; };
         in
         {
 
-        homeConfigurations = {
+        home = {
           "mrene@beast" = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [ ./nixpkgs/home-manager/beast.nix ];
+            modules = [ ./home-manager/beast.nix ];
             extraSpecialArgs = { inherit inputs; };
           };
 
@@ -120,21 +69,21 @@
             pkgs = import nixpkgs {
               inherit system overlays config;
             };
-            modules = [ ./nixpkgs/home-manager/mac.nix ];
+            modules = [ ./home-manager/mac.nix ];
             extraSpecialArgs = { inherit inputs; };
           };
 
           minimal = home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [ ./nixpkgs/home-manager/minimal.nix ];
+            modules = [ ./home-manager/minimal.nix ];
             extraSpecialArgs = { inherit inputs; };
           };
         };
 
           packages = {
-            pathfind = pkgs.callPackage ./nixpkgs/packages/pathfind { };
-            rgb-auto-toggle = pkgs.callPackage ./nixpkgs/packages/rgb-auto-toggle { };
-            kubectl-view-allocations = pkgs.callPackage ./nixpkgs/packages/kubectl-view-allocations { };
+            pathfind = pkgs.callPackage ./packages/pathfind { };
+            rgb-auto-toggle = pkgs.callPackage ./packages/rgb-auto-toggle { };
+            kubectl-view-allocations = pkgs.callPackage ./packages/kubectl-view-allocations { };
           };
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
@@ -143,7 +92,13 @@
             ];
           };
         }
-      )) // {
+        )) // {
+
+        homeConfigurations = {
+          "mrene@beast" = self.home.x86_64-linux."mrene@beast";
+          "mrene@Mathieus-MBP" = self.home.aarch64-darwin."mrene@Mathieus-MBP";
+        };
+
         darwinConfigurations = {
           # nix build .#darwinConfigurations.mbp2021.system
           # ./result/sw/bin/darwin-rebuild switch --flake .
@@ -155,19 +110,13 @@
             };
             modules = [
               #home-manager.darwinModules.home-manager
-              ./nixpkgs/darwin/mbp2021/configuration.nix
+              ./darwin/mbp2021/configuration.nix
             ];
             inputs = { inherit inputs darwin; };
           };
         };
 
         nixosConfigurations = {
-          # sudo nixos-rebuild switch --flake .#homepi
-          # homepi = inputs.nixpkgs.lib.nixosSystem {
-          #   system = "aarch64-linux";
-          #   specialArgs = { common = self.common; inherit inputs; };
-          #   modules = [ ];
-          # };
 
           # sudo nixos-rebuild switch --flake .#utm
           utm = inputs.nixpkgs.lib.nixosSystem {
@@ -177,7 +126,7 @@
               system = "aarch64-linux";
             };
             specialArgs = { common = self.common; inherit inputs; };
-            modules = [ ./nixpkgs/nixos/utm/configuration.nix ];
+            modules = [ ./nixos/utm/configuration.nix ];
           };
 
           # sudo nixos-rebuild switch --flake .#qemu
@@ -188,7 +137,7 @@
               system = "x86_64-linux";
             };
             specialArgs = { common = self.common; inherit inputs; };
-            modules = [ ./nixpkgs/nixos/qemu/configuration.nix ];
+            modules = [ ./nixos/qemu/configuration.nix ];
           };
 
           # sudo nixos-rebuild switch --flake .#beast
@@ -199,18 +148,8 @@
               system = "x86_64-linux";
             };
             specialArgs = { common = self.common; inherit inputs; };
-            modules = [ ./nixpkgs/nixos/beast/configuration.nix ];
+            modules = [ ./nixos/beast/configuration.nix ];
           };
-        };
-
-        images = {
-          # nix build .#images.homepi
-          homepi = self.nixosConfigurations.homepi.config.system.build.sdImage;
-        };
-
-        pkgs = import nixpkgs {
-          inherit config overlays;
-          system = "x86_64-linux";
         };
 
         common = {

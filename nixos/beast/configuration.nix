@@ -42,7 +42,6 @@
 
   networking.networkmanager.enable = true;
   networking.hostName = "beast";
-  #networking.wireless.enable = true;
 
   # Graphics
   hardware.opengl = {
@@ -56,7 +55,6 @@
   };
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-  #hardware.nvidia.modesetting.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -69,7 +67,6 @@
     pulse.enable = true;
     jack.enable = true;
   };
-
 
 
   hardware.openrazer = {
@@ -114,7 +111,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    minidsp
+    inputs.minidsp.packages.${system}.default
 
     # Notes 
     logseq
