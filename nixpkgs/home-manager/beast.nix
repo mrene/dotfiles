@@ -16,6 +16,19 @@
     ./modules/neofetch.nix
   ];
 
+
+  systemd.user.services.rgb-auto-toggle = {
+    Unit = {
+      Description = "Toggle rgb on/off when gnome is locked";
+    };
+
+    Service = {
+      After = ["openrgb.service"];
+      ExecStart = "${lib.getExe pkgs.rgb-auto-toggle}";
+    };
+  };
+
+
   home.stateVersion = "20.09";
 
   home.username = "mrene";

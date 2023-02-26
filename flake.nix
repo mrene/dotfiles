@@ -78,14 +78,6 @@
           };
           pathfind = prev.callPackage ./nixpkgs/packages/pathfind { };
           rgb-auto-toggle = prev.callPackage ./nixpkgs/packages/rgb-auto-toggle { };
-          openrgb = (pkgsUnstable.openrgb.overrideAttrs (old: {
-            src = prev.fetchFromGitLab {
-              owner = "CalcProgrammer1";
-              repo = "OpenRGB";
-              rev = "ddb7b141a39319d23aac143a9f00b2a934be8820";
-              sha256 = "1vfzb4n9ih7hvxyllhyh8inzfwdvk25y43f96q37lffiwhik3y36";
-            };
-          }));
 
           wezterm = pkgsUnstable.wezterm.overrideAttrs (old: rec {
             patches = [
@@ -103,6 +95,7 @@
         overlays = [
           packageOverlay
           (import ./nixpkgs/overlays/vscode-with-extensions.nix)
+          (import ./nixpkgs/overlays/openrgb)
         ];
 
     in

@@ -1,6 +1,6 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# edit this configuration file to define what should be installed on
+# your system.  help is available in the configuration.nix(5) man page
+# and in the nixos manual (accessible by running ‘nixos-help’).
 
 { config, common, pkgs, inputs, ... }:
 
@@ -12,6 +12,7 @@
 
     ./hardware-configuration.nix
     ./ryzen.nix
+    ./rgb.nix
     ../common/cachix.nix
     ../common/minikube.nix
     ../common/common.nix
@@ -69,10 +70,7 @@
     jack.enable = true;
   };
 
-  services.hardware.openrgb = {
-    enable = true;
-    motherboard = "amd";
-  };
+
 
   hardware.openrazer = {
     enable = true;
