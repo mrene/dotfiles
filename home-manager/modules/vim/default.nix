@@ -137,18 +137,18 @@ in
     ];
 
     extraConfig = (builtins.concatStringsSep "\n" [
-      (builtins.readFile ./vim/config.vim)
-      (builtins.readFile ./vim/mappings.vim)
-      (builtins.readFile ./vim/plugin.toggleterm.vim)
-      (builtins.readFile ./vim/plugin.projectnvim.vim)
-      (builtins.readFile ./vim/plugin.nvimtree.vim)
-      (builtins.readFile ./vim/plugin.lualine.vim)
-      (builtins.readFile ./vim/plugin.telescope.vim)
-      (builtins.readFile ./vim/plugin.truezen.vim)
-      (builtins.readFile ./vim/plugin.lsp.vim)
-      (builtins.readFile ./vim/plugin.rust-tools.vim)
-      (builtins.readFile ./vim/plugin.treesitter.vim)
-      (builtins.readFile ./vim/plugin.octo.vim)
+      (builtins.readFile ./config.vim)
+      (builtins.readFile ./mappings.vim)
+      (builtins.readFile ./plugin.toggleterm.vim)
+      (builtins.readFile ./plugin.projectnvim.vim)
+      (builtins.readFile ./plugin.nvimtree.vim)
+      (builtins.readFile ./plugin.lualine.vim)
+      (builtins.readFile ./plugin.telescope.vim)
+      (builtins.readFile ./plugin.truezen.vim)
+      (builtins.readFile ./plugin.lsp.vim)
+      (builtins.readFile ./plugin.rust-tools.vim)
+      (builtins.readFile ./plugin.treesitter.vim)
+      (builtins.readFile ./plugin.octo.vim)
     ]);
   };
 

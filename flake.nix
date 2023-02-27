@@ -46,9 +46,7 @@
         (import ./overlays/vscode-with-extensions.nix)
         (import ./overlays/openrgb)
       ];
-
     in
-
     flake-utils.lib.eachDefaultSystem
       (system: (
         let

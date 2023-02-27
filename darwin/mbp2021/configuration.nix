@@ -56,10 +56,10 @@
 
   home-manager = {
     users.mrene = import ../../home-manager/mac.nix;
-
     useGlobalPkgs = true;
-    useUserPackages = true;
     verbose = true;
+    #cuases the profile not to link to ~/.nix-profile/bin (would need to adjust fish paths)
+    #useUserPackages = true;
     # Passed from flake to avoid infinite recursion issue:
     #extraSpecialArgs = { inherit inputs; };
   };

@@ -7,7 +7,7 @@
       rofi-top
       rofimoji
     ];
-    theme = "${./rofi}/theme.rasi";
+    theme = "${./.}/theme.rasi";
     package = pkgs.rofi-wayland;
   };
 

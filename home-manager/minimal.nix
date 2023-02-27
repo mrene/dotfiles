@@ -3,11 +3,9 @@
 # Minimal home configuration to apply to random machines 
 {
   imports = [
-    ./modules/home-manager.nix
     ./modules/fish.nix
     ./modules/git.nix
-    ./modules/neovim.nix
-
+    ./modules/vim
     ./modules/minimal.nix
   ];
 

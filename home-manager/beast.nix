@@ -2,20 +2,18 @@
 
 {
   imports = [
-    ./modules/home-manager.nix
     ./modules/fish.nix
     ./modules/git.nix
-    ./modules/neovim.nix
+    ./modules/vim
 
     ./modules/minimal.nix
     ./modules/common.nix
     ./modules/gnome.nix
-    ./modules/hyprland.nix
-    ./modules/rofi.nix
+    ./modules/hyprland
+    ./modules/rofi
     ./modules/wezterm.nix
     ./modules/neofetch.nix
   ];
-
 
   systemd.user.services.rgb-auto-toggle = {
     Unit = {
@@ -27,7 +25,6 @@
       ExecStart = "${lib.getExe pkgs.rgb-auto-toggle}";
     };
   };
-
 
   home.stateVersion = "20.09";
 

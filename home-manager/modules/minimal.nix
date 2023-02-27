@@ -1,5 +1,9 @@
 { config, pkgs, libs, ... }:
 {
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+
   home.packages = with pkgs; [
     # Shell
     starship # Shell prompt generator

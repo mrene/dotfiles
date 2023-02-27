@@ -2,7 +2,7 @@
 
 {
   # TODO: Add api token via sops-nix
-  xdg.configFile.".jira/.config.yaml".source = ./jira/config.yml;
+  xdg.configFile.".jira/.config.yaml".source = ./config.yml;
 
   home.packages = with pkgs; [
     jira-cli-go
