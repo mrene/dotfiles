@@ -39,7 +39,7 @@
     users.mrene = import ../../home-manager/utm.nix;
 
     useGlobalPkgs = true;
-    useUserPackages = true;
+    #useUserPackages = true;
     verbose = true;
     extraSpecialArgs = { inherit inputs; };
   };
