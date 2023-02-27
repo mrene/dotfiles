@@ -6,7 +6,6 @@
 
   home.packages = with pkgs; [
     # Shell
-    starship # Shell prompt generator
     tmux
 
     fzf

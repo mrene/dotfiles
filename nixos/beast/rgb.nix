@@ -15,7 +15,7 @@
     serviceConfig = {
       Type = "oneshot";
       After = [ "openrgb.service" ];
-      ExecStart = "${lib.getExe pkgs.openrgb} -p ${./../../packages/rgb-auto-toggle}/default.orp";
+      ExecStart = "${lib.getExe pkgs.openrgb} -p ${./../../home-manager/modules/rgb}/default.orp";
     };
   };
 }

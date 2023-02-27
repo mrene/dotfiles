@@ -30,10 +30,10 @@ in
   systemd.user.services.rgb-auto-toggle = {
     Unit = {
       Description = "Toggle rgb on/off when the screensaver stops/starts";
+      Wants = [ "dbus.socket" "openrgb.service" ];
     };
 
     Service = {
-      After = [ "dbus.socket" "openrgb.service" ];
       ExecStart = "${lib.getExe rgb-auto-toggle}";
       Restart = "always";
       RestartSec = "5";

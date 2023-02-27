@@ -130,5 +130,12 @@
     };
   };
 
-  programs.starship.enable = true;
+  programs.starship = {
+    enable = true;
+    settings = {
+      gcloud = { disabled = true; };
+      nix_shell = { disabled = true; };
+      package = { disabled = true; };
+    };
+  };
 }

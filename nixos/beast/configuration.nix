@@ -128,7 +128,6 @@
 
     nvtop-nvidia # htop-like gpu load viewer
     nvitop
-    rgb-auto-toggle
   ];
 
   services.vscode-server.enable = true;
