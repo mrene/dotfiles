@@ -54,13 +54,15 @@
     shell = "${pkgs.fish}/bin/fish";
   };
 
-  #home-manager = {
-  #users.mrene = import ../../home-manager/mac.nix;
+  home-manager = {
+    users.mrene = import ../../home-manager/mac.nix;
 
-  #useGlobalPkgs = true;
-  #useUserPackages = true;
-  #verbose = true;
-  #};
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    verbose = true;
+    # Passed from flake to avoid infinite recursion issue:
+    #extraSpecialArgs = { inherit inputs; };
+  };
 
   users.users.root = {
     home = "/var/root";
