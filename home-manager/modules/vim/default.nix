@@ -100,8 +100,9 @@ in
 
       # needed by go-nvim
       # TODO: Trim down languages
-      pkgs.vimPlugins.nvim-treesitter.withAllGrammars
-      pkgs.vimPlugins.nvim-treesitter-textobjects
+      nvim-treesitter.withAllGrammars
+      nvim-treesitter-textobjects
+
 
       luasnip
       nvim-cmp # Auto-completion
@@ -116,8 +117,10 @@ in
       fzf-vim
       zoxide-vim
 
-      pkgs.vimPlugins.copilot-lua
-      pkgs.vimPlugins.copilot-cmp
+      copilot-lua
+      copilot-cmp
+
+      trouble-nvim
 
       # Debugger IDE
       #vimspector
@@ -149,6 +152,7 @@ in
       (builtins.readFile ./plugin.rust-tools.vim)
       (builtins.readFile ./plugin.treesitter.vim)
       (builtins.readFile ./plugin.octo.vim)
+      (builtins.readFile ./plugin.trouble.vim)
     ]);
   };
 
