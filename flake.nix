@@ -29,7 +29,7 @@
     # Tool to scaffold new packages automatically
     nix-init.url = "github:nix-community/nix-init";
 
-    rtx.url = "github:jdxcode/rtx";
+    rtx.url = "github:mrene/rtx/fix-darwin-build";
   };
 
   # the @ operator binds the left side attribute set to the right side

@@ -486,15 +486,16 @@
         "nixpkgs": "nixpkgs_9"
       },
       "locked": {
-        "lastModified": 1677689217,
-        "narHash": "sha256-w+gRkrKlF5wrUckTyekJpDscF+sgKhqU0gH5IFqI1ZQ=",
-        "owner": "jdxcode",
+        "lastModified": 1677729371,
+        "narHash": "sha256-vEflV5BAwl5Jop/iFVKTvDmGutrRRk6i9OFlG4eUmX0=",
+        "owner": "mrene",
         "repo": "rtx",
-        "rev": "f73b4ee540d43bef4ce350bd041c820bbbf93e21",
+        "rev": "923344ca84d6f9ba44c00d5160fb9f5f340c0cd2",
         "type": "github"
       },
       "original": {
-        "owner": "jdxcode",
+        "owner": "mrene",
+        "ref": "fix-darwin-build",
         "repo": "rtx",
         "type": "github"
       }
