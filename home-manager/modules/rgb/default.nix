@@ -14,11 +14,11 @@ let
         case "$line" in
           *"boolean true"*)
             echo "Screen locked"
-            ${openrgb}/bin/openrgb --profile ${./.}/off.orp
+            ${openrgb}/bin/openrgb --profile off
             ;;
           *"boolean false"*)
             echo "Screen unlocked"
-            ${openrgb}/bin/openrgb --profile ${./.}/default.orp
+            ${openrgb}/bin/openrgb --profile default
             ;;
         esac
       done
@@ -31,6 +31,10 @@ in
     Unit = {
       Description = "Toggle rgb on/off when the screensaver stops/starts";
       Wants = [ "dbus.socket" "openrgb.service" ];
+    };
+
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
     };
 
     Service = {

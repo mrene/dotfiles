@@ -128,6 +128,8 @@
 
     nvtop-nvidia # htop-like gpu load viewer
     nvitop
+
+    virt-manager
   ];
 
   services.vscode-server.enable = true;
@@ -138,7 +140,8 @@
 
   # TODO: Onprem package req, remove after.
   #services.k3s.enable = true;
-  #virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.enable = true;
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

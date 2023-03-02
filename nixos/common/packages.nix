@@ -23,6 +23,7 @@
     jq
 
     inputs.home-manager.packages.${system}.default
+    btop
   ];
 
   programs.mtr.enable = true;

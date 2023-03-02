@@ -28,6 +28,8 @@
     vscode-server.url = "github:msteen/nixos-vscode-server";
     # Tool to scaffold new packages automatically
     nix-init.url = "github:nix-community/nix-init";
+
+    rtx.url = "github:jdxcode/rtx";
   };
 
   # the @ operator binds the left side attribute set to the right side

@@ -3,8 +3,8 @@
     src = prev.fetchFromGitLab {
       owner = "CalcProgrammer1";
       repo = "OpenRGB";
-      rev = "de43a02a1b19b28f88e6e5cd0cdb58a953b630f5";
-      sha256 = "1asvhz7532hpg16vgf6p3kyj0r27a0j5kjn9f5klf7jg26jmr4vn";
+      rev = "a4f86032a5ff11afcc12aad7985d1d066577b44e";
+      sha256 = "1f3lyfl092pjkvvisvvx2zlzna7d7silkh4i0ylm313mc6fgslfl";
     };
     patches = [ ./0001-sd_notify.patch ];
     buildInputs = old.buildInputs ++ [ prev.systemd ];
