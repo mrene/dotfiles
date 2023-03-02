@@ -1,5 +1,9 @@
 { ... }:
 
+let
+  tailscaleDNS = name: name + ".mathieu-rene.gmail.com.beta.tailscale.net";
+in
+
 {
   programs.ssh = {
     enable = true;
@@ -11,23 +15,27 @@
       };
 
       nas = {
-        hostname = "100.76.135.41"; #Tailscale
+        hostname = tailscaleDNS "truenas";
         user = "mrene";
+        forwardAgent = true;
       };
 
       home = {
-        hostname = "100.95.58.37"; #Tailscale
+        hostname = tailscaleDNS "beast";
         user = "mrene";
+        forwardAgent = true;
       };
 
       rpi4 = {
-        hostname = "100.80.33.33"; #Tailscale
+        hostname = tailscaleDNS "rpi4";
         user = "pi";
+        forwardAgent = true;
       };
 
       mbp = {
-        hostname = "100.72.62.35"; #Tailscale
+        hostname = tailscaleDNS "mathieus-macbook-pro"; #Tailscale
         user = "mrene";
+        forwardAgent = true;
       };
     };
   };

@@ -24,7 +24,9 @@
 
     # `/usr/local/bin` is needed for biometric-support in `op` 1Password CLI
     set -x PATH $PATH /usr/local/bin 
-  '';
+    '';
+
+  programs.ssh.extraConfig = "IdentityAgent /Users/mrene/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
 
   home.packages = with pkgs; [
     inputs.minidsp.packages.${system}.default
