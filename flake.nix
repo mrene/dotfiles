@@ -30,11 +30,16 @@
     nix-init.url = "github:nix-community/nix-init";
 
     rtx.url = "github:mrene/rtx/fix-darwin-build";
+
+    humanfirst-dots = {
+      url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, darwin, nixpkgs, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, ... }:
+  outputs = inputs @ { self, darwin, nixpkgs, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, humanfirst-dots, ... }:
     let
       config = {
         allowUnfree = true;

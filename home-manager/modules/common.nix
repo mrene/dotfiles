@@ -4,8 +4,11 @@
   imports = [
     ./minimal.nix
     ./ssh.nix
-    ./jira
+    #./jira
+    inputs.humanfirst-dots.homeManagerModule
   ];
+
+  humanfirst.enable = true;
 
   # https://github.com/nix-community/nix-direnv#via-home-manager
   programs.direnv.enable = true;
