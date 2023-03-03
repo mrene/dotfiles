@@ -9,6 +9,7 @@
   ];
 
   humanfirst.enable = true;
+  humanfirst.identity.email = "mathieu@humanfirst.ai";
 
   # https://github.com/nix-community/nix-direnv#via-home-manager
   programs.direnv.enable = true;
