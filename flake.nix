@@ -3,6 +3,9 @@
     # Package channels
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
+    nixpkgs-frozen.url = "github:NixOS/nixpkgs/nixos-22.05";
+
     # Nix tools
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -39,7 +42,7 @@
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, darwin, nixpkgs, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, humanfirst-dots, ... }:
+  outputs = inputs @ { self, darwin, nixpkgs, nixpkgs-frozen, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, humanfirst-dots, ... }:
     let
       config = {
         allowUnfree = true;
@@ -138,6 +141,26 @@
           };
           specialArgs = { common = self.common; inherit inputs; };
           modules = [ ./nixos/utm/configuration.nix ];
+        };
+
+
+        # Raspberry Pis
+        bedpi = inputs.nixpkgs.lib.nixosSystem {
+          system = "armv6l-linux";
+          pkgs = import nixpkgs {
+            inherit config overlays;
+            system = "x86_64-linux";
+            crossSystem = inputs.nixpkgs.lib.systems.examples.raspberryPi;
+          };
+          specialArgs = { common = self.common; inherit inputs; };
+          modules = [ 
+            ./nixos/bedpi/configuration.nix
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+            {
+              #nixpkgs.config.allowUnsupportedSystem = true;
+              #nixpkgs.crossSystem.system = "armv6l-linux";
+            }
+          ];
         };
       };
 

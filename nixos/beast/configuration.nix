@@ -143,6 +143,12 @@
   virtualisation.libvirtd.enable = true;
 
 
+  # Allow running aarch64 binaries 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" "armv6l-linux" ];
+  nix.binaryCaches = [ "https://cache.armv7l.xyz" ];
+  nix.binaryCachePublicKeys = [ "cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk=" ];
+
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

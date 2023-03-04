@@ -362,6 +362,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-frozen": {
+      "locked": {
+        "lastModified": 1672580127,
+        "narHash": "sha256-3lW3xZslREhJogoOkjeZtlBtvFMyxHku7I/9IVehhT8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "0874168639713f547c05947c76124f78441ea46c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-22.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_10": {
       "locked": {
         "lastModified": 1677413016,
@@ -533,6 +549,7 @@
         "nix-init": "nix-init",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs_9",
+        "nixpkgs-frozen": "nixpkgs-frozen",
         "rtx": "rtx",
         "vscode-server": "vscode-server"
       }
