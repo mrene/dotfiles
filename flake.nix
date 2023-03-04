@@ -4,7 +4,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
-    nixpkgs-frozen.url = "github:NixOS/nixpkgs/nixos-22.05";
+    nixpkgs-frozen.url = "github:NixOS/nixpkgs/nixos-22.11";
 
     # Nix tools
     home-manager = {
@@ -16,6 +16,7 @@
 
     # Generate vm images and initial boot media
     nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     flake-utils.url = "github:numtide/flake-utils";
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -42,7 +43,7 @@
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, darwin, nixpkgs, nixpkgs-frozen, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, humanfirst-dots, ... }:
+  outputs = inputs @ { self, darwin, nixpkgs, nixpkgs-frozen, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, humanfirst-dots, nixos-hardware, ... }:
     let
       config = {
         allowUnfree = true;
@@ -149,17 +150,29 @@
           system = "armv6l-linux";
           pkgs = import nixpkgs {
             inherit config overlays;
-            system = "x86_64-linux";
-            crossSystem = inputs.nixpkgs.lib.systems.examples.raspberryPi;
+            system = "armv6l-linux";
+            #crossSystem = inputs.nixpkgs.lib.systems.examples.raspberryPi;
           };
           specialArgs = { common = self.common; inherit inputs; };
           modules = [ 
             ./nixos/bedpi/configuration.nix
             "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
-            {
-              #nixpkgs.config.allowUnsupportedSystem = true;
-              #nixpkgs.crossSystem.system = "armv6l-linux";
-            }
+          ];
+        };
+
+
+        tvpi = inputs.nixpkgs-frozen.lib.nixosSystem {
+          system = "aarch64-linux";
+          pkgs = import nixpkgs-frozen {
+            inherit config overlays;
+            system = "aarch64-linux";
+          };
+          specialArgs = { common = self.common; inherit inputs; };
+          modules = [ 
+            nixos-hardware.outputs.nixosModules.raspberry-pi-4
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+
+            ./nixos/tvpi/configuration.nix
           ];
         };
       };
