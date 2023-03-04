@@ -5,6 +5,7 @@
     ./modules/fish.nix
     ./modules/git.nix
     ./modules/vim
+    ./modules/wezterm.nix
 
     ./modules/minimal.nix
     ./modules/gnome.nix
