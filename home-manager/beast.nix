@@ -9,7 +9,7 @@
     ./modules/minimal.nix
     ./modules/common.nix
     ./modules/gnome.nix
-    ./modules/hyprland
+    #./modules/hyprland
     ./modules/rofi
     ./modules/wezterm.nix
     ./modules/neofetch.nix

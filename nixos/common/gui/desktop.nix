@@ -5,7 +5,7 @@
   services.xserver.displayManager.gdm.wayland = false;
   services.xserver.desktopManager.gnome.enable = true;
 
-  programs.hyprland.enable = true;
+  #programs.hyprland.enable = true;
   xdg.portal = {
     enable = true;
     wlr.enable = true;
