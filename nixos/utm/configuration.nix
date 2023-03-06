@@ -27,7 +27,7 @@
   boot.loader.timeout = 5;
 
   # Mount shared filesystem
-  fileSystems."/host" = { 
+  fileSystems."/host" = {
     device = "share";
     fsType = "9p";
     options = [ "trans=virtio" "version=9p2000.L" "cache=loose" ];

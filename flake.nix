@@ -57,6 +57,13 @@
         (import ./overlays/vscode-with-extensions.nix)
         (import ./overlays/openrgb)
       ];
+
+      rpiOverlays = [(final: super: {
+        # Allow missing modules because the master module list is based on strings and the rpi kernel
+        # is missing some
+        # https://github.com/NixOS/nixpkgs/issues/154163
+        makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
+      })];
     in
     flake-utils.lib.eachDefaultSystem
       (system: (
@@ -146,29 +153,39 @@
 
 
         # Raspberry Pis
-        bedpi = inputs.nixpkgs.lib.nixosSystem {
-          system = "armv6l-linux";
-          pkgs = import nixpkgs {
-            inherit config overlays;
-            system = "armv6l-linux";
-            #crossSystem = inputs.nixpkgs.lib.systems.examples.raspberryPi;
+        bedpi =
+          let
+            rpi1nixpkgs = (import nixpkgs { system = "x86_64-linux"; }).applyPatches {
+              name = "armv6-build";
+              src = nixpkgs;
+              patches = [ ./patches/0001-Disable-compiler-rt-builtins.patch ];
+            };
+          in
+          inputs.nixpkgs.lib.nixosSystem {
+            pkgs = import rpi1nixpkgs {
+              inherit config;
+              overlays = overlays ++ rpiOverlays;
+              system = "x86_64-linux";
+              # armv6l-linux
+              crossSystem = inputs.nixpkgs.lib.systems.examples.raspberryPi;
+            };
+            specialArgs = { common = self.common; inherit inputs; };
+            modules = [
+              ./nixos/bedpi/configuration.nix
+              "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+            ];
           };
-          specialArgs = { common = self.common; inherit inputs; };
-          modules = [ 
-            ./nixos/bedpi/configuration.nix
-            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
-          ];
-        };
 
 
         tvpi = inputs.nixpkgs-frozen.lib.nixosSystem {
           system = "aarch64-linux";
           pkgs = import nixpkgs-frozen {
-            inherit config overlays;
+            inherit config;
+            overlays = overlays ++ rpiOverlays;
             system = "aarch64-linux";
           };
           specialArgs = { common = self.common; inherit inputs; };
-          modules = [ 
+          modules = [
             nixos-hardware.outputs.nixosModules.raspberry-pi-4
             "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
 

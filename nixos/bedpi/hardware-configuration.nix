@@ -31,4 +31,7 @@
   # networking.interfaces.wlan0.useDHCP = lib.mkDefault true;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
+
+  nixpkgs.hostPlatform = lib.mkDefault "armv6l-linux";
+  nixpkgs.buildPlatform = lib.mkDefault "x86_64-linux";
 }
