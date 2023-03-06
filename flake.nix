@@ -58,6 +58,11 @@
         (import ./overlays/openrgb)
       ];
 
+      overlayModule = {...}: {
+        nixpkgs.overlays = overlays;
+        nixpkgs.config.allowUnfree = true;
+      };
+
       rpiOverlays = [(final: super: {
         # Allow missing modules because the master module list is based on strings and the rpi kernel
         # is missing some
@@ -131,26 +136,15 @@
 
         # sudo nixos-rebuild switch --flake .#beast
         beast = inputs.nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          pkgs = import nixpkgs {
-            inherit config overlays;
-            system = "x86_64-linux";
-          };
-          specialArgs = { common = self.common; inherit inputs; };
-          modules = [ ./nixos/beast/configuration.nix ];
+          specialArgs = { inherit (self) common; inherit inputs; };
+          modules = [ ./nixos/beast/configuration.nix overlayModule ];
         };
 
         # sudo nixos-rebuild switch --flake .#utm
         utm = inputs.nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          pkgs = import nixpkgs {
-            inherit config overlays;
-            system = "aarch64-linux";
-          };
-          specialArgs = { common = self.common; inherit inputs; };
-          modules = [ ./nixos/utm/configuration.nix ];
+          specialArgs = { inherit (self) common; inherit inputs; };
+          modules = [ ./nixos/utm/configuration.nix overlayModule ];
         };
-
 
         # Raspberry Pis
         bedpi =
@@ -179,17 +173,15 @@
 
         tvpi = inputs.nixpkgs-frozen.lib.nixosSystem {
           system = "aarch64-linux";
-          pkgs = import nixpkgs-frozen {
-            inherit config;
-            overlays = overlays ++ rpiOverlays;
-            system = "aarch64-linux";
-          };
           specialArgs = { common = self.common; inherit inputs; };
           modules = [
             nixos-hardware.outputs.nixosModules.raspberry-pi-4
             "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-
             ./nixos/tvpi/configuration.nix
+            ({...}: {
+              nixpkgs.config.allowUnfree = true;
+              nixpkgs.overlays = overlays ++ rpiOverlays;
+            })
           ];
         };
       };
