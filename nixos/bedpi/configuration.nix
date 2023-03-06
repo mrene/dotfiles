@@ -39,6 +39,11 @@
     openssh.authorizedKeys.keys = common.sshKeys;
   };
 
+
+  environment.systemPackages = with pkgs; [
+    bedrpc
+  ];
+
   #nix.binaryCaches = [ "https://cache.armv7l.xyz" ];
   #nix.binaryCachePublicKeys = [ "cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk=" ];
 

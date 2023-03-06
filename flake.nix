@@ -39,6 +39,11 @@
       url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    bedrpc = {
+      url = "/home/mrene/dev/bedrpc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # the @ operator binds the left side attribute set to the right side
@@ -56,6 +61,9 @@
         packageOverlay
         (import ./overlays/vscode-with-extensions.nix)
         (import ./overlays/openrgb)
+        (final: prev: {
+          bedrpc = prev.callPackage "${inputs.bedrpc}/package.nix" { };
+        })
       ];
 
       overlayModule = {...}: {
@@ -148,6 +156,8 @@
 
         # Raspberry Pis
         bedpi =
+          # Patch nixpkgs to add a cmake flag to compiler-rt - it could probably be done with an overlay but I can't figure out the
+          # import path since it's callPackaged at a bunch of places
           let
             rpi1nixpkgs = (import nixpkgs { system = "x86_64-linux"; }).applyPatches {
               name = "armv6-build";
@@ -163,7 +173,7 @@
               # armv6l-linux
               crossSystem = inputs.nixpkgs.lib.systems.examples.raspberryPi;
             };
-            specialArgs = { common = self.common; inherit inputs; };
+            specialArgs = { inherit (self) common; inherit inputs; };
             modules = [
               ./nixos/bedpi/configuration.nix
               "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
