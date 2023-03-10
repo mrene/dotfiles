@@ -159,10 +159,15 @@
           # Patch nixpkgs to add a cmake flag to compiler-rt - it could probably be done with an overlay but I can't figure out the
           # import path since it's callPackaged at a bunch of places
           let
-            rpi1nixpkgs = (import nixpkgs { system = "x86_64-linux"; }).applyPatches {
+            vanillaPkgs = (import nixpkgs { system = "x86_64-linux"; });
+            armv6-llvm-patch = vanillaPkgs.fetchpatch {
+              url = "https://github.com/NixOS/nixpkgs/pull/205176.patch";
+              hash = "sha256-QGviAj8m86GFMRneFlsX69xFhRHlI+0PlQezLFwg90Q=";
+            };
+            rpi1nixpkgs = vanillaPkgs.applyPatches {
               name = "armv6-build";
               src = nixpkgs;
-              patches = [ ./patches/0001-Disable-compiler-rt-builtins.patch ];
+              patches = [ armv6-llvm-patch  ];
             };
           in
           inputs.nixpkgs.lib.nixosSystem {
@@ -170,8 +175,14 @@
               inherit config;
               overlays = overlays ++ rpiOverlays;
               system = "x86_64-linux";
-              # armv6l-linux
-              crossSystem = inputs.nixpkgs.lib.systems.examples.raspberryPi;
+              crossSystem = {
+                system = "armv6l-linux";
+                # https://discourse.nixos.org/t/building-libcamera-for-raspberry-pi/26133/9
+                gcc = {
+                  arch = "armv6k";
+                  fpu = "vfp";
+                };
+              };
             };
             specialArgs = { inherit (self) common; inherit inputs; };
             modules = [
