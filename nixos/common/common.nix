@@ -1,10 +1,6 @@
 { pkgs, inputs, ... }:
 
 {
-  imports = [
-    ./packages.nix
-  ];
-
   nix = {
     package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
     settings = {

@@ -154,6 +154,12 @@
           modules = [ ./nixos/utm/configuration.nix overlayModule ];
         };
 
+
+        nascontainer = inputs.nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit (self) common; inherit inputs; };
+          modules = [ ./nixos/nas/configuration.nix overlayModule ];
+        };
+
         # Raspberry Pis
         bedpi =
           # Patch nixpkgs to add a cmake flag to compiler-rt - it could probably be done with an overlay but I can't figure out the

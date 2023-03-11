@@ -16,6 +16,7 @@
     ../common/cachix.nix
     ../common/minikube.nix
     ../common/common.nix
+    ../common/packages.nix
     ../common/gui/dev-kitchen-sink.nix
     ../common/gui/desktop.nix
     ../common/gui/base.nix
@@ -129,6 +130,7 @@
     nvtop-nvidia # htop-like gpu load viewer
     nvitop
     virt-manager
+    distrobox
   ];
 
   services.vscode-server.enable = true;

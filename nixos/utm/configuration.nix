@@ -16,6 +16,7 @@
       ../common/minikube.nix
       ../common/gui/desktop.nix
       ../common/common.nix
+      ../common/packages.nix
       ../common/vm/common.nix
       ../common/gui/base.nix
     ];

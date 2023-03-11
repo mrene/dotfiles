@@ -9,6 +9,8 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../common/packages.nix
+      ../common.nix
     ];
 
   # NixOS wants to enable GRUB by default

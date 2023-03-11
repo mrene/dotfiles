@@ -2,7 +2,6 @@
 
 {
   environment.systemPackages = with pkgs; [
-    neovim
     wget
     curl
     direnv
@@ -18,11 +17,9 @@
     file
     lsof
 
-    distrobox
     yq-go
     jq
 
-    inputs.home-manager.packages.${system}.default
     btop
   ];
 
