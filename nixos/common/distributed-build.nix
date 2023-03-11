@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ lib, config, ... }:
 
 {
   nix.buildMachines =
@@ -9,7 +9,7 @@
       speedFactor = 10;
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
       mandatoryFeatures = [ ];
-    }]
+    }] ++
     lib.optionals (config.networking.hostName != "beast") [{
       hostName = "beast";
       system = "aarch64-linux";
@@ -17,8 +17,8 @@
       speedFactor = 2; # emulation via qemu
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
       mandatoryFeatures = [ ];
-    }]
-    ++ lib.optionals (config.networking.hostName != "utm") [{
+    }] ++ 
+    lib.optionals (config.networking.hostName != "utm") [{
       hostName = "utm";
       system = "aarch64-linux";
       maxJobs = 2;
