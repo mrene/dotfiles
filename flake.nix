@@ -3,6 +3,9 @@
     # Package channels
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
+    nixpkgs-frozen.url = "github:NixOS/nixpkgs/nixos-22.11";
+
     # Nix tools
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -13,6 +16,7 @@
 
     # Generate vm images and initial boot media
     nixos-generators.url = "github:nix-community/nixos-generators";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     flake-utils.url = "github:numtide/flake-utils";
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -35,11 +39,16 @@
       url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    bedrpc = {
+      url = "/home/mrene/dev/bedrpc";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, darwin, nixpkgs, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, humanfirst-dots, ... }:
+  outputs = inputs @ { self, darwin, nixpkgs, nixpkgs-frozen, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, humanfirst-dots, nixos-hardware, ... }:
     let
       config = {
         allowUnfree = true;
@@ -52,7 +61,22 @@
         packageOverlay
         (import ./overlays/vscode-with-extensions.nix)
         (import ./overlays/openrgb)
+        (final: prev: {
+          bedrpc = prev.callPackage "${inputs.bedrpc}/package.nix" { };
+        })
       ];
+
+      overlayModule = {...}: {
+        nixpkgs.overlays = overlays;
+        nixpkgs.config.allowUnfree = true;
+      };
+
+      rpiOverlays = [(final: super: {
+        # Allow missing modules because the master module list is based on strings and the rpi kernel
+        # is missing some
+        # https://github.com/NixOS/nixpkgs/issues/154163
+        makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
+      })];
     in
     flake-utils.lib.eachDefaultSystem
       (system: (
@@ -120,24 +144,72 @@
 
         # sudo nixos-rebuild switch --flake .#beast
         beast = inputs.nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          pkgs = import nixpkgs {
-            inherit config overlays;
-            system = "x86_64-linux";
-          };
-          specialArgs = { common = self.common; inherit inputs; };
-          modules = [ ./nixos/beast/configuration.nix ];
+          specialArgs = { inherit (self) common; inherit inputs; };
+          modules = [ ./nixos/beast/configuration.nix overlayModule ];
         };
 
         # sudo nixos-rebuild switch --flake .#utm
         utm = inputs.nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          pkgs = import nixpkgs {
-            inherit config overlays;
-            system = "aarch64-linux";
+          specialArgs = { inherit (self) common; inherit inputs; };
+          modules = [ ./nixos/utm/configuration.nix overlayModule ];
+        };
+
+
+        nascontainer = inputs.nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit (self) common; inherit inputs; };
+          modules = [ ./nixos/nas/configuration.nix overlayModule ];
+        };
+
+        # Raspberry Pis
+        bedpi =
+          # Patch nixpkgs to add a cmake flag to compiler-rt - it could probably be done with an overlay but I can't figure out the
+          # import path since it's callPackaged at a bunch of places
+          let
+            vanillaPkgs = (import nixpkgs { system = "x86_64-linux"; });
+            armv6-llvm-patch = vanillaPkgs.fetchpatch {
+              url = "https://github.com/NixOS/nixpkgs/pull/205176.patch";
+              hash = "sha256-QGviAj8m86GFMRneFlsX69xFhRHlI+0PlQezLFwg90Q=";
+            };
+            rpi1nixpkgs = vanillaPkgs.applyPatches {
+              name = "armv6-build";
+              src = nixpkgs;
+              patches = [ armv6-llvm-patch  ];
+            };
+          in
+          inputs.nixpkgs.lib.nixosSystem {
+            pkgs = import rpi1nixpkgs {
+              inherit config;
+              overlays = overlays ++ rpiOverlays;
+              system = "x86_64-linux";
+              crossSystem = {
+                system = "armv6l-linux";
+                # https://discourse.nixos.org/t/building-libcamera-for-raspberry-pi/26133/9
+                gcc = {
+                  arch = "armv6k";
+                  fpu = "vfp";
+                };
+              };
+            };
+            specialArgs = { inherit (self) common; inherit inputs; };
+            modules = [
+              ./nixos/bedpi/configuration.nix
+              "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+            ];
           };
+
+
+        tvpi = inputs.nixpkgs-frozen.lib.nixosSystem {
+          system = "aarch64-linux";
           specialArgs = { common = self.common; inherit inputs; };
-          modules = [ ./nixos/utm/configuration.nix ];
+          modules = [
+            nixos-hardware.outputs.nixosModules.raspberry-pi-4
+            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+            ./nixos/tvpi/configuration.nix
+            ({...}: {
+              nixpkgs.config.allowUnfree = true;
+              nixpkgs.overlays = overlays ++ rpiOverlays;
+            })
+          ];
         };
       };
 

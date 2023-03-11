@@ -16,6 +16,7 @@
       ../common/minikube.nix
       ../common/gui/desktop.nix
       ../common/common.nix
+      ../common/packages.nix
       ../common/vm/common.nix
       ../common/gui/base.nix
     ];
@@ -26,7 +27,14 @@
   boot.kernelParams = [ "console=tty0" ];
   boot.loader.timeout = 5;
 
-  networking.hostName = "utm-nixos";
+  # Mount shared filesystem
+  fileSystems."/host" = {
+    device = "share";
+    fsType = "9p";
+    options = [ "trans=virtio" "version=9p2000.L" "cache=loose" ];
+  };
+
+  networking.hostName = "utm";
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   services.xserver.enable = true;

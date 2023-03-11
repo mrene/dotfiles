@@ -16,6 +16,7 @@
     ../common/cachix.nix
     ../common/minikube.nix
     ../common/common.nix
+    ../common/packages.nix
     ../common/gui/dev-kitchen-sink.nix
     ../common/gui/desktop.nix
     ../common/gui/base.nix
@@ -128,19 +129,40 @@
 
     nvtop-nvidia # htop-like gpu load viewer
     nvitop
-
     virt-manager
+    distrobox
   ];
 
   services.vscode-server.enable = true;
   services.openssh.enable = true;
 
+  services.rpcbind.enable = true;
+
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
 
+
   # TODO: Onprem package req, remove after.
   #services.k3s.enable = true;
+  virtualisation.containerd.enable = true;
   virtualisation.libvirtd.enable = true;
+  
+  #services.resolved.enable = true;
+
+  #environment.etc."systemd/resolved.conf.d/minikube.conf".text = ''
+  #[Resolve]
+  #DNS=10.96.0.10
+  #Domains=~cluster.local
+  #'';
+  networking.firewall.allowedTCPPorts = [ 8501 ];
+  networking.hosts = {
+    "10.106.169.248" = ["istio-ingressgateway.istio-system.svc.cluster.local"];
+  };
+
+  # Allow running aarch64 binaries 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" "armv6l-linux" ];
+  nix.binaryCaches = [ "https://cache.armv7l.xyz" ];
+  nix.binaryCachePublicKeys = [ "cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk=" ];
 
 
   # This value determines the NixOS release from which the default
