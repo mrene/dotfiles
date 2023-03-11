@@ -21,7 +21,7 @@
     lib.optionals (config.networking.hostName != "utm") [{
       hostName = "utm";
       system = "aarch64-linux";
-      maxJobs = 2;
+      maxJobs = 10;
       speedFactor = 5;
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
       mandatoryFeatures = [ ];

@@ -25,7 +25,10 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Packages sources from other flakes
-    minidsp.url = "github:mrene/minidsp-rs";
+    minidsp = {
+      url = "github:mrene/minidsp-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Nix LSP
     nil.url = "github:oxalica/nil";
     # NixOS fix so that vscode-server can run correctly
