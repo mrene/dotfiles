@@ -35,6 +35,8 @@
     options = [ "trans=virtio" "version=9p2000.L" "cache=loose" ];
   };
 
+  users.users.root.openssh.authorizedKeys.keys = common.builderKeys;
+
   networking.hostName = "utm";
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
