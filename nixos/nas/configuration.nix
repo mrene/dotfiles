@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ 
-    ../common/common.nix 
+  imports = [
+    ../common/common.nix
     ../common/packages.nix
   ];
 
@@ -15,12 +15,12 @@
   networking.useHostResolvConf = false;
   networking.firewall.enable = false;
 
-# default password is "root", create with `openssl passwd -6 root`
+  # default password is "root", create with `openssl passwd -6 root`
   security.initialRootPassword = "$6$V1JB3DXzfkBBjaxL$V4ymu8BxUdDKwDqRMsy4bu4tyocBglz6qtuyonMbi.HweoKbcgLr.W57A62SPqi6CzEGWtER9vskXHAqoHpr4/";
 
   environment.systemPackages = with pkgs; [
-     vim
-     wget
+    vim
+    wget
   ];
 
   system.stateVersion = "23.05";

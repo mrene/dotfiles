@@ -24,7 +24,7 @@
 
   # Use the systemd-boot EFI boot loader.
 
-  boot.kernelParams = [ "console=ttyAMA0" "earlyprintk" "mitigations=off"];
+  boot.kernelParams = [ "console=ttyAMA0" "earlyprintk" "mitigations=off" ];
   boot.loader.timeout = 5;
   boot.supportedFilesystems = lib.mkForce [ "ext4" "vfat" ];
 

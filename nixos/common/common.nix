@@ -6,12 +6,18 @@
     settings = {
       experimental-features = [ "flakes" "nix-command" ];
       auto-optimise-store = true;
+      trusted-users = [ "@wheel" ];
+      trusted-public-keys = [
+        "utm:TNhc0y1cxi+iR7IgKFRUTkXkEf6lzRqhTyk7Nl03Piw=" # aarch64 builds on laptop vm
+        "beast:CO98mFl5tv8ky4Msn/ftNi3WK+PW1y3Xm1BUkT2L7yY="
+      ];
     };
 
     registry = {
       self.flake = inputs.self;
       nixpkgs.flake = inputs.nixpkgs;
     };
+
   };
 
   # Set your time zone.

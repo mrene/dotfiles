@@ -13,6 +13,7 @@
     ./hardware-configuration.nix
     ./ryzen.nix
     ./rgb.nix
+    ../common/distributed-build.nix
     ../common/cachix.nix
     ../common/minikube.nix
     ../common/common.nix
@@ -146,7 +147,7 @@
   #services.k3s.enable = true;
   virtualisation.containerd.enable = true;
   virtualisation.libvirtd.enable = true;
-  
+
   #services.resolved.enable = true;
 
   #environment.etc."systemd/resolved.conf.d/minikube.conf".text = ''
@@ -156,7 +157,7 @@
   #'';
   networking.firewall.allowedTCPPorts = [ 8501 ];
   networking.hosts = {
-    "10.106.169.248" = ["istio-ingressgateway.istio-system.svc.cluster.local"];
+    "10.106.169.248" = [ "istio-ingressgateway.istio-system.svc.cluster.local" ];
   };
 
   # Allow running aarch64 binaries 

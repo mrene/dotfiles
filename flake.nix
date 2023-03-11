@@ -41,7 +41,7 @@
     };
 
     bedrpc = {
-      url = "/home/mrene/dev/bedrpc";
+      url = "git+ssh://git@github.com/mrene/bedrpc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -66,17 +66,19 @@
         })
       ];
 
-      overlayModule = {...}: {
+      overlayModule = { ... }: {
         nixpkgs.overlays = overlays;
         nixpkgs.config.allowUnfree = true;
       };
 
-      rpiOverlays = [(final: super: {
-        # Allow missing modules because the master module list is based on strings and the rpi kernel
-        # is missing some
-        # https://github.com/NixOS/nixpkgs/issues/154163
-        makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
-      })];
+      rpiOverlays = [
+        (final: super: {
+          # Allow missing modules because the master module list is based on strings and the rpi kernel
+          # is missing some
+          # https://github.com/NixOS/nixpkgs/issues/154163
+          makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
+        })
+      ];
     in
     flake-utils.lib.eachDefaultSystem
       (system: (
@@ -173,7 +175,7 @@
             rpi1nixpkgs = vanillaPkgs.applyPatches {
               name = "armv6-build";
               src = nixpkgs;
-              patches = [ armv6-llvm-patch  ];
+              patches = [ armv6-llvm-patch ];
             };
           in
           inputs.nixpkgs.lib.nixosSystem {
@@ -205,7 +207,7 @@
             nixos-hardware.outputs.nixosModules.raspberry-pi-4
             "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
             ./nixos/tvpi/configuration.nix
-            ({...}: {
+            ({ ... }: {
               nixpkgs.config.allowUnfree = true;
               nixpkgs.overlays = overlays ++ rpiOverlays;
             })

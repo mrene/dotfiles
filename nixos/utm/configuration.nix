@@ -19,6 +19,7 @@
       ../common/packages.nix
       ../common/vm/common.nix
       ../common/gui/base.nix
+      ../common/distributed-build.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -51,6 +52,9 @@
     verbose = true;
     extraSpecialArgs = { inherit inputs; };
   };
+
+  # Sign store builds for sharing across network
+  nix.settings.secret-key-files = "/var/secrets/cache-priv-key.pem";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

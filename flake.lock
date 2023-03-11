@@ -16,11 +16,11 @@
         "rev": "1b1ed6c798a298796a0287ab4ae51931d17849e5",
         "revCount": 22,
         "type": "git",
-        "url": "file:///home/mrene/dev/bedrpc"
+        "url": "ssh://git@github.com/mrene/bedrpc"
       },
       "original": {
         "type": "git",
-        "url": "file:///home/mrene/dev/bedrpc"
+        "url": "ssh://git@github.com/mrene/bedrpc"
       }
     },
     "darwin": {
