@@ -17,7 +17,7 @@
       speedFactor = 2; # emulation via qemu
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
       mandatoryFeatures = [ ];
-    }] ++ 
+    }] ++
     lib.optionals (config.networking.hostName != "utm") [{
       hostName = "utm";
       system = "aarch64-linux";
@@ -27,6 +27,6 @@
       mandatoryFeatures = [ ];
     }];
 
-    nix.distributedBuilds = true;
-  	nix.settings.builders-use-substitutes = true;
+  nix.distributedBuilds = true;
+  nix.settings.builders-use-substitutes = true;
 }

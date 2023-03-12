@@ -9,8 +9,12 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../common/common.nix
+      ../../common/common.nix
+      ../rpi1-quirks.nix
+      ./bed-remote.nix
     ];
+
+
 
   # NixOS wants to enable GRUB by default
   #boot.loader.grub.enable = false;
@@ -43,7 +47,7 @@
   services.openssh.enable = true;
 
   networking = {
-    hostName = "bedpi-nix";
+    hostName = "bedpi";
     usePredictableInterfaceNames = false;
 
     interfaces.eth0.ipv4.addresses = [{
@@ -56,7 +60,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    bedrpc
   ];
 
   sdImage = {

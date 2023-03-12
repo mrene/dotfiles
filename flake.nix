@@ -51,7 +51,7 @@
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, darwin, nixpkgs, nixpkgs-frozen, home-manager, vscode-server, nixos-generators, hyprland, flake-utils, humanfirst-dots, nixos-hardware, ... }:
+  outputs = inputs @ { self, darwin, nixpkgs, nixpkgs-frozen, home-manager, nixos-generators, flake-utils, nixos-hardware, deploy-rs, ... }:
     let
       config = {
         allowUnfree = true;
@@ -64,9 +64,6 @@
         packageOverlay
         (import ./overlays/vscode-with-extensions.nix)
         (import ./overlays/openrgb)
-        (final: prev: {
-          bedrpc = prev.callPackage "${inputs.bedrpc}/package.nix" { };
-        })
       ];
 
       overlayModule = { ... }: {
@@ -111,13 +108,24 @@
             };
           };
 
-          packages = (import ./packages) pkgs;
+          packages = ((import ./packages) pkgs) // {
+            buildClosure =
+              let
+                deps = builtins.split "\n" (builtins.readFile ./rpi-cross-deps.txt);
+                rootPaths = builtins.filter (x: x != "") deps;
+              in
+              pkgs.closureInfo { rootPaths = rootPaths; };
+          };
 
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
               nixos-generators.packages.${system}.nixos-generate
               nixos-install-tools
             ];
+          };
+
+          devShells.rpi1cross = pkgs.mkShell {
+            inputsFrom = [ self.nixosConfigurations.bedpi.config.system.build.toplevel ];
           };
         }
       )) // {
@@ -145,78 +153,94 @@
         };
       };
 
-      nixosConfigurations = {
+      nixosConfigurations =
+        let
+          vanillaPkgs = (import nixpkgs { system = "x86_64-linux"; });
+          armv6-llvm-patch = vanillaPkgs.fetchpatch {
+            url = "https://github.com/NixOS/nixpkgs/pull/205176.patch";
+            hash = "sha256-QGviAj8m86GFMRneFlsX69xFhRHlI+0PlQezLFwg90Q=";
+          };
+          rpi1nixpkgs = vanillaPkgs.applyPatches {
+            name = "armv6-build";
+            src = nixpkgs;
+            patches = [ armv6-llvm-patch ];
+          };
 
-        # sudo nixos-rebuild switch --flake .#beast
-        beast = inputs.nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit (self) common; inherit inputs; };
-          modules = [ ./nixos/beast/configuration.nix overlayModule ];
-        };
-
-        # sudo nixos-rebuild switch --flake .#utm
-        utm = inputs.nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit (self) common; inherit inputs; };
-          modules = [ ./nixos/utm/configuration.nix overlayModule ];
-        };
-
-
-        nascontainer = inputs.nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit (self) common; inherit inputs; };
-          modules = [ ./nixos/nas/configuration.nix overlayModule ];
-        };
-
-        # Raspberry Pis
-        bedpi =
-          # Patch nixpkgs to add a cmake flag to compiler-rt - it could probably be done with an overlay but I can't figure out the
-          # import path since it's callPackaged at a bunch of places
-          let
-            vanillaPkgs = (import nixpkgs { system = "x86_64-linux"; });
-            armv6-llvm-patch = vanillaPkgs.fetchpatch {
-              url = "https://github.com/NixOS/nixpkgs/pull/205176.patch";
-              hash = "sha256-QGviAj8m86GFMRneFlsX69xFhRHlI+0PlQezLFwg90Q=";
-            };
-            rpi1nixpkgs = vanillaPkgs.applyPatches {
-              name = "armv6-build";
-              src = nixpkgs;
-              patches = [ armv6-llvm-patch ];
-            };
-          in
-          inputs.nixpkgs.lib.nixosSystem {
-            pkgs = import rpi1nixpkgs {
-              inherit config;
-              overlays = overlays ++ rpiOverlays;
-              system = "x86_64-linux";
-              crossSystem = {
-                system = "armv6l-linux";
-                # https://discourse.nixos.org/t/building-libcamera-for-raspberry-pi/26133/9
-                gcc = {
-                  arch = "armv6k";
-                  fpu = "vfp";
-                };
+          rpi1pkgs = import rpi1nixpkgs {
+            inherit config;
+            overlays = overlays ++ rpiOverlays;
+            system = "x86_64-linux";
+            crossSystem = {
+              system = "armv6l-linux";
+              # https://discourse.nixos.org/t/building-libcamera-for-raspberry-pi/26133/9
+              gcc = {
+                arch = "armv6k";
+                fpu = "vfp";
               };
             };
+          };
+        in
+        {
+          # sudo nixos-rebuild switch --flake .#beast
+          beast = inputs.nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit (self) common; inherit inputs; };
+            modules = [ ./nixos/beast/configuration.nix overlayModule ];
+          };
+
+          # sudo nixos-rebuild switch --flake .#utm
+          utm = inputs.nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit (self) common; inherit inputs; };
+            modules = [ ./nixos/utm/configuration.nix overlayModule ];
+          };
+
+
+          nascontainer = inputs.nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit (self) common; inherit inputs; };
+            modules = [ ./nixos/nas/configuration.nix overlayModule ];
+          };
+
+          # Raspberry Pis
+          bedpi = inputs.nixpkgs.lib.nixosSystem {
+            pkgs = rpi1pkgs;
             specialArgs = { inherit (self) common; inherit inputs; };
             modules = [
-              ./nixos/bedpi/configuration.nix
+              ./nixos/rpis/bedpi/configuration.nix
               "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
             ];
           };
 
+          testpi = inputs.nixpkgs.lib.nixosSystem {
+            pkgs = rpi1pkgs;
+            specialArgs = { inherit (self) common; inherit inputs; };
+            modules = [
+              ./nixos/rpis/testpi/configuration.nix
+              "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+            ];
+          };
 
-        tvpi = inputs.nixpkgs-frozen.lib.nixosSystem {
-          system = "aarch64-linux";
-          specialArgs = { common = self.common; inherit inputs; };
-          modules = [
-            nixos-hardware.outputs.nixosModules.raspberry-pi-4
-            "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-            ./nixos/tvpi/configuration.nix
-            ({ ... }: {
-              nixpkgs.config.allowUnfree = true;
-              nixpkgs.overlays = overlays ++ rpiOverlays;
-            })
-          ];
+          tvpi = inputs.nixpkgs.lib.nixosSystem {
+            system = "aarch64-linux";
+            specialArgs = { common = self.common; inherit inputs; };
+            modules = [
+              nixos-hardware.outputs.nixosModules.raspberry-pi-4
+              "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+              ./nixos/rpis/tvpi/configuration.nix
+              ({ ... }: {
+                nixpkgs.config.allowUnfree = true;
+                nixpkgs.overlays = overlays ++ rpiOverlays;
+              })
+            ];
+          };
+        };
+
+      deploy = {
+        nodes.tvpi.profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.tvpi;
         };
       };
+
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
       common = {
         sshKeys = [
