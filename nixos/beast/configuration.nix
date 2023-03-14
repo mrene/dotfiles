@@ -13,6 +13,8 @@
     ./hardware-configuration.nix
     ./ryzen.nix
     ./rgb.nix
+    ./bt-speaker.nix
+
     ../common/distributed-build.nix
     ../common/cachix.nix
     ../common/minikube.nix
