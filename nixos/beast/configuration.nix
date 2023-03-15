@@ -40,7 +40,7 @@
     };
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_6_1;
+  boot.kernelPackages = pkgs.linuxPackages_6_2;
   # Sensors
   boot.kernelModules = [ "nct6775" ];
 

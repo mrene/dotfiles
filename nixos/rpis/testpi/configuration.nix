@@ -59,7 +59,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    bedrpc
   ];
 
   sdImage = {
