@@ -6,6 +6,8 @@
     settings = {
       experimental-features = [ "flakes" "nix-command" ];
       auto-optimise-store = true;
+      keep-outputs = true;
+      keep-derivations = true;
       trusted-users = [ "@wheel" ];
       trusted-public-keys = [
         "utm:TNhc0y1cxi+iR7IgKFRUTkXkEf6lzRqhTyk7Nl03Piw=" # aarch64 builds on laptop vm
