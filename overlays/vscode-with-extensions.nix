@@ -116,7 +116,7 @@ final: prev: (
         esbenp.prettier-vscode
       ]) ++ pkgs.lib.optionals (! (pkgs.stdenv.isAarch64 && pkgs.stdenv.isLinux)) (with prev.vscode-extensions; [
         ms-vscode.cpptools
-        ms-python.python
+        #ms-python.python
         ms-vsliveshare.vsliveshare
         ms-azuretools.vscode-docker
       ]);
