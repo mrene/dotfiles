@@ -114,6 +114,7 @@ final: prev: (
         jnoortheen.nix-ide
         github.vscode-pull-request-github
         esbenp.prettier-vscode
+        mkhl.direnv
       ]) ++ pkgs.lib.optionals (! (pkgs.stdenv.isAarch64 && pkgs.stdenv.isLinux)) (with prev.vscode-extensions; [
         ms-vscode.cpptools
         #ms-python.python
