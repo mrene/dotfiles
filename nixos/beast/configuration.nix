@@ -24,6 +24,8 @@
     ../common/gui/desktop.nix
     ../common/gui/base.nix
     ../common/gui/messaging.nix
+
+    ../common/radio.nix
   ];
 
   # Bootloader.

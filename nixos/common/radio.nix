@@ -1,5 +1,12 @@
-{ pkgs }:
+{ pkgs, ... }:
+
+let
+  uhd = pkgs.uhd.override (old: {
+    enableUtils = true;
+    enableExamples = true;
+  });
+in
 
 {
-  services.udev.packages = [ pkgs.uhd ];
- }
+  services.udev.packages = [ uhd ];
+}
