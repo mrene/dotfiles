@@ -42,11 +42,11 @@
     };
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_testing;
-  boot.kernelPatches = [{
-    name = "nvidia-fix";
-    patch = ../../patches/kernel-nvidia-fix.patch;
-  }];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPatches = [{
+    #name = "nvidia-fix";
+    #patch = ../../patches/kernel-nvidia-fix.patch;
+  #}];
   # Sensors
   boot.kernelModules = [ "nct6775" ];
 

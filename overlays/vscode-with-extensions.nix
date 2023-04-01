@@ -106,7 +106,6 @@ final: prev: (
         b4dm4n.vscode-nixpkgs-fmt
 
         skyapps.fish-vscode
-        silvenon.mdx
         redhat.vscode-yaml
         ms-vscode.makefile-tools
         ms-vscode.cmake-tools
