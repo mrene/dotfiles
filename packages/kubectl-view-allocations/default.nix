@@ -4,25 +4,34 @@
 , fetchFromGitHub
 , pkg-config
 , openssl
-, breakpointHook
+, perl
 , darwin ? null
 }:
 
 rustPlatform.buildRustPackage {
   pname = "kubectl-view-allocations";
-  version = "unstable-2023-02-13";
+  version = "0.16.3";
 
   src = fetchFromGitHub {
     owner = "davidB";
     repo = "kubectl-view-allocations";
-    rev = "623b891b6bb71d7460a5efbd8fdb5970ea730c51";
-    sha256 = "1cm4c16v12viqwf9jqb8np51n84m1l90v5nfzy7nvg7ydvq7da0g";
+    rev = "0.16.3";
+    sha256 = "sha256-udi39j/K4Wsxva171i7mMUQ6Jb8Ny2IEHfldt3B8IoY=";
   };
 
-  cargoHash = "sha256-Dreg8agLmDFb806REtK8cTsmQ7Iq5R4+Arlw3O4AV7w=";
-  cargoPatches = [ ./add-cargo-lock.patch ./openssl-no-vendor.patch ];
+  postPatch = ''
+    cp ${./Cargo.lock} Cargo.lock
+    '';
 
-  nativeBuildInputs = [ pkg-config ];
+  cargoLock = {
+    lockFile = ./Cargo.lock;
+  };
+
+  #postPatch = ''
+    #sed -i '/-Werror/d' Cargo.toml
+  #'';
+
+  nativeBuildInputs = [ pkg-config perl ];
   buildInputs = [ openssl ] ++ lib.optionals stdenv.isDarwin (with darwin.apple_sdk.frameworks; [ Security ]);
 
   meta = with lib; {
