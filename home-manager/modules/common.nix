@@ -67,14 +67,7 @@
     buf-language-server
 
     # markdown lsp
-    (marksman.overrideAttrs (old: {
-      src = pkgs.fetchFromGitHub {
-        owner = "artempyanykh";
-        repo = "marksman";
-        rev = "bcf5583f698ff0ac40e6743379da87a5b25e3eeb";
-        sha256 = "0qa70izddl36aydbyw1ipmx6fmf7mwsdd8hlzi7xqmlpjpdf8h2v";
-      };
-    }))
+    marksman
     # Rust
     rust-analyzer
     cargo-edit
