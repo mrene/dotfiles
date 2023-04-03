@@ -40,6 +40,8 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  programs.fish.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 }

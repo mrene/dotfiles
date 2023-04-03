@@ -6,6 +6,7 @@
     ./ssh.nix
     #./jira
     inputs.humanfirst-dots.homeManagerModule
+    inputs.nix-index-database.hmModules.nix-index
   ];
 
   humanfirst.enable = true;
@@ -20,7 +21,7 @@
     # Nix tools
     manix # nix cli search tool
     comma # run any command with `, command`
-    nix-index # and nix-locate, search within prebuilt packages filenames
+    #nix-index # and nix-locate, search within prebuilt packages filenames
     cachix # Alternative prebuilt cache for nix
 
     # Ops tools

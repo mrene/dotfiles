@@ -9,6 +9,7 @@
     inputs.home-manager.nixosModules.home-manager
     inputs.hyprland.nixosModules.default
     inputs.vscode-server.nixosModule
+    inputs.nix-index-database.nixosModules.nix-index
 
     ./hardware-configuration.nix
     ./ryzen.nix
@@ -164,6 +165,8 @@
   networking.hosts = {
     "10.106.169.248" = [ "istio-ingressgateway.istio-system.svc.cluster.local" ];
   };
+
+  programs.command-not-found.enable = false;
 
   # Allow running aarch64 binaries 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" "armv6l-linux" ];

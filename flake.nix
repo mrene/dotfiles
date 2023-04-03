@@ -38,6 +38,9 @@
 
     rtx.url = "github:mrene/rtx/fix-darwin-build";
 
+    nix-index-database.url = "github:Mic92/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
     humanfirst-dots = {
       url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -155,18 +158,7 @@
 
       nixosConfigurations =
         let
-          vanillaPkgs = (import nixpkgs { system = "x86_64-linux"; });
-          armv6-llvm-patch = vanillaPkgs.fetchpatch {
-            url = "https://github.com/NixOS/nixpkgs/pull/205176.patch";
-            hash = "sha256-QGviAj8m86GFMRneFlsX69xFhRHlI+0PlQezLFwg90Q=";
-          };
-          rpi1nixpkgs = vanillaPkgs.applyPatches {
-            name = "armv6-build";
-            src = nixpkgs;
-            patches = [ armv6-llvm-patch ];
-          };
-
-          rpi1pkgs = import rpi1nixpkgs {
+          rpi1pkgs = import nixpkgs {
             inherit config;
             overlays = overlays ++ rpiOverlays;
             system = "x86_64-linux";
@@ -232,15 +224,6 @@
             ];
           };
         };
-
-      deploy = {
-        nodes.tvpi.profiles.system = {
-          user = "root";
-          path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.tvpi;
-        };
-      };
-
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
 
       common = {
         sshKeys = [
