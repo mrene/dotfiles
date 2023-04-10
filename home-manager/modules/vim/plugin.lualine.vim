@@ -1,5 +1,14 @@
 lua << END
+
 local navic = require("nvim-navic")
+
+local function navic_get_location()
+    if navic.is_available() == true then
+      return navic.get_location()
+    end
+
+    return ""
+end
 
 require('lualine').setup {
   options = {
@@ -41,13 +50,16 @@ require('lualine').setup {
   },
   winbar = {
     lualine_c = {
-      { navic.get_location, cond = navic.is_available },
+      { navic_get_location },
     },
     lualine_x = {
       {'filename', path = 3, icon_only = true, shortening_target = 0, file_status = false },
     },
   },
   inactive_winbar = {
+    lualine_c = {
+      { navic_get_location },
+    },
     lualine_x = {
       {'filename', path = 3, icon_only = true, shortening_target = 0, file_status = false },
     },

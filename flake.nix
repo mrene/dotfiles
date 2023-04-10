@@ -4,7 +4,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
-    nixpkgs-frozen.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs-frozen.url = "github:NixOS/nixpkgs/e3652e0735fbec227f342712f180f4f21f0594f2";
 
     # Nix tools
     home-manager = {
@@ -38,8 +38,10 @@
 
     rtx.url = "github:mrene/rtx/fix-darwin-build";
 
-    nix-index-database.url = "github:Mic92/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database = {
+        url = "github:Mic92/nix-index-database";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     humanfirst-dots = {
       url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
@@ -54,7 +56,7 @@
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, darwin, nixpkgs, nixpkgs-frozen, home-manager, nixos-generators, flake-utils, nixos-hardware, deploy-rs, ... }:
+  outputs = inputs @ { self, darwin, nixpkgs, nixpkgs-frozen, home-manager, nixos-generators, flake-utils, nixos-hardware, ... }:
     let
       config = {
         allowUnfree = true;
@@ -158,7 +160,7 @@
 
       nixosConfigurations =
         let
-          rpi1pkgs = import nixpkgs {
+          rpi1pkgs = import nixpkgs-frozen {
             inherit config;
             overlays = overlays ++ rpiOverlays;
             system = "x86_64-linux";
@@ -185,14 +187,13 @@
             modules = [ ./nixos/utm/configuration.nix overlayModule ];
           };
 
-
           nascontainer = inputs.nixpkgs.lib.nixosSystem {
             specialArgs = { inherit (self) common; inherit inputs; };
             modules = [ ./nixos/nas/configuration.nix overlayModule ];
           };
 
           # Raspberry Pis
-          bedpi = inputs.nixpkgs.lib.nixosSystem {
+          bedpi = inputs.nixpkgs-frozen.lib.nixosSystem {
             pkgs = rpi1pkgs;
             specialArgs = { inherit (self) common; inherit inputs; };
             modules = [
@@ -201,7 +202,7 @@
             ];
           };
 
-          testpi = inputs.nixpkgs.lib.nixosSystem {
+          testpi = inputs.nixpkgs-frozen.lib.nixosSystem {
             pkgs = rpi1pkgs;
             specialArgs = { inherit (self) common; inherit inputs; };
             modules = [

@@ -8,14 +8,16 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 local navic = require("nvim-navic")
-navic.setup()
+navic.setup {
+  lsp = {
+    auto_attach = true,
+    preference = {"tsserver", "nil_ls", "jsonnet_ls", "bufls", "marksman", "jsonls", "clangd", "gopls", "rust_analyzer", "pyright",  "copilot" },
+  },
+}
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  if client.server_capabilities.documentSymbolProvider then
-    navic.attach(client, bufnr)
-  end
 
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')

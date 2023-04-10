@@ -1,10 +1,10 @@
 { pkgs, ... }:
 
 let
-  uhd = pkgs.uhd.override (old: {
+  uhd = pkgs.uhd.override {
     enableUtils = true;
     enableExamples = true;
-  });
+  };
 in
 
 {

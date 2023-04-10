@@ -45,6 +45,15 @@ let
     };
   });
 
+  nvim-navic = pkgs.vimPlugins.nvim-navic.overrideAttrs (old: {
+    src = pkgs.fetchFromGitHub {
+      owner = "SmiteshP";
+      repo = "nvim-navic";
+      rev = "27124a773d362628b114cd12016e743dab4ccf3e";
+      sha256 = "sha256-1hUnU6CayNerK7olqhSkAQSW0zE6JIhsmZIBw2fyYnc=";
+    };
+  });
+
 in
 {
   programs.neovim = {

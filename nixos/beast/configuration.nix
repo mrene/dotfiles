@@ -163,7 +163,7 @@
   #'';
   networking.firewall.allowedTCPPorts = [ 8501 ];
   networking.hosts = {
-    "10.106.169.248" = [ "istio-ingressgateway.istio-system.svc.cluster.local" ];
+    "10.96.20.33" = [ "istio-ingressgateway.istio-system.svc.cluster.local" ];
   };
 
   programs.command-not-found.enable = false;
