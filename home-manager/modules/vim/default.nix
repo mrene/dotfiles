@@ -2,34 +2,34 @@
 let
   ray-x-go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "ray-x-go-nvim";
-    version = "unstable-2023-04-01";
+    version = "unstable-2023-04-08";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "go.nvim";
-      rev = "e49597d0d12bb1840e12fa89cbd0f1bf61ce6482";
-      sha256 = "0ay1w244pfvqqy01aphq2q2qcv446k7mkcn3z8ihwx5sgdz6r78a";
+      rev = "8398343f2e161aec2d1a9324cd1c739eb379dd24";
+      sha256 = "07w7zwz87d3ngz34cnp5g6pxg16n7ixaci32gxfvyixlpng43wcb";
     };
   };
 
   ray-x-guihua = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "ray-x-guihua";
-    version = "unstable-2023-03-30";
+    version = "unstable-2023-04-05";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "guihua.lua";
-      rev = "0ad2612cd85457402005e252c39ca7b7c215dda0";
-      sha256 = "0b6sfh4phr8rqihss2v5jyld8swzyr1dj6hdqvz3xv838mpdnnqb";
+      rev = "d331b1526a87edbe13679298c3547d49f8a14ffc";
+      sha256 = "17xyv9cahw2bnsm2ljnlvkpgkmbqs5gmna2h4kr7bx2vbnfg4mpi";
     };
   };
 
   nvim-lspconfig = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "nvim-lspconfig";
-    version = "unstable-2023-04-01";
+    version = "unstable-2023-04-10";
     src = pkgs.fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lspconfig";
-      rev = "8cbfc30c4b238cc2465ff256803f7747376f046a";
-      sha256 = "13pq4zd1lm277fpph8mcfg0wk5yq8q5ahhll3v5abpk18ds4ch48";
+      rev = "10fa01d553ce10646350461ac5ddc71f189e9d1a";
+      sha256 = "1v5zqf5z9fl23f62cgchsyhg54wpw364k6bpn9gi6py5mfpig49c";
     };
     meta.homepage = "https://github.com/neovim/nvim-lspconfig/";
   };
@@ -40,8 +40,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "catppuccin";
       repo = "nvim";
-      rev = "73587f9c454da81679202f1668c30fea6cdafd5e";
-      sha256 = "0775rqp1367rivqxilpqmrjh5k900j3idid2lg7h5h2q4h8yicaj";
+      rev = "f078aa49bef4cb9e7b86f07b607c6e98c95b9fb5";
+      sha256 = "0w87h5vdrwn3ch8fyyfxkpz16r150910wmbb5y6wr4ad3scndjsk";
     };
   });
 
@@ -50,7 +50,7 @@ let
       owner = "SmiteshP";
       repo = "nvim-navic";
       rev = "27124a773d362628b114cd12016e743dab4ccf3e";
-      sha256 = "sha256-1hUnU6CayNerK7olqhSkAQSW0zE6JIhsmZIBw2fyYnc=";
+      sha256 = "0xv2y9kw60cjk5n8h91s679rc101lhaal9ds5fmxgj4sl19jf5fn";
     };
   });
 
