@@ -105,14 +105,6 @@ endfunction
 
 let g:go_snippet_engine = "neosnippet"
 
-if &term =~ '^xterm'
-  " tmux knows the extended mouse mode
-  set ttymouse=xterm2
-endif
-
-" TODO remove: https://github.com/neovim/neovim/issues/2294
-nmap <BS> <C-W>h
-
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
