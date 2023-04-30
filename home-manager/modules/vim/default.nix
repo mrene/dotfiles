@@ -2,34 +2,34 @@
 let
   ray-x-go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "ray-x-go-nvim";
-    version = "unstable-2023-04-18";
+    version = "unstable-2023-04-24";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "go.nvim";
-      rev = "37d226ca7444a3950a133acc205aaba7a2339f69";
-      sha256 = "1kp44dnnf4hddhl5fj08yvi6qjcqvz8wp800dvx723l9qxv3bb08";
+      rev = "80670b233218e9c72e9c8893ba52aff4b7510947";
+      sha256 = "19smjfa3zz9864dhp2pfxv05llh4rdaz8cksfvpaq4ja7j6vb3n0";
     };
   };
 
   ray-x-guihua = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "ray-x-guihua";
-    version = "unstable-2023-04-05";
+    version = "unstable-2023-04-27";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "guihua.lua";
-      rev = "d331b1526a87edbe13679298c3547d49f8a14ffc";
-      sha256 = "17xyv9cahw2bnsm2ljnlvkpgkmbqs5gmna2h4kr7bx2vbnfg4mpi";
+      rev = "ab8b1f09603cc268770efd057115035dc6cfa83d";
+      sha256 = "125y0wnif8cicbsqrdw021gqgd9l29ml44jgk6apijrnja18ik4y";
     };
   };
 
   nvim-lspconfig = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "nvim-lspconfig";
-    version = "unstable-2023-04-16";
+    version = "unstable-2023-04-27";
     src = pkgs.fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lspconfig";
-      rev = "eddaef928c1e1dd79a96f5db45f2fd7f2efe7ea0";
-      sha256 = "1gpkmywjlyyx8zmvyxqsrrfyrxsvs42gd442k05nhfv75z077dcf";
+      rev = "427378a03ffc1e1bc023275583a49b1993e524d0";
+      sha256 = "0f7jiryclg32nia7wciz58cj974jx5xhmiq43wcyidf7nfm62rwb";
     };
     meta.homepage = "https://github.com/neovim/nvim-lspconfig/";
   };
@@ -40,8 +40,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "catppuccin";
       repo = "nvim";
-      rev = "939be5f7fcbc15abeaad9214bb253a4551f6f6e6";
-      sha256 = "16dmasj74szapc0p9kv35yb0smci7zk4k17p5d301lslrhr5jg35";
+      rev = "3e91672945ae882098556cbade4f47987e6bae6b";
+      sha256 = "1syiqraqm5s4ka2d1ciz0v05gcnpnpj181ki90x0p66vbysblnzr";
     };
   });
 
@@ -49,8 +49,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "SmiteshP";
       repo = "nvim-navic";
-      rev = "66de418892b30709c6a5e79075dd6f4d5689a8c0";
-      sha256 = "1b8hfjq5icg396h147682fxhf4mkvxz4vikaq044y3n2hn919nc6";
+      rev = "83dc174da915f9dbc9b51169e9b62a2e0d42b527";
+      sha256 = "19lr5mlhnfd9s47mvhhkxl343slsvhw8ni5gqb9p11k1zznl2h9b";
     };
   });
 
