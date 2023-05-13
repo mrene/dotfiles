@@ -21,6 +21,7 @@
     jq
 
     btop
+    man-pages
   ];
 
   programs.mtr.enable = true;
