@@ -3,8 +3,8 @@ let
   delta = pkgs.fetchFromGitHub {
     owner = "dandavison";
     repo = "delta";
-    rev = "ce41a39bf6ebd3b7bbac4c73954cf6078ed96fc5";
-    sha256 = "023bz3ddlv9iaz46pmir9jsdzdv39q1bzl7fi12c2c14b0j2bys0";
+    rev = "b3ee8400dd955e2ecb80b06863da306e42f31d2d";
+    sha256 = "1z2llnvk4ns4jin53f1f34bhxfz6h5fm9mx2vcigzpvyh5p8sykp";
   };
 in
 {
