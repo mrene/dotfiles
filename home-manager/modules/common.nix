@@ -92,7 +92,7 @@
     update-nix-fetchgit
 
     # Copilot requirement
-    nodejs-16_x
+    nodejs
 
     nix-output-monitor
     nix-init

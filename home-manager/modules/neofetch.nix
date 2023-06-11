@@ -3,8 +3,8 @@ let
   themes = pkgs.fetchFromGitHub {
     owner = "Chick2D";
     repo = "neofetch-themes";
-    rev = "f20b385177ad417aad9df4aeaadf5e839c472959";
-    sha256 = "1n8ss24b5racyl2inya6p0rgsmpsij13bmk2gqpifz3wvnb6qdsn";
+    rev = "e743a3737031ca423113de9461965b61d46f6731";
+    sha256 = "0sd88z4icc2vk3gxdcf05wdmbjbssjm0r038bj7xjcifpm52anqw";
   };
 in
 {

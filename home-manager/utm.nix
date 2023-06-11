@@ -13,9 +13,6 @@
   ];
 
   home.packages = with pkgs; [
-    # NOTE node 16 needed for remote vsc server
-    nodejs-16_x
-
     fishPlugins.foreign-env
   ];
 

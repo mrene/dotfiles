@@ -60,6 +60,9 @@
     let
       config = {
         allowUnfree = true;
+          permittedInsecurePackages = [
+            "nodejs-16.20.0"
+          ];
       };
 
       # Add custom packages to nixpkgs
