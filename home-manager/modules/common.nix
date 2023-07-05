@@ -62,7 +62,6 @@
     rnix-lsp
     inputs.nil.packages.${system}.default
     rtx
-    inputs.rtx.packages.${system}.default
     nixd
     nixpkgs-fmt
     nurl
