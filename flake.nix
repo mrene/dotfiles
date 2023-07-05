@@ -36,8 +36,6 @@
     # Tool to scaffold new packages automatically
     nix-init.url = "github:nix-community/nix-init";
 
-    rtx.url = "github:mrene/rtx/fix-darwin-build";
-
     nix-index-database = {
         url = "github:Mic92/nix-index-database";
         inputs.nixpkgs.follows = "nixpkgs";
