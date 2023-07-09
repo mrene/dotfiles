@@ -37,8 +37,8 @@
     nix-init.url = "github:nix-community/nix-init";
 
     nix-index-database = {
-        url = "github:Mic92/nix-index-database";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     humanfirst-dots = {
@@ -58,9 +58,9 @@
     let
       config = {
         allowUnfree = true;
-          permittedInsecurePackages = [
-            "nodejs-16.20.0"
-          ];
+        permittedInsecurePackages = [
+          "nodejs-16.20.0"
+        ];
       };
 
       # Add custom packages to nixpkgs

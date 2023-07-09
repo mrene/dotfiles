@@ -14,7 +14,8 @@ buildGoModule rec {
   vendorSha256 = "sha256-Ndo6EQp/k9BLvIHf+NiBj6a73Th1liEnd5+ZGelV8VM=";
 
   ldflags = [
-    "-s" "-w"
+    "-s"
+    "-w"
     "-X github.com/ankitpokhrel/jira-cli/internal/version.GitCommit=${src.rev}"
     "-X github.com/ankitpokhrel/jira-cli/internal/version.SourceDateEpoch=0"
     "-X github.com/ankitpokhrel/jira-cli/internal/version.Version=${version}"

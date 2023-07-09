@@ -7,7 +7,7 @@ let
     ];
   });
 
-  overrideSoapy = p: p.override(old: { inherit soapysdr; });
+  overrideSoapy = p: p.override (old: { inherit soapysdr; });
 
   bedrpc = pkgs.callPackage "${inputs.bedrpc}/package.nix" { inherit soapysdr; };
 in

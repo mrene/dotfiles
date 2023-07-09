@@ -9,6 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./home-assistant.nix
       ../../common/packages.nix
       ../../common/common.nix
     ];
@@ -24,7 +25,7 @@
 
   # Override this so ttyAMA0 isn't used for a console, since its shared with the 
   # bluetooth controller.
-  boot.kernelParams = lib.mkForce ["console=tty0"];
+  boot.kernelParams = lib.mkForce [ "console=tty0" ];
 
   # Enables the generation of /boot/extlinux/extlinux.conf
   # which is laoded by u-boot
@@ -68,7 +69,7 @@
     compressImage = false;
   };
 
-  
+
   hardware.bluetooth.enable = true;
   services.pipewire = {
     enable = true;
@@ -78,6 +79,8 @@
     socketActivation = false;
   };
   services.pipewire.systemWide = true;
+
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
