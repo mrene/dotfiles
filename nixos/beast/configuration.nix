@@ -16,6 +16,7 @@
     ./rgb.nix
     ./bt-speaker.nix
 
+    ../common/nvidia.nix
     ../common/distributed-build.nix
     ../common/cachix.nix
     ../common/minikube.nix

@@ -111,6 +111,12 @@
               extraSpecialArgs = { inherit inputs; };
             };
 
+            nas = home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              modules = [ ./home-manager/nas.nix ];
+              extraSpecialArgs = { inherit inputs; };
+            };
+
             # nix build .#home.x86-64_linux.minimal.activationPackage
             minimal = home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
@@ -243,6 +249,7 @@
 
         builderKeys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYXed3Lzz4fWZmjt7VHvWDldk1VNlcSDokM7ZcguTFh root@beast"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHeCYLyIA2TgH8tE5i8pyCV2HvU/iepBx/ch6gh8IwbC nas-builder"
         ];
 
         sudoSshKeys = [

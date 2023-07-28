@@ -9,9 +9,15 @@
       keep-outputs = true;
       keep-derivations = true;
       trusted-users = [ "@wheel" ];
+
+      # To generate:
+      # nix-store --generate-binary-cache-key builder-name /var/secrets/nix-builder.pem /var/secrets/nix-builder.pub
+      # Add to the machine's config: nix.settings.secret-key-files = "/var/secrets/nix-builder.pem";
+      # Add contents of public key to this list
       trusted-public-keys = [
         "utm:TNhc0y1cxi+iR7IgKFRUTkXkEf6lzRqhTyk7Nl03Piw=" # aarch64 builds on laptop vm
         "beast:CO98mFl5tv8ky4Msn/ftNi3WK+PW1y3Xm1BUkT2L7yY="
+        "nas:AKbMvZhFWLMEqMCt9TLcN7Ha62q9jf4+XhHH3VVO+kI="
       ];
     };
 
