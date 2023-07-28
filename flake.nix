@@ -232,6 +232,9 @@
           };
         };
 
+
+      nasbuild = self.nixosConfigurations.nas.config.system.build.toplevel;
+
       common = {
         sshKeys = [
           "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMDK9LCwU62BIcyn73TcaQlMqr12GgYnHYcw5dbDDNmYnpp2n/jfDQ5hEkXd945dcngW6yb7cmgsa8Sx9T1Uuo4= secretive@mbp2021"

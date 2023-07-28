@@ -50,7 +50,6 @@
   };
   security.sudo.wheelNeedsPassword = false;
 
-
   home-manager = {
     users.mrene = import ../../home-manager/nas.nix;
 

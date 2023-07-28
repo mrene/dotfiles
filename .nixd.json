@@ -1,8 +1,8 @@
 {
   "eval": {
     "target": {
-      "args": [".#nixosConfigurations.nas.config.system.build.toplevel"],
-      "installable": ""
+      "args": ["-f", "default.nix"],
+      "installable": "nasbuild"
     }
   },
     "options": {
