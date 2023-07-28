@@ -1,7 +1,8 @@
-{ config, pkgs, common, ... }:
+{ config, pkgs, common, inputs, ... }:
 
 {
   imports = [
+    inputs.home-manager.nixosModules.home-manager
     ./hardware-configuration.nix
     ../common/common.nix
     ../common/packages.nix
@@ -27,8 +28,33 @@
   networking.hostName = "nas"; # empty
   networking.firewall.enable = false;
   services.openssh.enable = true;
-  users.users.root.openssh.authorizedKeys.keys = common.sshKeys;
+  users ={
+    users = {
+      mrene = {
+        isNormalUser = true;
+        description = "mathieu";
+        extraGroups = [
+          "wheel"
+          "docker"
+          "networkmanager"
+        ];
+        openssh.authorizedKeys.keys = common.sshKeys;
+      };
+       root.openssh.authorizedKeys.keys = common.sshKeys;
+    };
 
+    mutableUsers = true;
+    defaultUserShell = pkgs.fish;
+  };
+   security.sudo.wheelNeedsPassword = false;
+   home-manager = {
+    users.mrene = import ../../home-manager/utm.nix;
+
+    useGlobalPkgs = true;
+    #useUserPackages = true;
+    verbose = true;
+    extraSpecialArgs = { inherit inputs; };
+  };
 
   environment.systemPackages = with pkgs; [
     git
