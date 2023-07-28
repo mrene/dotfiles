@@ -1,28 +1,41 @@
-{ config, pkgs, ... }:
+{ config, pkgs, common, ... }:
 
 {
   imports = [
+    ./hardware-configuration.nix
     ../common/common.nix
     ../common/packages.nix
   ];
 
-  boot.isContainer = true;
-  boot.loader.initScript.enable = true;
+  boot.loader = {
+    grub = {
+      enable = true;
+      device = "nodev";
+      useOSProber = true;
+      efiSupport = true;
+    };
+    efi = {
+      efiSysMountPoint = "/boot/efi";
+      canTouchEfiVariables = true;
+    };
+  };
 
-  networking.hostName = ""; # empty
-  networking.useDHCP = false;
-  networking.useNetworkd = true;
-  networking.useHostResolvConf = false;
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.forceImportRoot = false;
+
+  networking.hostId = "f7717cca";
+  networking.hostName = "nas"; # empty
   networking.firewall.enable = false;
+  services.openssh.enable = true;
+  users.users.root.openssh.authorizedKeys.keys = common.sshKeys;
 
-  # default password is "root", create with `openssl passwd -6 root`
-  security.initialRootPassword = "$6$V1JB3DXzfkBBjaxL$V4ymu8BxUdDKwDqRMsy4bu4tyocBglz6qtuyonMbi.HweoKbcgLr.W57A62SPqi6CzEGWtER9vskXHAqoHpr4/";
 
   environment.systemPackages = with pkgs; [
+    git
     vim
     wget
   ];
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
   nixpkgs.hostPlatform = "x86_64-linux";
 }

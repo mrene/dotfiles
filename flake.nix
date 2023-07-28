@@ -188,7 +188,7 @@
             modules = [ ./nixos/utm/configuration.nix overlayModule ];
           };
 
-          nascontainer = inputs.nixpkgs.lib.nixosSystem {
+          nas = inputs.nixpkgs.lib.nixosSystem {
             specialArgs = { inherit (self) common; inherit inputs; };
             modules = [ ./nixos/nas/configuration.nix overlayModule ];
           };
