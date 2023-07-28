@@ -95,7 +95,7 @@
         initialHashedPassword = "";
       };
       root = {
-        openssh.authorizedKeys.keys = common.sudoSshKeys;
+        openssh.authorizedKeys.keys = common.sudoSshKeys ++ common.builderKeys;
       };
     };
 
