@@ -25,10 +25,10 @@
   boot.zfs.forceImportRoot = false;
 
   networking.hostId = "f7717cca";
-  networking.hostName = "nas"; # empty
+  networking.hostName = "nas";
   networking.firewall.enable = false;
   services.openssh.enable = true;
-  users ={
+  users = {
     users = {
       mrene = {
         isNormalUser = true;
@@ -40,14 +40,14 @@
         ];
         openssh.authorizedKeys.keys = common.sshKeys;
       };
-       root.openssh.authorizedKeys.keys = common.sshKeys;
+      root.openssh.authorizedKeys.keys = common.sshKeys;
     };
 
     mutableUsers = true;
     defaultUserShell = pkgs.fish;
   };
-   security.sudo.wheelNeedsPassword = false;
-   home-manager = {
+  security.sudo.wheelNeedsPassword = false;
+  home-manager = {
     users.mrene = import ../../home-manager/utm.nix;
 
     useGlobalPkgs = true;
