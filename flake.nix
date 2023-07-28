@@ -50,6 +50,11 @@
       url = "git+ssh://git@github.com/mrene/bedrpc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    flake-compat = {
+      url = "github:inclyc/flake-compat";
+      flake = false;
+    };
   };
 
   # the @ operator binds the left side attribute set to the right side

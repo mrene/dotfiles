@@ -3,6 +3,7 @@
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    inputs.nix-index-database.nixosModules.nix-index
     ./hardware-configuration.nix
     ../common/common.nix
     ../common/packages.nix
@@ -20,6 +21,7 @@
       canTouchEfiVariables = true;
     };
   };
+
 
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.forceImportRoot = false;
@@ -47,8 +49,10 @@
     defaultUserShell = pkgs.fish;
   };
   security.sudo.wheelNeedsPassword = false;
+
+
   home-manager = {
-    users.mrene = import ../../home-manager/utm.nix;
+    users.mrene = import ../../home-manager/nas.nix;
 
     useGlobalPkgs = true;
     #useUserPackages = true;
@@ -61,6 +65,9 @@
     vim
     wget
   ];
+
+  # Required for nix-index 
+  programs.command-not-found.enable = false;
 
   system.stateVersion = "23.11";
   nixpkgs.hostPlatform = "x86_64-linux";

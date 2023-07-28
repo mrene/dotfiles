@@ -1,0 +1,15 @@
+{
+  "eval": {
+    "target": {
+      "args": [".#nixosConfigurations.nas.config.system.build.toplevel"],
+      "installable": ""
+    }
+  },
+    "options": {
+        "enable": true,
+        "target": {
+            "args": [],
+            "installable": ".#nixosConfigurations.nas.options"
+        }
+    }
+}
