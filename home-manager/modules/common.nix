@@ -62,7 +62,6 @@
     rnix-lsp
     inputs.nil.packages.${system}.default
     rtx
-    nixd
     nixpkgs-fmt
     nurl
     jsonnet-language-server
@@ -101,6 +100,7 @@
     coreutils # provides `dd` with --status=progress
     wifi-password
   ] ++ lib.optionals stdenv.isLinux [
+    nixd # broken on darwin
     iputils # provides `ping`, `ifconfig`, ...
 
     libuuid # `uuidgen` (already pre-installed on mac)

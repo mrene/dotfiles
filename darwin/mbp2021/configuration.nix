@@ -18,9 +18,9 @@
       auto-optimise-store = true;
     };
 
-    registry = {
-      nixpkgs.flake = inputs.nixpkgs;
-    };
+    #registry = {
+      #nixpkgs.flake = inputs.nixpkgs;
+    #};
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true
