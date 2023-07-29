@@ -76,6 +76,10 @@
   # Required for nix-index 
   programs.command-not-found.enable = false;
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" "armv6l-linux" ];
+  nix.binaryCaches = [ "https://cache.armv7l.xyz" ];
+  nix.binaryCachePublicKeys = [ "cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk=" ];
+
   system.stateVersion = "23.11";
   nixpkgs.hostPlatform = "x86_64-linux";
 }
