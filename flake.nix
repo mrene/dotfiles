@@ -55,6 +55,10 @@
       url = "github:inclyc/flake-compat";
       flake = false;
     };
+
+    nixd = { 
+      url = "github:nix-community/nixd";
+    };
   };
 
   # the @ operator binds the left side attribute set to the right side

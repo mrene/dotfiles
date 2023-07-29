@@ -3,7 +3,8 @@
     "target": {
       "args": ["-f", "default.nix"],
       "installable": "nasbuild"
-    }
+    },
+    "workers": 3
   },
     "options": {
         "enable": true,

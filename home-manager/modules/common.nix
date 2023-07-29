@@ -62,7 +62,7 @@
     rnix-lsp
     inputs.nil.packages.${system}.default
     rtx
-    nixd
+    inputs.nixd.packages.${system}.default
     nixpkgs-fmt
     nurl
     jsonnet-language-server
