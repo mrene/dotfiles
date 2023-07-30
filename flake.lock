@@ -502,11 +502,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1690466538,
-        "narHash": "sha256-Fva2+3OK/yOcQcNF+MXEDUILTB8Y2ygPf8jwTmOY4v4=",
+        "lastModified": 1690727258,
+        "narHash": "sha256-j63YjYtN84FusmhUPX39KXqOB+EeCgW9OtNMqkXI33Y=",
         "owner": "nix-community",
         "repo": "nixd",
-        "rev": "00d67dc7950146d08bbffe1f55d742f382341217",
+        "rev": "022ecb803561f6e28663e8051ec16e573fce3a7a",
         "type": "github"
       },
       "original": {

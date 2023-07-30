@@ -1,6 +1,10 @@
 { pkgs, inputs, ... }:
 
 {
+  imports = [
+    ./ssh-ca.nix
+  ];
+
   nix = {
     package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
     settings = {
