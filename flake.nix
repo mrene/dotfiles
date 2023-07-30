@@ -12,8 +12,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/main";
-
     # Generate vm images and initial boot media
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -49,6 +47,15 @@
     bedrpc = {
       url = "git+ssh://git@github.com/mrene/bedrpc";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    flake-compat = {
+      url = "github:inclyc/flake-compat";
+      flake = false;
+    };
+
+    nixd = { 
+      url = "github:nix-community/nixd";
     };
   };
 
@@ -106,6 +113,12 @@
               extraSpecialArgs = { inherit inputs; };
             };
 
+            nas = home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              modules = [ ./home-manager/nas.nix ];
+              extraSpecialArgs = { inherit inputs; };
+            };
+
             # nix build .#home.x86-64_linux.minimal.activationPackage
             minimal = home-manager.lib.homeManagerConfiguration {
               inherit pkgs;
@@ -155,7 +168,7 @@
             home-manager.darwinModules.home-manager
             { home-manager.extraSpecialArgs = { inherit inputs; }; }
           ];
-          inputs = { inherit inputs darwin; };
+          specialArgs = { inherit inputs; };
         };
       };
 
@@ -188,7 +201,7 @@
             modules = [ ./nixos/utm/configuration.nix overlayModule ];
           };
 
-          nascontainer = inputs.nixpkgs.lib.nixosSystem {
+          nas = inputs.nixpkgs.lib.nixosSystem {
             specialArgs = { inherit (self) common; inherit inputs; };
             modules = [ ./nixos/nas/configuration.nix overlayModule ];
           };
@@ -227,6 +240,12 @@
           };
         };
 
+
+        nasbuild = self.nixosConfigurations.nas.config.system.build.toplevel;
+
+        # CI top level targets
+        ciTargets = inputs.nixpkgs.lib.genAttrs [ "beast" "nas" "utm" "tvpi" "bedpi" ] (name : self.nixosConfigurations.${name}.config.system.build.toplevel);
+
       common = {
         sshKeys = [
           "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMDK9LCwU62BIcyn73TcaQlMqr12GgYnHYcw5dbDDNmYnpp2n/jfDQ5hEkXd945dcngW6yb7cmgsa8Sx9T1Uuo4= secretive@mbp2021"
@@ -235,6 +254,7 @@
 
         builderKeys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGYXed3Lzz4fWZmjt7VHvWDldk1VNlcSDokM7ZcguTFh root@beast"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHeCYLyIA2TgH8tE5i8pyCV2HvU/iepBx/ch6gh8IwbC nas-builder"
         ];
 
         sudoSshKeys = [

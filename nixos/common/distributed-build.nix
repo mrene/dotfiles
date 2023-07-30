@@ -1,6 +1,7 @@
 { lib, config, ... }:
 
 {
+  # To add a machine, don't forget to add the key to common.nix
   nix.buildMachines =
     lib.optionals (config.networking.hostName != "beast") [{
       hostName = "beast";
@@ -25,8 +26,19 @@
       speedFactor = 5;
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
       mandatoryFeatures = [ ];
+    }] ++
+    lib.optionals (config.networking.hostName != "nas") [{
+      hostName = "nas";
+      system = "x86_64-linux";
+      maxJobs = 8;
+      speedFactor = 5;
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      mandatoryFeatures = [ ];
     }];
+
 
   nix.distributedBuilds = true;
   nix.settings.builders-use-substitutes = true;
+  #nix.settings.substituters = builtins.map (v: "ssh://${v.hostName}" ) config.nix.buildMachines;
+  nix.settings.substituters = [ "ssh://beast" ];
 }

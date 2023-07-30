@@ -1,0 +1,16 @@
+{
+  "eval": {
+    "target": {
+      "args": ["-f", "default.nix"],
+      "installable": "nixosConfigurations.nas.config"
+    },
+    "workers": 3
+  },
+    "options": {
+        "enable": true,
+        "target": {
+            "args": [],
+            "installable": ".#nixosConfigurations.nas.options"
+        }
+    }
+}

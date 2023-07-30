@@ -7,7 +7,6 @@
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    inputs.hyprland.nixosModules.default
     inputs.vscode-server.nixosModule
     inputs.nix-index-database.nixosModules.nix-index
 
@@ -16,6 +15,7 @@
     ./rgb.nix
     ./bt-speaker.nix
 
+    ../common/nvidia.nix
     ../common/distributed-build.nix
     ../common/cachix.nix
     ../common/minikube.nix
@@ -94,7 +94,7 @@
         initialHashedPassword = "";
       };
       root = {
-        openssh.authorizedKeys.keys = common.sudoSshKeys;
+        openssh.authorizedKeys.keys = common.sudoSshKeys ++ common.builderKeys;
       };
     };
 

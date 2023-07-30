@@ -62,7 +62,13 @@
     rnix-lsp
     inputs.nil.packages.${system}.default
     rtx
-    nixd
+    # Patch nixd whose tests are failing on recent macOS versions
+    # https://github.com/nix-community/nixd/issues/215
+    (inputs.nixd.packages.${system}.default.overrideAttrs(prevAttrs: {
+      doCheck = !stdenv.isDarwin;
+      # TODO: remove when merged: https://github.com/nix-community/nixd/pull/226
+      buildInputs = prevAttrs.buildInputs ++ [ lit ];
+    }))
     nixpkgs-fmt
     nurl
     jsonnet-language-server
