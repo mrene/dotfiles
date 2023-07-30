@@ -12,15 +12,15 @@
   services.nix-daemon.enable = true;
 
   nix = {
-    package = pkgs.nix;
+    package = pkgs.nixUnstable;
     settings = {
       experimental-features = [ "flakes" "nix-command" ];
       auto-optimise-store = true;
     };
 
-    #registry = {
-      #nixpkgs.flake = inputs.nixpkgs;
-    #};
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+    };
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true

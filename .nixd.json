@@ -2,7 +2,7 @@
   "eval": {
     "target": {
       "args": ["-f", "default.nix"],
-      "installable": "nasbuild"
+      "installable": "nixosConfigurations.nas.config"
     },
     "workers": 3
   },

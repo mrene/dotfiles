@@ -7,7 +7,6 @@
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    inputs.hyprland.nixosModules.default
     inputs.vscode-server.nixosModule
     inputs.nix-index-database.nixosModules.nix-index
 

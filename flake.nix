@@ -12,8 +12,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/main";
-
     # Generate vm images and initial boot media
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
@@ -170,7 +168,7 @@
             home-manager.darwinModules.home-manager
             { home-manager.extraSpecialArgs = { inherit inputs; }; }
           ];
-          inputs = { inherit inputs darwin; };
+          specialArgs = { inherit inputs; };
         };
       };
 
@@ -243,7 +241,10 @@
         };
 
 
-      nasbuild = self.nixosConfigurations.nas.config.system.build.toplevel;
+        nasbuild = self.nixosConfigurations.nas.config.system.build.toplevel;
+
+        # CI top level targets
+        ciTargets = inputs.nixpkgs.lib.genAttrs [ "beast" "nas" "utm" "tvpi" "bedpi" ] (name : self.nixosConfigurations.${name}.config.system.build.toplevel);
 
       common = {
         sshKeys = [
