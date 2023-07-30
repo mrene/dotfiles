@@ -1,7 +1,7 @@
 { ... }:
 
 let
-  tailscaleDNS = name: name + ".mathieu-rene.gmail.com.beta.tailscale.net";
+  tailscaleDNS = name: name + ".tailc705a.ts.net";
 in
 
 {
@@ -15,7 +15,7 @@ in
       };
 
       nas = {
-        hostname = tailscaleDNS "truenas";
+        hostname = tailscaleDNS "nas";
         user = "mrene";
         forwardAgent = true;
       };
@@ -33,7 +33,7 @@ in
       };
 
       mbp = {
-        hostname = tailscaleDNS "mathieus-macbook-pro"; #Tailscale
+        hostname = tailscaleDNS "mathieus-macbook-pro";
         user = "mrene";
         forwardAgent = true;
       };
