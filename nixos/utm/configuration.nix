@@ -18,7 +18,6 @@
       ../common/packages.nix
       ../common/vm/common.nix
       ../common/gui/base.nix
-      ../common/distributed-build.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -40,6 +39,7 @@
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   services.xserver.enable = true;
+  services.tailscale.enable = true;
 
   virtualisation.docker = {
     enable = true;
