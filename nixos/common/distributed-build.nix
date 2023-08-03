@@ -39,6 +39,7 @@
 
   nix.distributedBuilds = true;
   nix.settings.builders-use-substitutes = true;
-  #nix.settings.substituters = builtins.map (v: "ssh://${v.hostName}" ) config.nix.buildMachines;
-  #nix.settings.substituters = [ "ssh://beast" ];
+  nix.settings.substituters = lib.optionals (config.networking.hostName != "nas") [ "http://nas:5000" ] ++
+                              lib.optionals (config.networking.hostName != "beast") [ "http://beast:5000" ];
+
 }

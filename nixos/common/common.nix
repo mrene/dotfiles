@@ -54,4 +54,5 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  networking.firewall.rejectPackets = true;
 }

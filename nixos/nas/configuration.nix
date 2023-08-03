@@ -77,8 +77,14 @@
   programs.command-not-found.enable = false;
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" "armv6l-linux" ];
-  nix.binaryCaches = [ "https://cache.armv7l.xyz" ];
-  nix.binaryCachePublicKeys = [ "cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk=" ];
+  nix.settings.substituters = [ "https://cache.armv7l.xyz" ];
+  nix.settings.trusted-public-keys = [ "cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk=" ];
+
+  services.nix-serve = {
+    enable = true;
+    openFirewall = true;
+    secretKeyFile = "/var/secrets/nix-builder.pem";
+  };
 
   system.stateVersion = "23.11";
   nixpkgs.hostPlatform = "x86_64-linux";
