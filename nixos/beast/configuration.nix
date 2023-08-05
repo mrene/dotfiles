@@ -170,8 +170,8 @@
 
   # Allow running aarch64 binaries 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" "armv6l-linux" ];
-  nix.binaryCaches = [ "https://cache.armv7l.xyz" ];
-  nix.binaryCachePublicKeys = [ "cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk=" ];
+  nix.settings.substituters = [ "https://cache.armv7l.xyz" ];
+  nix.settings.trusted-public-keys = [ "cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk=" ];
 
 
   # This value determines the NixOS release from which the default
