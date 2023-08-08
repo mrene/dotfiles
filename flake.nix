@@ -57,6 +57,11 @@
     nixd = { 
       url = "github:nix-community/nixd";
     };
+
+    nh = {
+      url = "github:viperML/nh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   # the @ operator binds the left side attribute set to the right side

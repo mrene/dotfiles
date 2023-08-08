@@ -9,6 +9,8 @@
     inputs.home-manager.nixosModules.home-manager
     inputs.vscode-server.nixosModule
     inputs.nix-index-database.nixosModules.nix-index
+    inputs.nh.nixosModules.default
+
 
     ./hardware-configuration.nix
     ./ryzen.nix
@@ -28,6 +30,13 @@
 
     ../common/radio.nix
   ];
+
+    nh = {
+      enable = true;
+      package = inputs.nh.packages.${pkgs.system}.default;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3 --nogcroots";
+  };
 
   # Bootloader.
   boot.loader = {
