@@ -1,4 +1,8 @@
-{ pkgs, inputs, ... }:
+{ lib, pkgs, inputs, ... }:
+
+let 
+  flakes = lib.filterAttrs (_: v: ({_type = "";} // v)._type == "flake") inputs;
+in
 
 {
   imports = [
@@ -24,12 +28,9 @@
         "nas:AKbMvZhFWLMEqMCt9TLcN7Ha62q9jf4+XhHH3VVO+kI="
       ];
     };
-
-    registry = {
-      self.flake = inputs.self;
-      nixpkgs.flake = inputs.nixpkgs;
-    };
-
+    
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakes;
+    nixPath = lib.mapAttrsToList (x: _: "${x}=flake:${x}") flakes;
   };
 
   # Set your time zone.

@@ -1,14 +1,19 @@
 {
   inputs = {
     # Package channels
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # Wait for https://nixpk.gs/pr-tracker.html?pr=248278
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
     nixpkgs-frozen.url = "github:NixOS/nixpkgs/e3652e0735fbec227f342712f180f4f21f0594f2";
 
     # Nix tools
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      # Tenative fix for nix 2.17 issue
+      # https://github.com/nix-community/home-manager/issues/4298
+      #url = "github:nix-community/home-manager/master";
+      url = "github:Ma27/home-manager/0e1a727ed1b0c28ca27f4693e1d5564580f9f17e";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -59,7 +64,7 @@
     };
 
     nh = {
-      url = "github:viperML/nh";
+      url = "github:mrene/nh/fix-system-error-2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
