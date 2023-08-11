@@ -31,7 +31,7 @@
     ../common/radio.nix
   ];
 
-    nh = {
+  nh = {
       enable = true;
       #package = inputs.nh.packages.${pkgs.system}.default;
       clean.enable = true;
