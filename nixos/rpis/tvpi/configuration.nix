@@ -38,6 +38,7 @@
   boot.loader.timeout = 5;
 
   services.openssh.enable = true;
+  services.openssh.settings.PasswordAuthentication = false;
 
   networking = {
     hostName = "tvpi";

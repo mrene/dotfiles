@@ -40,10 +40,9 @@
     openssh.authorizedKeys.keys = common.sshKeys;
   };
 
-  # default password is "root", create with `openssl passwd -6 root`
-  security.initialRootPassword = "$6$V1JB3DXzfkBBjaxL$V4ymu8BxUdDKwDqRMsy4bu4tyocBglz6qtuyonMbi.HweoKbcgLr.W57A62SPqi6CzEGWtER9vskXHAqoHpr4/";
 
   services.openssh.enable = true;
+  services.openssh.settings.PasswordAuthentication = false;
 
   networking = {
     hostName = "testpi";
