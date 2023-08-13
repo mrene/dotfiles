@@ -10,6 +10,7 @@
     inputs.vscode-server.nixosModule
     inputs.nix-index-database.nixosModules.nix-index
     inputs.nh.nixosModules.default
+    inputs.minidsp.nixosModules.default
 
 
     ./hardware-configuration.nix
@@ -127,8 +128,12 @@
     enableNvidia = true;
   };
 
+  services.minidsp = {
+    enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
-    inputs.minidsp.packages.${system}.default
+    #inputs.minidsp.packages.${system}.default
 
     # Notes 
     logseq

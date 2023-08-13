@@ -446,17 +446,16 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
+        "dirtyRev": "4ac7e31a43b5cc215828ac733c4da011c4874fe7-dirty",
+        "dirtyShortRev": "4ac7e31-dirty",
         "lastModified": 1691814792,
-        "narHash": "sha256-+xoyn3qrVaUFD+FmzDqb75aZ/z41PJPdI833ueyCN+I=",
-        "owner": "mrene",
-        "repo": "minidsp-rs",
-        "rev": "4ac7e31a43b5cc215828ac733c4da011c4874fe7",
-        "type": "github"
+        "narHash": "sha256-oRBgsy+AK85HdeER2PGVXcP7aiQFWFpRRxdEwJydx+M=",
+        "type": "git",
+        "url": "file:///Users/mrene/dev/minidsp-rs"
       },
       "original": {
-        "owner": "mrene",
-        "repo": "minidsp-rs",
-        "type": "github"
+        "type": "git",
+        "url": "file:///Users/mrene/dev/minidsp-rs"
       }
     },
     "nh": {
