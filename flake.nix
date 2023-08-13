@@ -12,7 +12,7 @@
     home-manager = {
       # Tenative fix for nix 2.17 issue
       # https://github.com/nix-community/home-manager/issues/4298
-      url = "github:nix-community/home-manager/fix/4298";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
