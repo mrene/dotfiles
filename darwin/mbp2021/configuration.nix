@@ -15,7 +15,10 @@
     package = pkgs.nixUnstable;
     settings = {
       experimental-features = [ "flakes" "nix-command" ];
-      auto-optimise-store = true;
+      # Disable since it causes issues
+      # https://github.com/NixOS/nix/issues/7273 
+      # "error: cannot link '/nix/store/.tmp-link' to '/nix/store/.links/...': File exists" 
+      auto-optimise-store = false;
     };
 
     registry = {
@@ -24,7 +27,6 @@
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true
-      auto-optimise-store = true
 
       # assuming the builder has a faster internet connection
       builders-use-substitutes = true

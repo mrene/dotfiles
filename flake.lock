@@ -382,17 +382,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1691488245,
-        "narHash": "sha256-rn6g1Nby2sS4Q46uFBS5OYjNXKd8tUuBLO+k+RVC2Wk=",
-        "owner": "Ma27",
+        "lastModified": 1691882297,
+        "narHash": "sha256-e1/LAQSGLnBywfA1TfMl0Vj3tvYka73XOZ/D2/CJowE=",
+        "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0e1a727ed1b0c28ca27f4693e1d5564580f9f17e",
+        "rev": "c3ab5ea047e6dc73df530948f7367455749d8906",
         "type": "github"
       },
       "original": {
-        "owner": "Ma27",
+        "owner": "nix-community",
+        "ref": "fix/4298",
         "repo": "home-manager",
-        "rev": "0e1a727ed1b0c28ca27f4693e1d5564580f9f17e",
         "type": "github"
       }
     },
