@@ -159,8 +159,6 @@
   networking.firewall.checkReversePath = "loose";
 
 
-  # TODO: Onprem package req, remove after.
-  #services.k3s.enable = true;
   virtualisation.containerd.enable = true;
   virtualisation.libvirtd.enable = true;
 
