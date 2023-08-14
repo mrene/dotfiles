@@ -1,7 +1,7 @@
 (import
   (
-    let 
-      lock = builtins.fromJSON (builtins.readFile ./flake.lock); 
+    let
+      lock = builtins.fromJSON (builtins.readFile ./flake.lock);
       flake-compat = lock.nodes.${lock.nodes.root.inputs.flake-compat}.locked;
     in
     fetchTarball {

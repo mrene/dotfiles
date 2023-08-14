@@ -15,9 +15,9 @@ let
     arch = "aarch64";
   };
 in
-{ 
+{
   virtualisation.oci-containers.containers = {
-    homeassistant =  {
+    homeassistant = {
       #inherit imageFile;
 
       image = "${imageName}:${imageTag}@${imageDigest}";

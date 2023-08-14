@@ -1,7 +1,7 @@
 { lib, pkgs, inputs, ... }:
 
-let 
-  flakes = lib.filterAttrs (_: v: ({_type = "";} // v)._type == "flake") inputs;
+let
+  flakes = lib.filterAttrs (_: v: ({ _type = ""; } // v)._type == "flake") inputs;
 in
 
 {
@@ -28,8 +28,8 @@ in
         "nas:AKbMvZhFWLMEqMCt9TLcN7Ha62q9jf4+XhHH3VVO+kI="
       ];
     };
-    
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakes;
+
+    registry = lib.mapAttrs (_: flake: { inherit flake; }) flakes;
     nixPath = lib.mapAttrsToList (x: _: "${x}=flake:${x}") flakes;
   };
 
