@@ -447,16 +447,15 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1691970876,
+        "lastModified": 1691971443,
         "narHash": "sha256-CnE2FS0cLGE5/T4OBSX/clQFTvKaK6udfzuaTGy8gqQ=",
         "owner": "mrene",
         "repo": "minidsp-rs",
-        "rev": "179dd443a7bcae8443e3cbdf0f0b4bba2de0c7fb",
+        "rev": "228a0ea01dc7509dbef0f413108475e53706b840",
         "type": "github"
       },
       "original": {
         "owner": "mrene",
-        "ref": "nixos",
         "repo": "minidsp-rs",
         "type": "github"
       }
