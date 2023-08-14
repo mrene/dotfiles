@@ -16,6 +16,8 @@
     humanfirst-dots = { url = "git+ssh://git@github.com/zia-ai/shared-dotfiles"; inputs.nixpkgs.follows = "nixpkgs"; };
     bedrpc = { url = "git+ssh://git@github.com/mrene/bedrpc"; inputs.nixpkgs.follows = "nixpkgs"; };
     nh = { url = "github:viperML/nh"; inputs.nixpkgs.follows = "nixpkgs"; };
+    devshell.url = "github:numtide/devshell";
+    nix-update.url = "github:Mic92/nix-update";
   };
 
   outputs = inputs@{ flake-parts, ... }:
@@ -25,6 +27,7 @@
         ./nixos
         ./darwin
         ./home-manager
+        ./packages/flake-module.nix
         ./devshell.nix
         ./common.nix
       ];
