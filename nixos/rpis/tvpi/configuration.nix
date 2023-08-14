@@ -7,16 +7,13 @@
 {
   imports =
     [
+      inputs.minidsp.nixosModules.default
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./home-assistant.nix
       ../../common/packages.nix
       ../../common/common.nix
     ];
-
-  environment.systemPackages = [
-    inputs.minidsp.packages.aarch64-linux.default
-  ];
 
   # Prevent a lot of superfluous FS from being compiled
   boot.supportedFilesystems = lib.mkForce [ "ext4" "vfat" ];
@@ -88,6 +85,19 @@
 
   services.minidsp = {
     enable = true;
+    config = {
+      ignore_advertisements = true;
+      http_server = {
+        bind_address = "0.0.0.0:5380";
+      };
+      tcp_server = [{
+        bind_address = "0.0.0.0:5333";
+        advertise = {
+          ip = "192.168.1.245";
+          name = "Living Room Pi";
+        };
+      }];
+    };
   };
 
   # This value determines the NixOS release from which the default

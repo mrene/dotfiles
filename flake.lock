@@ -440,28 +440,31 @@
       "inputs": {
         "flake-compat": "flake-compat_4",
         "flake-utils": "flake-utils_4",
+        "nix-filter": "nix-filter",
         "nixpkgs": [
           "nixpkgs"
         ],
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "dirtyRev": "4ac7e31a43b5cc215828ac733c4da011c4874fe7-dirty",
-        "dirtyShortRev": "4ac7e31-dirty",
-        "lastModified": 1691814792,
-        "narHash": "sha256-oRBgsy+AK85HdeER2PGVXcP7aiQFWFpRRxdEwJydx+M=",
-        "type": "git",
-        "url": "file:///Users/mrene/dev/minidsp-rs"
+        "lastModified": 1691970876,
+        "narHash": "sha256-CnE2FS0cLGE5/T4OBSX/clQFTvKaK6udfzuaTGy8gqQ=",
+        "owner": "mrene",
+        "repo": "minidsp-rs",
+        "rev": "179dd443a7bcae8443e3cbdf0f0b4bba2de0c7fb",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///Users/mrene/dev/minidsp-rs"
+        "owner": "mrene",
+        "ref": "nixos",
+        "repo": "minidsp-rs",
+        "type": "github"
       }
     },
     "nh": {
       "inputs": {
         "flake-parts": "flake-parts",
-        "nix-filter": "nix-filter",
+        "nix-filter": "nix-filter_2",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -502,6 +505,21 @@
       }
     },
     "nix-filter": {
+      "locked": {
+        "lastModified": 1687178632,
+        "narHash": "sha256-HS7YR5erss0JCaUijPeyg2XrisEb959FIct3n2TMGbE=",
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "rev": "d90c75e8319d0dd9be67d933d8eb9d0894ec9174",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "type": "github"
+      }
+    },
+    "nix-filter_2": {
       "locked": {
         "lastModified": 1687178632,
         "narHash": "sha256-HS7YR5erss0JCaUijPeyg2XrisEb959FIct3n2TMGbE=",

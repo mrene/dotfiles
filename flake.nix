@@ -28,8 +28,7 @@
 
     # Packages sources from other flakes
     minidsp = {
-      url = "github:mrene/minidsp-rs/nix";
-      #url = "/Users/mrene/dev/minidsp-rs";
+      url = "github:mrene/minidsp-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # Nix LSP
