@@ -1,5 +1,5 @@
 { pkgs, ... }:
-let 
+let
   ides = with pkgs; [
     jetbrains.goland
     jetbrains.pycharm-professional

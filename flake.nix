@@ -58,7 +58,7 @@
       flake = false;
     };
 
-    nixd = { 
+    nixd = {
       url = "github:nix-community/nixd";
     };
 
@@ -250,10 +250,10 @@
         };
 
 
-        nasbuild = self.nixosConfigurations.nas.config.system.build.toplevel;
+      nasbuild = self.nixosConfigurations.nas.config.system.build.toplevel;
 
-        # CI top level targets
-        ciTargets = inputs.nixpkgs.lib.genAttrs [ "beast" "nas" "utm" "tvpi" "bedpi" ] (name : self.nixosConfigurations.${name}.config.system.build.toplevel);
+      # CI top level targets
+      ciTargets = inputs.nixpkgs.lib.genAttrs [ "beast" "nas" "utm" "tvpi" "bedpi" ] (name: self.nixosConfigurations.${name}.config.system.build.toplevel);
 
       common = {
         sshKeys = [

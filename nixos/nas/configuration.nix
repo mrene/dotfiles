@@ -51,7 +51,7 @@
   # Prevent the X server from starting up
   services.xserver.displayManager.lightdm.enable = false;
   #systemd.units."display-manager.service".enable = false;
-  
+
   security.sudo.wheelNeedsPassword = false;
 
   # Required for distributed builds
