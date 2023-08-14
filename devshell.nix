@@ -8,7 +8,7 @@
     devshells.default = {
       commands = [
         { name = "flake-update"; command = "nix flake update"; help = "Updates flake references"; }
-        { name = "package-update"; command = "nix-update -F $1"; help = "Updates packages using nix-update"; }
+        { name = "package-update"; command = "nix-update -F $1"; help = "<package> Updates local package (from packages/) using nix-update"; }
       ];
 
       packages = [
