@@ -8,7 +8,6 @@
     # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
     nixpkgs-frozen.url = "github:NixOS/nixpkgs/e3652e0735fbec227f342712f180f4f21f0594f2";
 
-    # Nix tools
     home-manager = {
       # Tenative fix for nix 2.17 issue
       # https://github.com/nix-community/home-manager/issues/4298
@@ -31,10 +30,13 @@
       url = "github:mrene/minidsp-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     # Nix LSP
     nil.url = "github:oxalica/nil";
+
     # NixOS fix so that vscode-server can run correctly
     vscode-server.url = "github:msteen/nixos-vscode-server";
+
     # Tool to scaffold new packages automatically
     nix-init.url = "github:nix-community/nix-init";
 
@@ -70,80 +72,25 @@
 
   # the @ operator binds the left side attribute set to the right side
   # `inputs` can still be referenced, but `darwin` is bound to `inputs.darwin`, etc.
-  outputs = inputs @ { self, darwin, nixpkgs, nixpkgs-frozen, home-manager, nixos-generators, flake-utils, nixos-hardware, ... }:
-    let
-      config = {
-        allowUnfree = true;
-        permittedInsecurePackages = [
-          "nodejs-16.20.0"
-        ];
-      };
-
-      # Add custom packages to nixpkgs
-      packageOverlay = (final: prev: ((import ./packages) prev));
-      overlays = [
-        # Locally defined pacakges
-        packageOverlay
-        (import ./overlays/vscode-with-extensions.nix)
-        (import ./overlays/openrgb)
+  outputs = inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        ./overlays
+        ./nixos
+        ./darwin
+        ./home-manager
       ];
-
-      overlayModule = { ... }: {
-        nixpkgs.overlays = overlays;
-        nixpkgs.config.allowUnfree = true;
-      };
-
-      rpiOverlays = [
-        (final: super: {
-          # Allow missing modules because the master module list is based on strings and the rpi kernel
-          # is missing some
-          # https://github.com/NixOS/nixpkgs/issues/154163
-          makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
-        })
-      ];
-    in
-    flake-utils.lib.eachDefaultSystem
-      (system: (
+      systems = [ "x86_64-linux" "aarch64-darwin" ];
+      perSystem = { config, system, ... }:
         let
-          pkgs = import nixpkgs { inherit system overlays config; };
+          overlays = [ ]; #config.flake.overlays.default;
+          pkgs = import inputs.nixpkgs {
+            inherit system overlays;
+            config = { allowUnfree = true; };
+          };
         in
         {
-
-          home = {
-            beast = home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-              modules = [ ./home-manager/beast.nix ];
-              extraSpecialArgs = { inherit inputs; };
-            };
-
-            mac = home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-              modules = [ ./home-manager/mac.nix ];
-              extraSpecialArgs = { inherit inputs; };
-            };
-
-            nas = home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-              modules = [ ./home-manager/nas.nix ];
-              extraSpecialArgs = { inherit inputs; };
-            };
-
-            # nix build .#home.x86-64_linux.minimal.activationPackage
-            minimal = home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-              modules = [ ./home-manager/minimal.nix ];
-              extraSpecialArgs = { inherit inputs; };
-            };
-          };
-
-          packages = ((import ./packages) pkgs) // {
-            buildClosure =
-              let
-                deps = builtins.split "\n" (builtins.readFile ./rpi-cross-deps.txt);
-                rootPaths = builtins.filter (x: x != "") deps;
-              in
-              pkgs.closureInfo { rootPaths = rootPaths; };
-          };
+          packages = ((import ./packages) pkgs);
 
           devShells.default = pkgs.mkShell {
             buildInputs = with pkgs; [
@@ -151,111 +98,8 @@
               nixos-install-tools
             ];
           };
-
-          devShells.rpi1cross = pkgs.mkShell {
-            inputsFrom = [ self.nixosConfigurations.bedpi.config.system.build.toplevel ];
-          };
-        }
-      )) // {
-
-      homeConfigurations = {
-        "mrene@beast" = self.home.x86_64-linux.beast;
-        "mrene@Mathieus-MBP" = self.home.aarch64-darwin.mac;
-      };
-
-      darwinConfigurations = {
-        # nix build .#darwinConfigurations.mbp2021.system
-        # ./result/sw/bin/darwin-rebuild switch --flake .
-        Mathieus-MBP = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          pkgs = import nixpkgs {
-            inherit config overlays;
-            system = "aarch64-darwin";
-          };
-          modules = [
-            ./darwin/mbp2021/configuration.nix
-            home-manager.darwinModules.home-manager
-            { home-manager.extraSpecialArgs = { inherit inputs; }; }
-          ];
-          specialArgs = { inherit inputs; };
         };
-      };
-
-      nixosConfigurations =
-        let
-          rpi1pkgs = import nixpkgs-frozen {
-            inherit config;
-            overlays = overlays ++ rpiOverlays;
-            system = "x86_64-linux";
-            crossSystem = {
-              system = "armv6l-linux";
-              # https://discourse.nixos.org/t/building-libcamera-for-raspberry-pi/26133/9
-              gcc = {
-                arch = "armv6k";
-                fpu = "vfp";
-              };
-            };
-          };
-        in
-        {
-          # sudo nixos-rebuild switch --flake .#beast
-          beast = inputs.nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit (self) common; inherit inputs; };
-            modules = [ ./nixos/beast/configuration.nix overlayModule ];
-          };
-
-          # sudo nixos-rebuild switch --flake .#utm
-          utm = inputs.nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit (self) common; inherit inputs; };
-            modules = [ ./nixos/utm/configuration.nix overlayModule ];
-          };
-
-          nas = inputs.nixpkgs.lib.nixosSystem {
-            specialArgs = { inherit (self) common; inherit inputs; };
-            modules = [ ./nixos/nas/configuration.nix overlayModule ];
-          };
-
-          # Raspberry Pis
-          bedpi = inputs.nixpkgs-frozen.lib.nixosSystem {
-            pkgs = rpi1pkgs;
-            specialArgs = { inherit (self) common; inherit inputs; };
-            modules = [
-              ./nixos/rpis/bedpi/configuration.nix
-              "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
-            ];
-          };
-
-          testpi = inputs.nixpkgs-frozen.lib.nixosSystem {
-            pkgs = rpi1pkgs;
-            specialArgs = { inherit (self) common; inherit inputs; };
-            modules = [
-              ./nixos/rpis/testpi/configuration.nix
-              "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
-            ];
-          };
-
-          tvpi = inputs.nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            specialArgs = { common = self.common; inherit inputs; };
-            modules = [
-              nixos-hardware.outputs.nixosModules.raspberry-pi-4
-              "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-              ./nixos/rpis/tvpi/configuration.nix
-              ({ ... }: {
-                nixpkgs.config.allowUnfree = true;
-                nixpkgs.overlays = overlays ++ rpiOverlays;
-              })
-            ];
-          };
-        };
-
-
-      nasbuild = self.nixosConfigurations.nas.config.system.build.toplevel;
-
-      # CI top level targets
-      ciTargets = inputs.nixpkgs.lib.genAttrs [ "beast" "nas" "utm" "tvpi" "bedpi" ] (name: self.nixosConfigurations.${name}.config.system.build.toplevel);
-
-      common = {
+      flake.common = {
         sshKeys = [
           "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMDK9LCwU62BIcyn73TcaQlMqr12GgYnHYcw5dbDDNmYnpp2n/jfDQ5hEkXd945dcngW6yb7cmgsa8Sx9T1Uuo4= secretive@mbp2021"
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAeSvwegmfet4Rw8OBFEVUfx+5WmVcYR4/n20QSh4tAs mrene@beast"
