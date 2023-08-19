@@ -7,7 +7,6 @@
 {
   imports =
     [
-      inputs.minidsp.nixosModules.default
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./home-assistant.nix

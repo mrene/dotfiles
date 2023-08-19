@@ -1,11 +1,16 @@
 { lib, pkgs, inputs, ... }:
 
 let
-  flakes = lib.filterAttrs (_: v: ({ _type = ""; } // v)._type == "flake") inputs;
+  flakes = lib.filterAttrs (_: v: (v._type or "") == "flake") inputs;
 in
 
 {
   imports = [
+    # Include modules that aren't enabled-by-default
+    inputs.nh.nixosModules.default
+    inputs.minidsp.nixosModules.default
+    inputs.nix-index-database.nixosModules.nix-index
+
     ./ssh-ca.nix
   ];
 

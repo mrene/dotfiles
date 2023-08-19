@@ -67,11 +67,11 @@
 
   services.tailscale.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    wget
-  ];
+  nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3 --nogcroots";
+  };
 
   # Required for nix-index 
   programs.command-not-found.enable = false;
