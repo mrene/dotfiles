@@ -1,4 +1,4 @@
-{ lib, buildGoModule, fetchFromGitHub, less, more, installShellFiles, testers, jira-cli-go, nix-update-script }:
+{ lib, buildGoModule, fetchFromGitHub, less, more, installShellFiles, testers, jira-cli-go, nix-update-script, ... }:
 
 buildGoModule rec {
   pname = "jira-cli-go";
