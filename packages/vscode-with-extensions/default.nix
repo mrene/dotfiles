@@ -3,20 +3,21 @@
   pkgs.vscode-with-extensions.override {
     vscodeExtensions =  
       # Prefer extensions that are in nixpkgs, fallback to the marketplace source
-      with inputs.nix-vscode-extensions.extensions.${system};  
-      with vscode-extensions; 
-        ([
+      (with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
           donjayamanne.python-environment-manager
           gaborv.flatbuffers
           heptio.jsonnet
           jeff-hykin.better-cpp-syntax
           malmaud.tmux
-          isort.ms-python
-          ms-tools.jupyter-keymap
+          ms-python.isort
+          ms-toolsai.jupyter-keymap
           ms-vscode-remote.remote-containers
           ms-vscode.cpptools-themes
           ms-vscode.remote-explorer
           tcwalther.cython
+       ]) ++
+      (with vscode-extensions; 
+        ([
 
           bbenoist.nix # Nix syntax
 
@@ -60,5 +61,5 @@
           ms-python.python
           ms-vsliveshare.vsliveshare
           ms-azuretools.vscode-docker
-        ]);
+        ]));
       }
