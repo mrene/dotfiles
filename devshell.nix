@@ -14,6 +14,7 @@
 
       packages = [
         inputs.nix-update.packages.${system}.default
+        #inputs.nvfetcher.packages.${system}.default
       ];
     };
 
