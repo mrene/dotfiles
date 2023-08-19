@@ -10,7 +10,6 @@
         config = {
           allowUnfree = true;
         };
-        overlays = with config.flake.overlays; [ packages vscode ];
         system = "aarch64-darwin";
       };
       modules = [
