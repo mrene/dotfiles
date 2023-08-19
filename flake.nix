@@ -24,7 +24,7 @@
   };
 
   outputs = inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } ({ config, self, ... }: {
+    flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./overlays
         ./nixos
@@ -35,5 +35,5 @@
         ./common.nix
       ];
       systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ];
-    });
+    };
 }
