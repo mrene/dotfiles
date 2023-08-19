@@ -7,6 +7,6 @@
       config = { allowUnfree = true; };
     };
 
-    packages = ((import ./default.nix) (pkgs // { inherit inputs; }));
+    packages = (import ./default.nix) (pkgs // { inherit inputs; });
   };
 }

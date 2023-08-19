@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 let
   tailscaleDNS = name: name + ".tailc705a.ts.net";

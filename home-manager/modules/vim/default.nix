@@ -148,7 +148,7 @@ in
       octo-nvim
     ];
 
-    extraConfig = (builtins.concatStringsSep "\n" [
+    extraConfig = builtins.concatStringsSep "\n" [
       (builtins.readFile ./config.vim)
       (builtins.readFile ./mappings.vim)
       (builtins.readFile ./plugin.toggleterm.vim)
@@ -162,7 +162,7 @@ in
       (builtins.readFile ./plugin.treesitter.vim)
       (builtins.readFile ./plugin.octo.vim)
       (builtins.readFile ./plugin.trouble.vim)
-    ]);
+    ];
   };
 
   # Create directory so startify can store its sessions

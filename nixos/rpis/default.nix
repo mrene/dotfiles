@@ -50,12 +50,12 @@ in
     # rpi4
     tvpi = inputs.nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
-      specialArgs = { common = self.common; inherit inputs; };
+      specialArgs = { inherit (self) common; inherit inputs; };
       modules = [
         inputs.nixos-hardware.outputs.nixosModules.raspberry-pi-4
         "${inputs.nixpkgs-frozen}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
         ./tvpi/configuration.nix
-        ({ ... }: {
+        (_: {
           nixpkgs.config.allowUnfree = true;
           nixpkgs.overlays = overlays ++ rpiOverlays;
         })

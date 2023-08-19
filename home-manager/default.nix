@@ -1,6 +1,6 @@
 { inputs, config, ... }:
 let
-  home-manager = inputs.home-manager;
+  inherit (inputs) home-manager;
 in
 {
   flake.homeConfigurations = {

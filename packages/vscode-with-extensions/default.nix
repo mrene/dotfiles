@@ -17,7 +17,7 @@
           tcwalther.cython
        ]) ++
       (with vscode-extensions; 
-        ([
+        [
 
           bbenoist.nix # Nix syntax
 
@@ -56,10 +56,10 @@
           github.vscode-pull-request-github
           esbenp.prettier-vscode
           mkhl.direnv
-        ]) ++ lib.optionals (! (stdenv.isAarch64 && stdenv.isLinux)) ([
+        ] ++ lib.optionals (! (stdenv.isAarch64 && stdenv.isLinux)) [
           ms-vscode.cpptools
           ms-python.python
           ms-vsliveshare.vsliveshare
           ms-azuretools.vscode-docker
-        ]));
+        ]);
       }

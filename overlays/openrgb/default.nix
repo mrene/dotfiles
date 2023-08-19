@@ -1,5 +1,5 @@
 (_final: prev: {
-  openrgb = (prev.openrgb.overrideAttrs (old: {
+  openrgb = prev.openrgb.overrideAttrs (old: {
     src = prev.fetchFromGitLab {
       owner = "CalcProgrammer1";
       repo = "OpenRGB";
@@ -8,5 +8,5 @@
     };
     patches = [ ./0001-sd_notify.patch ];
     buildInputs = old.buildInputs ++ [ prev.systemd ];
-  }));
+  });
 })
