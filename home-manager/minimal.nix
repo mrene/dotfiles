@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ ... }:
 
 # Minimal home configuration to apply to random machines 
 {

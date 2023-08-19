@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   ray-x-go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "ray-x-go-nvim";
@@ -36,7 +36,7 @@ let
 
 
   # Bleeding edge themes!
-  catppuccin-nvim = pkgs.vimPlugins.catppuccin-nvim.overrideAttrs (old: {
+  catppuccin-nvim = pkgs.vimPlugins.catppuccin-nvim.overrideAttrs (_old: {
     src = pkgs.fetchFromGitHub {
       owner = "catppuccin";
       repo = "nvim";
@@ -45,7 +45,7 @@ let
     };
   });
 
-  nvim-navic = pkgs.vimPlugins.nvim-navic.overrideAttrs (old: {
+  nvim-navic = pkgs.vimPlugins.nvim-navic.overrideAttrs (_old: {
     src = pkgs.fetchFromGitHub {
       owner = "SmiteshP";
       repo = "nvim-navic";

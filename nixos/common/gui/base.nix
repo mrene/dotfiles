@@ -1,4 +1,4 @@
-{ config, common, pkgs, ... }:
+{ pkgs, ... }:
 {
 
   imports = [
@@ -34,7 +34,7 @@
     xsel
   ] ++ pkgs.lib.optionals pkgs.stdenv.isx86_64 [
     keybase-gui
-    (google-chrome.override (old: { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; }))
+    (google-chrome.override (_old: { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; }))
   ];
 
   programs._1password = {

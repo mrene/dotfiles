@@ -2,7 +2,7 @@
 
 # Import all directories as their own package
 let
-  packageDirectories = lib.filterAttrs (k: v: v == "directory") (builtins.readDir ./.);
+  packageDirectories = lib.filterAttrs (_k: v: v == "directory") (builtins.readDir ./.);
 in
-builtins.mapAttrs (k: v: (callPackage (./. + ("/" + k)) { inherit inputs; })) packageDirectories
+builtins.mapAttrs (k: _v: (callPackage (./. + ("/" + k)) { inherit inputs; })) packageDirectories
 

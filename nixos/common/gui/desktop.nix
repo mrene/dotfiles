@@ -1,4 +1,4 @@
-{ config, common, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   services.xserver.displayManager.gdm = {

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, libs, ... }:
+{ pkgs, ... }:
 let
   themes = pkgs.fetchFromGitHub {
     owner = "Chick2D";

@@ -1,4 +1,4 @@
-{ config, common, pkgs, inputs, ... }:
+{ ... }:
 
 {
   hardware.bluetooth = {

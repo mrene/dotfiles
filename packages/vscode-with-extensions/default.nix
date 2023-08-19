@@ -1,4 +1,4 @@
-{ lib, stdenv, system, vscode-utils, vscode-extensions, pkgs, inputs }: 
+{ lib, stdenv, system, vscode-extensions, pkgs, inputs }: 
 
   pkgs.vscode-with-extensions.override {
     vscodeExtensions =  

@@ -1,4 +1,4 @@
-{ config, common, pkgs, inputs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   services.hardware.openrgb = {

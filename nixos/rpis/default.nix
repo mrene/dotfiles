@@ -3,7 +3,7 @@
 let
   overlays = with config.flake.overlays; [ packages openrgb vscode ];
   rpiOverlays = [
-    (final: super: {
+    (_final: super: {
       # Allow missing modules because the master module list is based on strings and the rpi kernel
       # is missing some
       # https://github.com/NixOS/nixpkgs/issues/154163

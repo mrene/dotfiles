@@ -2,7 +2,7 @@
 # your system.  help is available in the configuration.nix(5) man page
 # and in the nixos manual (accessible by running ‘nixos-help’).
 
-{ config, common, pkgs, inputs, ... }:
+{ common, pkgs, inputs, ... }:
 
 {
   imports = [

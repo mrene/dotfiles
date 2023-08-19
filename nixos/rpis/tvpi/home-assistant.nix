@@ -1,19 +1,9 @@
-{ lib, pkgs, common, inputs, ... }:
+{ pkgs, ... }:
 let
   hostBasePath = "/opt/homeassistant";
   imageName = "ghcr.io/home-assistant/home-assistant";
   imageTag = "2023.7.1";
   imageDigest = "sha256:a86ff5d05ce46520c53d67c8da55aba310de9b9b4ca8eead1ae0b5ab1c068f97";
-
-  imageFile = pkgs.dockerTools.pullImage {
-    inherit imageName imageDigest;
-    finalImageName = imageName;
-    finalImageTag = imageTag;
-    # To update:
-    # nix-prefetch-docker ghcr.io/home-assistant/home-assistant <tag>
-    sha256 = "07afv3sf84vw1rfvc9l11l15gbiblmgwj80yb18ghv7w6n272zxb";
-    arch = "aarch64";
-  };
 in
 {
   virtualisation.oci-containers.containers = {

@@ -1,4 +1,4 @@
-(final: prev: {
+(_final: prev: {
   openrgb = (prev.openrgb.overrideAttrs (old: {
     src = prev.fetchFromGitLab {
       owner = "CalcProgrammer1";

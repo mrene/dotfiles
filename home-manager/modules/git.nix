@@ -1,4 +1,4 @@
-{ config, pkgs, lib, libs, ... }:
+{ pkgs, ... }:
 let
   delta = pkgs.fetchFromGitHub {
     owner = "dandavison";
