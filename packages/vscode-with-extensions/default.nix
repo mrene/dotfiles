@@ -6,7 +6,6 @@
       (with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
           donjayamanne.python-environment-manager
           gaborv.flatbuffers
-          heptio.jsonnet
           jeff-hykin.better-cpp-syntax
           malmaud.tmux
           ms-python.isort
@@ -39,7 +38,6 @@
 
           # Languages
           golang.go
-          bungcip.better-toml
           tamasfe.even-better-toml
           ms-python.vscode-pylance
 
