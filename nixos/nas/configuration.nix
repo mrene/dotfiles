@@ -3,7 +3,6 @@
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    inputs.nix-index-database.nixosModules.nix-index
     ./hardware-configuration.nix
     ./storage.nix
     ../common/common.nix
@@ -69,8 +68,7 @@
 
   nh = {
     enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 4d --keep 3 --nogcroots";
+    clean.enable = false;
   };
 
   # Required for nix-index 
