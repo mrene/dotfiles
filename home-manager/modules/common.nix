@@ -103,6 +103,10 @@
 
     nix-output-monitor
     nix-init
+    alejandra
+    deadnix
+    statix
+    entr
   ] ++ lib.optionals stdenv.isDarwin [
     coreutils # provides `dd` with --status=progress
     wifi-password

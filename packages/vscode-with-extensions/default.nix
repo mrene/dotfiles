@@ -17,6 +17,8 @@
        ]) ++
       (with vscode-extensions; 
         [
+          catppuccin.catppuccin-vsc
+          vscodevim.vim
 
           bbenoist.nix # Nix syntax
 

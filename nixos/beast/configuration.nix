@@ -147,6 +147,9 @@
     nvitop
     virt-manager
     distrobox
+    nvme-cli
+    sysstat
+    dstat
   ];
 
   services.vscode-server.enable = true;
