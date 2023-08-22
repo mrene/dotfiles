@@ -19,6 +19,7 @@
       # https://github.com/NixOS/nix/issues/7273 
       # "error: cannot link '/nix/store/.tmp-link' to '/nix/store/.links/...': File exists" 
       auto-optimise-store = false;
+      extra-platforms = "x86_64-darwin";
     };
 
     registry = {
