@@ -1,7 +1,6 @@
 { inputs, self, config, ... }:
 
 let
-  overlays = with config.flake.overlays; [ packages openrgb vscode ];
   rpiOverlays = [
     (_final: super: {
       # Allow missing modules because the master module list is based on strings and the rpi kernel
@@ -13,7 +12,7 @@ let
 
   rpi1pkgs = import inputs.nixpkgs-frozen {
     config = { allowUnfree = true; };
-    overlays = overlays ++ rpiOverlays;
+    overlays = rpiOverlays;
     system = "x86_64-linux";
     crossSystem = {
       system = "armv6l-linux";
@@ -57,7 +56,7 @@ in
         ./tvpi/configuration.nix
         (_: {
           nixpkgs.config.allowUnfree = true;
-          nixpkgs.overlays = overlays ++ rpiOverlays;
+          nixpkgs.overlays = rpiOverlays;
         })
       ];
     };

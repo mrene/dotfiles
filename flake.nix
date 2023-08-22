@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unfree = { url = "github:numtide/nixpkgs-unfree"; inputs.nixpkgs.follows = "nixpkgs"; };
-    nixpkgs-frozen.url = "github:NixOS/nixpkgs/e3652e0735fbec227f342712f180f4f21f0594f2"; # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
+    nixpkgs-frozen.url = "github:NixOS/nixpkgs/8ecc900b2f695d74dea35a92f8a9f9b32c8ea33d"; # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
     home-manager = { url = "github:nix-community/home-manager/master"; inputs.nixpkgs.follows = "nixpkgs"; };
     nixos-generators.url = "github:nix-community/nixos-generators"; # Generate vm images and initial boot media
     nixos-hardware.url = "github:NixOS/nixos-hardware"; # Raspberry Pi 4 modules
