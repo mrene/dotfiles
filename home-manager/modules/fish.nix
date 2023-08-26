@@ -47,6 +47,7 @@
       set -g theme_color_scheme "Catppuccin Mocha"
 
       bind \cg '${./fzf-ripgrep.sh}'
+      bind \cn 'fzf-nix'
     '';
     functions = {
 
