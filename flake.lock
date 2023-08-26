@@ -437,16 +437,17 @@
         ]
       },
       "locked": {
-        "dirtyRev": "46fd7ce7f3a7c499199095b01d12809071ac0ae3-dirty",
-        "dirtyShortRev": "46fd7ce-dirty",
-        "lastModified": 1692971564,
+        "lastModified": 1693019790,
         "narHash": "sha256-k4H4sdXeGECn/X5SP5foBtMYVhvvaW5eH0yrlxo9KNk=",
-        "type": "git",
-        "url": "file:///home/mrene/dev/fzf-nix"
+        "owner": "mrene",
+        "repo": "fzf-nix",
+        "rev": "61d7b68a4c16befd4e5d03f5230ea61d44e92b46",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/mrene/dev/fzf-nix"
+        "owner": "mrene",
+        "repo": "fzf-nix",
+        "type": "github"
       }
     },
     "home-manager": {
