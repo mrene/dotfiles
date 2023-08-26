@@ -45,6 +45,8 @@
       any-nix-shell fish --info-right | source
 
       set -g theme_color_scheme "Catppuccin Mocha"
+
+      bind \cg '${./fzf-ripgrep.sh}'
     '';
     functions = {
 
@@ -90,7 +92,16 @@
           sha256 = "046016ilgf1zxdcj3l49l4rmmn3mbay3apdf5y1i4nn9qxh7pmcp";
         };
       }
+      { name = "fzf-fish";
+        src = pkgs.fetchFromGitHub {
+          owner = "PatrickF1";
+          repo = "fzf.fish";
+          rev = "f9e2e48a54199fe7c6c846556a12003e75ab798e";
+          hash = "sha256-CqRSkwNqI/vdxPKrShBykh+eHQq9QIiItD6jWdZ/DSM=";
+        };
+      }
     ];
+
     shellAliases = {
       v = "nvim";
       l = "exa";

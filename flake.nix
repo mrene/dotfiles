@@ -8,6 +8,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware"; # Raspberry Pi 4 modules
     darwin = { url = "github:lnl7/nix-darwin/master"; inputs.nixpkgs.follows = "nixpkgs"; };
     minidsp = { url = "github:mrene/minidsp-rs"; inputs.nixpkgs.follows = "nixpkgs"; };
+    #fzf-nix = { url = "github:mrene/fzf-nix"; inputs.nixpkgs.follows = "nixpkgs"; };
+    fzf-nix = { url = "/home/mrene/dev/fzf-nix"; inputs.nixpkgs.follows = "nixpkgs"; };
     nil.url = "github:oxalica/nil"; # Nix LSP
     nixd = { url = "github:nix-community/nixd"; };
     flake-compat = { url = "github:inclyc/flake-compat"; flake = false; }; # Required for nixd

@@ -107,6 +107,7 @@
     deadnix
     statix
     entr
+    inputs.fzf-nix.packages.${system}.fzf-nix
   ] ++ lib.optionals stdenv.isDarwin [
     coreutils # provides `dd` with --status=progress
     wifi-password
