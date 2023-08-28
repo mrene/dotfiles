@@ -131,7 +131,8 @@
       k = "kubectl";
       b = "bat";
 
-      nr = "nix run nixpkgs#";
+      nr = "nix run nixpkgs#(fzf-nix)";
+      ns = "nix shell nixpkgs#(fzf-nix)";
 
       ".." = "cd ..";
       "..." = "cd ../..";
