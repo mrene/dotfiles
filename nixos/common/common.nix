@@ -55,5 +55,10 @@ in
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-24.8.6"
+    "zotero-6.0.27"
+   ];
+
   networking.firewall.rejectPackets = true;
 }
