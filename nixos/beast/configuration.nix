@@ -150,6 +150,7 @@
     nvme-cli
     sysstat
     dstat
+    virtiofsd
   ];
 
   services.vscode-server.enable = true;
