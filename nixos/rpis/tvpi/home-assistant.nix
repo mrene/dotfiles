@@ -1,30 +1,51 @@
 { pkgs, ... }:
-let
-  hostBasePath = "/opt/homeassistant";
-  imageName = "ghcr.io/home-assistant/home-assistant";
-  imageTag = "2023.7.1";
-  imageDigest = "sha256:a86ff5d05ce46520c53d67c8da55aba310de9b9b4ca8eead1ae0b5ab1c068f97";
-in
 {
   virtualisation.oci-containers.containers = {
-    homeassistant = {
-      #inherit imageFile;
+    homeassistant = 
+      let
+        hostBasePath = "/opt/homeassistant";
+        imageName = "ghcr.io/home-assistant/home-assistant";
+        imageTag = "2023.11.3";
+        imageDigest = "sha256:feffc0b8227dbbf9d1bf61c465ff54b24aff2c990a1e54ea7219c4b300260ef9";
+      in {
+        image = "${imageName}:${imageTag}@${imageDigest}";
 
-      image = "${imageName}:${imageTag}@${imageDigest}";
+        environment = {
+          TZ = "America/Montreal";
+        };
+        volumes = [
+          "${hostBasePath}/config:/config"
+        ];
+        ports = [
+          "20810:20810"
+        ];
+        extraOptions = [
+          "--network=host"
+          "--privileged"
+        ];
+    };
 
-      environment = {
-        TZ = "America/Montreal";
-      };
-      volumes = [
-        "${hostBasePath}/config:/config"
-      ];
-      ports = [
-        "20810:20810"
-      ];
-      extraOptions = [
-        "--network=host"
-        "--privileged"
-      ];
+    addon-server-matter = 
+      let
+        hostBasePath = "/opt/homeassistant";
+        imageName = "ghcr.io/home-assistant-libs/python-matter-server";
+        imageTag = "4.0.2";
+        imageDigest = "sha256:f56613284edb88284282364ce969b40ae26c0385e01b90368decff0ec742db24";
+      in {
+        image = "${imageName}:${imageTag}@${imageDigest}";
+
+        environment = {
+          TZ = "America/Montreal";
+        };
+        volumes = [
+          "${hostBasePath}/python-matter-server:/data"
+          "/run/dbus:/run/dbus:ro"
+        ];
+
+        extraOptions = [
+          "--network=host"
+          "--privileged"
+        ];
     };
   };
 
