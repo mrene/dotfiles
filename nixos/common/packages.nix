@@ -7,6 +7,8 @@
     inputs.minidsp.nixosModules.default
     inputs.nix-index-database.nixosModules.nix-index
   ];
+
+  programs.command-not-found.enable = false; # conflicts with nix-index
   environment.systemPackages = with pkgs; [
     wget
     curl
