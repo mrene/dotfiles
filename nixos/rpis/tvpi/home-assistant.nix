@@ -7,6 +7,22 @@
         imageName = "ghcr.io/home-assistant/home-assistant";
         imageTag = "2023.11.3";
         imageDigest = "sha256:feffc0b8227dbbf9d1bf61c465ff54b24aff2c990a1e54ea7219c4b300260ef9";
+
+        smartIr = pkgs.fetchFromGitHub {
+          owner = "smartHomeHub";
+          repo = "SmartIR";
+          rev = "b0b4bc8ab88a2d76f7dc7a650c8beb00f638ceff";
+          hash = "sha256-HlvWZ12aXZDa3tgaOgKnTcQCnr0l0Pc1GcxWj0oQYpQ=";
+
+          # TODO: Patch with our IR codes
+        };
+
+        customComponents = pkgs.linkFarm {
+          name = "custom-components";
+          paths = [
+            { name =  "smartir"; path = "${smartIr}"; }
+          ];
+        };
       in {
         image = "${imageName}:${imageTag}@${imageDigest}";
 
@@ -15,6 +31,8 @@
         };
         volumes = [
           "${hostBasePath}/config:/config"
+          "${customComponents}:/config/custom_components"
+          "/nix/store:/nix/store:ro"
         ];
         ports = [
           "20810:20810"
@@ -47,6 +65,10 @@
           "--privileged"
         ];
     };
+  };
+
+  services.mosquitto = {
+    enable = true;
   };
 
   services.influxdb2.enable = true;

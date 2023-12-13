@@ -6,6 +6,7 @@
 
   environment.systemPackages = with pkgs; [
     fish
+    bandwhich
   ];
 
   # Auto upgrade nix package and the daemon service.
