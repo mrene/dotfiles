@@ -12,26 +12,11 @@
 
     theme = {
       name = "Catppuccin-Mocha-Standard-Pink-Dark";
-      package = pkgs.catppuccin-gtk.overrideAttrs (_old: {
+      package = pkgs.catppuccin-gtk.override ({
         accents = [ "pink" ];
         variant = "mocha";
       });
     };
-
-    cursorTheme = {
-      name = "Catppuccin Mocha Pink";
-      package = pkgs.catppuccin-cursors.mochaPink;
-    };
-
-    #theme = {
-    #name = "nordic";
-    #package = pkgs.nordic;
-    #};
-
-    #cursorTheme = {
-    #name = "Numix-Cursor";
-    #package = pkgs.numix-cursor-theme;
-    #};
 
     gtk3.extraConfig = {
       Settings = ''
@@ -115,10 +100,5 @@
     gnomeExtensions.dash-to-panel
     gnomeExtensions.sound-output-device-chooser
     gnomeExtensions.space-bar
-
-    # palenight-theme
-    # whitesur-gtk-theme
-    # whitesur-icon-theme
-    #nordic
   ];
 }
