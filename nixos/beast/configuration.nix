@@ -175,7 +175,7 @@
   #'';
   networking.firewall.allowedTCPPorts = [ 8501 ];
   networking.hosts = {
-    "10.101.39.89" = [ "istio-ingressgateway.istio-system.svc.cluster.local" ];
+    "192.168.1.127" = [ "localhost.humanfirst.ai" ];
   };
 
   programs.command-not-found.enable = false;
