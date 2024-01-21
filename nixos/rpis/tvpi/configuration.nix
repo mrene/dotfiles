@@ -9,7 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./home-assistant.nix
+      ./home-assistant
       ../../common/packages.nix
       ../../common/common.nix
     ];

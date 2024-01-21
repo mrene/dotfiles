@@ -13,6 +13,8 @@
       };
     };
 
+    _module.args.sources = pkgs.callPackage ../_sources/generated.nix { };
+
     packages = (import ./default.nix) (pkgs // { inherit inputs; });
   };
 }

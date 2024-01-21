@@ -1,3 +1,17 @@
 [homeassistant]
 src.github = "home-assistant/home-assistant"
 fetch.docker = "ghcr.io/home-assistant/home-assistant"
+
+[python-matter-server]
+src.github = "home-assistant-libs/python-matter-server"
+fetch.docker = "ghcr.io/home-assistant-libs/python-matter-server"
+
+[smartir]
+src.github = "smartHomeHub/SmartIR"
+fetch.github = "smartHomeHub/SmartIR"
+
+[hydroqc2mqtt]
+# nvfetcher doesn't pass down all options to nvchecker, so we can't use the native git or gitlab source
+src.webpage = "https://gitlab.com/api/v4/projects/33246695/repository/tags?order_by=version&per_page=1"
+src.regex = "\\d+\\.\\d+\\.\\d+"
+fetch.docker  = "registry.gitlab.com/hydroqc/hydroqc2mqtt"

@@ -11,4 +11,35 @@
       finalImageTag = "2024.1.5";
     };
   };
+  hydroqc2mqtt = {
+    pname = "hydroqc2mqtt";
+    version = "1.2.0";
+    src = dockerTools.pullImage {
+      imageName = "registry.gitlab.com/hydroqc/hydroqc2mqtt";
+      imageDigest = "sha256:dd616d3162367e549f270cb8dfb42ec9c105b3ccff96b9b921137869a9b6655d";
+      sha256 = "sha256-vdkaBXwZ7qHG9hiC9gZmD2EOGAtCzSO7qmC48GPQRDU=";
+      finalImageTag = "1.2.0";
+    };
+  };
+  python-matter-server = {
+    pname = "python-matter-server";
+    version = "5.2.1";
+    src = dockerTools.pullImage {
+      imageName = "ghcr.io/home-assistant-libs/python-matter-server";
+      imageDigest = "sha256:47dd99f0f13a7561d0982cd499138bd25dff5c1c9f3c11907694c86a8f769a0f";
+      sha256 = "sha256-OIjmvHurywnoxyhprkCknvzJDI4E3yylqvfIFds2rrU=";
+      finalImageTag = "5.2.1";
+    };
+  };
+  smartir = {
+    pname = "smartir";
+    version = "1.17.9";
+    src = fetchFromGitHub {
+      owner = "smartHomeHub";
+      repo = "SmartIR";
+      rev = "1.17.9";
+      fetchSubmodules = false;
+      sha256 = "sha256-E6TM761cuaeQzlbjA+oZ+wt5HTJAfkF2J3i4P1Wbuic=";
+    };
+  };
 }
