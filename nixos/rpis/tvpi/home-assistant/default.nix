@@ -55,20 +55,20 @@ in {
         "--privileged"
       ];
     };
-  };
 
-  hydroqc2mqtt = {
-    image = sources.dockerImageUrl "hydroqc2mqtt";
-    environment = {
-      TZ = "America/Montreal";
-      CONFIG_YAML = "/config/config.yaml"; # contains secrets, only deployed on device
+    hydroqc2mqtt = {
+      image = sources.dockerImageUrl "hydroqc2mqtt";
+      environment = {
+        TZ = "America/Montreal";
+        CONFIG_YAML = "/config/config.yaml"; # contains secrets, only deployed on device
+      };
+      volumes = [
+        "${hostBasePath}/hydroqc2mqtt:/config"
+      ];
+      extraOptions = [
+        "--network=host"
+      ];
     };
-    volumes = [
-      "${hostBasePath}/hydroqc2mqtt:/config"
-    ];
-    extraOptions = [
-      "--network=host"
-    ];
   };
 
   services.mosquitto = {
