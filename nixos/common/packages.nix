@@ -1,6 +1,8 @@
-{ inputs, pkgs, ... }:
-
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     # Include modules that aren't enabled-by-default
     inputs.nh.nixosModules.default

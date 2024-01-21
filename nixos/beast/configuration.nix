@@ -1,10 +1,12 @@
 # edit this configuration file to define what should be installed on
 # your system.  help is available in the configuration.nix(5) man page
 # and in the nixos manual (accessible by running ‘nixos-help’).
-
-{ common, pkgs, inputs, ... }:
-
 {
+  common,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.vscode-server.nixosModule
@@ -51,7 +53,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Sensors
-  boot.kernelModules = [ "nct6775" ];
+  boot.kernelModules = ["nct6775"];
 
   networking.networkmanager.enable = true;
   networking.hostName = "beast";
@@ -67,7 +69,7 @@
     ];
   };
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -81,11 +83,10 @@
     jack.enable = true;
   };
 
-
   hardware.openrazer = {
     enable = true;
     mouseBatteryNotifier = true;
-    users = [ "mrene" ];
+    users = ["mrene"];
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -94,7 +95,7 @@
       mrene = {
         isNormalUser = true;
         description = "mathieu";
-        extraGroups = [ "networkmanager" "wheel" "docker" ];
+        extraGroups = ["networkmanager" "wheel" "docker"];
         openssh.authorizedKeys.keys = common.sshKeys;
         initialHashedPassword = "";
       };
@@ -112,7 +113,7 @@
     useGlobalPkgs = true;
     #useUserPackages = true;
     verbose = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
   };
 
   security.sudo.wheelNeedsPassword = true;
@@ -130,7 +131,7 @@
   environment.systemPackages = with pkgs; [
     #inputs.minidsp.packages.${system}.default
 
-    # Notes 
+    # Notes
     logseq
     zotero
 
@@ -162,7 +163,6 @@
   services.tailscale.enable = true;
   networking.firewall.checkReversePath = "loose";
 
-
   virtualisation.containerd.enable = true;
   virtualisation.libvirtd.enable = true;
 
@@ -173,18 +173,17 @@
   #DNS=10.96.0.10
   #Domains=~cluster.local
   #'';
-  networking.firewall.allowedTCPPorts = [ 8501 ];
+  networking.firewall.allowedTCPPorts = [8501];
   networking.hosts = {
-    "192.168.1.127" = [ "localhost.humanfirst.ai" ];
+    "192.168.1.127" = ["localhost.humanfirst.ai"];
   };
 
   programs.command-not-found.enable = false;
 
-  # Allow running aarch64 binaries 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" "armv6l-linux" ];
-  nix.settings.substituters = [ "https://cache.armv7l.xyz" ];
-  nix.settings.trusted-public-keys = [ "cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk=" ];
-
+  # Allow running aarch64 binaries
+  boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
+  nix.settings.substituters = ["https://cache.armv7l.xyz"];
+  nix.settings.trusted-public-keys = ["cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk="];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

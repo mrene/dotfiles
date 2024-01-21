@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   fonts.fonts = with pkgs; [
     jetbrains-mono
     noto-fonts
@@ -12,7 +10,7 @@
     #powerline-symbols
 
     #nerdfonts
-    (nerdfonts.override { fonts = [ "SourceCodePro" ]; })
+    (nerdfonts.override {fonts = ["SourceCodePro"];})
     freefont_ttf
     ibm-plex
     # Part of powerline-fonts

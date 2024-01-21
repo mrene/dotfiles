@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-let
+{pkgs, ...}: let
   inherit (pkgs) lib writeShellApplication dbus openrgb;
   rgb-auto-toggle = writeShellApplication {
     name = "rgb-auto-toggle";
@@ -24,17 +22,15 @@ let
       done
     '';
   };
-in
-
-{
+in {
   systemd.user.services.rgb-auto-toggle = {
     Unit = {
       Description = "Toggle rgb on/off when the screensaver stops/starts";
-      Wants = [ "dbus.socket" "openrgb.service" ];
+      Wants = ["dbus.socket" "openrgb.service"];
     };
 
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = ["graphical-session.target"];
     };
 
     Service = {

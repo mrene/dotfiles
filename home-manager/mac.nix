@@ -1,6 +1,8 @@
-{ pkgs, inputs, ... }:
-
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./modules/fish.nix
     ./modules/git.nix
@@ -23,7 +25,7 @@
     set -x PATH $PATH "/run/current-system/sw/bin/"
 
     # `/usr/local/bin` is needed for biometric-support in `op` 1Password CLI
-    set -x PATH $PATH /usr/local/bin 
+    set -x PATH $PATH /usr/local/bin
   '';
 
   programs.ssh.extraConfig = "IdentityAgent /Users/mrene/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";

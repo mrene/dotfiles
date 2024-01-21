@@ -1,9 +1,9 @@
-{ lib
-, buildGo121Module
-, fetchFromGitHub
-, ...
+{
+  lib,
+  buildGo121Module,
+  fetchFromGitHub,
+  ...
 }:
-
 buildGo121Module rec {
   pname = "devbox";
   version = "0.7.0";
@@ -37,7 +37,7 @@ buildGo121Module rec {
     description = "Instant, easy, and predictable development environments";
     homepage = "https://github.com/jetpack-io/devbox";
     license = licenses.asl20;
-    maintainers = with maintainers; [ ];
+    maintainers = with maintainers; [];
     mainProgram = "devbox";
   };
 }

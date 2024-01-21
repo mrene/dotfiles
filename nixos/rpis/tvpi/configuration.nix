@@ -1,27 +1,29 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ lib, config, pkgs, common, ... }:
-
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./home-assistant
-      ../../common/packages.nix
-      ../../common/common.nix
-    ];
+  lib,
+  config,
+  pkgs,
+  common,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./home-assistant
+    ../../common/packages.nix
+    ../../common/common.nix
+  ];
 
   # Prevent a lot of superfluous FS from being compiled
-  boot.supportedFilesystems = lib.mkForce [ "ext4" "vfat" ];
+  boot.supportedFilesystems = lib.mkForce ["ext4" "vfat"];
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
   hardware.enableRedistributableFirmware = true;
 
-  # Override this so ttyAMA0 isn't used for a console, since its shared with the 
+  # Override this so ttyAMA0 isn't used for a console, since its shared with the
   # bluetooth controller.
-  boot.kernelParams = lib.mkForce [ "console=tty0" ];
+  boot.kernelParams = lib.mkForce ["console=tty0"];
 
   # Enables the generation of /boot/extlinux/extlinux.conf
   # which is laoded by u-boot
@@ -40,13 +42,15 @@
     hostName = "tvpi";
     usePredictableInterfaceNames = false;
 
-    interfaces.eth0.ipv4.addresses = [{
-      address = "192.168.1.245";
-      prefixLength = 24;
-    }];
+    interfaces.eth0.ipv4.addresses = [
+      {
+        address = "192.168.1.245";
+        prefixLength = 24;
+      }
+    ];
 
     defaultGateway = "192.168.1.1";
-    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+    nameservers = ["1.1.1.1" "8.8.8.8"];
   };
 
   users.users.root.openssh.authorizedKeys.keys = common.sshKeys;
@@ -65,7 +69,6 @@
     firmwareSize = 100;
     compressImage = false;
   };
-
 
   hardware.bluetooth.enable = true;
   services.pipewire = {
@@ -89,13 +92,15 @@
       http_server = {
         bind_address = "0.0.0.0:5380";
       };
-      tcp_server = [{
-        bind_address = "0.0.0.0:5333";
-        advertise = {
-          ip = "192.168.1.245";
-          name = "Living Room Pi";
-        };
-      }];
+      tcp_server = [
+        {
+          bind_address = "0.0.0.0:5333";
+          advertise = {
+            ip = "192.168.1.245";
+            name = "Living Room Pi";
+          };
+        }
+      ];
     };
   };
 
@@ -107,4 +112,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 }
-

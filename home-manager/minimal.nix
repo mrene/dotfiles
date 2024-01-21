@@ -1,6 +1,5 @@
-{ ... }:
-
-# Minimal home configuration to apply to random machines 
+{...}:
+# Minimal home configuration to apply to random machines
 {
   imports = [
     ./modules/fish.nix

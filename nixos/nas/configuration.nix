@@ -1,6 +1,9 @@
-{ pkgs, common, inputs, ... }:
-
 {
+  pkgs,
+  common,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./hardware-configuration.nix
@@ -61,7 +64,7 @@
 
     useGlobalPkgs = true;
     verbose = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
   };
 
   services.tailscale.enable = true;
@@ -71,12 +74,12 @@
     clean.enable = false;
   };
 
-  # Required for nix-index 
+  # Required for nix-index
   programs.command-not-found.enable = false;
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" "armv6l-linux" ];
-  nix.settings.substituters = [ "https://cache.armv7l.xyz" ];
-  nix.settings.trusted-public-keys = [ "cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk=" ];
+  boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
+  nix.settings.substituters = ["https://cache.armv7l.xyz"];
+  nix.settings.trusted-public-keys = ["cache.armv7l.xyz-1:kBY/eGnBAYiqYfg0fy0inWhshUo+pGFM3Pj7kIkmlBk="];
 
   services.nix-serve = {
     enable = true;

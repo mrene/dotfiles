@@ -1,6 +1,8 @@
-{ pkgs, lib, ... }:
-
 {
+  pkgs,
+  lib,
+  ...
+}: {
   services.hardware.openrgb = {
     enable = true;
     motherboard = "amd";
@@ -11,10 +13,10 @@
 
   systemd.services.openrgbprofile = {
     description = "apply openrgb profile main";
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = ["multi-user.target"];
     serviceConfig = {
       Type = "oneshot";
-      After = [ "openrgb.service" ];
+      After = ["openrgb.service"];
       ExecStart = "${lib.getExe pkgs.openrgb} -p ${./../../home-manager/modules/rgb}/default.orp";
     };
   };

@@ -1,16 +1,17 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ lib, pkgs, common, ... }:
-
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../common/common.nix
-    ];
+  lib,
+  pkgs,
+  common,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../common/common.nix
+  ];
 
   # NixOS wants to enable GRUB by default
   #boot.loader.grub.enable = false;
@@ -24,9 +25,9 @@
 
   # Use the systemd-boot EFI boot loader.
 
-  boot.kernelParams = [ "console=ttyAMA0" "earlyprintk" "mitigations=off" ];
+  boot.kernelParams = ["console=ttyAMA0" "earlyprintk" "mitigations=off"];
   boot.loader.timeout = 5;
-  boot.supportedFilesystems = lib.mkForce [ "ext4" "vfat" ];
+  boot.supportedFilesystems = lib.mkForce ["ext4" "vfat"];
 
   users.users.root.openssh.authorizedKeys.keys = common.sshKeys;
   users.defaultUserShell = pkgs.fish;
@@ -40,7 +41,6 @@
     openssh.authorizedKeys.keys = common.sshKeys;
   };
 
-
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
 
@@ -48,13 +48,15 @@
     hostName = "testpi";
     usePredictableInterfaceNames = false;
 
-    interfaces.eth0.ipv4.addresses = [{
-      address = "192.168.1.243";
-      prefixLength = 24;
-    }];
+    interfaces.eth0.ipv4.addresses = [
+      {
+        address = "192.168.1.243";
+        prefixLength = 24;
+      }
+    ];
 
     defaultGateway = "192.168.1.1";
-    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+    nameservers = ["1.1.1.1" "8.8.8.8"];
   };
 
   environment.systemPackages = with pkgs; [
@@ -76,4 +78,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 }
-

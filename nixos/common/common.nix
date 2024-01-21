@@ -1,10 +1,11 @@
-{ lib, pkgs, inputs, ... }:
-
-let
-  flakes = lib.filterAttrs (_: v: (v._type or "") == "flake") inputs;
-in
-
 {
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: let
+  flakes = lib.filterAttrs (_: v: (v._type or "") == "flake") inputs;
+in {
   imports = [
     ./ssh-ca.nix
   ];
@@ -12,11 +13,11 @@ in
   nix = {
     package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
     settings = {
-      experimental-features = [ "flakes" "nix-command" ];
+      experimental-features = ["flakes" "nix-command"];
       auto-optimise-store = true;
       keep-outputs = true;
       keep-derivations = true;
-      trusted-users = [ "@wheel" ];
+      trusted-users = ["@wheel"];
 
       # To generate:
       # nix-store --generate-binary-cache-key builder-name /var/secrets/nix-builder.pem /var/secrets/nix-builder.pub
@@ -29,7 +30,7 @@ in
       ];
     };
 
-    registry = lib.mapAttrs (_: flake: { inherit flake; }) flakes;
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakes;
     nixPath = lib.mapAttrsToList (x: _: "${x}=flake:${x}") flakes;
   };
 
@@ -59,7 +60,7 @@ in
     "electron-25.9.0"
     "electron-24.8.6"
     "zotero-6.0.27"
-   ];
+  ];
 
   networking.firewall.rejectPackets = true;
 }

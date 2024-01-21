@@ -1,10 +1,6 @@
-_:
-
-let
+_: let
   tailscaleDNS = name: name + ".tailc705a.ts.net";
-in
-
-{
+in {
   programs.ssh = {
     enable = true;
 

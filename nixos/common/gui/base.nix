@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-{
-
+{pkgs, ...}: {
   imports = [
     ../../../common/fonts.nix
   ];
@@ -15,27 +13,29 @@
     xkbVariant = "";
   };
 
-  environment.systemPackages = with pkgs; [
-    chromium
+  environment.systemPackages = with pkgs;
+    [
+      chromium
 
-    alacritty
+      alacritty
 
-    #gnvim
+      #gnvim
 
-    # The nixpkgs-unstable version fixes a bug around bad window dragging performance
-    # https://github.com/wez/wezterm/issues/2530
-    wezterm
-    flameshot # Screenshot software
-    simplescreenrecorder
+      # The nixpkgs-unstable version fixes a bug around bad window dragging performance
+      # https://github.com/wez/wezterm/issues/2530
+      wezterm
+      flameshot # Screenshot software
+      simplescreenrecorder
 
-    keybase
+      keybase
 
-    xclip
-    xsel
-  ] ++ pkgs.lib.optionals pkgs.stdenv.isx86_64 [
-    keybase-gui
-    (google-chrome.override (_old: { commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode"; }))
-  ];
+      xclip
+      xsel
+    ]
+    ++ pkgs.lib.optionals pkgs.stdenv.isx86_64 [
+      keybase-gui
+      (google-chrome.override (_old: {commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode";}))
+    ];
 
   programs._1password = {
     enable = true;
@@ -45,7 +45,7 @@
   programs._1password-gui = {
     enable = true;
     package = pkgs._1password-gui;
-    polkitPolicyOwners = [ "mrene " ];
+    polkitPolicyOwners = ["mrene "];
   };
 
   security.polkit.enable = true;

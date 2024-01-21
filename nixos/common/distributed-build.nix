@@ -1,6 +1,8 @@
-{ lib, config, ... }:
-
 {
+  lib,
+  config,
+  ...
+}: {
   # To add a machine, don't forget to add the key to common.nix
   #nix.buildMachines =
   #lib.optionals (config.networking.hostName != "beast") [{
@@ -36,10 +38,9 @@
   #mandatoryFeatures = [ ];
   #}];
 
-
   nix.distributedBuilds = true;
   nix.settings.builders-use-substitutes = true;
-  nix.settings.substituters = lib.optionals (false && config.networking.hostName != "nas") [ "http://nas:5000" ] ++
-    lib.optionals (config.networking.hostName != "beast") [ "http://beast:5000" ];
-
+  nix.settings.substituters =
+    lib.optionals (false && config.networking.hostName != "nas") ["http://nas:5000"]
+    ++ lib.optionals (config.networking.hostName != "beast") ["http://beast:5000"];
 }

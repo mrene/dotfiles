@@ -1,5 +1,8 @@
-{ lib, stdenv, ... }:
-
+{
+  lib,
+  stdenv,
+  ...
+}:
 # From https://astojanov.github.io/blog/2011/09/26/pid-to-absolute-path.html
 stdenv.mkDerivation {
   name = "pathfind";

@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.fish = {
     enable = true;
     package = pkgs.fish;
@@ -14,7 +17,7 @@
         set -l post (string split " " (string trim $post_joined))
         set fish_complete_path $prev "${config.xdg.dataHome}/fish/home-manager_generated_completions" $post
       end
-      
+
       set PATH ~/.nix-profile/bin /nix/var/nix/profiles/default/bin ~/.cargo/bin ~/.deno/bin $GOPATH/bin ~/.npm-global-packages/bin $PATH
 
       # Setup terminal, and turn on colors
@@ -50,7 +53,6 @@
       bind \cn 'fzf-nix'
     '';
     functions = {
-
       o = ''
         if test (count $argv) -eq 0
           open .
@@ -93,7 +95,8 @@
           sha256 = "1a6yj6zhccpg5jpcrxjzxyydh5ldwlvwf3vz6lwl60gk2xvz7kqd";
         };
       }
-      { name = "fzf-fish";
+      {
+        name = "fzf-fish";
         src = pkgs.fetchFromGitHub {
           owner = "PatrickF1";
           repo = "fzf.fish";
@@ -146,9 +149,9 @@
   programs.starship = {
     enable = true;
     settings = {
-      gcloud = { disabled = true; };
-      nix_shell = { disabled = true; };
-      package = { disabled = true; };
+      gcloud = {disabled = true;};
+      nix_shell = {disabled = true;};
+      package = {disabled = true;};
     };
   };
 }

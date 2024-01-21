@@ -1,5 +1,8 @@
-{ pkgs, inputs, ... }:
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ../../common/fonts.nix
   ];
@@ -15,10 +18,10 @@
   nix = {
     package = pkgs.nixUnstable;
     settings = {
-      experimental-features = [ "flakes" "nix-command" ];
+      experimental-features = ["flakes" "nix-command"];
       # Disable since it causes issues
-      # https://github.com/NixOS/nix/issues/7273 
-      # "error: cannot link '/nix/store/.tmp-link' to '/nix/store/.links/...': File exists" 
+      # https://github.com/NixOS/nix/issues/7273
+      # "error: cannot link '/nix/store/.tmp-link' to '/nix/store/.links/...': File exists"
       auto-optimise-store = false;
       extra-platforms = "x86_64-darwin";
     };
@@ -50,7 +53,7 @@
     fish.enable = true;
   };
 
-  environment.shells = [ pkgs.fish ];
+  environment.shells = [pkgs.fish];
   fonts.fontDir.enable = true;
 
   users.users.mrene = {

@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # TODO: Add api token via sops-nix
   xdg.configFile.".jira/.config.yaml".source = ./config.yml;
 

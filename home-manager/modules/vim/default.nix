@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   ray-x-go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "ray-x-go-nvim";
     version = "unstable-2023-12-27";
@@ -34,7 +33,6 @@ let
     meta.homepage = "https://github.com/neovim/nvim-lspconfig/";
   };
 
-
   # Bleeding edge themes!
   catppuccin-nvim = pkgs.vimPlugins.catppuccin-nvim.overrideAttrs (_old: {
     src = pkgs.fetchFromGitHub {
@@ -53,9 +51,7 @@ let
       sha256 = "0964wgwh6i4nm637vx36bshkpd5i63ipwzqmrdbkz5h9bzyng7nj";
     };
   });
-
-in
-{
+in {
   programs.neovim = {
     enable = true;
     viAlias = true;
@@ -66,7 +62,7 @@ in
       lualine-nvim # https://github.com/nvim-lualine/lualine.nvim
       nvim-web-devicons
       lualine-lsp-progress
-      # bufferline-nvim # Top bar 
+      # bufferline-nvim # Top bar
 
       # Theme
       #nightfox-nvim
@@ -80,7 +76,6 @@ in
       vim-fugitive
 
       vim-gitgutter # Show diffs on the left of line numbers
-
 
       # Tools
       #nerdtree
@@ -112,7 +107,6 @@ in
       nvim-treesitter.withAllGrammars
       nvim-treesitter-textobjects
 
-
       luasnip
       nvim-cmp # Auto-completion
       cmp-cmdline
@@ -139,7 +133,6 @@ in
       nvim-dap-python
       nvim-dap-virtual-text
       plenary-nvim
-
 
       # Start screen
       vim-startify

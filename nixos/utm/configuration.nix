@@ -1,36 +1,36 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ common, inputs, ... }:
-
 {
-  imports =
-    [
-      inputs.home-manager.nixosModules.home-manager
-      inputs.vscode-server.nixosModule
+  common,
+  inputs,
+  ...
+}: {
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    inputs.vscode-server.nixosModule
 
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../common/minikube.nix
-      ../common/gui/desktop.nix
-      ../common/common.nix
-      ../common/packages.nix
-      ../common/vm/common.nix
-      ../common/gui/base.nix
-    ];
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../common/minikube.nix
+    ../common/gui/desktop.nix
+    ../common/common.nix
+    ../common/packages.nix
+    ../common/vm/common.nix
+    ../common/gui/base.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [ "console=tty0" ];
+  boot.kernelParams = ["console=tty0"];
   boot.loader.timeout = 5;
 
   # Mount shared filesystem
   fileSystems."/host" = {
     device = "share";
     fsType = "9p";
-    options = [ "trans=virtio" "version=9p2000.L" "cache=loose" ];
+    options = ["trans=virtio" "version=9p2000.L" "cache=loose"];
   };
 
   users.users.root.openssh.authorizedKeys.keys = common.builderKeys;
@@ -51,7 +51,7 @@
     useGlobalPkgs = true;
     #useUserPackages = true;
     verbose = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {inherit inputs;};
   };
 
   # Sign store builds for sharing across network
@@ -65,4 +65,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 }
-

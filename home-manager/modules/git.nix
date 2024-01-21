@@ -1,13 +1,11 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   delta = pkgs.fetchFromGitHub {
     owner = "dandavison";
     repo = "delta";
     rev = "e208f4ed52759fc018ee14808717c977df57b56f";
     sha256 = "1xpdcgns0bn2y2pvlpph2zqv1vqb7va6hsbnwljip1bjlk6835qc";
   };
-in
-{
+in {
   programs.git = {
     enable = true;
     userName = "Mathieu Rene";
