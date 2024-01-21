@@ -7,13 +7,16 @@ in
   virtualisation.oci-containers.containers = {
     homeassistant = 
       let
-        smartIr = sources.fetch "smartir";
         # Inject new file as "codes/climate/9999.json"
+        smartIr = sources.fetch "smartir";
         smartIrWithCodes = pkgs.symlinkJoin { 
           name = "smartir-with-codes";
-          paths = [ smartIr ];
+          paths = [ "${smartIr}/custom_components/smartir" ];
           postBuild = ''
-            cp -s ${./9999.json} $out/codes/climate/9999.json";
+            cp -rs ${smartIr}/codes $out/codes
+            chmod 0766 $out/codes
+            chmod 0766 $out/codes/climate
+            cp -s ${./9999.json} $out/codes/climate/9999.json
           '';
         };
         customComponents = pkgs.linkFarm "custom-components" [
