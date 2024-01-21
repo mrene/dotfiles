@@ -1,0 +1,22 @@
+{
+    "homeassistant": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "homeassistant",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "arch": null,
+            "finalImageName": null,
+            "finalImageTag": null,
+            "imageDigest": "sha256:e0cd4f4043f2bdae80224b230cb9ca11e8d15f55f5754148412e32d5af8f98b6",
+            "imageName": "ghcr.io/home-assistant/home-assistant",
+            "imageTag": "2024.1.5",
+            "os": null,
+            "sha256": "sha256-YJim6oNInwsaC7osz9O0bAsKsci5BVZKal8am99+7ss=",
+            "tlsVerify": null
+        },
+        "version": "2024.1.5"
+    }
+}

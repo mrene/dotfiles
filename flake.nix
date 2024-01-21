@@ -20,7 +20,6 @@
     nh = { url = "github:viperML/nh"; inputs.nixpkgs.follows = "nixpkgs"; };
     devshell.url = "github:numtide/devshell";
     nix-update.url = "github:Mic92/nix-update";
-    #nvfetcher.url = "github:berberman/nvfetcher";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 

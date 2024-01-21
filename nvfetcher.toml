@@ -1,0 +1,3 @@
+[homeassistant]
+src.github = "home-assistant/home-assistant"
+fetch.docker = "ghcr.io/home-assistant/home-assistant"
