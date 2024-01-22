@@ -11,7 +11,12 @@
     devshells.default = {
       commands = [
         {
-          name = "flake-update";
+          name = "update-all";
+          command = "update-git && update-sources && update-flake";
+          help = "Run all update commands";
+        }
+        {
+          name = "update-flake";
           command = "nix flake update";
           help = "Updates flake references";
         }
@@ -21,7 +26,7 @@
           help = "Update git fetch expressions";
         }
         {
-          name = "package-update";
+          name = "update-package";
           command = "nix-update -F $1";
           help = "<package> Updates local package (from packages/) using nix-update";
         }
