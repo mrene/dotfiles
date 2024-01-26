@@ -16,6 +16,7 @@ in {
       specialArgs = {
         inherit (self) common;
         inherit inputs;
+        flakePackages = config.flake.packages;
       };
       modules = [./beast/configuration.nix overlayModule];
     };
