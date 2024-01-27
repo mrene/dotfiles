@@ -8,7 +8,7 @@ _: {
   };
 
   # Write /etc/crypttab manually because initrd.luks.devices tries to do everything in initrd/stage1 when the root fs isn't yet available
-  # systemd appears to watch /etc/crypttab and create devices dynamically whenever requires
+  # systemd appears to watch /etc/crypttab and create devices dynamically whenever required
   environment.etc.crypttab = {
     enable = true;
     text = ''

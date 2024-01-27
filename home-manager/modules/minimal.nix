@@ -64,10 +64,10 @@
         sha256 = "1g2r6j33f4zys853i1c5gnwcdbwb6xv5w6pazfdslxf69904lrg9";
       };
     in {
-      Catppuccin-latte = builtins.readFile "${cattpuccin}/Catppuccin-latte.tmTheme";
-      Catppuccin-frappe = builtins.readFile "${cattpuccin}/Catppuccin-frappe.tmTheme";
-      Catppuccin-macchiato = builtins.readFile "${cattpuccin}/Catppuccin-macchiato.tmTheme";
-      Catppuccin-mocha = builtins.readFile "${cattpuccin}/Catppuccin-mocha.tmTheme";
+      Catppuccin-latte.src = "${cattpuccin}/Catppuccin-latte.tmTheme";
+      Catppuccin-frappe.src = "${cattpuccin}/Catppuccin-frappe.tmTheme";
+      Catppuccin-macchiato.src = "${cattpuccin}/Catppuccin-macchiato.tmTheme";
+      Catppuccin-mocha.src = "${cattpuccin}/Catppuccin-mocha.tmTheme";
     };
   };
 

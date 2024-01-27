@@ -26,6 +26,7 @@
     lshw
     file
     lsof
+    unixtools.xxd
 
     yq-go
     jq

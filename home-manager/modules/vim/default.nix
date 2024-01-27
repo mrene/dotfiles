@@ -1,5 +1,5 @@
 {pkgs, ...}: let
-  ray-x-go-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  ray-x-go-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "ray-x-go-nvim";
     version = "unstable-2023-12-27";
     src = pkgs.fetchFromGitHub {
@@ -10,7 +10,7 @@
     };
   };
 
-  ray-x-guihua = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  ray-x-guihua = pkgs.vimUtils.buildVimPlugin {
     pname = "ray-x-guihua";
     version = "unstable-2023-12-06";
     src = pkgs.fetchFromGitHub {
@@ -21,7 +21,7 @@
     };
   };
 
-  nvim-lspconfig = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  nvim-lspconfig = pkgs.vimUtils.buildVimPlugin {
     pname = "nvim-lspconfig";
     version = "unstable-2024-01-20";
     src = pkgs.fetchFromGitHub {

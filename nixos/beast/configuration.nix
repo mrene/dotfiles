@@ -2,6 +2,7 @@
 # your system.  help is available in the configuration.nix(5) man page
 # and in the nixos manual (accessible by running ‘nixos-help’).
 {
+  lib,
   common,
   pkgs,
   inputs,
@@ -117,7 +118,10 @@
   };
 
   security.sudo.wheelNeedsPassword = true;
-  security.pam.enableSSHAgentAuth = true;
+  security.pam.sshAgentAuth.enable = true;
+  # Prevent authorized keys from containing files in the user directory, as they could be
+  # used to escalate privileges to root.
+  services.openssh.authorizedKeysFiles = lib.mkForce [ "/etc/ssh/authorized_keys.d/%u" ];
 
   virtualisation.docker = {
     enable = true;

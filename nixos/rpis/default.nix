@@ -62,7 +62,7 @@ in {
         inherit inputs;
       };
       modules = [
-        inputs.nixos-hardware.outputs.nixosModules.raspberry-pi-4
+        inputs.nixos-hardware.nixosModules.raspberry-pi-4
         "${inputs.nixpkgs-frozen}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
         ./tvpi/configuration.nix
         (_: {
