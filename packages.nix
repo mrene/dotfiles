@@ -19,11 +19,11 @@
     _module.args.sources = pkgs.callPackage ./_sources/generated.nix {};
 
     packages = let
-      scope = lib.makeScope pkgs.newScope (self: { inherit inputs; });
+      scope = lib.makeScope pkgs.newScope (self: {inherit inputs;});
     in
       lib.filesystem.packagesFromDirectoryRecursive {
         inherit (scope) callPackage;
-        directory=./packages;
+        directory = ./packages;
       };
   };
 }

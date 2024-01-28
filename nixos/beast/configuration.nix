@@ -121,7 +121,7 @@
   security.pam.sshAgentAuth.enable = true;
   # Prevent authorized keys from containing files in the user directory, as they could be
   # used to escalate privileges to root.
-  services.openssh.authorizedKeysFiles = lib.mkForce [ "/etc/ssh/authorized_keys.d/%u" ];
+  services.openssh.authorizedKeysFiles = lib.mkForce ["/etc/ssh/authorized_keys.d/%u"];
 
   virtualisation.docker = {
     enable = true;
