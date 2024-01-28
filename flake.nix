@@ -60,7 +60,7 @@
         ./nixos
         ./darwin
         ./home-manager
-        ./packages/flake-module.nix
+        ./packages.nix
         ./devshell.nix
         ./common.nix
       ];
