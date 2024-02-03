@@ -51,6 +51,8 @@
     };
   };
 
+  swapDevices = [{ device = "/swap"; size = 65536; }];
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Sensors

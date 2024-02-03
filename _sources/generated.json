@@ -10,14 +10,14 @@
             "arch": null,
             "finalImageName": null,
             "finalImageTag": null,
-            "imageDigest": "sha256:e0cd4f4043f2bdae80224b230cb9ca11e8d15f55f5754148412e32d5af8f98b6",
+            "imageDigest": "sha256:3c571dc0e5a8280bff12f917d3845adc93606bdad45707bf9e0b6a15acd3075f",
             "imageName": "ghcr.io/home-assistant/home-assistant",
-            "imageTag": "2024.1.5",
+            "imageTag": "2024.1.6",
             "os": null,
-            "sha256": "sha256-YJim6oNInwsaC7osz9O0bAsKsci5BVZKal8am99+7ss=",
+            "sha256": "sha256-PDkXFhtq1LQe7K2Ljvod4ttBMoggMreuuQm59nTimts=",
             "tlsVerify": null
         },
-        "version": "2024.1.5"
+        "version": "2024.1.6"
     },
     "hydroqc2mqtt": {
         "cargoLocks": null,
@@ -50,14 +50,14 @@
             "arch": null,
             "finalImageName": null,
             "finalImageTag": null,
-            "imageDigest": "sha256:47dd99f0f13a7561d0982cd499138bd25dff5c1c9f3c11907694c86a8f769a0f",
+            "imageDigest": "sha256:f60a4dc296fef4c46336f1bd5a440be149907df56cb5fa8ac2bcecdf40993b15",
             "imageName": "ghcr.io/home-assistant-libs/python-matter-server",
-            "imageTag": "5.2.1",
+            "imageTag": "5.4.0",
             "os": null,
-            "sha256": "sha256-OIjmvHurywnoxyhprkCknvzJDI4E3yylqvfIFds2rrU=",
+            "sha256": "sha256-PMvVkm3U249nMdJdqLwWWBw7NvnhJPZj6q+HIfEhzl8=",
             "tlsVerify": null
         },
-        "version": "5.2.1"
+        "version": "5.4.0"
     },
     "smartir": {
         "cargoLocks": null,
