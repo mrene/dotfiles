@@ -160,7 +160,9 @@
     virtiofsd
   ];
 
-  services.vscode-server.enable = true;
+  #services.vscode-server.enable = true;
+  programs.nix-ld.enable = true;
+
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
 
