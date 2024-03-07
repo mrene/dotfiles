@@ -2,8 +2,8 @@
   delta = pkgs.fetchFromGitHub {
     owner = "dandavison";
     repo = "delta";
-    rev = "e208f4ed52759fc018ee14808717c977df57b56f";
-    sha256 = "1xpdcgns0bn2y2pvlpph2zqv1vqb7va6hsbnwljip1bjlk6835qc";
+    rev = "d41d02d10f92222ee56e31caa64ca4ebf7da3f41";
+    sha256 = "0l5apbsxxyxkglc67ic1hhwyasgi3jdc8hg7pmfj1x4yjrl4pwbj";
   };
 in {
   programs.git = {
