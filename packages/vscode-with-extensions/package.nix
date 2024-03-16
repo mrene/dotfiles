@@ -20,6 +20,7 @@ pkgs.vscode-with-extensions.override {
       ms-vscode.cpptools-themes
       ms-vscode.remote-explorer
       tcwalther.cython
+      grafana.vscode-jsonnet
     ])
     ++ (with vscode-extensions;
       [

@@ -31,7 +31,7 @@
       kubectx
       kubectl
       k9s
-      kubectl-view-allocations
+      #kubectl-view-allocations
       # TODO : Move to work-specific env
       (google-cloud-sdk.withExtraComponents (with google-cloud-sdk.components; [gke-gcloud-auth-plugin]))
 
@@ -61,9 +61,7 @@
       lz4
 
       # Nix LSPs
-      rnix-lsp
       inputs.nil.packages.${system}.default
-      rtx
       # Patch nixd whose tests are failing on recent macOS versions
       # https://github.com/nix-community/nixd/issues/215
       (inputs.nixd.packages.${system}.default.overrideAttrs (prevAttrs: {
@@ -75,6 +73,7 @@
       nurl
       jsonnet-language-server
       buf-language-server
+      rtx
 
       # markdown lsp
       marksman

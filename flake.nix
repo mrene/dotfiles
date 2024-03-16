@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unfree = {
       url = "github:numtide/nixpkgs-unfree";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,6 +51,7 @@
     devshell.url = "github:numtide/devshell";
     nix-update.url = "github:Mic92/nix-update";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
   outputs = inputs @ {flake-parts, ...}:
