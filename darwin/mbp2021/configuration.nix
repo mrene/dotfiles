@@ -1,8 +1,13 @@
 {
+  lib,
   pkgs,
   inputs,
   ...
-}: {
+}: 
+let
+  flakes = lib.filterAttrs (_: v: (v._type or "") == "flake") inputs;
+in
+{
   imports = [
     ../../common/fonts.nix
   ];
@@ -24,11 +29,35 @@
       # "error: cannot link '/nix/store/.tmp-link' to '/nix/store/.links/...': File exists"
       auto-optimise-store = false;
       extra-platforms = "x86_64-darwin";
+      trusted-public-keys = [
+        "utm:TNhc0y1cxi+iR7IgKFRUTkXkEf6lzRqhTyk7Nl03Piw=" # aarch64 builds on laptop vm
+        "beast:CO98mFl5tv8ky4Msn/ftNi3WK+PW1y3Xm1BUkT2L7yY="
+        "nas:AKbMvZhFWLMEqMCt9TLcN7Ha62q9jf4+XhHH3VVO+kI="
+      ];
+
+      # This line is a prerequisite
+      trusted-users = [ "@admin" ];
     };
 
-    registry = {
-      nixpkgs.flake = inputs.nixpkgs;
+    linux-builder = {
+      enable = true;
+      ephemeral = true;
+      maxJobs = 4;
+      config = {
+        virtualisation = {
+          darwin-builder = {
+            diskSize = 40 * 1024;
+            memorySize = 8 * 1024;
+          };
+          cores = 6;
+        };
+      };
     };
+
+
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakes;
+    nixPath = lib.mapAttrsToList (x: _: "${x}=flake:${x}") flakes;
+
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true
