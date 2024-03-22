@@ -22,11 +22,15 @@
     fishPlugins.foreign-env
   ];
 
-
   home.sessionVariables = {
     NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [
       pkgs.stdenv.cc.cc
     ];
-    NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
+    # NIX_LD = builtins.readFile "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
   };
+
+
+  programs.fish.interactiveShellInit = ''
+    set -x NIX_LD "${pkgs.stdenv.cc}/nix-support/dynamic-linker"
+  '';
 }

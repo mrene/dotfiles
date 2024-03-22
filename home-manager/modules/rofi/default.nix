@@ -6,7 +6,7 @@
       rofimoji
     ];
     theme = "${./.}/theme.rasi";
-    package = pkgs.rofi-wayland;
+    #package = pkgs.rofi-wayland;
   };
 
   dconf.settings = {

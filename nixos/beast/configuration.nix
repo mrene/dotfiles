@@ -69,6 +69,7 @@
     extraPackages = with pkgs; [
       vaapiVdpau
       libvdpau-va-gl
+      vulkan-tools
     ];
   };
   services.xserver.enable = true;
