@@ -21,7 +21,7 @@ in
   services.nix-daemon.enable = true;
 
   nix = {
-    package = pkgs.nixUnstable;
+    #package = pkgs.nixUnstable;
     settings = {
       experimental-features = ["flakes" "nix-command"];
       # Disable since it causes issues

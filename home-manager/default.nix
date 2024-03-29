@@ -7,7 +7,7 @@
 in {
   flake.homeConfigurations = {
     "mrene@beast" = home-manager.lib.homeManagerConfiguration {
-      inherit (config.flake.homeConfigurations.beast) pkgs;
+      inherit (config.flake.nixosConfigurations.beast) pkgs;
       modules = [./beast.nix];
       extraSpecialArgs = {inherit inputs;};
     };
