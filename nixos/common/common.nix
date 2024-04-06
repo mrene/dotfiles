@@ -11,7 +11,7 @@ in {
   ];
 
   nix = {
-    #package = pkgs.nixUnstable; # or versioned attributes like nix_2_4
+    package = pkgs.nixVersions.nix_2_20; # or versioned attributes like nix_2_4
     settings = {
       experimental-features = ["flakes" "nix-command"];
       auto-optimise-store = true;
@@ -56,11 +56,11 @@ in {
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-    "electron-24.8.6"
-    "zotero-6.0.27"
-  ];
+  #nixpkgs.config.permittedInsecurePackages = [
+    #"electron-25.9.0"
+    #"electron-24.8.6"
+    #"zotero-6.0.27"
+  #];
 
   networking.firewall.rejectPackets = true;
 }

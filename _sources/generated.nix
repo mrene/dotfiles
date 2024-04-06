@@ -3,12 +3,12 @@
 {
   homeassistant = {
     pname = "homeassistant";
-    version = "2024.3.1";
+    version = "2024.4.0";
     src = dockerTools.pullImage {
       imageName = "ghcr.io/home-assistant/home-assistant";
-      imageDigest = "sha256:9dade9391001b769a791a03faf9f193a9c801e711922f0469d27a3d923b9dfe0";
-      sha256 = "sha256-veOaidcEcDQaZFVa4zeDohQ5MZdvTx5oNT9JnIQs4G4=";
-      finalImageTag = "2024.3.1";
+      imageDigest = "sha256:2060bcda3ea90f601acf538d17e2e3139da50a5bd5cd9c56ec0a2cddba8b042d";
+      sha256 = "sha256-l65/Tu4GDwCTM9homtA75yajwM4y0wjMFnYRYrNMi0A=";
+      finalImageTag = "2024.4.0";
     };
   };
   hydroqc2mqtt = {
@@ -23,12 +23,12 @@
   };
   python-matter-server = {
     pname = "python-matter-server";
-    version = "5.8.1";
+    version = "5.9.0";
     src = dockerTools.pullImage {
       imageName = "ghcr.io/home-assistant-libs/python-matter-server";
-      imageDigest = "sha256:aab82f903670b7bf4f72eb24c7d5b3520c854fe272f196e32b354c63f02d8724";
-      sha256 = "sha256-CDYUkCxS0XtenZTo1xTQqhvR1ocG5ha7JdwFPIFZdKs=";
-      finalImageTag = "5.8.1";
+      imageDigest = "sha256:f857a093129151ac300cfc1d57bd6c3f65917e00d214d8d78e752174357e30ee";
+      sha256 = "sha256-uo74AL1ZKwgph7xYY1rVVbBSZkbXDXXEkasVCRK+kps=";
+      finalImageTag = "5.9.0";
     };
   };
   smartir = {

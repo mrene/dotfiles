@@ -2,7 +2,7 @@
   "eval": {
     "target": {
       "args": ["-f", "default.nix"],
-      "installable": "nixosConfigurations.tvpi.config"
+      "installable": "nixosConfigurations.beast.config"
     },
     "workers": 3
   },
@@ -10,7 +10,7 @@
         "enable": true,
         "target": {
             "args": [],
-            "installable": ".#nixosConfigurations.tvpi.options"
+            "installable": ".#nixosConfigurations.beast.options"
         }
     }
 }
