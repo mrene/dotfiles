@@ -5,7 +5,6 @@
 }: {
   imports = [
     # Include modules that aren't enabled-by-default
-    inputs.nh.nixosModules.default
     inputs.minidsp.nixosModules.default
     inputs.nix-index-database.nixosModules.nix-index
   ];

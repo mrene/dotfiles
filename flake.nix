@@ -52,6 +52,10 @@
     nix-update.url = "github:Mic92/nix-update";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     flake-parts.url = "github:hercules-ci/flake-parts";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
@@ -61,6 +65,7 @@
         ./nixos
         ./darwin
         ./home-manager
+        ./vim
         ./packages.nix
         ./devshell.nix
         ./common.nix

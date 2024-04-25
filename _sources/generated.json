@@ -10,14 +10,14 @@
             "arch": null,
             "finalImageName": null,
             "finalImageTag": null,
-            "imageDigest": "sha256:2060bcda3ea90f601acf538d17e2e3139da50a5bd5cd9c56ec0a2cddba8b042d",
+            "imageDigest": "sha256:4f86df601650c74b8689f1be033054ff09567db5dba5bf227ccc406ca4fa88d0",
             "imageName": "ghcr.io/home-assistant/home-assistant",
-            "imageTag": "2024.4.0",
+            "imageTag": "2024.4.3",
             "os": null,
-            "sha256": "sha256-l65/Tu4GDwCTM9homtA75yajwM4y0wjMFnYRYrNMi0A=",
+            "sha256": "sha256-OeyQrmRH1ZRwfZYyBu6aqfZKfh4oglAl91cg3gL+2sI=",
             "tlsVerify": null
         },
-        "version": "2024.4.0"
+        "version": "2024.4.3"
     },
     "hydroqc2mqtt": {
         "cargoLocks": null,
