@@ -184,7 +184,7 @@
   #'';
   networking.firewall.allowedTCPPorts = [8501];
   networking.hosts = {
-    "192.168.1.127" = ["localhost.humanfirst.ai"];
+    "192.168.1.10" = ["localhost.humanfirst.ai"];
     "127.0.0.1" = ["istio-ingressgateway.istio-system.svc.cluster.local"];
     "34.152.51.18" = ["studio.humanfirst.ai"];
     "34.73.57.247" = ["studio-staging.humanfirst.ai"];

@@ -50,14 +50,14 @@
             "arch": null,
             "finalImageName": null,
             "finalImageTag": null,
-            "imageDigest": "sha256:9f703534a1397bf066859327455d7c0d8e144339be439d3f9efcff0e8779c247",
+            "imageDigest": "sha256:1971cbc3b1d850beda8043b0a870c3d1b35ba858f1b6af670bdbc2aa62e092eb",
             "imageName": "ghcr.io/home-assistant-libs/python-matter-server",
-            "imageTag": "5.10.0",
+            "imageTag": "6.0.0",
             "os": null,
-            "sha256": "sha256-qZ4l3W19osEcFUheWxkYBPZJvoNjBnlgUYoWl/dMQkY=",
+            "sha256": "sha256-2snqZR4b+axaAC++Y5KWYhoDpf12Le8wO4K0MHRl7aM=",
             "tlsVerify": null
         },
-        "version": "5.10.0"
+        "version": "6.0.0"
     },
     "smartir": {
         "cargoLocks": null,

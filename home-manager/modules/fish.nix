@@ -73,8 +73,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "oh-my-fish";
           repo = "theme-bobthefish";
-          rev = "0c15ff1cbc4bfa026c882e01dd5ceec327f26033";
-          sha256 = "1fz52in2gxjgxz8bcbcxvyp7m7cdxv6va52n1yy3vhspkb8729d9";
+          rev = "736356d73f297cab3a8fac877db73d79aff30eeb";
+          sha256 = "0qbi3knmi6h5yxpyls58c7vcjxi35kcv308phmwr0zvnafp9jd6a";
         };
       }
       {
@@ -91,8 +91,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "catppuccin";
           repo = "fish";
-          rev = "0ce27b518e8ead555dec34dd8be3df5bd75cff8e";
-          sha256 = "1a6yj6zhccpg5jpcrxjzxyydh5ldwlvwf3vz6lwl60gk2xvz7kqd";
+          rev = "a3b9eb5eaf2171ba1359fe98f20d226c016568cf";
+          sha256 = "0y7j8qcc88vwh6ig7whibndndk243cavaml619075f8s5abk255j";
         };
       }
       {
