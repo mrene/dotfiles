@@ -23,12 +23,12 @@
 
   nvim-lspconfig = pkgs.vimUtils.buildVimPlugin {
     pname = "nvim-lspconfig";
-    version = "unstable-2024-05-16";
+    version = "unstable-2024-05-18";
     src = pkgs.fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lspconfig";
-      rev = "cee94b22adc96582d9136f85fb3b076feda8825c";
-      sha256 = "1gz5vwb0hdqaxi2xh9dl87rf1yc10xinh3w83vd02cr9h88n5qv0";
+      rev = "6d2ae9fdc3111a6e8fd5db2467aca11737195a30";
+      sha256 = "1vsri2p7prbm336b08hkjc78jdv5bw79kiy3kkqjhk3nigqavxir";
     };
     meta.homepage = "https://github.com/neovim/nvim-lspconfig/";
   };

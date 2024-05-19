@@ -3,12 +3,12 @@
 {
   homeassistant = {
     pname = "homeassistant";
-    version = "2024.5.3";
+    version = "2024.5.4";
     src = dockerTools.pullImage {
       imageName = "ghcr.io/home-assistant/home-assistant";
-      imageDigest = "sha256:cd3e0dc0df5b2013ae589e9f0044e1093c28c31dc653f36db3df10ba8e898dd6";
-      sha256 = "sha256-sOIgrBzJRWQiZ7mpA8TwF5kqjnNc2rzw5d4aCKvNt80=";
-      finalImageTag = "2024.5.3";
+      imageDigest = "sha256:6f5eeb8360d9d58ff096c7259366993b4b01ebe11251c2b83c9329daad441b00";
+      sha256 = "sha256-OSaqw8yOhiVacQOiohhO48guZdfw1yEI4f/+Eil2CjY=";
+      finalImageTag = "2024.5.4";
     };
   };
   hydroqc2mqtt = {
