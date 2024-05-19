@@ -44,7 +44,7 @@
       # JS
       yarn
 
-      go
+      #go
       gopls # LSP
       delve
       go-tools

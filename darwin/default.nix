@@ -6,6 +6,7 @@
   flake.darwinConfigurations = {
     # nix build .#darwinConfigurations.mbp2021.system
     # ./result/sw/bin/darwin-rebuild switch --flake .
+    Mathieus-MacBook-Pro = config.flake.darwinConfigurations.Mathieus-MBP;
     Mathieus-MBP = inputs.darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       pkgs = import inputs.nixpkgs {

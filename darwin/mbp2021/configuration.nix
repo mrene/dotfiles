@@ -15,13 +15,14 @@ in
   environment.systemPackages = with pkgs; [
     fish
     bandwhich
+    nixos-rebuild
   ];
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
   nix = {
-    package = pkgs.nixVersions.nix_2_19;
+    package = pkgs.nixVersions.nix_2_22;
     settings = {
       experimental-features = ["flakes" "nix-command"];
       # Disable since it causes issues
@@ -40,7 +41,7 @@ in
     };
 
     linux-builder = {
-      enable = true;
+      enable = false;
       ephemeral = true;
       maxJobs = 4;
       config = {
