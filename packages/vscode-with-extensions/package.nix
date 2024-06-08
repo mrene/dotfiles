@@ -31,7 +31,7 @@ pkgs.vscode-with-extensions.override {
 
         ms-vscode-remote.remote-ssh
 
-        matklad.rust-analyzer
+        rust-lang.rust-analyzer
         github.copilot
         matangover.mypy
         jebbs.plantuml
