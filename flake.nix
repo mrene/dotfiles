@@ -6,6 +6,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs-frozen.url = "github:NixOS/nixpkgs/8ecc900b2f695d74dea35a92f8a9f9b32c8ea33d"; # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
+    nixpkgs-before-electron-eol.url = "github:NixOS/nixpkgs/8de5bd2ac7c9a1c77a38e8951daa889b6052697f";
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";

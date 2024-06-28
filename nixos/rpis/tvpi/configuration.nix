@@ -83,6 +83,7 @@
   networking.firewall.enable = false;
   services.tailscale = {
     enable = true;
+    extraUpFlags = [ "--advertise-exit-node" ];
   };
 
   services.minidsp = {

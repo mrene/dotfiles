@@ -139,7 +139,7 @@
     #inputs.minidsp.packages.${system}.default
 
     # Notes
-    logseq
+    inputs.nixpkgs-before-electron-eol.legacyPackages.${system}.logseq
     zotero
 
     #Audio
@@ -169,7 +169,11 @@
 
   services.rpcbind.enable = true;
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    extraUpFlags = [ "--advertise-exit-node" ];
+    useRoutingFeatures = "server";
+  };
   networking.firewall.checkReversePath = "loose";
 
   virtualisation.containerd.enable = true;

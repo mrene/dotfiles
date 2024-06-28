@@ -83,7 +83,7 @@
       cargo-edit
 
       # Microsoft's python LSP
-      nodePackages.pyright
+      pyright
       nodePackages.typescript-language-server
       nodePackages.vscode-langservers-extracted
 
