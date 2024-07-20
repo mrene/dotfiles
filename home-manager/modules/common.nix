@@ -38,7 +38,7 @@
       graphviz
       curlie
 
-      youtube-dl
+      yt-dlp
       speedtest-cli
 
       # JS
