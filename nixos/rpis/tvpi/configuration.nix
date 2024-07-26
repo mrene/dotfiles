@@ -16,6 +16,8 @@
     ../../common/common.nix
   ];
 
+  programs.corefreq.enable = true;
+
   # Prevent a lot of superfluous FS from being compiled
   boot.supportedFilesystems = lib.mkForce ["ext4" "vfat"];
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages;

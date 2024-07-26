@@ -1035,18 +1035,17 @@
     },
     "nixpkgs_11": {
       "locked": {
-        "lastModified": 1721750420,
-        "narHash": "sha256-CPnL6sKe9exf+Nd94Wk1TgzOlgWqnI/wL0MkAtBcOzw=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "f11a6a01cb5e2ceaa40bdc28d492bd2fd8b2a847",
-        "type": "github"
+        "lastModified": 1721962240,
+        "narHash": "sha256-gxU9K/e4fsJFw1cekj0QcstXOUo0ud1rH0G81Uzl1a4=",
+        "ref": "refs/heads/corefreq",
+        "rev": "6082c2599458cf30262f2b664c8444a27412f44a",
+        "revCount": 657389,
+        "type": "git",
+        "url": "file:///home/mrene/nixpkgs"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable-small",
-        "repo": "nixpkgs",
-        "type": "github"
+        "type": "git",
+        "url": "file:///home/mrene/nixpkgs"
       }
     },
     "nixpkgs_12": {

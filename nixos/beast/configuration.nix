@@ -31,6 +31,8 @@
     ../common/radio.nix
   ];
 
+  programs.corefreq.enable = true;
+
   programs.nh = {
     enable = true;
     clean.enable = true;
