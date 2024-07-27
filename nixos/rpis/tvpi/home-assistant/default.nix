@@ -82,16 +82,16 @@ in {
     ];
   };
 
-  services.influxdb2.enable = true;
-  services.grafana = {
-    enable = true;
-    settings = {
-      server = {
-        http_addr = "0.0.0.0";
-        http_port = 8087;
-        domain = "192.168.1.245:8087";
-        root_url = "http://192.168.1.245:8087";
-      };
-    };
-  };
+  # services.influxdb2.enable = true;
+  # services.grafana = {
+  #   enable = true;
+  #   settings = {
+  #     server = {
+  #       http_addr = "0.0.0.0";
+  #       http_port = 8087;
+  #       domain = "192.168.1.245:8087";
+  #       root_url = "http://192.168.1.245:8087";
+  #     };
+  #   };
+  # };
 }
