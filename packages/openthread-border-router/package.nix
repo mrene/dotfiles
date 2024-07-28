@@ -82,6 +82,7 @@ stdenv.mkDerivation {
     (lib.cmakeBool "OTBR_COVERAGE" true)
     (lib.cmakeBool "OTBR_DNS_UPSTREAM_QUERY" true)
 
+    # Turning on random flags until I can pair the damn lights
     (lib.cmakeBool "OT_DUA" true)
     (lib.cmakeBool "OT_MLR" true)
     (lib.cmakeBool "OT_ECDSA" true)
@@ -94,8 +95,6 @@ stdenv.mkDerivation {
     (lib.cmakeBool "OT_SRP_CLIENT" true)
     (lib.cmakeBool "OT_FULL_LOGS" true)
     (lib.cmakeBool "OT_UPTIME" true)
-
-
 
     # Required by protobuf
     (lib.cmakeFeature "CMAKE_CXX_STANDARD" "17")
