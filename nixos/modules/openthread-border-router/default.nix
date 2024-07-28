@@ -106,7 +106,7 @@ in
         requires =  [ "dbus.socket" ];
         after = [ "dbus.socket" ];
         serviceConfig = {
-          ExecStart = "${lib.getExe' cfg.package "otbr-agent"} -B ${cfg.backboneInterface} -I ${cfg.interfaceName} -d ${toString cfg.logLevel} ${cfg.radioUrl}";
+          ExecStart = "${lib.getExe' cfg.package "otbr-agent"} -v -B ${cfg.backboneInterface} -I ${cfg.interfaceName} -d ${toString cfg.logLevel} ${cfg.radioUrl}";
           KillMode = "mixed";
           Restart = "on-failure";
           RestartSec = 5;
