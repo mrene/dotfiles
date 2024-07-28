@@ -99,7 +99,7 @@
       mrene = {
         isNormalUser = true;
         description = "mathieu";
-        extraGroups = ["networkmanager" "wheel" "docker"];
+        extraGroups = ["networkmanager" "wheel" "docker" "dialout"];
         openssh.authorizedKeys.keys = common.sshKeys;
         initialHashedPassword = "";
       };
