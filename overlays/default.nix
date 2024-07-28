@@ -6,5 +6,8 @@
 
   flake.overlays = {
     openrgb = import ./openrgb;
+    openthread-border-router = (final: prev: {
+      openthread-border-router = config.flake.packages.openthread-border-router;
+    });
   };
 }

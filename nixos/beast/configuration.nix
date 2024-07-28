@@ -29,7 +29,13 @@
     ../common/gui/messaging.nix
 
     ../common/radio.nix
+    ../modules/openthread-border-router
   ];
+
+  services.openthread-border-router = {
+    enable = true;
+    backboneInterface = "enp45s0";
+  };
 
   programs.nh = {
     enable = true;
