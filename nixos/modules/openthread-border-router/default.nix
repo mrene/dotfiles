@@ -49,6 +49,18 @@ in
       '';
     };
 
+    rest = {
+      listenAddress = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+      };
+
+      listenPort = lib.mkOption {
+        type = lib.types.int;
+        default = 8081;
+      };
+    };
+
     radio = {
       device = lib.mkOption {
         type = lib.types.str;
@@ -87,9 +99,9 @@ in
 
     services.openthread-border-router.radio.url = "spinel+hdlc+uart://${cfg.radio.device}?" +
       lib.concatStringsSep "&" (
-          (lib.optional (cfg.radio.baudRate != 115200) "uart-baudrate=${toString cfg.radio.baudRate}")  ++
-          (lib.optional cfg.radio.flowControl "uart-flow-control") ++
-          (lib.optional (cfg.radio.extraUrlParams != "") cfg.radio.extraUrlParams)
+             (lib.optional (cfg.radio.baudRate != 115200) "uart-baudrate=${toString cfg.radio.baudRate}")
+          ++ (lib.optional cfg.radio.flowControl "uart-flow-control")
+          ++ (lib.optional (cfg.radio.extraUrlParams != "") cfg.radio.extraUrlParams)
       );
 
     environment.systemPackages = [ cfg.package ];
@@ -121,7 +133,16 @@ in
         requires =  [ "dbus.socket" ];
         after = [ "dbus.socket" ];
         serviceConfig = {
-          ExecStart = "${lib.getExe' cfg.package "otbr-agent"} -v -B ${cfg.backboneInterface} -I ${cfg.interfaceName} -d ${toString cfg.logLevel} ${cfg.radio.url}";
+          ExecStart = (lib.concatStringsSep " " (
+               [(lib.getExe' cfg.package "otbr-agent")]
+            ++ ["--verbose"]
+            ++ ["--backbone-ifname ${cfg.backboneInterface}"]
+            ++ ["--thread-ifname ${cfg.interfaceName}"]
+            ++ ["--debug-level ${toString cfg.logLevel}"]
+            ++ (lib.optional (cfg.rest.listenPort != 0) "--rest-listen-port ${toString cfg.rest.listenPort}")
+            ++ (lib.optional (cfg.rest.listenAddress != "") "--rest-listen-address ${cfg.rest.listenAddress}")
+            ++ [cfg.radio.url]
+          ));
           KillMode = "mixed";
           Restart = "on-failure";
           RestartSec = 5;
