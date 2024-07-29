@@ -1,5 +1,5 @@
 
-{ lib, config, pkgs, inputs, flakePackages, ... }: 
+{ lib, config, pkgs, inputs,  ... }: 
 
 
 let
@@ -11,13 +11,12 @@ in
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.callPackage ../../../packages/openthread-border-router/package.nix {};
+      default = inputs.self.packages.${pkgs.system}.openthread-border-router;
       description = "The openthread-border-router package";
     };
 
     radioDevice = lib.mkOption {
       type = lib.types.str;
-      #default = "/dev/ttyACM0";
       default = "/dev/ttyUSB0";
       description = "The device name of the serial port of the radio device";
     };
@@ -87,9 +86,11 @@ in
   config = lib.mkIf cfg.enable {
 
     services.openthread-border-router.radio.url = "spinel+hdlc+uart://${cfg.radio.device}?" +
-      (lib.optionals (cfg.radio.baudRate != 115200) "uart-baudrate=${toString cfg.radio.baudRate}") +
-      (lib.optionals cfg.radio.flowControl "uart-flow-control") +
-      cfg.radio.extraUrlParams;
+      lib.concatStringsSep "&" (
+          (lib.optional (cfg.radio.baudRate != 115200) "uart-baudrate=${toString cfg.radio.baudRate}")  ++
+          (lib.optional cfg.radio.flowControl "uart-flow-control") ++
+          (lib.optional (cfg.radio.extraUrlParams != "") cfg.radio.extraUrlParams)
+      );
 
     environment.systemPackages = [ cfg.package ];
 

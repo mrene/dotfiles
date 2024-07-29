@@ -40,6 +40,8 @@
       packages = [
         inputs.nix-update.packages.${system}.default
         pkgs.nvfetcher
+        pkgs.sops
+        pkgs.ssh-to-age
       ];
     };
 
