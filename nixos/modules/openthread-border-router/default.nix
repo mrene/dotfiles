@@ -10,7 +10,7 @@ in
     enable = lib.mkEnableOption "Enable the OpenThread Border Router";
 
     package = lib.mkOption {
-      type = lib.types.package ;
+      type = lib.types.package;
       default = pkgs.callPackage ../../../packages/openthread-border-router/package.nix {};
       description = "The openthread-border-router package";
     };
@@ -50,27 +50,46 @@ in
       '';
     };
 
-    #baudRate = lib.mkOption {
-      #type = lib.types.int;
-      #default = 460800;
-      #description = "The baud rate of the radio device";
-    #};
+    radio = {
+      device = lib.mkOption {
+        type = lib.types.str;
+        default = "/dev/ttyUSB0";
+        description = "The device name of the serial port of the radio device. Ignored if url is manually set.";
+      };
 
-    #flowControl = lib.mkOption {
-      #type = lib.types.bool;
-      #default = true;
-      #description = "Enable hardware flow control";
-    #};
+      baudRate = lib.mkOption {
+        type = lib.types.int;
+        default = 115200;
+        description = "The baud rate of the radio device. Ignored if url is manually set.";
+      };
 
-    radioUrl = lib.mkOption {
-      type = lib.types.str;
-      # TODO: Split URL components into individual options
-      default = "spinel+hdlc+uart:///dev/ttyUSB0?uart-baudrate=460800&uart-flow-control";
-      description = "The URL of the radio device";
+      flowControl = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable hardware flow control. Ignored if url is manually set.";
+      };
+
+      extraUrlParams = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Extra URL query string parameters";
+        example = "bus-latency=100&region=ca";
+      };
+
+      url = lib.mkOption {
+        #TODO: There can technically be multiple URL if a device has more than one radio
+        type = lib.types.str;
+        description = "The URL of the radio device to use";
+      };
     };
   };
 
   config = lib.mkIf cfg.enable {
+
+    services.openthread-border-router.radio.url = "spinel+hdlc+uart://${cfg.radio.device}?" +
+      (lib.optionals (cfg.radio.baudRate != 115200) "uart-baudrate=${toString cfg.radio.baudRate}") +
+      (lib.optionals cfg.radio.flowControl "uart-flow-control") +
+      cfg.radio.extraUrlParams;
 
     environment.systemPackages = [ cfg.package ];
 
@@ -93,11 +112,6 @@ in
 
     # Synchronize the services with the unit files defined in the source pacakge
     systemd.services = {
-
-      # TODO: Where is this defined?
-      # Probably not required since avahi is being used
-      #mdns = {};
-
       # src/agent/otbr-agent.service.in
       # The agent keeps its local state in /var/lib/thread
       otbr-agent = {
@@ -106,15 +120,13 @@ in
         requires =  [ "dbus.socket" ];
         after = [ "dbus.socket" ];
         serviceConfig = {
-          ExecStart = "${lib.getExe' cfg.package "otbr-agent"} -v -B ${cfg.backboneInterface} -I ${cfg.interfaceName} -d ${toString cfg.logLevel} ${cfg.radioUrl}";
+          ExecStart = "${lib.getExe' cfg.package "otbr-agent"} -v -B ${cfg.backboneInterface} -I ${cfg.interfaceName} -d ${toString cfg.logLevel} ${cfg.radio.url}";
           KillMode = "mixed";
           Restart = "on-failure";
           RestartSec = 5;
           RestartPreventExitStatus = "SIGKILL";
         };
-        path = [
-          pkgs.ipset
-        ];
+        path = [ pkgs.ipset ];
       };
 
       # TODO: Build disabled due to npm dependency
