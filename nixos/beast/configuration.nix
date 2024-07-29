@@ -29,7 +29,19 @@
     ../common/gui/messaging.nix
 
     ../common/radio.nix
+    ../modules/openthread-border-router
   ];
+
+  services.openthread-border-router = {
+    enable = true;
+    backboneInterface = "enp45s0";
+    logLevel = 3;
+    radio =  {
+      device = "/dev/ttyUSB0";
+      baudRate = 460800;
+      flowControl = true;
+    };
+  };
 
   programs.nh = {
     enable = true;
@@ -151,7 +163,7 @@
     #razergenie #mouse
     openrazer-daemon
 
-    nvtop-nvidia # htop-like gpu load viewer
+    nvtopPackages.nvidia # htop-like gpu load viewer
     nvitop
     virt-manager
     distrobox
