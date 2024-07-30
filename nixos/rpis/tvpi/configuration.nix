@@ -19,7 +19,6 @@
 
   # Prevent a lot of superfluous FS from being compiled
   boot.supportedFilesystems = lib.mkForce ["ext4" "vfat"];
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
   hardware.enableRedistributableFirmware = true;
 
   # Override this so ttyAMA0 isn't used for a console, since its shared with the
