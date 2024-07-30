@@ -42,6 +42,7 @@
         pkgs.nvfetcher
         pkgs.sops
         pkgs.ssh-to-age
+        pkgs.age
       ];
     };
 

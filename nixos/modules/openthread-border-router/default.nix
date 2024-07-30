@@ -123,6 +123,7 @@ in
     services.avahi.publish.enable = lib.mkDefault true;
     services.avahi.publish.userServices = lib.mkDefault true;
 
+
     # Synchronize the services with the unit files defined in the source pacakge
     systemd.services = {
       # src/agent/otbr-agent.service.in

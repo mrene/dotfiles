@@ -16,6 +16,8 @@ in
     sops = {
       # Deploy this file out-of-band using the latest secrets
       defaultSopsFile = lib.mkDefault "/var/lib/secrets/sops.yaml";
+      defaultSopsFormat = lib.mkDefault "yaml";
+      validateSopsFiles = lib.mkDefault false;
 
       # Use the ed25519 host key. Some systems (e.g. rpis) won't have RSA keys
       # due to the limited amount of CPU available to generate them.

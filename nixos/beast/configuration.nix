@@ -3,6 +3,7 @@
 # and in the nixos manual (accessible by running ‘nixos-help’).
 {
   lib,
+  config,
   common,
   pkgs,
   inputs,
@@ -29,7 +30,7 @@
     ../common/gui/messaging.nix
 
     ../common/radio.nix
-    ../modules/openthread-border-router
+    ../modules
   ];
 
   services.openthread-border-router = {
@@ -46,6 +47,17 @@
       listenPort = 58081;
     };
   };
+
+  homelab.sops.enable = true;
+  sops.secrets."home-assistant/token" = {
+    owner = config.users.users.mrene.name;
+  };
+
+  homelab.backups = {
+    enable = true;
+    paths = ["/var/lib/thread"];
+  };
+
 
   programs.nh = {
     enable = true;
@@ -176,6 +188,8 @@
     dstat
     virtiofsd
   ];
+
+
 
   #services.vscode-server.enable = true;
   programs.nix-ld.enable = true;
