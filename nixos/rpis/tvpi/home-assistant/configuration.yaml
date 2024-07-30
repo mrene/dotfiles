@@ -1,0 +1,101 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+automation: !include automations.yaml
+
+scene: !include scenes.yaml
+
+homeassistant:
+  latitude: 45.475320
+  longitude: -73.562210 
+
+influxdb:
+  api_version: 2
+  ssl: false
+  host: 192.168.1.245
+  port: 8086
+  token: EB2H_cZoyIUSO4d9Dd2NMkRXziMbyVlAvqehmK_zMERJVyOocNorfZaq34hpEfaoXsgZZ2p_j39tDYcL6-C6uw==
+  organization: home
+  bucket: ha
+  tags:
+    source: HA
+  default_measurement: units
+
+smartir:
+climate:
+  - platform: smartir
+    name: Heat pump
+    unique_id: heat_pump
+    device_code: 9999
+    controller_data: remote.2nd_floor_ir
+    temperature_sensor: sensor.2nd_floor_ir_temperature
+    humidity_sensor: sensor.2nd_floor_ir_humidity
+
+wake_on_lan:
+switch:
+  - platform: wake_on_lan
+    mac: d8:bb:c1:14:45:79
+    name: beast
+  - platform: wake_on_lan
+    mac: 64:E4:A5:E2:38:F4
+    name: tv
+
+script:
+  fan_power:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.2nd_floor_ir
+        data:
+          command: "b64:JgB4AAABIpIQOBMTERMSEhISEhITEhISEhISNxI3EjcROBA4ETgSNxE3ETgSExISEhISExETERQRExETETcSNxM3EDgSNxE3ETgSNhIUERMRExITERMRExETEhMRNxI3EDkSNxE4ETcSAAG0AAEjSRIADDcAASFKEgANBQ=="
+  fan_speed:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.2nd_floor_ir
+        data:
+          command: "b64:JgB4AAABI5ESNxISEhMSExETERMSExETERMRNxI3EjcROBA4EzcRNxE3EjcRNxITERMSExETEhMRExISERMSNxE4ETcRNxI4EjcRNxI3ERMSExETEBQRExETEhQRExE3ETcTNxA4ETcRAAG1AAEjSREADDQAASJKDwANBQ=="
+  fan_rotate:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.2nd_floor_ir
+        data:
+          command: "b64:JgB4AAABI5EROBETERMSFBETERMRExITERMSNhI3ETcSOBI3ETcRNxI3ETgQFQ8VEjcRExETERMSEhITEjYROBITEjcRNxE3ETgSNhITEhMSNhISExISEhISEhITNhE4ERQRNxI3ETgRAAG0AAEjSREADDIAASNJEQANBQ=="
+  fan_timer:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.2nd_floor_ir
+        data:
+          command: "b64:JgB4AAABIZMRNxISEhITEhISEhISEhIUEhIROBA4ETcSNxI3ETgRNxM3ETcQFBE3EhISFBISEhISEhMSEjYSEhI3ETgROBI2EjcRNxITETcSEhISEhQQFBISEhISNxETETgRNxE4EjcSAAG0AAEhShEADDIAASJKEQANBQ=="
+  fan_pattern:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.2nd_floor_ir
+        data:
+          command: "b64:JgBwAAABIZMPOhAUEBQRExEUEBQRExETERQQORA4ETgROBE4EDcSOBE4ETcROBE4EBQRExAUERQQFBEVDxQRExI3ETgRNxE3ETkQORE4ETcRExAUEhMRExETERMQFhETEDgROBA4EjgQAAG1AAEiShEADQU="
+  tv_power:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.rc_ir
+        data:
+          command: "b64:JgBGAAABKJQSEhI3EjcSEhISEhISEhI3EjcSEhI3EhISEhISEhISEhI3EjcSNxI3EhISEhISEhISEhISEhISEhI3EjcSNxI3EjcAAA=="
+
+  tv_source_hdmi:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.rc_ir
+        data:
+          command: "b64:JgBGAAABKJQSEhI3EjcSEhISEhISEhI3EjcSEhI3EhISEhISEhISEhISEhISEhISEjcSEhI3EhISNxI3EjcSNxISEjcSEhI3EjcAAA=="
+            
+  rc_fan_power:
+    sequence:
+      - service: remote.send_command
+        target:
+          entity_id: remote.rc_ir
+        data:
+          command: "b64:JgB4AAABIpIQOBMTERMSEhISEhITEhISEhISNxI3EjcROBA4ETgSNxE3ETgSExISEhISExETERQRExETETcSNxM3EDgSNxE3ETgSNhIUERMRExITERMRExETEhMRNxI3EDkSNxE4ETcSAAG0AAEjSRIADDcAASFKEgANBQ=="

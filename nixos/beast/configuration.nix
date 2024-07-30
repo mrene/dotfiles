@@ -33,20 +33,6 @@
     ../modules
   ];
 
-  services.openthread-border-router = {
-    enable = true;
-    backboneInterface = "enp45s0";
-    logLevel = 3;
-    radio =  {
-      device = "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_a8cf5592bed8ed1198a76f6162c613ac-if00-port0";
-      baudRate = 460800;
-      flowControl = true;
-    };
-    rest = {
-      listenPort = 58081;
-    };
-  };
-
   homelab.sops.enable = true;
   sops.secrets."home-assistant/token" = {
     owner = config.users.users.mrene.name;
@@ -55,7 +41,6 @@
   homelab.backups = {
     enable = true;
     paths = [
-      "/var/lib/thread"
       "/home/mrene/logseq"
     ];
   };

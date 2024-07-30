@@ -14,6 +14,7 @@
     ./home-assistant
     ../../common/packages.nix
     ../../common/common.nix
+    ../../modules
   ];
 
   # Prevent a lot of superfluous FS from being compiled
@@ -37,6 +38,20 @@
 
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
+
+  homelab.sops.enable = true;
+  sops.secrets."home-assistant/token" = {
+    owner = config.users.users.mrene.name;
+  };
+
+  homelab.backups = {
+    enable = true;
+    paths = [
+      "/opt/homeassistant"
+    ];
+  };
+
+
 
   networking = {
     hostName = "tvpi";
