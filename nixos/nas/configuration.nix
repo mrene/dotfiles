@@ -2,6 +2,7 @@
   pkgs,
   common,
   inputs,
+  config,
   ...
 }: {
   imports = [
@@ -49,6 +50,15 @@
     mutableUsers = true;
     defaultUserShell = pkgs.fish;
   };
+
+  homelab.sops.enable = true;
+  homelab.backups = {
+    enable = true;
+    paths = [
+      "/bulk/replicated"
+    ];
+  };
+
 
   # Prevent the X server from starting up
   services.xserver.displayManager.lightdm.enable = false;
