@@ -13,6 +13,7 @@
     ../common/packages.nix
     ../common/nvidia.nix
     ../common/distributed-build.nix
+    ../modules
   ];
 
   boot = {
