@@ -3,7 +3,7 @@ _: {
     supportedFilesystems = ["zfs"];
     zfs = {
       forceImportRoot = false;
-      extraPools = ["bulk" "boot-pool"];
+      extraPools = ["bulk"];
     };
   };
 
