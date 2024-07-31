@@ -15,6 +15,7 @@
     ../../common/packages.nix
     ../../common/common.nix
     ../../modules
+    ../bedpi/bed-remote.nix
   ];
 
   # Prevent a lot of superfluous FS from being compiled
@@ -43,14 +44,7 @@
     owner = config.users.users.mrene.name;
   };
 
-  homelab.backups = {
-    enable = true;
-    paths = [
-      "/opt/homeassistant"
-    ];
-  };
-
-
+  homelab.backups.enable = true;
 
   networking = {
     hostName = "tvpi";
