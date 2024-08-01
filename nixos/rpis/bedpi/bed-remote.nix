@@ -20,4 +20,14 @@ in {
     bedrpc.server
     bedrpc.cli
   ];
+
+  systemd.services.bedrpc = {
+    description = "MQTT Bed Remote";
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = (lib.getExe' bedrpc "server") + " -m 127.0.0.1";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+  };
 }
