@@ -174,6 +174,7 @@
     sysstat
     dstat
     virtiofsd
+    home-assistant-cli
   ];
 
 
