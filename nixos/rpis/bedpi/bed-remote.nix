@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   inputs,
   ...
@@ -25,7 +26,7 @@ in {
     description = "MQTT Bed Remote";
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      ExecStart = (lib.getExe' bedrpc "server") + " -m 127.0.0.1";
+      ExecStart = (lib.getExe' bedrpc.server "server") + " -m 127.0.0.1";
       Restart = "on-failure";
       RestartSec = 5;
     };

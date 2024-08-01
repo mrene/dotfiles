@@ -59,6 +59,7 @@ in
           "spotify"
           "homeassistant_sky_connect"
           "unifiprotect" # not used but it complains about the uiprotect python package
+          "bluetooth"
         ];
         extraPackages = python3Packages: with python3Packages; [
           grpcio
@@ -70,6 +71,12 @@ in
               cp -s ${./9999.json} $out/custom_components/smartir/codes/climate/9999.json
             '';
           })
+        ];
+        customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
+          mini-graph-card
+          mini-media-player
+          lg-webos-remote-control
+          android-tv-card
         ];
       };
 
