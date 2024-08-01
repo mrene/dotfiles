@@ -10,11 +10,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1722480107,
-        "narHash": "sha256-gsLQWrldvuo6jL/k+6JhRuAT5aAK+CZeFO3sreui9zU=",
+        "lastModified": 1722513521,
+        "narHash": "sha256-BCCQ3EeDJ4ub3N6uJoFxuBQC8B1Qp6pQarZzaO0AB7s=",
         "ref": "refs/heads/master",
-        "rev": "bae833391d5ccbf3ca46083b9e7a6e8d315bdf74",
-        "revCount": 28,
+        "rev": "b62ede846157ec12cd4f60ba0c3c3bf842e1be9c",
+        "revCount": 30,
         "type": "git",
         "url": "ssh://git@github.com/mrene/bedrpc"
       },
