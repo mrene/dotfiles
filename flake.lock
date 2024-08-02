@@ -4,17 +4,18 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
+        "nix-filter": "nix-filter",
         "nixpkgs": [
           "nixpkgs"
         ],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1722513521,
-        "narHash": "sha256-BCCQ3EeDJ4ub3N6uJoFxuBQC8B1Qp6pQarZzaO0AB7s=",
+        "lastModified": 1722559491,
+        "narHash": "sha256-lvR98ohITJxjt0jayg5Z0Xyf3QpuuXKVClvgxvWjfOM=",
         "ref": "refs/heads/master",
-        "rev": "b62ede846157ec12cd4f60ba0c3c3bf842e1be9c",
-        "revCount": 30,
+        "rev": "3d942f5f6c7d860d4e03f4d2550975706e41032b",
+        "revCount": 33,
         "type": "git",
         "url": "ssh://git@github.com/mrene/bedrpc"
       },
@@ -643,7 +644,7 @@
       "inputs": {
         "flake-compat": "flake-compat_3",
         "flake-utils": "flake-utils_3",
-        "nix-filter": "nix-filter",
+        "nix-filter": "nix-filter_2",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -725,6 +726,21 @@
       }
     },
     "nix-filter": {
+      "locked": {
+        "lastModified": 1710156097,
+        "narHash": "sha256-1Wvk8UP7PXdf8bCCaEoMnOT1qe5/Duqgj+rL8sRQsSM=",
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "rev": "3342559a24e85fc164b295c3444e8a139924675b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "type": "github"
+      }
+    },
+    "nix-filter_2": {
       "locked": {
         "lastModified": 1701697642,
         "narHash": "sha256-L217WytWZHSY8GW9Gx1A64OnNctbuDbfslaTEofXXRw=",

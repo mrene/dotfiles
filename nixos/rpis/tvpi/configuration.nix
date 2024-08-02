@@ -15,7 +15,7 @@
     ../../common/packages.nix
     ../../common/common.nix
     ../../modules
-    ../bedpi/bed-remote.nix
+    ./bed-remote.nix
   ];
 
   # Prevent a lot of superfluous FS from being compiled
