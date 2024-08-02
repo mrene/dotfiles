@@ -5,6 +5,9 @@ automation: !include automations.yaml
 
 scene: !include scenes.yaml
 
+frontend:
+  themes: !include_dir_merged_named themes
+
 homeassistant:
   latitude: 45.475320
   longitude: -73.562210 

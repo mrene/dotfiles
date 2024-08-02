@@ -21,15 +21,81 @@ in
         };
       };
 
-      # Bakced up via /opt/homeassistant below
+      # Backed up via /opt/homeassistant below
     }
 
     # Home Assistant Core
     {
       services.home-assistant = {
         enable = true;
-        config = null;
-        configWritable = true;
+        config = {
+          default_config = {};
+          automation = "!include automations.yaml";
+          scene = "!include scenes.yaml";
+          frontend = {
+            themes = "!include_dir_merge_named themes";
+          };
+          homeassistant = {
+            latitude = 45.475320;
+            longitude = -73.562210; 
+          };
+          smartir = {};
+          climate = [{
+              platform = "smartir";
+              name = "Heat pump";
+              unique_id = "heat_pump";
+              device_code = "9999";
+              controller_data = "remote.2nd_floor_ir";
+              temperature_sensor = "sensor.2nd_floor_ir_temperature";
+              humidity_sensor = "sensor.2nd_floor_ir_humidity";
+            }];
+          wake_on_lan = {};
+          switch = [
+            {
+              platform = "wake_on_lan";
+              mac = "1c:fd:08:7e:19:59";
+              name = "beast";
+            }
+            {
+              platform ="wake_on_lan";
+              mac ="64:E4:A5:E2:38:F4";
+              name = "tv";
+            }
+          ];
+          script = let 
+            makeIrScript = { entity ? "remote.2nd_floor_ir", command }: {
+              sequence = [
+                  {
+                    service = "remote.send_command";
+                    target = {
+                      entity_id = entity;
+                    };
+                    data = {
+                      inherit command;
+                    };
+                  }
+              ];
+            };
+          in          
+          {
+            fan_power = makeIrScript { 
+              command = "b64:JgB4AAABIpIQOBMTERMSEhISEhITEhISEhISNxI3EjcROBA4ETgSNxE3ETgSExISEhISExETERQRExETETcSNxM3EDgSNxE3ETgSNhIUERMRExITERMRExETEhMRNxI3EDkSNxE4ETcSAAG0AAEjSRIADDcAASFKEgANBQ=="; 
+            };
+            fan_speed = makeIrScript { 
+              command = "b64:JgB4AAABI5EROBETERMSFBETERMRExITERMSNhI3ETcSOBI3ETcRNxI3ETgQFQ8VEjcRExETERMSEhITEjYROBITEjcRNxE3ETgSNhITEhMSNhISExISEhISEhITNhE4ERQRNxI3ETgRAAG0AAEjSREADDIAASNJEQANBQ=="; 
+            };
+            fan_rotate = makeIrScript { 
+              command = "b64:JgB4AAABI5EROBETERMSFBETERMRExITERMSNhI3ETcSOBI3ETcRNxI3ETgQFQ8VEjcRExETERMSEhITEjYROBITEjcRNxE3ETgSNhITEhMSNhISExISEhISEhITNhE4ERQRNxI3ETgRAAG0AAEjSREADDIAASNJEQANBQ=="; 
+            };
+            fan_timer = makeIrScript {
+              command = "b64:JgB4AAABIZMRNxISEhITEhISEhISEhIUEhIROBA4ETcSNxI3ETgRNxM3ETcQFBE3EhISFBISEhISEhMSEjYSEhI3ETgROBI2EjcRNxITETcSEhISEhQQFBISEhISNxETETgRNxE4EjcSAAG0AAEhShEADDIAASJKEQANBQ==";
+            };
+            fan_pattern = makeIrScript {
+              command = "b64:JgBwAAABIZMPOhAUEBQRExEUEBQRExETERQQORA4ETgROBE4EDcSOBE4ETcROBE4EBQRExAUERQQFBEVDxQRExI3ETgRNxE3ETkQORE4ETcRExAUEhMRExETERMQFhETEDgROBA4EjgQAAG1AAEiShEADQU=";
+            };
+          };
+        };
+        configWritable = false;
         configDir = "/opt/homeassistant/config";
         extraComponents = [
           "default_config"
@@ -80,6 +146,21 @@ in
         ];
       };
 
+      systemd.tmpfiles.rules = let 
+          lcars = (pkgs.fetchFromGitHub {
+            owner = "th3jesta";
+            repo = "ha-lcars";
+            rev = "9c7b06590a0007566ad69ba163596e7108b89f7e";
+            hash = "sha256-XGoBjtVM1qloWu6kllVdiGuErGAid9j8jcbQE7nbCAg=";
+          }) + "/themes";
+
+          themes = pkgs.symlinkJoin {
+            name = "home-assistant-themes";
+            paths = [ lcars ];
+          };
+        in
+        [ "L+ '${themes}' - - - - '${config.services.home-assistant.configDir}/themes}'" ];
+
       homelab.backups.paths = [ hostBasePath ];
     }
 
@@ -87,7 +168,6 @@ in
       services.matter-server = {
         enable = true;
         logLevel = "info";
-        #extraArgs = [ "--paa-root-cert-dir" "/var/lib/matter-server/credentials" ];
       };
 
       # Override the launch params because "--vendorid 4939" prevents it from starting
@@ -142,16 +222,5 @@ in
       homelab.backups.paths = [ "/var/lib/mosquitto" ];
     }
   ]
-  # services.influxdb2.enable = true;
-  # services.grafana = {
-  #   enable = true;
-  #   settings = {
-  #     server = {
-  #       http_addr = "0.0.0.0";
-  #       http_port = 8087;
-  #       domain = "192.168.1.245:8087";
-  #       root_url = "http://192.168.1.245:8087";
-  #     };
-  #   };
-  # };
+
 

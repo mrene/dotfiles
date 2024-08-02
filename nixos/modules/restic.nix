@@ -8,7 +8,7 @@ in
   options.homelab.backups = {
     enable = lib.mkEnableOption "Enable homelab backups configuration";
     paths = lib.mkOption {
-      type = lib.types.listOf lib.types.string;
+      type = lib.types.listOf lib.types.str;
       default = [];
       description = "Paths to backup";
     };
