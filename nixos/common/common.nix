@@ -61,4 +61,16 @@ in {
   ];
 
   networking.firewall.rejectPackets = true;
+
+  services.avahi = {
+    enable = true;
+    ipv4 = true;
+    ipv6 = true;
+    publish = {
+      addresses = true;
+      userServices = true;
+      workstation = true;
+      enable = true;
+    };
+  };
 }
