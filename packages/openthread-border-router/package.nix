@@ -38,12 +38,16 @@ stdenv.mkDerivation {
   patches = [
     ./dont-install-systemd-units.patch
     ./dont-use-boost-static-libs.patch
-    # "${hass-addons}/openthread_border_router/0001-channel-monitor-disable-by-default.patch"
-    # "${hass-addons}/openthread_border_router/0002-posix-fix-build-with-custom-netif-prefix-route-set.patch"
     "${hass-addons}/openthread_border_router/0002-rest-support-deleting-the-dataset.patch"
-    # "${hass-addons}/openthread_border_router/0003-openthread-set-netif-route-metric-lower.patch"
-    # "${hass-addons}/openthread_border_router/0004-Deassert-DTR-and-RTS-if-flow-control-is-disabled.patch"
+    "${hass-addons}/openthread_border_router/0003-openthread-set-netif-route-metric-lower.patch"
   ];
+
+  postPatch = ''
+    pushd third_party/openthread/repo
+      patch -p1 -i "${hass-addons}/openthread_border_router/0001-channel-monitor-disable-by-default.patch"
+    popd
+
+  '';
 
   nativeBuildInputs = [
     pkg-config
