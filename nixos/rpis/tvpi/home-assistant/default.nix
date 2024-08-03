@@ -1,6 +1,18 @@
 {pkgs, lib, config, ...}: let
   sources = pkgs.callPackage ../../../../_sources {};
   hostBasePath = "/opt/homeassistant";
+  themes = {
+    catppuccin = pkgs.fetchFromGitHub {
+      owner = "catppuccin";
+      repo = "home-assistant";
+      rev = "e877188ca467e7bbe8991440f6b5f6b3d30347fc";
+      hash = "sha256-eUqYlaXNLPfaKn3xcRm5AQwTOKf70JF8cepibBb9KXc=";
+    };
+  };
+  joinedThemes = pkgs.symlinkJoin {
+    name = "home-assistant-themes";
+    paths = (builtins.map (t: "${t}/themes") (builtins.attrValues themes));
+  };
 in 
   lib.mkMerge [
     # Hydro Quebec Usage Importer
@@ -95,7 +107,7 @@ in
             };
           };
         };
-        configWritable = false;
+        configWritable = true;
         configDir = "/opt/homeassistant/config";
         extraComponents = [
           "default_config"
@@ -143,23 +155,13 @@ in
           mini-media-player
           lg-webos-remote-control
           android-tv-card
+          card-mod
         ];
       };
 
-      systemd.tmpfiles.rules = let 
-          lcars = (pkgs.fetchFromGitHub {
-            owner = "th3jesta";
-            repo = "ha-lcars";
-            rev = "9c7b06590a0007566ad69ba163596e7108b89f7e";
-            hash = "sha256-XGoBjtVM1qloWu6kllVdiGuErGAid9j8jcbQE7nbCAg=";
-          }) + "/themes";
-
-          themes = pkgs.symlinkJoin {
-            name = "home-assistant-themes";
-            paths = [ lcars ];
-          };
-        in
-        [ "L+ '${themes}' - - - - '${config.services.home-assistant.configDir}/themes}'" ];
+      systemd.tmpfiles.rules =  [ 
+        "L+ ${config.services.home-assistant.configDir}/themes - - - - ${joinedThemes}" 
+      ];
 
       homelab.backups.paths = [ hostBasePath ];
     }
