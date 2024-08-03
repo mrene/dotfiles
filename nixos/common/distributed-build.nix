@@ -41,6 +41,5 @@
   nix.distributedBuilds = true;
   nix.settings.builders-use-substitutes = true;
   nix.settings.substituters =
-    lib.optionals (false && config.networking.hostName != "nas") ["http://nas:5000"]
-    ++ lib.optionals (config.networking.hostName != "beast") ["http://beast:5000"];
+    lib.optionals (false && config.networking.hostName != "nas") ["http://nas.local:5000"];
 }
