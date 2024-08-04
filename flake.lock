@@ -1055,16 +1055,16 @@
     },
     "nixpkgs_11": {
       "locked": {
-        "lastModified": 1722300864,
-        "narHash": "sha256-onVCHVNQH+C2k1WXPnV+CJrd4MqY4/eydKSDLp5naa4=",
+        "lastModified": 1722795313,
+        "narHash": "sha256-P1mpwjgsSHh9KL7i5kggYp4Xgh45UQlkD+I3mPX+oNo=",
         "owner": "mrene",
         "repo": "nixpkgs",
-        "rev": "ce749b83c1b53f7b8383132f19edc58b49b6d8b9",
+        "rev": "a5f49ed099422ca30f9e46085cda27af910be908",
         "type": "github"
       },
       "original": {
         "owner": "mrene",
-        "ref": "home-assistant-cli-shell-completions",
+        "ref": "openthread-border-router",
         "repo": "nixpkgs",
         "type": "github"
       }

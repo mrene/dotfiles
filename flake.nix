@@ -1,7 +1,7 @@
 {
   inputs = {
     #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:mrene/nixpkgs/home-assistant-cli-shell-completions";
+    nixpkgs.url = "github:mrene/nixpkgs/openthread-border-router";
     nixpkgs-unfree = {
       url = "github:numtide/nixpkgs-unfree";
       inputs.nixpkgs.follows = "nixpkgs";
