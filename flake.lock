@@ -1055,16 +1055,16 @@
     },
     "nixpkgs_11": {
       "locked": {
-        "lastModified": 1722300864,
-        "narHash": "sha256-onVCHVNQH+C2k1WXPnV+CJrd4MqY4/eydKSDLp5naa4=",
-        "owner": "mrene",
+        "lastModified": 1722630782,
+        "narHash": "sha256-hMyG9/WlUi0Ho9VkRrrez7SeNlDzLxalm9FwY7n/Noo=",
+        "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ce749b83c1b53f7b8383132f19edc58b49b6d8b9",
+        "rev": "d04953086551086b44b6f3c6b7eeb26294f207da",
         "type": "github"
       },
       "original": {
-        "owner": "mrene",
-        "ref": "home-assistant-cli-shell-completions",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
