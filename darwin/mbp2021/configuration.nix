@@ -16,6 +16,7 @@ in
     fish
     bandwhich
     nixos-rebuild
+    pkg-config
   ];
 
   # Auto upgrade nix package and the daemon service.

@@ -38,7 +38,7 @@
       graphviz
       curlie
 
-      yt-dlp
+      #yt-dlp
       speedtest-cli
 
       # JS
@@ -74,7 +74,7 @@
       nurl
       jsonnet-language-server
       buf-language-server
-      rtx
+      mise
 
       # markdown lsp
       marksman
