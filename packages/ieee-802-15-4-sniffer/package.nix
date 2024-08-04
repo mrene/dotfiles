@@ -9,7 +9,7 @@ let
   gnuradio = inputs.self.packages.${system}.gnuradio;
 in
 stdenvNoCC.mkDerivation {
-  name = "oqpsk-sniffer";
+  name = "ieee-802-15-4-sniffer";
   version = "1.0";
   src = ./.;
 
@@ -36,7 +36,7 @@ stdenvNoCC.mkDerivation {
     mkdir -p $out/bin
     mkdir -p $out/${gnuradio.pythonEnv.sitePackages}
     cp ./*.py $out/${gnuradio.pythonEnv.sitePackages}
-    cp ./oqpsk_sniffer.py $out/bin/802-15-4-sniffer
+    cp ./oqpsk_sniffer.py $out/bin/ieee-802-15-4-sniffer
     runHook postInstall
   '';
 
@@ -49,5 +49,9 @@ stdenvNoCC.mkDerivation {
       --prefix PYTHONPATH : "${gnuradio.pythonEnv}/${gnuradio.pythonEnv.sitePackages}:$out/${gnuradio.pythonEnv.sitePackages}"
     done
   '';
+
+  meta = {
+    mainProgram = "ieee-802-15-4-sniffer";
+  };
 }
 
