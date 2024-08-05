@@ -51,6 +51,18 @@ in
             latitude = 45.475320;
             longitude = -73.562210; 
           };
+          homekit = [
+            {
+              filter = {
+                include_entity_globs = [
+                  "climate.*"
+                  "media_player.lg_webos_smart_tv"
+                  "media_player.denon_avr_x1600h"
+                  "media_player.denon_avr_x1600h_2"
+                ];
+              };
+            }
+          ];
           smartir = {};
           climate = [{
               platform = "smartir";
