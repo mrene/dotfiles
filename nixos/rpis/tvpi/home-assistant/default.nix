@@ -1,4 +1,4 @@
-{pkgs, lib, config, ...}: let
+{pkgs, lib, config, inputs, ...}: let
   sources = pkgs.callPackage ../../../../_sources {};
   hostBasePath = "/opt/homeassistant";
   themes = {
@@ -163,13 +163,17 @@ in
             '';
           })
         ];
-        customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
+        customLovelaceModules = (with pkgs.home-assistant-custom-lovelace-modules; [
           mini-graph-card
           mini-media-player
           lg-webos-remote-control
           android-tv-card
           card-mod
-        ];
+        ]) ++ (with inputs.mrene-nur.packages.${pkgs.system}; [
+          clock-weather-card
+          lovelace-auto-entities
+          lovelace-slider-entity-row
+        ]);
       };
 
       systemd.tmpfiles.rules =  [ 
