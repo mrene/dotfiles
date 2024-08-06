@@ -12,6 +12,7 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mrene-nur.url = "github:mrene/nur-packages";
     nixos-generators.url = "github:nix-community/nixos-generators"; # Generate vm images and initial boot media
     nixos-hardware.url = "github:NixOS/nixos-hardware"; # Raspberry Pi 4 modules
     darwin = {
