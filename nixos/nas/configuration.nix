@@ -59,6 +59,7 @@
       "/bulk/replicated"
     ];
   };
+  homelab.attic.enable = true;
 
 
   # Prevent the X server from starting up
@@ -68,7 +69,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   # Required for distributed builds
-  users.users.root.openssh.authorizedKeys.keys = common.builderKeys;
+  users.users.root.openssh.authorizedKeys.keys = common.builderKeys ++ common.sudoSshKeys;
 
   home-manager = {
     users.mrene = import ../../home-manager/nas.nix;

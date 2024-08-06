@@ -18,6 +18,7 @@
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    attic.url = "github:zhaofengli/attic";
     minidsp = {
       url = "github:mrene/minidsp-rs";
       inputs.nixpkgs.follows = "nixpkgs";
