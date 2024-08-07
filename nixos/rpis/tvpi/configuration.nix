@@ -45,6 +45,7 @@
   };
 
   homelab.backups.enable = true;
+  homelab.dyndns.enable = true;
 
   networking = {
     hostName = "tvpi";

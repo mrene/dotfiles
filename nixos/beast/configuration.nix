@@ -45,6 +45,7 @@
     ];
   };
 
+  homelab.dyndns.enable = true;
 
   programs.nh = {
     enable = true;

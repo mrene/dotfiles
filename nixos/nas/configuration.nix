@@ -61,6 +61,7 @@
   };
   homelab.attic.enable = true;
   homelab.caddy.enable = true;
+  homelab.dyndns.enable = true;
 
 
   # Prevent the X server from starting up
