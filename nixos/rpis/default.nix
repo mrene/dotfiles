@@ -28,31 +28,31 @@
   };
 in {
   flake.nixosConfigurations = {
-    # rpi1 + bladeRF
-    bedpi = inputs.nixpkgs-frozen.lib.nixosSystem {
-      pkgs = rpi1pkgs;
-      specialArgs = {
-        inherit (self) common;
-        inherit inputs;
-      };
-      modules = [
-        ./bedpi/configuration.nix
-        "${inputs.nixpkgs-frozen}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
-      ];
-    };
+    # # rpi1 + bladeRF
+    # bedpi = inputs.nixpkgs-frozen.lib.nixosSystem {
+    #   pkgs = rpi1pkgs;
+    #   specialArgs = {
+    #     inherit (self) common;
+    #     inherit inputs;
+    #   };
+    #   modules = [
+    #     ./bedpi/configuration.nix
+    #     "${inputs.nixpkgs-frozen}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+    #   ];
+    # };
 
-    # test rpi1
-    testpi = inputs.nixpkgs-frozen.lib.nixosSystem {
-      pkgs = rpi1pkgs;
-      specialArgs = {
-        inherit (self) common;
-        inherit inputs;
-      };
-      modules = [
-        ./testpi/configuration.nix
-        "${inputs.nixpkgs-frozen}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
-      ];
-    };
+    # # test rpi1
+    # testpi = inputs.nixpkgs-frozen.lib.nixosSystem {
+    #   pkgs = rpi1pkgs;
+    #   specialArgs = {
+    #     inherit (self) common;
+    #     inherit inputs;
+    #   };
+    #   modules = [
+    #     ./testpi/configuration.nix
+    #     "${inputs.nixpkgs-frozen}/nixos/modules/installer/sd-card/sd-image-raspberrypi.nix"
+    #   ];
+    # };
 
     # rpi4
     tvpi = inputs.nixpkgs.lib.nixosSystem {

@@ -743,11 +743,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1722942458,
-        "narHash": "sha256-3SGWZsyGoOU9542yWIeU9JgCLNwFxoMh1EX4vaa7rMA=",
+        "lastModified": 1722998692,
+        "narHash": "sha256-DDlyY/SQcUnl8GIv8sWofJ53/998epYEnAXwW4HNpS0=",
         "owner": "mrene",
         "repo": "nur-packages",
-        "rev": "fcab4bf1d5dcabd050b6e58340e8abc11c95d3e9",
+        "rev": "16dd60d2387a57bc771127b02e15070e5fedc36b",
         "type": "github"
       },
       "original": {

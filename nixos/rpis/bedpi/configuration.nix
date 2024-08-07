@@ -12,7 +12,6 @@
     ./hardware-configuration.nix
     ../../common/common.nix
     ../rpi1-quirks.nix
-    ./bed-remote.nix
   ];
 
   # NixOS wants to enable GRUB by default
