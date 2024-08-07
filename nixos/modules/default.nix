@@ -6,5 +6,6 @@
     ./sops.nix
     ./restic.nix
     ./attic.nix
+    ./caddy.nix
   ];
 }

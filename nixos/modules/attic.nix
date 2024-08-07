@@ -10,6 +10,11 @@ in
 
   options.homelab.attic = {
     enable = lib.mkEnableOption "Enable homelab attic configuration";
+    domain = lib.mkOption {
+      type = lib.types.str;
+      default = "nixcache.mathieurene.com";
+      description = "The domain to use for the attic service";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -42,6 +47,12 @@ in
           max-size = 256 * 1024; # 256 KiB
         };
       };
+    };
+
+    services.caddy.virtualHosts."${cfg.domain}" = lib.mkIf config.services.caddy.enabled {
+      extraConfig = ''
+        reverse_proxy http://localhost:8080
+      '';
     };
   };
 }
