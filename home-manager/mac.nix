@@ -32,7 +32,7 @@
 
   home.packages = with pkgs; [
     inputs.minidsp.packages.${system}.default
-    inputs.self.packages.${system}.pathfind
+    inputs.nur.packages.${system}.pathfind
   ];
 
   home.stateVersion = "20.09";
