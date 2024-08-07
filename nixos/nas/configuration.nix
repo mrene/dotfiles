@@ -60,6 +60,7 @@
     ];
   };
   homelab.attic.enable = true;
+  homelab.caddy.enable = true;
 
 
   # Prevent the X server from starting up

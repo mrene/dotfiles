@@ -49,7 +49,7 @@ in
       };
     };
 
-    services.caddy.virtualHosts."${cfg.domain}" = lib.mkIf config.services.caddy.enabled {
+    services.caddy.virtualHosts."${cfg.domain}" = lib.mkIf config.services.caddy.enable {
       extraConfig = ''
         reverse_proxy http://localhost:8080
       '';
