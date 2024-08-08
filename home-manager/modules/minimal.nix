@@ -60,8 +60,8 @@
       cattpuccin = pkgs.fetchFromGitHub {
         owner = "catppuccin";
         repo = "bat";
-        rev = "82e7ca555f805b53d2b377390e4ab38c20282e83";
-        sha256 = "161xfhykjw8n8kc2qjg64v3yw10mn39b6v3r170r133j4n4gvrpw";
+        rev = "d3feec47b16a8e99eabb34cdfbaa115541d374fc";
+        sha256 = "1g73x0p8pbzb8d1g1x1fwhwf05sj3nzhbhb65811752p5178fh5k";
       };
     in {
       Catppuccin-latte.src = "${cattpuccin}/Catppuccin-latte.tmTheme";
