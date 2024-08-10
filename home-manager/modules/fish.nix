@@ -104,6 +104,17 @@
           hash = "sha256-CqRSkwNqI/vdxPKrShBykh+eHQq9QIiItD6jWdZ/DSM=";
         };
       }
+      {
+        # Syncs fish_completion_path from XDG_DATA_DIR, this makes completions
+        # work with direnv (if the package is added to nativeBuildInputs)
+        name = "fish-completion-sync";
+        src = pkgs.fetchFromGitHub {
+          owner = "pfgray";
+          repo = "fish-completion-sync";
+          rev = "f75ed04e98b3b39af1d3ce6256ca5232305565d8";
+          hash = "sha256-wmtMUVi/NmbvJtrPbORPhAwXgnILvm4rjOtjl98GcWA=";
+        };
+      }
     ];
 
     shellAliases = {

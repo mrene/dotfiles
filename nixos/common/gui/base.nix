@@ -9,8 +9,7 @@
   fonts.fontDir.enable = true;
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
   };
 
   environment.systemPackages = with pkgs;
@@ -30,7 +29,7 @@
     ]
     ++ pkgs.lib.optionals pkgs.stdenv.isx86_64 [
       keybase-gui
-      (google-chrome.override (_old: {commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode";}))
+      (google-chrome.override {commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode";})
     ];
 
   programs._1password = {

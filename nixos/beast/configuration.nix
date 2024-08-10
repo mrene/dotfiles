@@ -78,10 +78,9 @@
   networking.hostName = "beast";
 
   # Graphics
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
-
+    enable32Bit = true;
     extraPackages = with pkgs; [
       vaapiVdpau
       libvdpau-va-gl
@@ -105,8 +104,8 @@
 
   hardware.openrazer = {
     enable = true;
-    mouseBatteryNotifier = true;
     users = ["mrene"];
+    batteryNotifier.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -142,10 +141,8 @@
   # used to escalate privileges to root.
   services.openssh.authorizedKeysFiles = lib.mkForce ["/etc/ssh/authorized_keys.d/%u"];
 
-  virtualisation.docker = {
-    enable = true;
-    enableNvidia = true;
-  };
+  virtualisation.docker.enable = true;
+  hardware.nvidia-container-toolkit.enable = true;
 
   services.minidsp = {
     enable = true;
