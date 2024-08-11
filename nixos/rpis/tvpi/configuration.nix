@@ -14,6 +14,7 @@
     ./home-assistant
     ../../common/packages.nix
     ../../common/common.nix
+    ../../common/radio.nix
     ../../modules
     ./bed-remote.nix
   ];

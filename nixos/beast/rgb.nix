@@ -18,7 +18,7 @@
     serviceConfig = {
       Type = "oneshot";
       After = ["openrgb.service"];
-      ExecStart = "${lib.getExe inputs.mrene-nur.packages.${pkgs.system}.openrgbWithPatches} -p ${./../../home-manager/modules/rgb}/default.orp";
+      ExecStart = "${lib.getExe inputs.mrene-nur.packages.${pkgs.system}.openrgb-sdnotify} -p ${./../../home-manager/modules/rgb}/default.orp";
     };
   };
 }
