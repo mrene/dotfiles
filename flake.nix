@@ -1,12 +1,11 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unfree = {
       url = "github:numtide/nixpkgs-unfree";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs-frozen.url = "github:NixOS/nixpkgs/8ecc900b2f695d74dea35a92f8a9f9b32c8ea33d"; # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
-    nixpkgs-before-electron-eol.url = "github:NixOS/nixpkgs/8de5bd2ac7c9a1c77a38e8951daa889b6052697f";
+    # nixpkgs-frozen.url = "github:NixOS/nixpkgs/8ecc900b2f695d74dea35a92f8a9f9b32c8ea33d"; # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,13 +14,16 @@
       url = "github:mrene/nur-packages";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-generators.url = "github:nix-community/nixos-generators"; # Generate vm images and initial boot media
+    # nixos-generators.url = "github:nix-community/nixos-generators"; # Generate vm images and initial boot media
     nixos-hardware.url = "github:NixOS/nixos-hardware"; # Raspberry Pi 4 modules
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    attic.url = "github:zhaofengli/attic";
+    attic = {
+      url = "github:zhaofengli/attic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     minidsp = {
       url = "github:mrene/minidsp-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,14 +32,22 @@
       url = "github:mrene/fzf-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nil.url = "github:oxalica/nil"; # Nix LSP
-    nixd = {url = "github:nix-community/nixd";};
+    nixd = {
+      url = "github:nix-community/nixd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-compat = {
       url = "github:inclyc/flake-compat";
       flake = false;
     }; # Required for nixd
-    vscode-server.url = "github:msteen/nixos-vscode-server"; # NixOS fix so that vscode-server can run correctly
-    nix-init.url = "github:nix-community/nix-init"; # Tool to scaffold new packages automatically
+    vscode-server = {
+      url = "github:msteen/nixos-vscode-server"; # NixOS fix so that vscode-server can run correctly
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-init = {
+      url = "github:nix-community/nix-init"; # Tool to scaffold new packages automatically
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,19 +60,27 @@
       url = "git+ssh://git@github.com/mrene/bedrpc";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nh = {
-      url = "github:viperML/nh";
+    devshell = {
+      url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    devshell.url = "github:numtide/devshell";
-    nix-update.url = "github:Mic92/nix-update";
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nix-update = {
+      url = "github:Mic92/nix-update";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-vscode-extensions = { 
+      url = "github:nix-community/nix-vscode-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:

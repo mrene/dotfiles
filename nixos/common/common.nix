@@ -11,9 +11,9 @@ in {
   ];
 
   nix = {
-    package = pkgs.nixVersions.nix_2_21; # or versioned attributes like nix_2_4
+    package = pkgs.nixVersions.latest; # or versioned attributes like nix_2_4
     settings = {
-      experimental-features = ["flakes" "nix-command"];
+      experimental-features = ["flakes" "nix-command" "fetch-closure"];
       auto-optimise-store = true;
       keep-outputs = true;
       keep-derivations = true;

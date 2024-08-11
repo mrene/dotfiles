@@ -50,7 +50,6 @@ local lsp_flags = {
 }
 
 -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
--- nil_ls
 local servers = {  'pyright', 'tsserver','jsonnet_ls', 'bufls', 'marksman', 'jsonls', 'clangd', 'nixd' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {

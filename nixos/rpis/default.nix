@@ -13,19 +13,19 @@
     })
   ];
 
-  rpi1pkgs = import inputs.nixpkgs-frozen {
-    config = {allowUnfree = true;};
-    overlays = rpiOverlays;
-    system = "x86_64-linux";
-    crossSystem = {
-      system = "armv6l-linux";
-      # https://discourse.nixos.org/t/building-libcamera-for-raspberry-pi/26133/9
-      gcc = {
-        arch = "armv6k";
-        fpu = "vfp";
-      };
-    };
-  };
+  # rpi1pkgs = import inputs.nixpkgs-frozen {
+  #   config = {allowUnfree = true;};
+  #   overlays = rpiOverlays;
+  #   system = "x86_64-linux";
+  #   crossSystem = {
+  #     system = "armv6l-linux";
+  #     # https://discourse.nixos.org/t/building-libcamera-for-raspberry-pi/26133/9
+  #     gcc = {
+  #       arch = "armv6k";
+  #       fpu = "vfp";
+  #     };
+  #   };
+  # };
 in {
   flake.nixosConfigurations = {
     # # rpi1 + bladeRF
