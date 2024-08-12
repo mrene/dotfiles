@@ -62,6 +62,9 @@ in {
 
   networking.firewall.rejectPackets = true;
 
+  # Trim SSD weekly
+  services.fstrim.enable = true;
+
   services.avahi = {
     enable = true;
     ipv4 = true;
