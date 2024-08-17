@@ -156,6 +156,7 @@ in
           grpcio
         ];
         customComponents = with pkgs.home-assistant-custom-components; [
+          smartthinq-sensors
           (smartir.overrideAttrs { 
             postInstall = ''
               cp -r codes $out/custom_components/smartir/
