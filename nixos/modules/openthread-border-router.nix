@@ -169,6 +169,7 @@ in
       otbr-web = {
         description = "OpenThread Border Router Web";
         after = [ "otbr-agent.service"];
+        wantedBy = [ "multi-user.target" ];
         serviceConfig = {
           ExecStart = (lib.concatStringsSep " " (
                [
