@@ -63,6 +63,7 @@ pkgs.vscode-with-extensions.override {
         github.vscode-pull-request-github
         esbenp.prettier-vscode
         mkhl.direnv
+        llvm-vs-code-extensions.vscode-clangd
       ]
       ++ lib.optionals (! (stdenv.isAarch64 && stdenv.isLinux)) [
         ms-vscode.cpptools

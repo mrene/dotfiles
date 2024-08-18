@@ -61,6 +61,19 @@ in
       };
     };
 
+    web = {
+      enable = lib.mkEnableOption "Enable the web interface";
+      listenAddress = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+      };
+
+      listenPort = lib.mkOption {
+        type = lib.types.int;
+        default = 8082;
+      };
+    };
+
     radio = {
       device = lib.mkOption {
         type = lib.types.str;
@@ -152,9 +165,22 @@ in
         path = [ pkgs.ipset ];
       };
 
-      # TODO: Build disabled due to npm dependency
       # src/web/otbr-web.service.in
-      # otbr-web = {};
+      otbr-web = {
+        description = "OpenThread Border Router Web";
+        after = [ "otbr-agent.service "];
+        serviceConfig = {
+          ExecStart = (lib.concatStringsSep " " (
+               [
+                (lib.getExe' cfg.package "otbr-web")
+                "-I" "${cfg.interfaceName}"
+                "-d" "${toString cfg.logLevel}"
+               ] 
+               ++ (lib.optional (cfg.web.listenAddress != "") "-a ${cfg.web.listenAddress}")
+               ++ (lib.optional (cfg.web.listenPort != 0) "-p ${toString cfg.web.listenPort}")
+          ));
+        };
+      };
     };
   };
 }

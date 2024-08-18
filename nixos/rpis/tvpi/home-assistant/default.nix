@@ -222,6 +222,10 @@ in
         rest = {
           listenPort = 58081;
         };
+        web = {
+          enable = true;
+          listenPort = 58082;
+        };
       };
 
       # Backup thread netdata (includes network credentials (aka "dataset"))
