@@ -149,7 +149,7 @@ in
         serviceConfig = {
           ExecStart = (lib.concatStringsSep " " (
                [(lib.getExe' cfg.package "otbr-agent")]
-            ++ ["--verbose"]
+            ++ ["--verbose" "--syslog-disable"]
             ++ ["--backbone-ifname ${cfg.backboneInterface}"]
             ++ ["--thread-ifname ${cfg.interfaceName}"]
             ++ ["--debug-level ${toString cfg.logLevel}"]
@@ -168,7 +168,7 @@ in
       # src/web/otbr-web.service.in
       otbr-web = {
         description = "OpenThread Border Router Web";
-        after = [ "otbr-agent.service "];
+        after = [ "otbr-agent.service"];
         serviceConfig = {
           ExecStart = (lib.concatStringsSep " " (
                [
