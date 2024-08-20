@@ -58,12 +58,31 @@
     enable = true;
     paths = [
       "/bulk/replicated"
+      # Backup thread netdata (includes network credentials (aka "dataset"))
+      "/var/lib/thread"
     ];
   };
   homelab.attic.enable = true;
   homelab.caddy.enable = true;
   homelab.dyndns.enable = true;
 
+  services.openthread-border-router = {
+    enable = true;
+    backboneInterface = "enp2s0";
+    logLevel = 3;
+    radio =  {
+      device = "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231118192304-if00";
+      baudRate = 460800;
+      extraDevices = [ "trel://enp2s0" ];
+    };
+    rest = {
+      listenPort = 58081;
+    };
+    web = {
+      enable = true;
+      listenPort = 58082;
+    };
+  };
 
   # Prevent the X server from starting up
   services.xserver.displayManager.lightdm.enable = false;

@@ -42,10 +42,29 @@
     enable = true;
     paths = [
       "/home/mrene/logseq"
+      "/var/lib/thread"
     ];
   };
 
   homelab.dyndns.enable = true;
+
+  services.openthread-border-router = {
+    enable = true;
+    backboneInterface = "enp45s0";
+    logLevel = 3;
+    radio =  {
+      device = "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231118163708-if00";
+      baudRate = 460800;
+      extraDevices = [ "trel://enp45s0" ];
+    };
+    rest = {
+      listenPort = 58081;
+    };
+    web = {
+      enable = true;
+      listenPort = 58082;
+    };
+  };
 
   programs.nh = {
     enable = true;

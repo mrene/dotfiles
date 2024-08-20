@@ -24,28 +24,28 @@ in
     backboneInterface = lib.mkOption {
       type = lib.types.str;
       default = "eth0";
-      description = "The network interface on which to advertise the thread ipv6 range";
+      description = "The network interface on which to advertise the thread ipv6 mesh prefix";
     };
 
     interfaceName = lib.mkOption {
       type = lib.types.str;
       default = "wpan0";
-      description = "The network interface on which to advertise the thread ipv6 range";
+      description = "The network interface to create for thread packets";
     };
 
     logLevel = lib.mkOption {
       type = lib.types.int;
-      default = 7;
+      default = 3;
       description = ''
-      The logging level to use:
-        EMERG 0
-        ALERT 1
-        CRIT 2
-        ERR 3
-        WARNING 4
-        NOTICE 5
-        INFO 6
-        DEBUG 7
+        The logging level to use:
+          EMERG 0
+          ALERT 1
+          CRIT 2
+          ERR 3
+          WARNING 4
+          NOTICE 5
+          INFO 6
+          DEBUG 7
       '';
     };
 
@@ -53,13 +53,17 @@ in
       listenAddress = lib.mkOption {
         type = lib.types.str;
         default = "";
+        description = "Theaddress on which to listen for REST API requests";
+        example = "0.0.0.0";
       };
 
       listenPort = lib.mkOption {
         type = lib.types.int;
         default = 8081;
+        description = "The port on which to listen for REST API requests";
       };
     };
+
 
     web = {
       enable = lib.mkEnableOption "Enable the web interface";
@@ -101,9 +105,15 @@ in
       };
 
       url = lib.mkOption {
-        #TODO: There can technically be multiple URL if a device has more than one radio
         type = lib.types.str;
         description = "The URL of the radio device to use";
+      };
+
+      extraDevices = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+        description = "Extra devices to add to the radio device";
+        example = "[ \"trel://eth0\" ]";
       };
     };
   };
@@ -136,27 +146,29 @@ in
     services.avahi.publish.enable = lib.mkDefault true;
     services.avahi.publish.userServices = lib.mkDefault true;
 
-
     # Synchronize the services with the unit files defined in the source pacakge
     systemd.services = {
       # src/agent/otbr-agent.service.in
       # The agent keeps its local state in /var/lib/thread
-      otbr-agent = {
+     otbr-agent = {
         description = "OpenThread Border Router Agent";
         wantedBy = [ "multi-user.target" ];
-        requires =  [ "dbus.socket" ];
+        requires = [ "dbus.socket" ];
         after = [ "dbus.socket" ];
         serviceConfig = {
-          ExecStart = (lib.concatStringsSep " " (
-               [(lib.getExe' cfg.package "otbr-agent")]
-            ++ ["--verbose" "--syslog-disable"]
-            ++ ["--backbone-ifname ${cfg.backboneInterface}"]
-            ++ ["--thread-ifname ${cfg.interfaceName}"]
-            ++ ["--debug-level ${toString cfg.logLevel}"]
-            ++ (lib.optional (cfg.rest.listenPort != 0) "--rest-listen-port ${toString cfg.rest.listenPort}")
-            ++ (lib.optional (cfg.rest.listenAddress != "") "--rest-listen-address ${cfg.rest.listenAddress}")
-            ++ [cfg.radio.url]
-          ));
+          ExecStart = (
+            lib.concatStringsSep " " (
+              [ (lib.getExe' cfg.package "otbr-agent") ]
+              ++ [ "--verbose" ]
+              ++ [ "--backbone-ifname ${cfg.backboneInterface}" ]
+              ++ [ "--thread-ifname ${cfg.interfaceName}" ]
+              ++ [ "--debug-level ${toString cfg.logLevel}" ]
+              ++ (lib.optional (cfg.rest.listenPort != 0) "--rest-listen-port ${toString cfg.rest.listenPort}")
+              ++ (lib.optional (cfg.rest.listenAddress != "") "--rest-listen-address ${cfg.rest.listenAddress}")
+              ++ [ cfg.radio.url ]
+              ++ cfg.radio.extraDevices
+            )
+          );
           KillMode = "mixed";
           Restart = "on-failure";
           RestartSec = 5;

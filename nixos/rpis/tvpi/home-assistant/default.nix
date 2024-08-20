@@ -218,6 +218,7 @@ in
           device = "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_a8cf5592bed8ed1198a76f6162c613ac-if00-port0";
           baudRate = 460800;
           flowControl = true;
+          extraDevices = [ "trel://eth0" ];
         };
         rest = {
           listenPort = 58081;
