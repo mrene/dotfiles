@@ -63,7 +63,8 @@
     nameservers = ["1.1.1.1" "8.8.8.8"];
   };
 
-  users.users.root.openssh.authorizedKeys.keys = common.sshKeys;
+  # Required for distributed builds
+  users.users.root.openssh.authorizedKeys.keys = common.builderKeys ++ common.sudoSshKeys;
   users.defaultUserShell = pkgs.fish;
 
   users.users.mrene = {

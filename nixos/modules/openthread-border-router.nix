@@ -156,6 +156,10 @@ in
         requires = [ "dbus.socket" ];
         after = [ "dbus.socket" ];
         serviceConfig = {
+          Environment = [
+            "THREAD_IF=${cfg.interfaceName}"
+          ];
+          ExecStartPre = "${lib.getExe' cfg.package "otbr-firewall"} start";
           ExecStart = (
             lib.concatStringsSep " " (
               [ (lib.getExe' cfg.package "otbr-agent") ]
@@ -169,12 +173,13 @@ in
               ++ cfg.radio.extraDevices
             )
           );
+          ExecStopPost = "${lib.getExe' cfg.package "otbr-firewall"} stop";
           KillMode = "mixed";
           Restart = "on-failure";
           RestartSec = 5;
           RestartPreventExitStatus = "SIGKILL";
         };
-        path = [ pkgs.ipset ];
+        path = [ pkgs.ipset pkgs.iptables ];
       };
 
       # src/web/otbr-web.service.in

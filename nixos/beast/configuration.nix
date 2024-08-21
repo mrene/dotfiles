@@ -225,6 +225,7 @@
   #DNS=10.96.0.10
   #Domains=~cluster.local
   #'';
+  networking.firewall.enable = false;
   networking.firewall.allowedTCPPorts = [8501];
   networking.hosts = {
     "192.168.1.10" = ["localhost.humanfirst.ai"];

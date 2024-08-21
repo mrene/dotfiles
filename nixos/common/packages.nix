@@ -32,6 +32,15 @@
 
     btop
     man-pages
+    wireshark
+    sysstat
+    dstat
+    bat
+    eza
+    fd
+    tmux-xpanes
+    ipset
+    iptables
   ];
 
   programs.mtr.enable = true;
