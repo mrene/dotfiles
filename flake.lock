@@ -666,11 +666,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1723941495,
-        "narHash": "sha256-4q8A+n0U4UXRK+cc0SYci9ZB9d9z6fEgy9GQQ/EzoRM=",
+        "lastModified": 1724200605,
+        "narHash": "sha256-zkfdKnlv7y4RUHAFWoQBL23hG0Hfyq8eTkfowecAfx0=",
         "owner": "mrene",
         "repo": "nur-packages",
-        "rev": "47353f2251785f789eba923c4aec072c9fd526d3",
+        "rev": "035a532bdfad53791e324cb4a776a056550a096b",
         "type": "github"
       },
       "original": {

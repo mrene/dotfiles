@@ -163,6 +163,7 @@ in
               cp -s ${./9999.json} $out/custom_components/smartir/codes/climate/9999.json
             '';
           })
+          inputs.mrene-nur.packages.${pkgs.system}.connectlife-ha
         ];
         customLovelaceModules = (with pkgs.home-assistant-custom-lovelace-modules; [
           mini-graph-card
