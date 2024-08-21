@@ -175,6 +175,7 @@ in
           clock-weather-card
           lovelace-auto-entities
           lovelace-slider-entity-row
+          timer-bar-card
         ]);
       };
 
