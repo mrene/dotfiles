@@ -121,37 +121,37 @@ in
         };
         configWritable = true;
         configDir = "/opt/homeassistant/config";
-        extraComponents = lib.lists.subtractLists [ "raincloud" "tensorflow" "azure_devops" "azure_event_hub" "linode" ] config.services.home-assistant.package.passthru.availableComponents;
-        #[
-          #"default_config"
-          #"met"
-          #"esphome"
-          #"rpi_power"
-          #"homekit_controller"
-          #"dhcp"
-          #"stream"
-          #"mobile_app"
-          #"heos"
-          #"thread"
-          #"environment_canada"
-          #"vesync"
-          #"otbr"
-          #"webostv"
-          #"denonavr"
-          #"tailscale"
-          #"tuya"
-          #"apple_tv"
-          #"influxdb"
-          #"upnp"
-          #"cast"
-          #"homekit"
-          #"wake_on_lan"
-          #"nest"
-          #"spotify"
-          #"homeassistant_sky_connect"
-          #"unifiprotect" # not used but it complains about the uiprotect python package
-          #"bluetooth"
-        #];
+        extraComponents = #lib.lists.subtractLists [ "raincloud" "tensorflow" "azure_devops" "azure_event_hub" "linode" "lyric" ] config.services.home-assistant.package.passthru.availableComponents;
+        [
+          "default_config"
+          "met"
+          "esphome"
+          "rpi_power"
+          "homekit_controller"
+          "dhcp"
+          "stream"
+          "mobile_app"
+          "heos"
+          "thread"
+          "environment_canada"
+          "vesync"
+          "otbr"
+          "webostv"
+          "denonavr"
+          "tailscale"
+          "tuya"
+          "apple_tv"
+          "influxdb"
+          "upnp"
+          "cast"
+          "homekit"
+          "wake_on_lan"
+          "nest"
+          "spotify"
+          "homeassistant_sky_connect"
+          "unifiprotect" # not used but it complains about the uiprotect python package
+          "bluetooth"
+        ];
         extraPackages = python3Packages: with python3Packages; [
           grpcio
         ];

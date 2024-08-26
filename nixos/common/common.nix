@@ -57,7 +57,8 @@ in {
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.permittedInsecurePackages = [
-    "electron"
+    #"electron"
+    "olm-3.2.16"
   ];
 
   networking.firewall.rejectPackets = true;
