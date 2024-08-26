@@ -77,7 +77,7 @@ in
           switch = [
             {
               platform = "wake_on_lan";
-              mac = "1c:fd:08:7e:19:59";
+              mac = "d8:bb:c1:14:45:79";
               name = "beast";
             }
             {
