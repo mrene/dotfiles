@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, config, ...}: {
   # Graphics
   hardware.graphics = {
     enable = true;
@@ -9,6 +9,8 @@
       libvdpau-va-gl
     ];
   };
+
+  hardware.nvidia.package = config.boot.kernelPackages.nvidia_x11_production;
   services.xserver.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
 }

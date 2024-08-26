@@ -41,6 +41,7 @@
     tmux-xpanes
     ipset
     iptables
+    ethtool
   ];
 
   programs.mtr.enable = true;

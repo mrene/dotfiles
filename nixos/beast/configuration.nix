@@ -50,12 +50,12 @@
 
   services.openthread-border-router = {
     enable = true;
-    backboneInterface = "enp45s0";
+    backboneInterface = "enp36s0";
     logLevel = 3;
     radio =  {
       device = "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231118163708-if00";
       baudRate = 460800;
-      extraDevices = [ "trel://enp45s0" ];
+      extraDevices = [ "trel://enp36s0" ];
     };
     rest = {
       listenPort = 58081;
