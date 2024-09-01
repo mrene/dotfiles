@@ -19,7 +19,14 @@
       tealdeer # fast tldr
       zoxide # habitual `cd`
       any-nix-shell # allows using fish for `nix shell`
-      igrep # interactive grep
+
+      # igrep # interactive grep
+      # last success build - build fails following rustc bump
+      (builtins.fetchClosure {
+        fromStore = "https://cache.nixos.org";
+        fromPath = "/nix/store/2fwlhzph27yvl232fps6dyq1brdcgdmn-igrep-1.2.0";
+        inputAddressed = true;
+      })
 
       nvd # nix package diff tool
 
@@ -46,7 +53,8 @@
       batpipe
       batman
       batgrep
-      batdiff
+      # Snapshot testing error on the reported version which is surely due to nix shenanigans
+      (batdiff.overrideAttrs { doCheck = false; })
     ]);
 
   programs.bat = {

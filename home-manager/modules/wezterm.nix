@@ -30,6 +30,10 @@
           font = wezterm.font 'IBM Plex Mono',
           window_decorations = "RESIZE",
 
+          -- https://github.com/NixOS/nixpkgs/issues/336069
+          front_end = "WebGpu",
+          enable_wayland = false,
+
           window_frame = {
             --active_titlebar_bg = '#3b4252',
             --inactive_titlebar_bg = '#3b4252',
