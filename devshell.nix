@@ -46,6 +46,10 @@
       ];
     };
 
+    devShells.esp = pkgs.mkShell {
+      packages = [ pkgs.esphome ];
+    };
+
     devShells.installer = pkgs.mkShell {
       buildInputs = with pkgs; [
         inputs.nixos-generators.packages.${system}.nixos-generate
