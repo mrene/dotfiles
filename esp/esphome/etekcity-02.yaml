@@ -1,0 +1,149 @@
+# Instructions from https://community.smartthings.com/t/etekcity-voltson-esw01-usa/114744
+
+esphome:
+  name: esp_etekcity_02
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  domain: .local
+  networks:
+  - ssid: !secret ssid
+    password: !secret wifi_password
+
+# Enable logging
+logger:
+  
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret api_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+web_server:
+  port: 80
+  
+status_led:
+  pin:
+    number: GPIO5
+
+output:
+  - platform: gpio
+    id: led1
+    pin: GPIO16
+
+switch:
+  - platform: gpio
+    name: "Etekcity_02"
+    id: switch1
+    pin: GPIO4
+    restore_mode: RESTORE_DEFAULT_ON
+    on_turn_on:
+     - output.turn_on: led1
+    on_turn_off:
+      - output.turn_off: led1
+  - platform: restart
+    name: "Etekcity_02 Restart"
+
+binary_sensor:
+  - platform: status
+    name: "Etekcity_02 Status"
+  - platform: gpio
+    id: button1
+    pin:
+      number: GPIO14
+      mode: INPUT_PULLUP
+      inverted: true
+    on_press:
+      - switch.toggle: switch1
+        
+sensor:
+  - platform: wifi_signal
+    name: "Etekcity_02 WiFi Signal"
+    update_interval: 60s
+  - platform: uptime
+    name: "Etekcity_02 uptime seconds"
+    id: uptime_s
+  - platform: pulse_counter
+    pin: GPIO12
+    id: "gpio12"
+    name: "Etekcity_02 GPIO12 counter"
+    count_mode:
+      rising_edge: DISABLE
+      falling_edge: INCREMENT
+    internal_filter: 13us
+    update_interval: 10s
+    on_value:
+      - sensor.template.publish:
+          id: voltage
+          state: !lambda 'return id(gpio12).state * 0.00623;'
+      - sensor.template.publish:
+          id: amps
+          state: !lambda 'return id(watts).state / id(voltage).state;'
+  - platform: pulse_counter
+    pin: GPIO13
+    id: "gpio13"
+    name: "Etekcity_02 GPIO13 counter"
+    count_mode:
+      rising_edge: DISABLE
+      falling_edge: INCREMENT
+    internal_filter: 13us
+    update_interval: 10s
+    on_value:
+      - sensor.template.publish:
+          id: watts
+          state: !lambda  |-
+            if (id(switch1).state) {
+              return id(gpio13).state * 0.07708;
+            } else {
+              return 0;
+            }
+      - sensor.template.publish:
+          id: amps
+          state: !lambda 'return id(watts).state / id(voltage).state;'
+  - platform: template 
+    id: voltage
+    name: "Etekcity_02 Voltage"
+    unit_of_measurement: "V"
+  - platform: template 
+    id: watts
+    name: "Etekcity_02 Watts"
+    unit_of_measurement: "W"
+  - platform: template 
+    id: amps
+    unit_of_measurement: "A"
+    name: "Etekcity_02 Amps"
+    accuracy_decimals: 3
+
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "Etekcity_02 IP Address"
+    ssid:
+      name: "Etekcity_02 SSID"
+  - platform: template
+    name: "Etekcity_02 uptime"
+    lambda: |-
+      uint32_t dur = id(uptime_s).state;
+      int dys = 0;
+      int hrs = 0;
+      int mnts = 0;
+      if (dur > 86399) {
+        dys = trunc(dur / 86400);
+        dur = dur - (dys * 86400);
+      }
+      if (dur > 3599) {
+        hrs = trunc(dur / 3600);
+        dur = dur - (hrs * 3600);
+      }
+      if (dur > 59) {
+        mnts = trunc(dur / 60);
+        dur = dur - (mnts * 60);
+      }
+      char buffer[17];
+      sprintf(buffer, "%ud %02uh %02um %02us", dys, hrs, mnts, dur);
+      return {buffer};
+    icon: mdi:clock-start
