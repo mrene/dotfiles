@@ -151,12 +151,14 @@ in
           "homeassistant_sky_connect"
           "unifiprotect" # not used but it complains about the uiprotect python package
           "bluetooth"
+          "zha"
         ];
         extraPackages = python3Packages: with python3Packages; [
           grpcio
         ];
         customComponents = with pkgs.home-assistant-custom-components; [
           smartthinq-sensors
+          adaptive_lighting
           (smartir.overrideAttrs { 
             postInstall = ''
               cp -r codes $out/custom_components/smartir/
