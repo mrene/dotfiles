@@ -21,6 +21,7 @@ pkgs.vscode-with-extensions.override {
       ms-vscode.remote-explorer
       tcwalther.cython
       grafana.vscode-jsonnet
+      esphome.esphome-vscode
     ])
     ++ (with vscode-extensions;
       [
