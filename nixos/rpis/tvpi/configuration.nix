@@ -64,7 +64,7 @@
   };
 
   # Required for distributed builds
-  users.users.root.openssh.authorizedKeys.keys = common.builderKeys ++ common.sudoSshKeys;
+  users.users.root.openssh.authorizedKeys.keys = common.builderKeys ++ common.sudoSshKeys ++ common.sshKeys;
   users.defaultUserShell = pkgs.fish;
 
   users.users.mrene = {
