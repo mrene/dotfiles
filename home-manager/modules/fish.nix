@@ -91,8 +91,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "catppuccin";
           repo = "fish";
-          rev = "a3b9eb5eaf2171ba1359fe98f20d226c016568cf";
-          sha256 = "0y7j8qcc88vwh6ig7whibndndk243cavaml619075f8s5abk255j";
+          rev = "cc8e4d8fffbdaab07b3979131030b234596f18da";
+          sha256 = "1iqmchnz0gglwsxrqcm300754s84gsxrbwmfxh5mdlm16gcr9n5r";
         };
       }
       {
