@@ -82,6 +82,10 @@
   };
 
   hardware.bluetooth.enable = true;
+
+  # enable nixos-hardware dtoverlay configuration for bluetooth
+  hardware.raspberry-pi."4".bluetooth.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
