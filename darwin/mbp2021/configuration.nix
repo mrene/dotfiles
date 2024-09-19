@@ -22,6 +22,13 @@ in
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
+  # Disable automatically setting the flake registry entry for nixpkgs
+  # because it's already being done and conflicts with it.
+  nixpkgs.flake = {
+    setNixPath = false;
+    setFlakeRegistry = false;
+  };
+
   nix = {
     package = pkgs.nixVersions.nix_2_22;
     settings = {

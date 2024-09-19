@@ -15,18 +15,12 @@
       ripgrep
       fd
       eza
-      #neofetch # fancy system + hardware info
+      neofetch # fancy system + hardware info
       tealdeer # fast tldr
       zoxide # habitual `cd`
       any-nix-shell # allows using fish for `nix shell`
 
-      # igrep # interactive grep
-      # last success build - build fails following rustc bump
-      (builtins.fetchClosure {
-        fromStore = "https://cache.nixos.org";
-        fromPath = "/nix/store/2fwlhzph27yvl232fps6dyq1brdcgdmn-igrep-1.2.0";
-        inputAddressed = true;
-      })
+      igrep # interactive grep
 
       nvd # nix package diff tool
 
