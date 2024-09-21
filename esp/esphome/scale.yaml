@@ -1,0 +1,102 @@
+esphome:
+  name: scale
+
+esp32:
+  board: esp32-c6-devkitm-1
+  variant: esp32c6
+  framework:
+    type: esp-idf
+    version: "5.3.0"
+    platform_version: "https://github.com/pioarduino/platform-espressif32/releases/download/53.03.10%%2Brc1/platform-espressif32.zip"
+    sdkconfig_options:
+      CONFIG_ESPTOOLPY_FLASHSIZE_4MB: y
+
+wifi:
+  domain: .local
+  networks:
+  - ssid: !secret ssid
+    password: !secret wifi_password
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+api:
+ encryption:
+   key: !secret api_key
+
+logger:
+  level: DEBUG
+  hardware_uart: USB_SERIAL_JTAG
+
+debug:
+  update_interval: 5s
+
+# Uncomment to use the external antenna connector
+#switch:
+  #- platform: gpio
+    #id: "ext_ant_switch_enable"
+    #internal: true
+    #pin: GPIO3
+    #inverted: true
+    #restore_mode: ALWAYS_ON
+  #- platform: gpio
+    #id: "ext_ant_enable"
+    #internal: true
+    #pin: GPIO14
+    #restore_mode: ALWAYS_ON
+
+
+# D10 -> GPIO18
+# D09 -> GPIO20
+sensor:
+  - platform: hx711
+    id: weight_raw
+    name: "Weight Raw"
+    dout_pin:
+      number: GPIO20
+      mode:
+        input: true
+        pulldown: true
+    clk_pin: GPIO18
+    gain: 128
+    update_interval: 1s
+    unit_of_measurement: g
+    accuracy_decimals: 2
+    on_value:
+      then:
+        - sensor.template.publish:
+            id: weight
+            state: !lambda 'return id(weight_raw).state - id(tare_value).state;'
+    filters:
+      - calibrate_linear:
+        - 399310 -> 0
+        - 412900 -> 53.6
+        - 510700 -> 418.8
+        - 732650 -> 1263
+        - 843300 -> 1683
+      - or:
+        - throttle: 10s
+        - delta: 2
+
+  - platform: template
+    id: weight 
+    name: "Weight"
+    accuracy_decimals: 0
+    unit_of_measurement: g
+
+number:
+  - platform: template
+    id: tare_value
+    name: "Tare Value"
+    min_value: -10000
+    max_value: 10000
+    initial_value: 0
+    step: 1
+    optimistic: true
+    restore_value: true
+    on_value:
+      then:
+        - sensor.template.publish:
+            id: weight
+            state: !lambda 'return id(weight_raw).state - id(tare_value).state;'
