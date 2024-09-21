@@ -170,12 +170,7 @@
   environment.systemPackages = with pkgs; [
     #inputs.minidsp.packages.${system}.default
 
-    # Logseq before electron-eol, at nixpkgs 8de5bd2ac7c9a1c77a38e8951daa889b6052697f
-    (builtins.fetchClosure { 
-      fromStore = "https://cache.nixos.org";
-      fromPath = /nix/store/hsb5d1cqfqqnr902kj8da9s0hq6q7kqj-logseq-0.10.9; 
-      inputAddressed = true; 
-    })
+    logseq
     zotero
 
     #Audio

@@ -15,7 +15,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # nixos-generators.url = "github:nix-community/nixos-generators"; # Generate vm images and initial boot media
-    nixos-hardware.url = "github:NixOS/nixos-hardware"; # Raspberry Pi 4 modules
+    # Raspberry Pi 4 modules
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,10 +49,11 @@
       url = "github:nix-community/nix-init"; # Tool to scaffold new packages automatically
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Pre-indexed nix-index db
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
-    }; # Pre-indexed nix-index db
+    }; 
     humanfirst-dots = {
       url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
       inputs.nixpkgs.follows = "nixpkgs";
