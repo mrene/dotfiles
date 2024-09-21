@@ -37,7 +37,7 @@ switch:
     name: "Etekcity_02"
     id: switch1
     pin: GPIO4
-    restore_mode: RESTORE_DEFAULT_ON
+    restore_mode: RESTORE_DEFAULT_OFF
     on_turn_on:
      - output.turn_on: led1
     on_turn_off:
