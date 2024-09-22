@@ -16,7 +16,6 @@
     ../../common/common.nix
     ../../common/radio.nix
     ../../modules
-    ./bed-remote.nix
   ];
 
   # Prevent a lot of superfluous FS from being compiled
