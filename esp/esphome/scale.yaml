@@ -33,18 +33,18 @@ debug:
   update_interval: 5s
 
 # Uncomment to use the external antenna connector
-#switch:
-  #- platform: gpio
-    #id: "ext_ant_switch_enable"
-    #internal: true
-    #pin: GPIO3
-    #inverted: true
-    #restore_mode: ALWAYS_ON
-  #- platform: gpio
-    #id: "ext_ant_enable"
-    #internal: true
-    #pin: GPIO14
-    #restore_mode: ALWAYS_ON
+switch:
+  - platform: gpio
+    id: "rf_switch_enable"
+    internal: true
+    pin: GPIO3
+    inverted: true
+    restore_mode: ALWAYS_ON
+  - platform: gpio
+    id: "ext_ant_enable"
+    internal: true
+    pin: GPIO14
+    restore_mode: ALWAYS_OFF
 
 
 # D10 -> GPIO18
