@@ -119,6 +119,16 @@
     secretKeyFile = "/var/secrets/nix-builder.pem";
   };
 
+  services.sabnzbd = {
+    enable = true;
+    user = "jellyfin";
+    group = "jellyfin";
+  };
+
+  services.jellyfin = {
+    enable = true;
+  };
+
   system.stateVersion = "23.11";
   nixpkgs.hostPlatform = "x86_64-linux";
 }
