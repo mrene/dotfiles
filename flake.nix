@@ -1,5 +1,6 @@
 {
   inputs = {
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05"; # nixos-unstable before last staging-next merge
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # nixos-unstable before last staging-next merge
     nixpkgs-unfree = {
       url = "github:numtide/nixpkgs-unfree";

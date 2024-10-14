@@ -65,6 +65,9 @@ pkgs.vscode-with-extensions.override {
         esbenp.prettier-vscode
         mkhl.direnv
         llvm-vs-code-extensions.vscode-clangd
+
+        hashicorp.terraform
+        hashicorp.hcl
       ]
       ++ lib.optionals (! (stdenv.isAarch64 && stdenv.isLinux)) [
         ms-vscode.cpptools

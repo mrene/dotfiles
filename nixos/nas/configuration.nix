@@ -102,7 +102,6 @@
   };
 
   services.tailscale.enable = true;
-
   programs.nh = {
     enable = true;
     clean.enable = false;

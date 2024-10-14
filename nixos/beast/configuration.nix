@@ -170,7 +170,11 @@
   environment.systemPackages = with pkgs; [
     #inputs.minidsp.packages.${system}.default
 
-    logseq
+    (builtins.fetchClosure {
+      fromPath = "/nix/store/hsb5d1cqfqqnr902kj8da9s0hq6q7kqj-logseq-0.10.9";
+      fromStore = "https://cache.nixos.org";
+      inputAddressed = true;
+    })
     zotero
 
     #Audio
