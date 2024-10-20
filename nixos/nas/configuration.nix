@@ -71,7 +71,7 @@
     backboneInterface = "enp2s0";
     logLevel = 3;
     radio =  {
-      device = "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231118192304-if00";
+      device = "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_a8cf5592bed8ed1198a76f6162c613ac-if00-port0";
       baudRate = 460800;
       extraDevices = [ "trel://enp2s0" ];
     };

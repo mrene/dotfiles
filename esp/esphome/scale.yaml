@@ -75,10 +75,6 @@ sensor:
         - 510700 -> 418.8
         - 732650 -> 1263
         - 843300 -> 1683
-      - clamp:
-          min_value: 0
-          max_value: 5000
-          ignore_out_of_range: true
       - or:
         - throttle: 10s
         - delta: 2
@@ -88,6 +84,11 @@ sensor:
     name: "Weight"
     accuracy_decimals: 0
     unit_of_measurement: g
+    filters:
+      - clamp:
+          min_value: 0
+          max_value: 5000
+          ignore_out_of_range: true
 
 number:
   - platform: template
