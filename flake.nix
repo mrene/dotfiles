@@ -1,12 +1,15 @@
 {
   inputs = {
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05"; # nixos-unstable before last staging-next merge
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable"; # nixos-unstable before last staging-next merge
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
+    nixpkgs-pr-corefreq.url = "github:mrene/nixpkgs?ref=corefreq";
+
     nixpkgs-unfree = {
       url = "github:numtide/nixpkgs-unfree";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nixpkgs-frozen.url = "github:NixOS/nixpkgs/8ecc900b2f695d74dea35a92f8a9f9b32c8ea33d"; # Frozen nixpkgs stable for systems that don't get updated so often (raspberry pis)
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";

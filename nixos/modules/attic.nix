@@ -5,7 +5,7 @@ let
 in
 {
   imports = [
-    inputs.attic.nixosModules.atticd
+    # inputs.attic.nixosModules.atticd
   ];
 
   options.homelab.attic = {
@@ -24,9 +24,8 @@ in
 
     services.atticd = {
       enable = true;
-      credentialsFile = config.sops.secrets."attic/hs256_secret".path;
+      environmentFile = config.sops.secrets."attic/hs256_secret".path;
       package = pkgs.attic-server;
-      useFlakeCompatOverlay = false;
 
       settings = {
         listen = "[::]:8080";

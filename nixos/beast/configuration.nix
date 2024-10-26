@@ -38,6 +38,8 @@
     owner = config.users.users.mrene.name;
   };
 
+  programs.corefreq.enable = true;
+
   homelab.backups = {
     enable = true;
     paths = [
@@ -48,23 +50,19 @@
 
   homelab.dyndns.enable = true;
 
-  services.openthread-border-router = {
-    enable = true;
-    backboneInterface = "enp36s0";
-    logLevel = 3;
-    radio =  {
-      device = "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231118163708-if00";
-      baudRate = 460800;
-      extraDevices = [ "trel://enp36s0" ];
-    };
-    rest = {
-      listenPort = 58081;
-    };
-    web = {
-      enable = true;
-      listenPort = 58082;
-    };
-  };
+   services.openthread-border-router = {
+     enable = false;
+     backboneInterface = "enp36s0";
+     logLevel = "debug";
+     radio =  {
+       device = "/dev/serial/by-path/pci-0000:30:00.3-usb-0:4:1.0-port0";
+       baudRate = 460800;
+       extraDevices = [ "trel://enp36s0" ];
+     };
+     rest = {
+       listenPort = 58081;
+     };
+   };
 
   programs.nh = {
     enable = true;

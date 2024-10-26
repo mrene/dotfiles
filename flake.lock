@@ -924,6 +924,38 @@
         "type": "github"
       }
     },
+    "nixpkgs-pr-corefreq": {
+      "locked": {
+        "lastModified": 1729387435,
+        "narHash": "sha256-GRlzRdtllSi/RJR/z3VrNwXcUS6vhCyUDvpMq+QbXas=",
+        "owner": "mrene",
+        "repo": "nixpkgs",
+        "rev": "dcc8b99d856d77d373cd4c0ec88329e5bfb042b6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrene",
+        "ref": "corefreq",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-pr-openthread": {
+      "locked": {
+        "lastModified": 1729740652,
+        "narHash": "sha256-W5mx18JUiTlUKuTtlYT+io4r2PuZQ5MXNKIIEHk/4zU=",
+        "owner": "mrene",
+        "repo": "nixpkgs",
+        "rev": "cf8dcf1fcf3931db7a6f01f878176fc6ff0e4f9d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mrene",
+        "ref": "openthread-border-router",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1724316499,
@@ -1026,11 +1058,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1728492678,
-        "narHash": "sha256-9UTxR8eukdg+XZeHgxW5hQA9fIKHsKCdOIUycTryeVw=",
+        "lastModified": 1729665710,
+        "narHash": "sha256-AlcmCXJZPIlO5dmFzV3V2XF6x/OpNWUV8Y/FMPGd8Z4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5633bcff0c6162b9e4b5f1264264611e950c8ec7",
+        "rev": "2768c7d042a37de65bb1b5b3268fc987e534c49d",
         "type": "github"
       },
       "original": {
@@ -1110,6 +1142,8 @@
         "nixd": "nixd",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_4",
+        "nixpkgs-pr-corefreq": "nixpkgs-pr-corefreq",
+        "nixpkgs-pr-openthread": "nixpkgs-pr-openthread",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nixpkgs-unfree": "nixpkgs-unfree",
         "nixvim": "nixvim",

@@ -11,7 +11,7 @@ local navic = require("nvim-navic")
 navic.setup {
   lsp = {
     auto_attach = true,
-    preference = {"tsserver", "nil_ls", "jsonnet_ls", "bufls", "marksman", "jsonls", "clangd", "gopls", "rust_analyzer", "pyright",  "copilot" },
+    preference = {"ts_ls", "nil_ls", "jsonnet_ls", "bufls", "marksman", "jsonls", "clangd", "gopls", "rust_analyzer", "pyright",  "copilot" },
   },
 }
 
