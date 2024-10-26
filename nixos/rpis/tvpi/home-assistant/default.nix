@@ -217,7 +217,7 @@ in
       services.openthread-border-router = {
         enable = true;
         backboneInterface = "eth0";
-        logLevel = 3;
+        logLevel = "err";
         radio =  {
           device = "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231118192304-if00";
           baudRate = 460800;
