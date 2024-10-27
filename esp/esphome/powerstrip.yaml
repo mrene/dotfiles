@@ -4,9 +4,6 @@ esphome:
 bk72xx:
   board: cb3s
 
-# packages:
-#   base: !include kickstart-base.yaml
-
 wifi:
   domain: .local
   networks:
@@ -22,31 +19,6 @@ api:
    key: !secret api_key
 
 logger:
-
-# select:
-#   - platform: template
-#     id: !extend pin
-#     options:
-#       - Select PIN
-#       - P0 / UART2_TX / I2C2_SCL
-#       # - P1 / UART2_RX / I2C2_SDA
-#       - P6 / PWM0
-#       - P7 / PWM1
-#       - P8 / PWM2
-#       - P9 / PWM3
-#       - P10 / UART1_RX
-#       - P11 / UART1_TX
-#       - P14 / SCK
-#       # - P15 / CS
-#       # - P16 / MOSI
-#       # - P17 / MISO
-#       - P20 / I2C1_SCL / TCK
-#       - P21 / I2C1_SDA / TMS
-#       - P22 / TDI
-#       - P23 / TDO / ADC3
-#       - P24 / PWM4
-#       - P26 / PWM5
-#       # - P28
 
 text_sensor:
   - platform: libretiny
