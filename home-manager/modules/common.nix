@@ -18,6 +18,12 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
+  programs.hctl = {
+    enable = true;
+    hubTokenFile = "/foo";
+    hubUrl = "https://tvpi:8123/api";
+  };
+
   home.packages = with pkgs;
     [
       # Nix tools

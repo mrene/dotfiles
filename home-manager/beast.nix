@@ -11,7 +11,10 @@
     ./modules/wezterm.nix
     ./modules/neofetch.nix
     ./modules/rgb
+    ./modules/hctl.nix
   ];
+
+
 
   home.stateVersion = "20.09";
 
