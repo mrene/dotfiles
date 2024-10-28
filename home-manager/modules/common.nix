@@ -19,9 +19,9 @@
   programs.direnv.nix-direnv.enable = true;
 
   home.packages = with pkgs;
-    [
+  [
+      inputs.mrene-nur.packages.${system}.hctl
       # Nix tools
-      manix # nix cli search tool
       comma # run any command with `, command`
       #nix-index # and nix-locate, search within prebuilt packages filenames
       cachix # Alternative prebuilt cache for nix

@@ -123,6 +123,7 @@
       fz = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
       cdg = "cd (git rev-parse --show-toplevel)";
       svim = "nvim +'SLoad!'";
+      h = "hctl";
     };
 
     shellAbbrs = {
