@@ -87,6 +87,9 @@
   swapDevices = [{ device = "/swap"; size = 65536; }];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  
+  # Expose external monitor brightness control
+  hardware.ddcci.enable = true;
 
   # Sensors
   boot.kernelModules = ["nct6775"];

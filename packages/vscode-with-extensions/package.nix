@@ -9,7 +9,7 @@
 pkgs.vscode-with-extensions.override {
   vscodeExtensions =
     # Prefer extensions that are in nixpkgs, fallback to the marketplace source
-    (with inputs.nix-vscode-extensions.extensions.${system}.vscode-marketplace; [
+    (with (inputs.nix-vscode-extensions.extensions.${system}.forVSCodeVersion "1.95.0-20241022").vscode-marketplace; [
       donjayamanne.python-environment-manager
       gaborv.flatbuffers
       jeff-hykin.better-cpp-syntax
@@ -22,6 +22,8 @@ pkgs.vscode-with-extensions.override {
       tcwalther.cython
       grafana.vscode-jsonnet
       esphome.esphome-vscode
+      github.copilot
+      github.copilot-chat
     ])
     ++ (with vscode-extensions;
       [
@@ -33,7 +35,6 @@ pkgs.vscode-with-extensions.override {
         ms-vscode-remote.remote-ssh
 
         rust-lang.rust-analyzer
-        github.copilot
         matangover.mypy
         jebbs.plantuml
 

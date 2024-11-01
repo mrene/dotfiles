@@ -8,13 +8,14 @@
     _module.args.pkgs = import inputs.nixpkgs {
       inherit system;
       config = {
-        permittedInsecurePackages = [
-          "electron-24.8.6"
-          "electron-25.9.0"
-          "electron"
-        ];
+        permittedInsecurePackages = [ ];
         allowUnfree = true;
       };
+      overlays = [
+        (prev: super: {
+          vscode = prev.callPackage "${inputs.nixpkgs-pr-vscode}/pkgs/applications/editors/vscode/vscode.nix" {};
+        })
+      ];
     };
 
     _module.args.sources = pkgs.callPackage ./_sources/generated.nix {};

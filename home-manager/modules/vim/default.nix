@@ -1,12 +1,12 @@
 {pkgs, ...}: let
   ray-x-go-nvim = pkgs.vimUtils.buildVimPlugin {
     pname = "ray-x-go-nvim";
-    version = "unstable-2024-10-21";
+    version = "unstable-2024-10-31";
     src = pkgs.fetchFromGitHub {
       owner = "ray-x";
       repo = "go.nvim";
-      rev = "12ab6ac0fdd03b1ec9ee4e5378dd204f744a55bf";
-      sha256 = "0ckmvsqwms66h50xrh27rhn7f58ziqcrdzr08vf07k13ljnlsqkh";
+      rev = "9c6deb740337f0e02d0ccc5d6c7682226f1dcdf2";
+      sha256 = "1qgxfwcqvc99v40dm49xm69kf9y6lihzs4rv6ndjzvadh97rdw3c";
     };
   };
 
@@ -23,12 +23,12 @@
 
   nvim-lspconfig = pkgs.vimUtils.buildVimPlugin {
     pname = "nvim-lspconfig";
-    version = "unstable-2024-10-26";
+    version = "unstable-2024-10-28";
     src = pkgs.fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lspconfig";
-      rev = "28b205ebe73a18f401e040585106f9bafd8ff21f";
-      sha256 = "04xypd04qx396dcx0c0w750qrjvxyx5qk7rw45m37whazbcdwh0f";
+      rev = "59a6766cbf32c7e4cf3ed685ccad7ffe1dde8c40";
+      sha256 = "0w04mply303j4mq6myygwgr54bxv7cirnj3qrq4il798bxs71vix";
     };
     meta.homepage = "https://github.com/neovim/nvim-lspconfig/";
   };
@@ -38,8 +38,8 @@
     src = pkgs.fetchFromGitHub {
       owner = "catppuccin";
       repo = "nvim";
-      rev = "cf021ebfb1e400a5fd1615cbda024308ca589b18";
-      sha256 = "0sg9f4iyzp5dqlyg1198r362fqjxljvfp912g4kzvb9yid1bbdn8";
+      rev = "65bf0b16f57a3db70d6a93ac68882dd9a31d0565";
+      sha256 = "16ngmh7psyc5499bdz4l03gqkjxj67400kj0fd8jxac57dwfq9h7";
     };
   });
 

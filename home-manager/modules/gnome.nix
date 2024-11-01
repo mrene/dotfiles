@@ -44,6 +44,7 @@
         "dash-to-panel@jderose9.github.com"
         "sound-output-device-chooser@kgshank.net"
         "space-bar@luchrioh"
+        "gnome-extension-brightness@bruno.englert.gitlab.com"
       ];
     };
     "org/gnome/shell/extensions/user-theme" = {
@@ -98,5 +99,6 @@
     gnomeExtensions.dash-to-panel
     gnomeExtensions.sound-output-device-chooser
     gnomeExtensions.space-bar
+    gnomeExtensions.adjust-display-brightness
   ];
 }
