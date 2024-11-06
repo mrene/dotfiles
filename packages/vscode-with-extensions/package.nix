@@ -24,6 +24,7 @@ pkgs.vscode-with-extensions.override {
       esphome.esphome-vscode
       github.copilot
       github.copilot-chat
+      vitest.explorer
     ])
     ++ (with vscode-extensions;
       [
