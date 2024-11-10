@@ -166,6 +166,7 @@ in
             '';
           })
           inputs.mrene-nur.packages.${pkgs.system}.connectlife-ha
+          inputs.mrene-nur.packages.${pkgs.system}.openrgb-ha
         ];
         customLovelaceModules = (with pkgs.home-assistant-custom-lovelace-modules; [
           mini-graph-card

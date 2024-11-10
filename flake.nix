@@ -1,10 +1,10 @@
 {
   inputs = {
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-pr-vscode.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
+    nixpkgs-pr-corefreq.url = "github:mrene/nixpkgs?ref=corefreq";
 
     nixpkgs-unfree = {
       url = "github:numtide/nixpkgs-unfree";
