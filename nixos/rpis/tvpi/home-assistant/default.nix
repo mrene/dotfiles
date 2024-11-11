@@ -55,7 +55,10 @@ in
             {
               filter = {
                 include_entity_globs = [
-                  "climate.*"
+                  "climate.heat_pump"
+                  "climate.nest"
+                  "light.office_lamp"
+                  "light.office_rgb"
                   "media_player.lg_webos_smart_tv"
                   "media_player.denon_avr_x1600h"
                   "media_player.denon_avr_x1600h_2"
