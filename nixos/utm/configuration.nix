@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+  pkgs,
   common,
   inputs,
   ...
@@ -25,6 +26,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = ["console=tty0"];
   boot.loader.timeout = 5;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Mount shared filesystem
   #fileSystems."/host" = {
