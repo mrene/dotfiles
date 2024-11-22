@@ -1,4 +1,4 @@
-{ pkgs, inputs, config, ... }: 
+{ pkgs, inputs, ... }: 
 
 {
   imports = [
@@ -6,10 +6,5 @@
   ];
 
   services.openthread-border-router.package = pkgs.callPackage "${inputs.nixpkgs-pr-openthread}/pkgs/by-name/op/openthread-border-router/package.nix" {};
-  nixpkgs.overlays = [
-    (prev: super: {
-      vscode = prev.callPackage "${inputs.nixpkgs-pr-vscode}/pkgs/applications/editors/vscode/vscode.nix" {};
-    })
-  ];
 }
 

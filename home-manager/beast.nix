@@ -10,7 +10,6 @@
     ./modules/rofi
     ./modules/wezterm.nix
     ./modules/neofetch.nix
-    ./modules/rgb
   ];
 
   home.stateVersion = "20.09";

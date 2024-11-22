@@ -102,6 +102,11 @@
       statix
       entr
       inputs.fzf-nix.packages.${system}.fzf-nix
+
+      # TUI file browser
+      yazi
+      aichat
+      aider-chat
     ]
     ++ lib.optionals stdenv.isDarwin [
       coreutils # provides `dd` with --status=progress

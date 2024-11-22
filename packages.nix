@@ -11,11 +11,6 @@
         permittedInsecurePackages = [ ];
         allowUnfree = true;
       };
-      overlays = [
-        (prev: super: {
-          vscode = prev.callPackage "${inputs.nixpkgs-pr-vscode}/pkgs/applications/editors/vscode/vscode.nix" {};
-        })
-      ];
     };
 
     _module.args.sources = pkgs.callPackage ./_sources/generated.nix {};
