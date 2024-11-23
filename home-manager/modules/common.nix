@@ -65,7 +65,7 @@
       nixpkgs-fmt
       nurl
       jsonnet-language-server
-      buf-language-server
+      buf
       mise
 
       # markdown lsp
