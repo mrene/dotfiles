@@ -86,7 +86,7 @@
 
   swapDevices = [{ device = "/swap"; size = 65536; }];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_11;
   
   # Expose external monitor brightness control
   hardware.ddcci.enable = true;
