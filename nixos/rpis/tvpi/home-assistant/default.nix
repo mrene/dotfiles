@@ -76,6 +76,13 @@ in
               temperature_sensor = "sensor.2nd_floor_ir_temperature";
               humidity_sensor = "sensor.2nd_floor_ir_humidity";
             }];
+          fan = [{
+            platform = "smartir";
+            name = "Air Purifier";
+            unique_id = "iqair_healthpro_plus";
+            device_code = "9998";
+            controller_data = "remote.office_ir";
+          }];
           wake_on_lan = {};
           switch = [
             {
@@ -166,6 +173,7 @@ in
             postInstall = ''
               cp -r codes $out/custom_components/smartir/
               cp -s ${./9999.json} $out/custom_components/smartir/codes/climate/9999.json
+              cp -s ${./9998.json} $out/custom_components/smartir/codes/fan/9998.json
             '';
           })
           inputs.mrene-nur.packages.${pkgs.system}.connectlife-ha
