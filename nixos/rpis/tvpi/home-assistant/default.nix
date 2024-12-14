@@ -13,6 +13,8 @@
     name = "home-assistant-themes";
     paths = (builtins.map (t: "${t}/themes") (builtins.attrValues themes));
   };
+  # Waiting on https://nixpk.gs/pr-tracker.html?pr=365009
+  stagingNext = builtins.getFlake "github:NixOS/nixpkgs/145ffddb216135e76a32def79b19f46d1dcdbdc9";
 in 
   lib.mkMerge [
     # Hydro Quebec Usage Importer
@@ -40,6 +42,7 @@ in
     {
       services.home-assistant = {
         enable = true;
+        package = stagingNext.legacyPackages.${pkgs.system}.home-assistant;
         config = {
           default_config = {};
           automation = "!include automations.yaml";
