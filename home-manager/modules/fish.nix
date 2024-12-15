@@ -141,6 +141,7 @@
       gcm = "git commit";
       gco = "git checkout";
       gcl = "git clone";
+      gri = "git rebase -i --committer-date-is-author-date --autostash";
 
       d = "docker";
       k = "kubectl";

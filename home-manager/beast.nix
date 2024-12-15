@@ -30,6 +30,6 @@
 
 
   programs.fish.interactiveShellInit = ''
-    set -x NIX_LD "${pkgs.stdenv.cc}/nix-support/dynamic-linker"
+    set -x NIX_LD (cat "${pkgs.stdenv.cc}/nix-support/dynamic-linker")
   '';
 }

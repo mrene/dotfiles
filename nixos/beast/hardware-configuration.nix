@@ -22,6 +22,17 @@
     neededForBoot = true;
   };
 
+  fileSystems."/bulk" = {
+    device = "/dev/disk/by-uuid/9e43d788-e180-41d9-b46e-55e782bb2593";
+    fsType = "ext4";
+    neededForBoot = false;
+  };
+
+  fileSystems."/var/lib/docker" = {
+    device = "/bulk/docker";
+    options = [ "bind" ];
+  };
+
   fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/D6FD-510A";
     fsType = "vfat";
