@@ -14,7 +14,14 @@
     paths = (builtins.map (t: "${t}/themes") (builtins.attrValues themes));
   };
   # Waiting on https://nixpk.gs/pr-tracker.html?pr=365009
-  stagingNext = builtins.getFlake "github:NixOS/nixpkgs/145ffddb216135e76a32def79b19f46d1dcdbdc9";
+  stagingNext = import (builtins.getFlake "github:NixOS/nixpkgs/1067436a75332b99f0fe4cd8131dd9c3940b9471") {
+    system = pkgs.system;
+    overlays = [
+      (final: prev: {
+        wangle = prev.wangle.overrideAttrs { doCheck = false; };
+      })
+    ];
+  };
 in 
   lib.mkMerge [
     # Hydro Quebec Usage Importer
@@ -42,7 +49,7 @@ in
     {
       services.home-assistant = {
         enable = true;
-        package = stagingNext.legacyPackages.${pkgs.system}.home-assistant;
+        package = stagingNext.home-assistant;
         config = {
           default_config = {};
           automation = "!include automations.yaml";
@@ -186,7 +193,7 @@ in
           mini-graph-card
           mini-media-player
           lg-webos-remote-control
-          android-tv-card
+          universal-remote-card
           card-mod
         ]) ++ (with inputs.mrene-nur.packages.${pkgs.system}; [
           clock-weather-card
