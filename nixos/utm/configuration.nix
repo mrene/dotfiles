@@ -26,7 +26,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelParams = ["console=tty0"];
   boot.loader.timeout = 5;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Mount shared filesystem
   #fileSystems."/host" = {

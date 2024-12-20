@@ -183,7 +183,7 @@ in
           mini-graph-card
           mini-media-player
           lg-webos-remote-control
-          android-tv-card
+          universal-remote-card
           card-mod
         ]) ++ (with inputs.mrene-nur.packages.${pkgs.system}; [
           clock-weather-card
