@@ -1,0 +1,54 @@
+esphome:
+  name: iqair
+
+esp32:
+  board: esp32-c6-devkitm-1
+  variant: esp32c6
+  framework:
+    type: esp-idf
+    version: "5.3.0"
+    platform_version: "https://github.com/pioarduino/platform-espressif32/releases/download/53.03.10-rc1/platform-espressif32.zip"
+
+remote_transmitter:
+  pin: GPIO3
+  carrier_duty_percent: 50%
+
+wifi:
+  domain: .local
+  networks:
+  - ssid: !secret ssid
+    password: !secret wifi_password
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+api:
+ encryption:
+   key: !secret api_key
+
+logger:
+  level: DEBUG
+  hardware_uart: USB_SERIAL_JTAG
+
+debug:
+  update_interval: 5s
+
+number:
+  - platform: template
+    id: speed
+    name: "Speed"
+    min_value: 0
+    max_value: 6
+    initial_value: 0
+    step: 1
+    optimistic: true
+    on_value:
+      then:
+      - remote_transmitter.transmit_nec:
+          address: 0xFF00
+          command: !lambda |-
+            const uint8_t speeds[] = {0, 23, 3, 2, 5, 4, 22};
+            uint8_t f = speeds[(int)x];
+            return (~f << 8) | f;
+          command_repeats: 6
