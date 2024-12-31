@@ -9,8 +9,7 @@
     # Part of nerdfonts
     #powerline-symbols
 
-    #nerdfonts
-    (nerdfonts.override {fonts = ["SourceCodePro"];})
+    source-code-pro
     freefont_ttf
     ibm-plex
     # Part of powerline-fonts

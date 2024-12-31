@@ -1,25 +1,25 @@
 {pkgs, ...}: let
-  ray-x-go-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "ray-x-go-nvim";
-    version = "unstable-2024-12-01";
-    src = pkgs.fetchFromGitHub {
-      owner = "ray-x";
-      repo = "go.nvim";
-      rev = "c6d5ca26377d01c4de1f7bff1cd62c8b43baa6bc";
-      sha256 = "1vx86g8lgyhg7wa4azl4hajzh42hvb1a1q9ndihwb1v4dy5bizxf";
-    };
-  };
+  # ray-x-go-nvim = pkgs.vimUtils.buildVimPlugin {
+  #   pname = "ray-x-go-nvim";
+  #   version = "unstable-2024-12-01";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "ray-x";
+  #     repo = "go.nvim";
+  #     rev = "c6d5ca26377d01c4de1f7bff1cd62c8b43baa6bc";
+  #     sha256 = "1vx86g8lgyhg7wa4azl4hajzh42hvb1a1q9ndihwb1v4dy5bizxf";
+  #   };
+  # };
 
-  ray-x-guihua = pkgs.vimUtils.buildVimPlugin {
-    pname = "ray-x-guihua";
-    version = "unstable-2024-11-02";
-    src = pkgs.fetchFromGitHub {
-      owner = "ray-x";
-      repo = "guihua.lua";
-      rev = "d783191eaa75215beae0c80319fcce5e6b3beeda";
-      sha256 = "1zh3aq7bspyd1danbwzsvrvn95xx9qkyj0jgr3dkg82v7mp2r5ay";
-    };
-  };
+  # ray-x-guihua = pkgs.vimUtils.buildVimPlugin {
+  #   pname = "ray-x-guihua";
+  #   version = "unstable-2024-11-02";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "ray-x";
+  #     repo = "guihua.lua";
+  #     rev = "d783191eaa75215beae0c80319fcce5e6b3beeda";
+  #     sha256 = "1zh3aq7bspyd1danbwzsvrvn95xx9qkyj0jgr3dkg82v7mp2r5ay";
+  #   };
+  # };
 
   nvim-lspconfig = pkgs.vimUtils.buildVimPlugin {
     pname = "nvim-lspconfig";
@@ -95,8 +95,8 @@ in {
       typescript-vim
       nvim-lspconfig
       pkgs.vimPlugins.rust-tools-nvim
-      ray-x-go-nvim
-      ray-x-guihua
+      # ray-x-go-nvim
+      # ray-x-guihua
       lsp-inlayhints-nvim
 
       # Show LSP-aware context in file (current function, scope names)

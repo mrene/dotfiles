@@ -30,7 +30,7 @@ in
   };
 
   nix = {
-    package = pkgs.nixVersions.nix_2_22;
+    # package = pkgs.nixVersions.nix_2_22;
     settings = {
       experimental-features = ["flakes" "nix-command"];
       # Disable since it causes issues
