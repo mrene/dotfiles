@@ -190,6 +190,7 @@ in
           lovelace-auto-entities
           lovelace-slider-entity-row
           timer-bar-card
+          lovelace-big-slider-card
         ]);
       };
 
