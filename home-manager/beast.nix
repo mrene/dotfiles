@@ -28,6 +28,8 @@
     # NIX_LD = builtins.readFile "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
   };
 
+  nixpkgs.config.cudaSupport = true;
+
 
   programs.fish.interactiveShellInit = ''
     set -x NIX_LD (cat "${pkgs.stdenv.cc}/nix-support/dynamic-linker")

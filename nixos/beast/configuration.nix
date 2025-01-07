@@ -110,6 +110,7 @@
   };
   services.xserver.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
+  nixpkgs.config.cudaSupport = true;
 
   # Enable sound with pipewire.
   #sound.enable = true;
