@@ -82,8 +82,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "halostatue";
           repo = "fish-docker";
-          rev = "5b8266b0e3d78db1283a01d60724a9bc10325608";
-          sha256 = "1zs7chvy28bz1l03z3dyv5i258pqw7wbbyb4qdvipdlbrn3adkzm";
+          rev = "4eaabc8df954b1fafb3efcc10545b9c7c2dc4c55";
+          sha256 = "1hgn1ly1q0a0cbq8lihrrg4m3kclr8xp1n4yx9150v701cqfa6my";
         };
       }
       {
