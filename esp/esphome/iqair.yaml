@@ -34,6 +34,36 @@ logger:
 debug:
   update_interval: 5s
 
+fan:
+  - platform: template
+    id: "iqair_fan"
+    name: "Fan"
+    speed_count: 6
+    on_state:
+      if:
+        condition:
+          fan.is_on: iqair_fan
+        then:
+        - number.set:
+            id: speed
+            value: !lambda return id(iqair_fan).speed;
+        else:
+        - number.set:
+            id: speed
+            value: 0
+    on_speed_set:
+      if:
+        condition:
+          fan.is_on: iqair_fan
+        then:
+        - number.set:
+            id: speed
+            value: !lambda return id(iqair_fan).speed;
+        else:
+        - number.set:
+            id: speed
+            value: 0
+
 number:
   - platform: template
     id: speed
