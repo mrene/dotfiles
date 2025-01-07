@@ -57,11 +57,9 @@ in
                 include_entity_globs = [
                   "climate.heat_pump"
                   "climate.nest"
+                  "fan.iqair_fan"
                   "light.office_lamp"
                   "light.office_rgb"
-                  "media_player.lg_webos_smart_tv"
-                  "media_player.denon_avr_x1600h"
-                  "media_player.denon_avr_x1600h_2"
                 ];
               };
             }
@@ -76,13 +74,6 @@ in
               temperature_sensor = "sensor.2nd_floor_ir_temperature";
               humidity_sensor = "sensor.2nd_floor_ir_humidity";
             }];
-          fan = [{
-            platform = "smartir";
-            name = "Air Purifier";
-            unique_id = "iqair_healthpro_plus";
-            device_code = "9998";
-            controller_data = "remote.office_ir";
-          }];
           wake_on_lan = {};
           switch = [
             {
@@ -96,6 +87,7 @@ in
               name = "tv";
             }
           ];
+          "script ha" = "!include scripts.yaml";
           script = let 
             makeIrScript = { entity ? "remote.2nd_floor_ir", command }: {
               sequence = [
@@ -190,7 +182,7 @@ in
           lovelace-auto-entities
           lovelace-slider-entity-row
           timer-bar-card
-          lovelace-big-slider-card
+          lovelace-mushroom
         ]);
       };
 
