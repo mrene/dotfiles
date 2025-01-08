@@ -1,0 +1,52 @@
+diff --git a/custom_components/smartir/__init__.py b/custom_components/smartir/__init__.py
+index 2547181..f7e0ccc 100644
+--- a/custom_components/smartir/__init__.py
++++ b/custom_components/smartir/__init__.py
+@@ -2,7 +2,7 @@ import aiofiles
+ import aiohttp
+ import asyncio
+ import binascii
+-from distutils.version import StrictVersion
++from packaging.version import Version
+ import json
+ import logging
+ import os.path
+@@ -77,14 +77,14 @@ async def _update(hass, branch, do_update=False, notify_if_latest=True):
+                     last_version = data['updater']['version']
+                     release_notes = data['updater']['releaseNotes']
+ 
+-                    if StrictVersion(last_version) <= StrictVersion(VERSION):
++                    if Version(last_version) <= Version(VERSION):
+                         if notify_if_latest:
+                             hass.components.persistent_notification.async_create(
+                                 "You're already using the latest version!", 
+                                 title='SmartIR')
+                         return
+ 
+-                    if StrictVersion(current_ha_version) < StrictVersion(min_ha_version):
++                    if Version(current_ha_version) < Version(min_ha_version):
+                         hass.components.persistent_notification.async_create(
+                             "There is a new version of SmartIR integration, but it is **incompatible** "
+                             "with your system. Please first update Home Assistant.", title='SmartIR')
+diff --git a/custom_components/smartir/manifest.json b/custom_components/smartir/manifest.json
+index 655cff7..69f7116 100644
+--- a/custom_components/smartir/manifest.json
++++ b/custom_components/smartir/manifest.json
+@@ -4,7 +4,7 @@
+   "documentation": "https://github.com/smartHomeHub/SmartIR",
+   "dependencies": [],
+   "codeowners": ["@smartHomeHub"],
+-  "requirements": ["aiofiles>=0.6.0"],
++  "requirements": ["aiofiles>=0.6.0", "packaging>=20.3"],
+   "homeassistant": "2024.10.0",
+   "version": "1.18.0",
+   "updater": {
+@@ -15,7 +15,7 @@
+       "climate.py",
+       "media_player.py",
+       "fan.py",
+-      "light.py",  
++      "light.py",
+       "controller.py",
+       "manifest.json",
+       "services.yaml"
