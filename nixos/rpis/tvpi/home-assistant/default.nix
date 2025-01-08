@@ -162,6 +162,14 @@ in
           smartthinq-sensors
           adaptive_lighting
           (smartir.overrideAttrs { 
+            version = "1.18.0";
+            src = pkgs.fetchFromGitHub {
+              owner = "smartHomeHub";
+              repo = "SmartIR";
+              rev = "1.18.0";
+              hash = "sha256-Sy1wxVUApKWm9TlDia2Gwd+mIi7WbDkzJrAtyb0tTbM=";
+            };
+            patches = [ ./smartir-remove-distutils.diff ];
             postInstall = ''
               cp -r codes $out/custom_components/smartir/
               cp -s ${./9999.json} $out/custom_components/smartir/codes/climate/9999.json
