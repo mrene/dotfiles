@@ -195,7 +195,7 @@
     distrobox
     nvme-cli
     sysstat
-    dstat
+    dool
     virtiofsd
     home-assistant-cli
   ];

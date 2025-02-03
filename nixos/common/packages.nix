@@ -34,7 +34,7 @@
     man-pages
     wireshark
     sysstat
-    dstat
+    dool
     bat
     eza
     fd

@@ -2,8 +2,8 @@
   delta = pkgs.fetchFromGitHub {
     owner = "dandavison";
     repo = "delta";
-    rev = "ef3e1be569bf076f035327342939bd9d7c8908bd";
-    sha256 = "0xkdxsmshagbh64xnbnjprarqf26g44gjxi2mc115nj21vfy0hln";
+    rev = "d4017ea9cbf3a1223c88953c61a33d0f20334524";
+    sha256 = "02q9si2cr4lsg50wv2sbxgcw6mm9cv6xqdx0iqisswk8w9n78xd9";
   };
 in {
   programs.git = {
@@ -20,6 +20,8 @@ in {
         features = "chameleon-mod";
       };
     };
+
+    lfs.enable = true;
 
     extraConfig = {
       github.user = "mrene";
