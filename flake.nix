@@ -1,8 +1,7 @@
 {
   inputs = {
     #nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
 
     nixpkgs-unfree = {
@@ -61,10 +60,6 @@
       url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    bedrpc = {
-      url = "git+ssh://git@github.com/mrene/bedrpc";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     devshell = {
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -91,12 +86,12 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
+        ./packages.nix
         ./overlays
         ./nixos
         ./darwin
         ./home-manager
         ./vim
-        ./packages.nix
         ./devshell.nix
         ./common.nix
       ];

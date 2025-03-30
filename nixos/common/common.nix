@@ -56,10 +56,9 @@ in {
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    #"electron"
-    "olm-3.2.16"
-  ];
+  
+  # Some programs (ex: Go) expects /etc/mime.types
+  environment.etc."mime.types".source = "${pkgs.mailcap}/etc/mime.types";
 
   networking.firewall.rejectPackets = true;
 

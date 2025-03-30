@@ -9,6 +9,7 @@
       libvdpau-va-gl
     ];
   };
+  hardware.nvidia.open = true;
 
   hardware.nvidia.package = config.boot.kernelPackages.nvidia_x11_production;
   services.xserver.enable = true;

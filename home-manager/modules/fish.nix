@@ -147,8 +147,8 @@
       k = "kubectl";
       b = "bat";
 
-      nr = "nix run nixpkgs#(fzf-nix)";
-      ns = "nix shell nixpkgs#(fzf-nix)";
+      nr = "nix ~/dotfiles#nixosConfigurations.(hostname).pkgs.(fzf-nix)";
+      ns = "nix shell ~/dotfiles#nixosConfigurations.(hostname).pkgs.(fzf-nix)";
 
       ".." = "cd ..";
       "..." = "cd ../..";

@@ -9,7 +9,7 @@
 pkgs.vscode-with-extensions.override {
   vscodeExtensions =
     # Prefer extensions that are in nixpkgs, fallback to the marketplace source
-    (with (inputs.nix-vscode-extensions.extensions.${system}.forVSCodeVersion pkgs.vscode.version).vscode-marketplace; [
+    (with ((inputs.nix-vscode-extensions.overlays.default pkgs pkgs).forVSCodeVersion pkgs.vscode.version).vscode-marketplace; [
       donjayamanne.python-environment-manager
       gaborv.flatbuffers
       jeff-hykin.better-cpp-syntax
@@ -22,12 +22,11 @@ pkgs.vscode-with-extensions.override {
       tcwalther.cython
       grafana.vscode-jsonnet
       esphome.esphome-vscode
-      github.copilot
-      #github.copilot-chat
       vitest.explorer
     ])
     ++ (with vscode-extensions;
       [
+        github.copilot
         catppuccin.catppuccin-vsc
         vscodevim.vim
 
