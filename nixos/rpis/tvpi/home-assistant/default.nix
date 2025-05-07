@@ -154,6 +154,7 @@ in
           "unifiprotect" # not used but it complains about the uiprotect python package
           "bluetooth"
           "zha"
+          "broadlink"
         ];
         extraPackages = python3Packages: with python3Packages; [
           grpcio

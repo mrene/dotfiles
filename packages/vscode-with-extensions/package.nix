@@ -23,6 +23,7 @@ pkgs.vscode-with-extensions.override {
       grafana.vscode-jsonnet
       esphome.esphome-vscode
       vitest.explorer
+      saoudrizwan.claude-dev # Cline
     ])
     ++ (with vscode-extensions;
       [
