@@ -214,14 +214,30 @@ in
         mcfg = config.services.matter-server;
         storagePath = "/var/lib/matter-server";
       in
-      lib.mkForce (lib.concatStringsSep " " [ 
-        (lib.getExe pkgs.python-matter-server)
-        "--log-level" mcfg.logLevel
-        "--port" (toString mcfg.port)
-        "--storage-path" storagePath
-        "--paa-root-cert-dir" "${storagePath}/credentials"
-        (lib.escapeShellArgs mcfg.extraArgs)
-      ]);
+        lib.mkForce (
+          lib.concatStringsSep " " [
+            # `python-matter-server` writes to /data even when a storage-path
+            # is specified. This symlinks /data at the systemd-managed
+            # /var/lib/matter-server, so all files get dropped into the state
+            # directory.
+            "${pkgs.bash}/bin/sh"
+            "-c"
+            "'"
+            "${pkgs.coreutils}/bin/ln -s %S/matter-server/ %t/matter-server/root/data"
+            "&&"
+            "${mcfg.package}/bin/matter-server"
+            "--port"
+            (toString mcfg.port)
+            #"--vendorid"
+            #vendorId
+            "--storage-path"
+            storagePath
+            "--log-level"
+            "${mcfg.logLevel}"
+            "${lib.escapeShellArgs mcfg.extraArgs}"
+            "'"
+          ]
+        );
 
       # Backup its storage state
       homelab.backups.paths = [ "/var/lib/matter-server" ];
