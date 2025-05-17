@@ -55,9 +55,7 @@ in
             #   echo "Enabling DDCCI on ''${dev}"
             #   echo ddcci 0x37 > /sys/bus/i2c/devices/''${dev}/new_device; 
             # done
-            echo ddcci 0x37 > /sys/bus/i2c/devices/i2c-6/new_device;
-            sleep 2
-            echo ddcci 0x37 > /sys/bus/i2c/devices/i2c-7/new_device;
+            echo ddcci 0x37 > /sys/bus/i2c/devices/i2c-5/new_device;
             echo "Done"
           '';
         in "${ddcciSetupScript}";

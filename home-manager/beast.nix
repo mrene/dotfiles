@@ -2,6 +2,7 @@
   imports = [
     ./modules/fish.nix
     ./modules/git.nix
+    ./modules/jujutsu.nix
     ./modules/vim
 
     ./modules/minimal.nix

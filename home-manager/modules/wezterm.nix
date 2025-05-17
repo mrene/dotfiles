@@ -28,11 +28,11 @@
         return {
           color_scheme = 'Catppuccin Mocha',
           font = wezterm.font 'IBM Plex Mono',
-          window_decorations = "RESIZE",
+          -- window_decorations = "RESIZE",
 
           -- https://github.com/NixOS/nixpkgs/issues/336069
-          front_end = "WebGpu",
-          enable_wayland = false,
+          -- front_end = "WebGpu",
+          -- enable_wayland = false,
 
           window_frame = {
             --active_titlebar_bg = '#3b4252',

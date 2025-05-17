@@ -106,6 +106,9 @@
       vaapiVdpau
       libvdpau-va-gl
       vulkan-tools
+      vulkan-caps-viewer
+      vulkan-hdr-layer-kwin6
+      vulkan-validation-layers
     ];
   };
   services.xserver.enable = true;

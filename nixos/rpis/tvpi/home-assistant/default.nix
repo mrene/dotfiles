@@ -240,7 +240,7 @@ in
         );
 
       # Backup its storage state
-      homelab.backups.paths = [ "/var/lib/matter-server" ];
+      homelab.backups.paths = [ "/var/lib/matter-server" "/var/lib/private/matter-server" ];
     }
 
     {
