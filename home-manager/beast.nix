@@ -1,9 +1,9 @@
-{lib, pkgs, ...}: {
+{lib, pkgs, inputs, ...}: {
   imports = [
     ./modules/fish.nix
     ./modules/git.nix
     ./modules/jujutsu.nix
-    ./modules/vim
+    # ./modules/vim
 
     ./modules/minimal.nix
     ./modules/common.nix
@@ -20,6 +20,7 @@
 
   home.packages = with pkgs; [
     fishPlugins.foreign-env
+    inputs.app-nvim.packages.${pkgs.system}.default
   ];
 
   home.sessionVariables = {

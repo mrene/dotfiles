@@ -50,19 +50,23 @@
 
   homelab.dyndns.enable = true;
 
-   services.openthread-border-router = {
-     enable = false;
-     backboneInterface = "enp36s0";
-     logLevel = "debug";
-     radio =  {
-       device = "/dev/serial/by-path/pci-0000:30:00.3-usb-0:4:1.0-port0";
-       baudRate = 460800;
-       extraDevices = [ "trel://enp36s0" ];
-     };
-     rest = {
-       listenPort = 58081;
-     };
-   };
+  # On windows, the volume is changed on the usb device while on gnome it's changed inside pipewire.
+  # Reset the hw volume to 100% so we have enough headroom.
+  systemd.services.minidsp-amixer-volume = let
+    minidsp-amixer-volume = pkgs.writeShellApplication {
+      name = "minidsp-amixer-volume";
+      runtimeInputs = [ pkgs.alsa-utils ];
+      text = ''amixer -c Flex set 'miniDSP Flex' 100%'';
+    };
+  in {
+    description = "Set miniDSP volume using amixer";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${lib.getExe minidsp-amixer-volume}";
+      RemainAfterExit = true;
+    };
+    wantedBy = [ "multi-user.target" ];
+  };
 
   programs.nh = {
     enable = true;
@@ -87,8 +91,6 @@
 
   swapDevices = [{ device = "/swap"; size = 65536; }];
 
-  #boot.kernelPackages = pkgs.linuxPackages_6_11;
-  
   # Expose external monitor brightness control
   hardware.ddcci.enable = true;
 
@@ -115,8 +117,6 @@
   services.xserver.videoDrivers = ["nvidia"];
   nixpkgs.config.cudaSupport = true;
 
-  # Enable sound with pipewire.
-  #sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -155,7 +155,6 @@
     users.mrene = import ../../home-manager/beast.nix;
 
     useGlobalPkgs = true;
-    #useUserPackages = true;
     verbose = true;
     extraSpecialArgs = {inherit inputs;};
   };
@@ -174,22 +173,20 @@
   };
 
   environment.systemPackages = with pkgs; [
-    #inputs.minidsp.packages.${system}.default
-
-    (builtins.fetchClosure {
-      fromPath = "/nix/store/hsb5d1cqfqqnr902kj8da9s0hq6q7kqj-logseq-0.10.9";
-      fromStore = "https://cache.nixos.org";
-      inputAddressed = true;
-    })
+    logseq
     zotero
 
     #Audio
     roomeqwizard
     spotify
     audacity
+    alsa-utils
+
+    # Screen utils
+    ddcui
+    ddcutil
 
     # HW support
-    #razergenie #mouse
     openrazer-daemon
 
     nvtopPackages.nvidia # htop-like gpu load viewer
@@ -200,12 +197,9 @@
     sysstat
     dool
     virtiofsd
-    home-assistant-cli
   ];
 
 
-
-  #services.vscode-server.enable = true;
   programs.nix-ld.enable = true;
 
   services.openssh.enable = true;
@@ -223,13 +217,6 @@
   virtualisation.containerd.enable = true;
   virtualisation.libvirtd.enable = true;
 
-  #services.resolved.enable = true;
-
-  #environment.etc."systemd/resolved.conf.d/minikube.conf".text = ''
-  #[Resolve]
-  #DNS=10.96.0.10
-  #Domains=~cluster.local
-  #'';
   networking.firewall.enable = false;
   networking.firewall.allowedTCPPorts = [8501];
   networking.hosts = {

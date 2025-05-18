@@ -9,6 +9,7 @@
 
   environment.systemPackages = with pkgs; [
     flakePackages.${system}.vscode-with-extensions
+    flakePackages.${system}.windsurf-with-extensions
 
     # These need to be in the global PATH for goland to work correctly
     gcc
