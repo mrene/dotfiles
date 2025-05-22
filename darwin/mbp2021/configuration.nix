@@ -20,7 +20,6 @@ in
   ];
 
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
 
   # Disable automatically setting the flake registry entry for nixpkgs
   # because it's already being done and conflicts with it.
@@ -30,6 +29,7 @@ in
   };
 
   nix = {
+    enable = true;
     # package = pkgs.nixVersions.nix_2_22;
     settings = {
       experimental-features = ["flakes" "nix-command"];
@@ -85,14 +85,14 @@ in
     cp ${pkgs._1password-cli}/bin/op /usr/local/bin/op
   '';
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   programs = {
     fish.enable = true;
   };
 
   environment.shells = [pkgs.fish];
-
+  system.primaryUser = "mrene";
   users.users.mrene = {
     home = "/Users/mrene";
     shell = "${pkgs.fish}/bin/fish";

@@ -11,6 +11,7 @@
     ./modules/minimal.nix
     ./modules/common.nix
     ./modules/wezterm.nix
+    ./modules/jujutsu.nix
   ];
 
   home.username = "mrene";
@@ -33,6 +34,7 @@
   home.packages = with pkgs; [
     inputs.minidsp.packages.${system}.default
     inputs.mrene-nur.packages.${system}.pathfind
+    inputs.app-nvim.packages.${pkgs.system}.default
   ];
 
   home.stateVersion = "20.09";
