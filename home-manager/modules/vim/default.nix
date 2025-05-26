@@ -23,12 +23,12 @@
 
   nvim-lspconfig = pkgs.vimUtils.buildVimPlugin {
     pname = "nvim-lspconfig";
-    version = "unstable-2025-04-19";
+    version = "unstable-2025-05-25";
     src = pkgs.fetchFromGitHub {
       owner = "neovim";
       repo = "nvim-lspconfig";
-      rev = "32b6a6449aaba11461fffbb596dd6310af79eea4";
-      sha256 = "0rbqg3xdsdfklcsadzbbphzrgwa2c54lsipfqd67jq2p4baxsgxn";
+      rev = "3ea99227e316c5028f57a4d86a1a7fd01dd876d0";
+      sha256 = "1fbsamcnzkrn9ck3bfx55wkmgyz8dhdxkj1g1zclg4lvmgk9l1cs";
     };
     meta.homepage = "https://github.com/neovim/nvim-lspconfig/";
   };
@@ -38,8 +38,8 @@
     src = pkgs.fetchFromGitHub {
       owner = "catppuccin";
       repo = "nvim";
-      rev = "5b5e3aef9ad7af84f463d17b5479f06b87d5c429";
-      sha256 = "0jmrwag2dx4b1g9x32xwxcr8y0l159hqks09z5miy99wav6dy7z2";
+      rev = "be1e5e6308bb9d016bf5c1565e0f1d5e46400d7a";
+      sha256 = "0idx5vg1w3yhayia8hsl4dddhd3ak5gczpkyqgaidb6nzpijl5fw";
     };
   });
 
@@ -47,8 +47,8 @@
     src = pkgs.fetchFromGitHub {
       owner = "SmiteshP";
       repo = "nvim-navic";
-      rev = "39231352aec0d1e09cebbffdd9dc20a5dc691ffe";
-      sha256 = "1xj2bzax8hynm2x9zbvsaxv1j22chklyygzm1kbqxxs077qn45ws";
+      rev = "f887d794a0f4594882814d7780980a949200a238";
+      sha256 = "0mxsnwvrjirpy2ichsilx6207z55xi42syg5d3fdgs2r1p1npggc";
     };
   });
 in {

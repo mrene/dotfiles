@@ -117,7 +117,7 @@
   services.xserver.videoDrivers = ["nvidia"];
   nixpkgs.config.cudaSupport = true;
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
