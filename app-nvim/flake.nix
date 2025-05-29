@@ -37,16 +37,29 @@
             extraSpecialArgs = {
               inherit inputs;
               inherit secrets;
-              unstablePkgs = import nixpkgs-unstable {
-                inherit (pkgs) system;
+              unstablePkgs = import appdots.inputs.nixpkgs-unstable {
+                inherit system overlays; 
               };
             };
           };
           cfg = hm.config.programs.neovim;
           lib = pkgs.lib;
+          overlays = [
+            (final: prev: 
+              let
+                flakeImport = inputName: packageName: appdots.inputs.${inputName}.packages.${prev.system}.${packageName};
+              in
+              {
+                mcp-hub = flakeImport "mcp-hub" "default";
+                mcphub-nvim = flakeImport "mcphub-nvim" "default";
+              }
+            )];
+
         in
         {
-          _module.args.pkgs = import appdots.inputs.nixpkgs { inherit system; };
+          _module.args.pkgs = import appdots.inputs.nixpkgs { 
+            inherit system overlays; 
+          };
           packages.default = (pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
             inherit (cfg) plugins;
             neovimRcContent = cfg.extraConfig;
