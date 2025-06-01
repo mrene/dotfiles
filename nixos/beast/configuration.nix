@@ -87,7 +87,7 @@
       canTouchEfiVariables = true;
     };
   };
-  boot.kernelParams = [];
+  boot.kernelParams = [ ];
 
   swapDevices = [{ device = "/swap"; size = 65536; }];
 

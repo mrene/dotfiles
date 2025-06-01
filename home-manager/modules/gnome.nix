@@ -40,6 +40,7 @@
         "org.wezfurlong.wezterm.desktop"
         "logseq.desktop"
         "slack.desktop"
+        "google-chrome.desktop"
       ];
 
       # `gnome-extensions list` for a list
