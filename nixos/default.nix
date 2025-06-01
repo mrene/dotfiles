@@ -21,6 +21,17 @@ in {
       modules = [./beast/configuration.nix overlayModule];
     };
 
+    # sudo nixos-rebuild switch --flake .#wsl
+    wsl = inputs.nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit (self) common;
+        inherit inputs;
+        flakePackages = config.flake.packages;
+      };
+      modules = [./wsl/configuration.nix overlayModule];
+    };
+
+
     # sudo nixos-rebuild switch --flake .#utm
     utm = inputs.nixpkgs.lib.nixosSystem {
       specialArgs = {

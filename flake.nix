@@ -84,6 +84,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     app-nvim.url = "path:./app-nvim";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
