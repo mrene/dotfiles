@@ -1300,16 +1300,16 @@
     },
     "nixpkgs-pr-openthread": {
       "locked": {
-        "lastModified": 1735226759,
-        "narHash": "sha256-c97MhoiStVKyHvJcB3BH6vxK0jBEwABZEShJIRTqZTM=",
+        "lastModified": 1748832459,
+        "narHash": "sha256-bH9ZUB3KoF854Kso1IZB3gtr8FIv/I1Vv8V9vSULA6Q=",
         "owner": "mrene",
         "repo": "nixpkgs",
-        "rev": "faa9a55d6bcd1163ae222c5b0be4fe0b48a126e8",
+        "rev": "fc0c223dc703c3990663fb29d4508aabc024f963",
         "type": "github"
       },
       "original": {
         "owner": "mrene",
-        "ref": "openthread-border-router",
+        "ref": "openthread-border-router-2025",
         "repo": "nixpkgs",
         "type": "github"
       }

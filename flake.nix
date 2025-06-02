@@ -4,7 +4,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     #nixpkgs.url = "/home/mrene/nixpkgs";
-    nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
+    nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router-2025";
 
     nixpkgs-unfree = {
       url = "github:numtide/nixpkgs-unfree";
