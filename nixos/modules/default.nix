@@ -9,5 +9,6 @@
     ./dyndns.nix
     ./prs.nix
     ./brightness.nix
+    ./screen-switch.nix
   ];
 }

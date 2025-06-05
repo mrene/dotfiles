@@ -130,7 +130,6 @@
   hardware.openrazer = {
     enable = true;
     users = ["mrene"];
-    batteryNotifier.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -168,9 +167,7 @@
   virtualisation.docker.enable = true;
   hardware.nvidia-container-toolkit.enable = true;
 
-  services.minidsp = {
-    enable = true;
-  };
+  services.minidsp.enable = true;
 
   environment.systemPackages = with pkgs; [
     logseq
@@ -183,8 +180,8 @@
     alsa-utils
 
     # Screen utils
-    ddcui
     ddcutil
+    ddcui
 
     # HW support
     openrazer-daemon
@@ -225,6 +222,7 @@
   };
 
   programs.command-not-found.enable = false;
+  homelab.screen-input-switcher = true;
 
   # Allow running aarch64 binaries
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
