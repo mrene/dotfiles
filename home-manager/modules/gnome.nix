@@ -34,27 +34,29 @@
   dconf.settings = with lib.gvariant; {
     # ...
     "org/gnome/shell" = {
-      disable-user-extensions = false;
 
       favorite-apps = [
         "org.wezfurlong.wezterm.desktop"
-        "logseq.desktop"
+        "Logseq.desktop"
         "slack.desktop"
         "google-chrome.desktop"
       ];
 
+      # should be managed by programs.gnome-shells.extensions
+      # disable-user-extensions = false;
       # `gnome-extensions list` for a list
-      enabled-extensions = [
-        "tilingshell@ferrarodomenico.com"
-        "user-theme@gnome-shell-extensions.gcampax.github.com"
-        "trayIconsReloaded@selfmade.pl"
-        "Vitals@CoreCoding.com"
-        "dash-to-panel@jderose9.github.com"
-        "sound-output-device-chooser@kgshank.net"
-        "space-bar@luchrioh"
-        "disable-workspace-animation@ethnarque"
-        "alttab-mod@leleat-on-github"
-      ];
+      # enabled-extensions = [
+      #   "tilingshell@ferrarodomenico.com"
+      #   "user-theme@gnome-shell-extensions.gcampax.github.com"
+      #   "trayIconsReloaded@selfmade.pl"
+      #   "Vitals@CoreCoding.com"
+      #   "dash-to-panel@jderose9.github.com"
+      #   "sound-output-device-chooser@kgshank.net"
+      #   "space-bar@luchrioh"
+      #   "disable-workspace-animation@ethnarque"
+      #   "alttab-mod@leleat-on-github"
+      #   "smart-home@chlumskyvaclav.gmail.com"
+      # ];
     };
 
     "org/gnome/mutter" = {
@@ -139,18 +141,34 @@
     "org/gnome/settings-daemon/plugins/power" = {
       sleep-inactive-ac-type = "nothing";
     };
+
+    # "org/gnome/shell/extensions/smart-home" = {
+    #   "remember-opened-submenu" = true;
+    #   "menu-selection" = {
+    #     "http://tvpi_home-assistant" = {
+    #       group = "office";
+    #     };
+    #     "smart-home-universal_smart-home-universal" = {
+    #       group = "Office";
+    #     };
+    #   };
+    # };
   };
 
-  home.packages = with pkgs; [
-    # ...
-    gnomeExtensions.user-themes
-    gnomeExtensions.tray-icons-reloaded
-    gnomeExtensions.vitals
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.sound-output-device-chooser
-    gnomeExtensions.space-bar
-    gnomeExtensions.tiling-shell
-    gnomeExtensions.disable-workspace-animation
-    gnomeExtensions.alttab-mod
-  ];
+  programs.gnome-shell = {
+    enable = true;
+    extensions = with pkgs; [
+      # ...
+      { package = gnomeExtensions.user-themes; }
+      { package = gnomeExtensions.tray-icons-reloaded; }
+      { package = gnomeExtensions.vitals; }
+      { package = gnomeExtensions.dash-to-panel; }
+      { package = gnomeExtensions.sound-output-device-chooser; }
+      { package = gnomeExtensions.space-bar; }
+      { package = gnomeExtensions.tiling-shell; }
+      { package = gnomeExtensions.disable-workspace-animation; }
+      { package = gnomeExtensions.alttab-mod; }
+      { package = gnomeExtensions.smart-home; }
+    ];
+  };
 }

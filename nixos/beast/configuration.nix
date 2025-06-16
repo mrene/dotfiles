@@ -222,7 +222,7 @@
   };
 
   programs.command-not-found.enable = false;
-  homelab.screen-input-switcher = true;
+  homelab.screen-input-switcher.enable = true;
 
   # Allow running aarch64 binaries
   boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];

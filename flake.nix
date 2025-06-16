@@ -1,10 +1,8 @@
 {
   inputs = {
-    #nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    #nixpkgs.url = "/home/mrene/nixpkgs";
-    nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router-2025";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "/home/mrene/nixpkgs";
+    nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
 
     nixpkgs-unfree = {
       url = "github:numtide/nixpkgs-unfree";
