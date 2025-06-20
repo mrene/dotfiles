@@ -142,6 +142,10 @@
       sleep-inactive-ac-type = "nothing";
     };
 
+    "org/gnome/shell/extensions/space-bar/behavior" = {
+        always-show-numbers = true;
+    };
+
     # "org/gnome/shell/extensions/smart-home" = {
     #   "remember-opened-submenu" = true;
     #   "menu-selection" = {
@@ -158,7 +162,6 @@
   programs.gnome-shell = {
     enable = true;
     extensions = with pkgs; [
-      # ...
       { package = gnomeExtensions.user-themes; }
       { package = gnomeExtensions.tray-icons-reloaded; }
       { package = gnomeExtensions.vitals; }

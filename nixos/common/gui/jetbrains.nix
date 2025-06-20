@@ -6,6 +6,7 @@
     inherit (pkgs) system config;
   };
   ides = with oldPkgs; [
+    jetbrains.webstorm
     jetbrains.goland
     jetbrains.pycharm-professional
     jetbrains.datagrip

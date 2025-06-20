@@ -111,6 +111,7 @@
       vulkan-caps-viewer
       vulkan-hdr-layer-kwin6
       vulkan-validation-layers
+      nvidia-vaapi-driver
     ];
   };
   services.xserver.enable = true;
@@ -165,7 +166,11 @@
   services.openssh.authorizedKeysFiles = lib.mkForce ["/etc/ssh/authorized_keys.d/%u"];
 
   virtualisation.docker.enable = true;
-  hardware.nvidia-container-toolkit.enable = true;
+  hardware.nvidia-container-toolkit = {
+    enable = true;
+    # Unblock build-vm
+    suppressNvidiaDriverAssertion = true;
+  };
 
   services.minidsp.enable = true;
 
