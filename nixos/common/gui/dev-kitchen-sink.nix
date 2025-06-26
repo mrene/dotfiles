@@ -18,5 +18,6 @@
 
     clang-tools_15
     clang_15
+    task-master-ai
   ];
 }

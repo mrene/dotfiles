@@ -8,7 +8,7 @@
 }:
 
 # Prefer extensions that are in nixpkgs, fallback to the marketplace source
-(with (inputs.nix-vscode-extensions.overlays.default pkgs pkgs).vscode-marketplace; [
+(with ((inputs.nix-vscode-extensions.overlays.default pkgs pkgs).forVSCodeVersion vscode.passthru.vscodeVersion).vscode-marketplace; [
   donjayamanne.python-environment-manager
   gaborv.flatbuffers
   jeff-hykin.better-cpp-syntax
