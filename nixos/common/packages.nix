@@ -35,6 +35,7 @@
     wireshark
     sysstat
     dool
+    dtool
     bat
     eza
     fd

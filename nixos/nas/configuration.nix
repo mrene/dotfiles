@@ -14,6 +14,7 @@
     ../common/nvidia.nix
     ../common/distributed-build.nix
     ../common/radio.nix
+    ../common/cachix.nix
     ../modules
   ];
 
