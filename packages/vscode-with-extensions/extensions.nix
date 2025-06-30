@@ -23,6 +23,7 @@
   esphome.esphome-vscode
   vitest.explorer
   saoudrizwan.claude-dev # Cline
+  anthropic.claude-code
 ])
 ++ (with vscode-extensions;
   [

@@ -59,6 +59,11 @@
       # ];
     };
 
+    # Disable middle click paste
+    "org/gnome/desktop/interface" = {
+      gtk-enable-primary-paste = false;
+    };
+
     "org/gnome/mutter" = {
       workspaces-only-on-primary = false;
     };

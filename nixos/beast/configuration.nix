@@ -48,6 +48,10 @@
     ];
   };
 
+  # Fixes: warning: download buffer is full; consider increasing the 'download-buffer-size' setting
+  # when building
+  nix.settings.download-buffer-size = 524288000; # 500 MiB
+
   homelab.dyndns.enable = true;
 
   # On windows, the volume is changed on the usb device while on gnome it's changed inside pipewire.

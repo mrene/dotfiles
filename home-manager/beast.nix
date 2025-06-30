@@ -11,7 +11,13 @@
     ./modules/rofi
     ./modules/wezterm.nix
     ./modules/neofetch.nix
+
+    inputs.claude-code.homeManagerModules.claude-code
   ];
+
+  programs.claude-code = {
+    enable = true;
+  };
 
   home.stateVersion = "20.09";
 

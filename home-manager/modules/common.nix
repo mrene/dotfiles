@@ -107,6 +107,7 @@
       yazi
       aichat
       aider-chat
+      claude-code
     ]
     ++ lib.optionals stdenv.isDarwin [
       coreutils # provides `dd` with --status=progress
