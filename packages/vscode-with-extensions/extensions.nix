@@ -64,6 +64,7 @@
     mechatroner.rainbow-csv
     jnoortheen.nix-ide
     github.vscode-pull-request-github
+    github.vscode-github-actions
     esbenp.prettier-vscode
     mkhl.direnv
     llvm-vs-code-extensions.vscode-clangd

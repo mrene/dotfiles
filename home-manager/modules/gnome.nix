@@ -1,4 +1,5 @@
-{lib, pkgs, ...}: {
+{ lib, pkgs, ... }:
+{
   # ...
   gtk = {
     enable = true;
@@ -11,7 +12,7 @@
     theme = {
       name = "Catppuccin-Mocha-Standard-Pink-Dark";
       package = pkgs.catppuccin-gtk.override {
-        accents = ["pink"];
+        accents = [ "pink" ];
         variant = "mocha";
       };
     };
@@ -66,32 +67,33 @@
 
     "org/gnome/mutter" = {
       workspaces-only-on-primary = false;
+      overlay-key = "";
     };
 
     "org/gnome/shell/extensions/tilingshell" = {
       inner-gaps = mkUint32 2;
       outer-gaps = mkUint32 0;
 
-      move-window-right = ["<Super>Right"];
-      move-window-left = ["<Super>Left"];
-      move-window-up = ["<Super>Up"];
-      move-window-down = ["<Super>Down"];
+      move-window-right = [ "<Super>Right" ];
+      move-window-left = [ "<Super>Left" ];
+      move-window-up = [ "<Super>Up" ];
+      move-window-down = [ "<Super>Down" ];
 
-      span-window-right = ["<Shift><Super>Right"];
-      span-window-left = ["<Shift><Super>Left"];
-      span-window-up = ["<Shift><Super>Up"];
-      span-window-down = ["<Shift><Super>Down"];
+      span-window-right = [ "<Shift><Super>Right" ];
+      span-window-left = [ "<Shift><Super>Left" ];
+      span-window-up = [ "<Shift><Super>Up" ];
+      span-window-down = [ "<Shift><Super>Down" ];
 
-      focus-window-right = ["<Control><Super>Right"];
-      focus-window-left = ["<Control><Super>Left"];
-      focus-window-up = ["<Control><Super>Up"];
-      focus-window-down = ["<Control><Super>Down"];
+      focus-window-right = [ "<Control><Super>Right" ];
+      focus-window-left = [ "<Control><Super>Left" ];
+      focus-window-up = [ "<Control><Super>Up" ];
+      focus-window-down = [ "<Control><Super>Down" ];
     };
 
-    "org/gnome/shell/extensions/altTab-mod" = {
-      current-workspace-only = true;
-      current-workspace-only-window = true;
-    };
+    #"org/gnome/shell/extensions/altTab-mod" = {
+    #  current-workspace-only = true;
+    #  current-workspace-only-window = true;
+    #};
 
     "org/gnome/shell/extensions/dash-to-panel" = {
       isolate-workspaces = true;
@@ -148,7 +150,28 @@
     };
 
     "org/gnome/shell/extensions/space-bar/behavior" = {
-        always-show-numbers = true;
+      always-show-numbers = true;
+    };
+
+    "org/gnome/shell/extensions/advanced-alt-tab-window-switcher" = {
+      app-switcher-popup-sorting = mkUint32 1;
+      switcher-popup-timeout = mkUint32 0;
+      switcher-popup-preview-selected = mkUint32 2;
+      switcher-popup-position = mkUint32 3;
+      super-key-mode = mkUint32 1;
+      enable-super = false;
+      hot-edge-mode = mkUint32 0;
+      switcher-popup-ext-app-stable = false;
+      animation-time-factor = mkUint32 100;
+      switcher-ws-thumbnails = 1;
+      win-switcher-popup-filter = 2;
+      switcher-popup-shift-hotkeys = true;
+      app-switcher-popup-filter = 2;
+      app-switcher-popup-fav-apps = false;
+      app-switcher-popup-include-show-apps-icon = false;
+      app-switcher-popup-titles = false;
+      app-switcher-popup-win-counter = true;
+      app-switcher-popup-hide-win-counter-for-single-window = true;
     };
 
     # "org/gnome/shell/extensions/smart-home" = {
@@ -175,8 +198,9 @@
       { package = gnomeExtensions.space-bar; }
       { package = gnomeExtensions.tiling-shell; }
       { package = gnomeExtensions.disable-workspace-animation; }
-      { package = gnomeExtensions.alttab-mod; }
       { package = gnomeExtensions.smart-home; }
+      { package = gnomeExtensions.advanced-alttab-window-switcher; }
+      { package = gnomeExtensions.blurt; } # speech-to-text extension
     ];
   };
 }

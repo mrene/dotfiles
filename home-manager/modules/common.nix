@@ -18,6 +18,7 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
+
   home.packages = with pkgs;
   [
       inputs.mrene-nur.packages.${system}.hctl
@@ -108,6 +109,7 @@
       aichat
       aider-chat
       claude-code
+      zellij
     ]
     ++ lib.optionals stdenv.isDarwin [
       coreutils # provides `dd` with --status=progress

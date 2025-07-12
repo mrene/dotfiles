@@ -45,7 +45,7 @@
         zoxide init fish | source
       end
 
-      any-nix-shell fish --info-right | source
+      #any-nix-shell fish --info-right | source
 
       set -g theme_color_scheme "Catppuccin Mocha"
 
@@ -147,8 +147,8 @@
       k = "kubectl";
       b = "bat";
 
-      nr = "nix ~/dotfiles#nixosConfigurations.(hostname).pkgs.(fzf-nix)";
-      ns = "nix shell ~/dotfiles#nixosConfigurations.(hostname).pkgs.(fzf-nix)";
+      nr = if pkgs.stdenv.isLinux then "nix run ~/dotfiles#nixosConfigurations.(hostname).pkgs.(fzf-nix)" else "nix run nixpkgs#(fzf-nix)";
+      ns = if pkgs.stdenv.isLinux then "nix shell ~/dotfiles#nixosConfigurations.(hostname).pkgs.(fzf-nix)" else "nix shell nixpkgs#(fzf-nix)";
 
       ".." = "cd ..";
       "..." = "cd ../..";

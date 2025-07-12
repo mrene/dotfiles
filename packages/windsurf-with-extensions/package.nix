@@ -2,12 +2,10 @@
 {
   pkgs,
   callPackage,
-  inputs,
-  system ? builtins.currentSystem,
 }:
 
 let 
-  vscode = inputs.mrene-nur.packages.${system}.windsurf;
+  vscode = pkgs.windsurf;
 in
 
 pkgs.vscode-with-extensions.override {
