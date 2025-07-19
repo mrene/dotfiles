@@ -1195,11 +1195,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1751312930,
-        "narHash": "sha256-4vkvcZG/Z8MD1lFEAMQsxBgUjJ42ei8Eq1b9fj6HuRc=",
+        "lastModified": 1752772313,
+        "narHash": "sha256-RcwDTwlWmYXVdFoOYepJxUtLqScQJlIh72w6E9COeQU=",
         "ref": "refs/heads/master",
-        "rev": "bedf5f629785288674128d8ec04804f09f824d7c",
-        "revCount": 15,
+        "rev": "ebc01ded7751702767ca8e8708b4ed93a76532d9",
+        "revCount": 24,
         "type": "git",
         "url": "ssh://git@github.com/zia-ai/shared-dotfiles"
       },
@@ -1996,16 +1996,16 @@
     },
     "nixpkgs_13": {
       "locked": {
-        "lastModified": 1751271578,
-        "narHash": "sha256-P/SQmKDu06x8yv7i0s8bvnnuJYkxVGBWLWHaU+tt4YY=",
+        "lastModified": 1752427638,
+        "narHash": "sha256-ANNyaXW/cnZLszjXB4LXGxaWZ2cRz7Ar06WjYoawgFo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3016b4b15d13f3089db8a41ef937b13a9e33a8df",
+        "rev": "b2e5044b3e79793df83d01c9983c054cae5ea6ff",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "ref": "b2e5044b3e79",
         "repo": "nixpkgs",
         "type": "github"
       }

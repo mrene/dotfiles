@@ -4,78 +4,59 @@
   programs.zellij = {
     enable = true;
     settings = {
-      theme = "default";
-      default_mode = "normal";
       keybinds = {
         normal = {
+          _props.clear-defaults = true;
           "bind \"Ctrl b\"" = {
             SwitchToMode = "tmux";
           };
         };
         tmux = {
-          "bind \"[\"" = {
-            SwitchToMode = "Scroll";
+          "bind \"1\"" = {
+            GoToTab = 1;
+            SwitchToMode = "Normal";
           };
-          "bind \"Ctrl b\"" = {
-            Write = 2;
+          "bind \"2\"" = {
+            GoToTab = 2;
+            SwitchToMode = "Normal";
           };
-          "bind \"\\\"\"" = {
-            NewPane = "Down";
+          "bind \"3\"" = {
+            GoToTab = 3;
+            SwitchToMode = "Normal";
           };
-          "bind \"%\"" = {
-            NewPane = "Right";
+          "bind \"4\"" = {
+            GoToTab = 4;
+            SwitchToMode = "Normal";
           };
-          "bind \"z\"" = {
-            ToggleFocusFullscreen = {};
+          "bind \"5\"" = {
+            GoToTab = 5;
+            SwitchToMode = "Normal";
           };
-          "bind \"c\"" = {
-            NewTab = {};
+          "bind \"6\"" = {
+            GoToTab = 6;
+            SwitchToMode = "Normal";
           };
-          "bind \",\"" = {
-            SwitchToMode = "RenameTab";
-            TabNameInput = 0;
+          "bind \"7\"" = {
+            GoToTab = 7;
+            SwitchToMode = "Normal";
           };
-          "bind \"p\"" = {
-            GoToPreviousTab = {};
+          "bind \"8\"" = {
+            GoToTab = 8;
+            SwitchToMode = "Normal";
           };
-          "bind \"n\"" = {
-            GoToNextTab = {};
+          "bind \"9\"" = {
+            GoToTab = 9;
+            SwitchToMode = "Normal";
           };
-          "bind \"Left\"" = {
-            MoveFocus = "Left";
+          "bind \"e\"" = {
+            EditScrollback = {};
+            SwitchToMode = "Normal";
           };
-          "bind \"Right\"" = {
-            MoveFocus = "Right";
+          "bind \"m\"" = {
+            SwitchToMode = "move";
           };
-          "bind \"Up\"" = {
-            MoveFocus = "Up";
-          };
-          "bind \"Down\"" = {
-            MoveFocus = "Down";
-          };
-          "bind \"h\"" = {
-            MoveFocus = "Left";
-          };
-          "bind \"l\"" = {
-            MoveFocus = "Right";
-          };
-          "bind \"j\"" = {
-            MoveFocus = "Down";
-          };
-          "bind \"k\"" = {
-            MoveFocus = "Up";
-          };
-          "bind \"o\"" = {
-            FocusNextPane = {};
-          };
-          "bind \"d\"" = {
-            Detach = {};
-          };
-          "bind \"Space\"" = {
-            NextSwapLayout = {};
-          };
-          "bind \"x\"" = {
-            CloseFocus = {};
+          "bind \"=\"" = {
+            SwitchToMode = "resize";
           };
         };
       };

@@ -107,7 +107,7 @@
       # TUI file browser
       yazi
       aichat
-      aider-chat
+      #aider-chat
       claude-code
       zellij
     ]
