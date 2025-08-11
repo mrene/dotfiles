@@ -5,7 +5,7 @@
   oldPkgs = import (builtins.getFlake "github:nixos/nixpkgs/ff618e29610a44a30966bbc3f1a0d5ae95ac8fda") {
     inherit (pkgs) system config;
   };
-  ides = with oldPkgs; [
+  ides = with pkgs; [
     jetbrains.webstorm
     jetbrains.goland
     jetbrains.pycharm-professional
@@ -13,9 +13,9 @@
     jetbrains.clion
   ];
 in {
-  environment.systemPackages = with oldPkgs;
+  environment.systemPackages = with pkgs;
     [
       jetbrains.datagrip
     ]
-    ++ builtins.map (ide: (jetbrains.plugins.addPlugins ide ["github-copilot"])) ides;
+    ++ builtins.map (ide: (jetbrains.plugins.addPlugins ide ["ideavim"])) ides;
 }

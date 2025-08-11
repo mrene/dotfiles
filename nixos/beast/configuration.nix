@@ -185,7 +185,7 @@
     #Audio
     roomeqwizard
     spotify
-    audacity
+    # audacity
     alsa-utils
 
     # Screen utils

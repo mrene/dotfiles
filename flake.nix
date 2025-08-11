@@ -1,6 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/b2e5044b3e79";
+    # nixpkgs.url = "github:NixOS/nixpkgs/b2e5044b3e79";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     #nixpkgs.url = "/home/mrene/nixpkgs";
     nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
 
@@ -88,6 +89,10 @@
     };
     claude-code = {
       url = "github:roman/claude-code.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixpak = {
+      url = "github:nixpak/nixpak";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

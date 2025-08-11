@@ -14,7 +14,6 @@
     ./home-assistant
     ../../common/packages.nix
     ../../common/common.nix
-    ../../common/radio.nix
     ../../modules
   ];
 
@@ -85,14 +84,14 @@
   # enable nixos-hardware dtoverlay configuration for bluetooth
   hardware.raspberry-pi."4".bluetooth.enable = true;
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    socketActivation = false;
-  };
-  services.pipewire.systemWide = true;
+  # services.pipewire = {
+  #   enable = true;
+  #   alsa.enable = true;
+  #   alsa.support32Bit = true;
+  #   pulse.enable = true;
+  #   socketActivation = false;
+  # };
+  # services.pipewire.systemWide = true;
 
   networking.firewall.enable = false;
   services.tailscale = {
@@ -100,24 +99,24 @@
     extraUpFlags = [ "--advertise-exit-node" ];
   };
 
-  services.minidsp = {
-    enable = true;
-    config = {
-      ignore_advertisements = true;
-      http_server = {
-        bind_address = "0.0.0.0:5380";
-      };
-      tcp_server = [
-        {
-          bind_address = "0.0.0.0:5333";
-          advertise = {
-            ip = "192.168.1.245";
-            name = "Living Room Pi";
-          };
-        }
-      ];
-    };
-  };
+  # services.minidsp = {
+  #   enable = true;
+  #   config = {
+  #     ignore_advertisements = true;
+  #     http_server = {
+  #       bind_address = "0.0.0.0:5380";
+  #     };
+  #     tcp_server = [
+  #       {
+  #         bind_address = "0.0.0.0:5333";
+  #         advertise = {
+  #           ip = "192.168.1.245";
+  #           name = "Living Room Pi";
+  #         };
+  #       }
+  #     ];
+  #   };
+  # };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

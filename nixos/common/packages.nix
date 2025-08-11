@@ -32,7 +32,6 @@
 
     btop
     man-pages
-    wireshark
     sysstat
     dool
     dtool

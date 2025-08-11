@@ -20,15 +20,24 @@
     enable = true;
   };
 
+  home.packages = let 
+    notify = pkgs.writeShellApplication {
+      name = "notify";
+      runtimeInputs = [ pkgs.libnotify ];
+      text = ''
+        notify-send "$@"
+      '';
+    };
+    in [
+      pkgs.fishPlugins.foreign-env
+      inputs.app-nvim.packages.${pkgs.system}.default
+      notify
+    ]; 
+
   home.stateVersion = "20.09";
 
   home.username = "mrene";
   home.homeDirectory = "/home/mrene";
-
-  home.packages = with pkgs; [
-    fishPlugins.foreign-env
-    inputs.app-nvim.packages.${pkgs.system}.default
-  ];
 
   home.sessionVariables = {
     NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [
