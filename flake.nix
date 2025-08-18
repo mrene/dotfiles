@@ -40,10 +40,17 @@
       url = "github:nix-community/nixd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # flake-compat = {
+    #   url = "github:inclyc/flake-compat";
+    #   flake = false;
+    # }; # Required for nixd
+
     flake-compat = {
-      url = "github:inclyc/flake-compat";
+      url = "https://git.lix.systems/lix-project/flake-compat/archive/main.tar.gz";
       flake = false;
-    }; # Required for nixd
+    };
+
     vscode-server = {
       url = "github:msteen/nixos-vscode-server"; # NixOS fix so that vscode-server can run correctly
       inputs.nixpkgs.follows = "nixpkgs";

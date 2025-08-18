@@ -1,15 +1,17 @@
-(
-  import
-  (
-    let
-      lock = builtins.fromJSON (builtins.readFile ./flake.lock);
-      flake-compat = lock.nodes.${lock.nodes.root.inputs.flake-compat}.locked;
-    in
-      fetchTarball {
-        url = "https://github.com/edolstra/flake-compat/archive/${flake-compat.rev}.tar.gz";
-        sha256 = flake-compat.narHash;
-      }
-  )
-  {src = ./.;}
-)
-.defaultNix
+let
+  lockFile = builtins.fromJSON (builtins.readFile ./flake.lock);
+  flake-compat-node = lockFile.nodes.${lockFile.nodes.root.inputs.flake-compat};
+  flake-compat = builtins.fetchTarball {
+    inherit (flake-compat-node.locked) url;
+    sha256 = flake-compat-node.locked.narHash;
+  };
+
+  flake = (
+    import flake-compat {
+      src = ./.;
+      copySourceTreeToStore = false;
+      useBuiltinsFetchTree = true;
+    }
+  );
+in
+  flake.defaultNix
