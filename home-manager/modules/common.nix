@@ -107,7 +107,6 @@
       # TUI file browser
       yazi
       aichat
-      #aider-chat
       claude-code
       zellij
     ]
@@ -117,7 +116,7 @@
     ]
     ++ lib.optionals stdenv.isLinux [
       iputils # provides `ping`, `ifconfig`, ...
-
+      aider-chat
       libuuid # `uuidgen` (already pre-installed on mac)
     ];
 }

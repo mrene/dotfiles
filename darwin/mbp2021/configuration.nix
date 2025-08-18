@@ -49,7 +49,7 @@ in
     };
 
     linux-builder = {
-      enable = true;
+      enable = false;
       ephemeral = true;
       maxJobs = 4;
       #config = {
@@ -106,6 +106,7 @@ in
     #useUserPackages = true;
     # Passed from flake to avoid infinite recursion issue:
     #extraSpecialArgs = { inherit inputs; };
+    backupFileExtension = "bak";
   };
 
   users.users.root = {

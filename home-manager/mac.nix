@@ -6,7 +6,7 @@
   imports = [
     ./modules/fish.nix
     ./modules/git.nix
-    ./modules/vim
+   # ./modules/vim
 
     ./modules/minimal.nix
     ./modules/common.nix
