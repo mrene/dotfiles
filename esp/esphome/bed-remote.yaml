@@ -1,0 +1,70 @@
+esphome:
+  name: bed-remote
+
+external_components:
+  - source: bed-remote
+    components:
+      - a7105
+
+esp32:
+  board: esp32-c6-devkitm-1
+  variant: esp32c6
+
+spi:
+  clk_pin: GPIO11
+  mosi_pin: GPIO12
+  miso_pin: GPIO13
+  interface: hardware
+
+a7105:
+  id: radio
+  cs_pin: GPIO10
+
+# Breadboard routing
+# 10 -> 22
+# 11 -> 23
+# 12 -> 24
+# 13 -> 26
+
+packages:
+  bed1: !include
+    file: bed-remote-components.yaml
+    vars:
+      bed_prefix: ""
+      bed_name: ""
+      remote_id: !secret bed_remote_id
+      channel: !secret bed_remote_channel
+  bed2: !include
+    file: bed-remote-components.yaml
+    vars:
+      bed_prefix: "sara_"
+      bed_name: "Sara "
+      remote_id: !secret bed_remote_sara_id
+      channel: !secret bed_remote_sara_channel
+
+network:
+  enable_ipv6: true
+
+# Enable logging
+logger:
+#   level: DEBUG
+#   hardware_uart: UART0
+
+# debug:
+#   update_interval: 5s
+
+# Enable Home Assistant API
+wifi:
+  domain: .local
+  networks:
+  - ssid: !secret ssid
+    password: !secret wifi_password
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret api_key
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
