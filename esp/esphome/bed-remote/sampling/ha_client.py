@@ -57,14 +57,14 @@ class HAClient:
     @staticmethod
     def parse_events(
         logbook_data: List[Dict], 
-        event_types: List[str] = ['opening', 'closing']
+        event_types: Optional[List[str]] = None
     ) -> List[Dict]:
         """
         Parse specific event types from logbook data.
         
         Args:
             logbook_data: Raw logbook data from API
-            event_types: List of event states to extract
+            event_types: List of event states to extract (if None, includes all states)
             
         Returns:
             List of parsed events with timestamps and states
@@ -72,7 +72,8 @@ class HAClient:
         events = []
         
         for entry in logbook_data:
-            if entry.get('state') in event_types:
+            # Include all states if event_types is None, otherwise filter
+            if 'state' in entry and (event_types is None or entry.get('state') in event_types):
                 # Parse timestamp and ensure UTC
                 timestamp = pd.to_datetime(entry['when'])
                 
@@ -122,7 +123,8 @@ def load_ha_events(
     entity_id: str,
     ha_url: str = 'http://tvpi:8123',
     token_path: str = '/run/secrets/home-assistant/token',
-    token: Optional[str] = None
+    token: Optional[str] = None,
+    event_types: Optional[List[str]] = None
 ) -> List[Dict]:
     """
     Load Home Assistant events corresponding to sensor data timeframe.
@@ -133,6 +135,7 @@ def load_ha_events(
         ha_url: Home Assistant base URL
         token_path: Path to token file (used if token not provided)
         token: Bearer token (if None, will read from token_path)
+        event_types: List of event states to include (if None, includes all states)
         
     Returns:
         List of HA events within sensor data timeframe
@@ -152,8 +155,8 @@ def load_ha_events(
     # Fetch logbook entries
     logbook_data = client.fetch_logbook_entries(entity_id, sensor_start)
     
-    # Parse events
-    events = client.parse_events(logbook_data)
+    # Parse events (defaults to all event types if not specified)
+    events = client.parse_events(logbook_data, event_types)
     
     # Filter to sensor timeframe
     events = client.filter_events_by_timerange(events, sensor_start, sensor_end)

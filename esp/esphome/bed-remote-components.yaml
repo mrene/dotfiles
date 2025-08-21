@@ -9,18 +9,18 @@ cover:
   - platform: time_based
     name: "${bed_name}Head Position"
     id: ${bed_prefix}head_position
-    close_duration: 11s
-    open_duration: 11s
+    close_duration: 20s
+    open_duration: 20s
     open_action:
       - repeat:
-          count: 220 # 11s
+          count: 400 # 20s
           then:
             - lambda: |-
                 id(radio)->send_bed_command(${remote_id}, 1, 0, ${channel});
             - delay: 50ms
     close_action:
       - repeat:
-          count: 220 # 11s
+          count: 400 # 20s
           then:
             - lambda: |-
                 id(radio)->send_bed_command(${remote_id}, -1, 0, ${channel});
@@ -32,18 +32,18 @@ cover:
   - platform: time_based
     name: "${bed_name}Feet Position"
     id: ${bed_prefix}feet_position
-    close_duration: 11s
-    open_duration: 11s
+    close_duration: 20s
+    open_duration: 20s
     open_action:
       - repeat:
-          count: 220 # 11s
+          count: 400 # 20s
           then:
             - lambda: |-
                 id(radio)->send_bed_command(${remote_id}, 0, 1, ${channel});
             - delay: 50ms
     close_action:
       - repeat:
-          count: 220 # 11s
+          count: 400 # 20s
           then:
             - lambda: |-
                 id(radio)->send_bed_command(${remote_id}, 0, -1, ${channel});
@@ -59,7 +59,7 @@ switch:
     turn_on_action:
       then:
         - repeat:
-            count: 220 # 11s
+            count: 400 # 20s
             then:
             - lambda: |-
                 id(radio)->send_bed_command(${remote_id}, -1, -1, ${channel});

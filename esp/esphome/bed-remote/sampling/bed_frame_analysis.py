@@ -3,7 +3,12 @@
 from typing import List, Dict, Optional
 import pandas as pd
 import numpy as np
-from movement_detection import MovementConfig, analyze_movement
+from movement_detection import (
+    MovementConfig, 
+    analyze_movement,
+    analyze_interrupted_movement,
+    InterruptedMovementResult
+)
 from ha_client import load_ha_events
 
 
@@ -169,3 +174,141 @@ def print_analysis_summary(analysis: Dict) -> None:
         print(f"  Average time to stop: {closing['avg_stop_delay_ms']:.0f} ms")
         print(f"  Min time to stop: {closing['min_stop_delay_ms']:.0f} ms")
         print(f"  Max time to stop: {closing['max_stop_delay_ms']:.0f} ms")
+
+
+def analyze_interrupted_events(
+    events: List[Dict],
+    sensor_df: pd.DataFrame,
+    config: Optional[MovementConfig] = None
+) -> Dict:
+    """
+    Analyze movement stop delays after stop commands.
+    
+    This analyzes ALL movements followed by state changes (open/closed),
+    measuring the time from the state change to actual movement stop.
+    
+    Args:
+        events: List of ALL HA events (including open/closed states)
+        sensor_df: DataFrame with sensor data
+        config: Movement detection configuration
+        
+    Returns:
+        Dictionary with movement stop delay results and statistics
+    """
+    if config is None:
+        config = MovementConfig()
+    
+    results = []
+    opening_stop_delays = []
+    closing_stop_delays = []
+    opening_overruns = []
+    closing_overruns = []
+    
+    # Look for interrupted movement patterns
+    for i in range(len(events) - 1):
+        curr_event = events[i]
+        next_event = events[i + 1]
+        
+        # Check for movement followed by state change (ALL movements end with a state change)
+        # We want to measure stop delay for ALL of these transitions
+        if curr_event['state'] in ['opening', 'closing'] and next_event['state'] in ['open', 'closed']:
+            # Get the next movement event if it exists
+            next_movement_event = None
+            if i + 2 < len(events) and events[i + 2]['state'] in ['opening', 'closing']:
+                next_movement_event = events[i + 2]
+            
+            # Analyze this interrupted sequence
+            result = analyze_interrupted_movement(
+                curr_event, next_event, sensor_df, config, next_movement_event
+            )
+            
+            if result:
+                results.append(result)
+                
+                # Collect statistics
+                if result.movement_type == 'opening':
+                    opening_stop_delays.append(result.stop_delay_ms)
+                    opening_overruns.append(result.overrun_after_stop)
+                elif result.movement_type == 'closing':
+                    closing_stop_delays.append(result.stop_delay_ms)
+                    closing_overruns.append(result.overrun_after_stop)
+    
+    # Calculate statistics
+    statistics = {}
+    
+    if opening_stop_delays:
+        statistics['opening_interrupted'] = {
+            'count': len(opening_stop_delays),
+            'avg_stop_delay_ms': np.mean(opening_stop_delays),
+            'min_stop_delay_ms': np.min(opening_stop_delays),
+            'max_stop_delay_ms': np.max(opening_stop_delays),
+            'avg_overrun_rad': np.mean(opening_overruns),
+            'max_overrun_rad': np.max(np.abs(opening_overruns))
+        }
+    
+    if closing_stop_delays:
+        statistics['closing_interrupted'] = {
+            'count': len(closing_stop_delays),
+            'avg_stop_delay_ms': np.mean(closing_stop_delays),
+            'min_stop_delay_ms': np.min(closing_stop_delays),
+            'max_stop_delay_ms': np.max(closing_stop_delays),
+            'avg_overrun_rad': np.mean(closing_overruns),
+            'max_overrun_rad': np.max(np.abs(closing_overruns))
+        }
+    
+    return {
+        'results': results,
+        'statistics': statistics,
+        'config': config
+    }
+
+
+def print_interrupted_analysis_summary(analysis: Dict) -> None:
+    """
+    Print a summary of interrupted movement analysis.
+    
+    Args:
+        analysis: Dictionary from analyze_interrupted_events
+    """
+    print("Interrupted Movement Analysis")
+    print("=" * 50)
+    
+    # Print individual results
+    for result in analysis['results']:
+        movement = result.movement_type.capitalize()
+        
+        print(f"\n{movement} INTERRUPTED:")
+        print(f"  Movement command: {result.movement_command_time.strftime('%H:%M:%S.%f')[:-3]}")
+        print(f"  Stop command:     {result.stop_command_time.strftime('%H:%M:%S.%f')[:-3]}")
+        print(f"  Command duration: {result.command_duration_s:.3f} seconds")
+        print(f"  >>> STOP DELAY:   {result.stop_delay_ms:.0f} ms <<<")
+        print(f"  Pitch change:     {result.pitch_change_during_movement:.3f} rad")
+        print(f"  Overrun:          {result.overrun_after_stop:.3f} rad")
+        
+        if result.velocity_at_stop_command:
+            print(f"  Velocity at stop: {result.velocity_at_stop_command:.3f} rad/s")
+    
+    # Print statistics
+    print("\n" + "=" * 50)
+    print("Summary Statistics")
+    print("-" * 50)
+    
+    stats = analysis['statistics']
+    
+    if 'opening_interrupted' in stats:
+        opening = stats['opening_interrupted']
+        print(f"Opening interruptions: {opening['count']}")
+        print(f"  Average stop delay:  {opening['avg_stop_delay_ms']:.0f} ms")
+        print(f"  Min stop delay:      {opening['min_stop_delay_ms']:.0f} ms")
+        print(f"  Max stop delay:      {opening['max_stop_delay_ms']:.0f} ms")
+        print(f"  Average overrun:     {opening['avg_overrun_rad']:.3f} rad")
+        print(f"  Max overrun:         {opening['max_overrun_rad']:.3f} rad")
+    
+    if 'closing_interrupted' in stats:
+        closing = stats['closing_interrupted']
+        print(f"\nClosing interruptions: {closing['count']}")
+        print(f"  Average stop delay:  {closing['avg_stop_delay_ms']:.0f} ms")
+        print(f"  Min stop delay:      {closing['min_stop_delay_ms']:.0f} ms")
+        print(f"  Max stop delay:      {closing['max_stop_delay_ms']:.0f} ms")
+        print(f"  Average overrun:     {closing['avg_overrun_rad']:.3f} rad")
+        print(f"  Max overrun:         {closing['max_overrun_rad']:.3f} rad")
