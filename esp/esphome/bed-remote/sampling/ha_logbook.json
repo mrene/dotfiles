@@ -1,0 +1,304 @@
+[
+  {
+    "state": "unavailable",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:20:27.654625+00:00"
+  },
+  {
+    "state": "closed",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:20:34.992316+00:00"
+  },
+  {
+    "state": "opening",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:21:50.498819+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "open",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:21:55.097447+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "stop_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "opening",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:22:41.348375+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "open",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:22:43.699000+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "stop_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "unavailable",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:33:55.201327+00:00"
+  },
+  {
+    "state": "open",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:34:04.549062+00:00"
+  },
+  {
+    "state": "opening",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:34:13.639315+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "open",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:34:17.676254+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "closing",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:34:27.962585+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "close_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "opening",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:34:33.065306+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "open",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:34:37.081643+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "closing",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:35:15.958962+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "set_cover_position",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "closed",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:35:26.966634+00:00"
+  },
+  {
+    "state": "unavailable",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:41:42.412506+00:00"
+  },
+  {
+    "state": "closed",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:41:50.730052+00:00"
+  },
+  {
+    "state": "opening",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:42:03.148067+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "open",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:42:14.154731+00:00"
+  },
+  {
+    "state": "closing",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:42:17.959058+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "close_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "closed",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:42:28.965849+00:00"
+  },
+  {
+    "state": "opening",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:42:37.205933+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "open",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:42:48.206282+00:00"
+  },
+  {
+    "state": "closing",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:42:55.441337+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "close_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "closed",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:43:06.452730+00:00"
+  },
+  {
+    "state": "opening",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:59:18.774098+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "open",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T21:59:22.921494+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "stop_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "closing",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T23:25:23.670238+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "close_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "closed",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T23:25:27.830383+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "close_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "opening",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T23:25:31.647674+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "open",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T23:25:38.090036+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "stop_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "opening",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T23:25:53.968722+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "open",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T23:25:58.518749+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "open_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "closing",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T23:26:49.325480+00:00",
+    "context_user_id": "1e61e92776b04f088b4dbe240fb4d6a5",
+    "context_domain": "cover",
+    "context_service": "close_cover",
+    "context_event_type": "call_service"
+  },
+  {
+    "state": "closed",
+    "entity_id": "cover.bed_remote_head_position",
+    "name": "Bed-Remote Head Position",
+    "when": "2025-08-19T23:27:00.322287+00:00"
+  }
+]
