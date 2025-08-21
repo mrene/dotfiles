@@ -159,10 +159,10 @@ def plot_velocity_profile(
     event: Dict,
     sensor_df: pd.DataFrame,
     window_seconds: float = 20.0,
-    figsize: tuple = (12, 6)
+    figsize: tuple = (12, 8)
 ) -> plt.Figure:
     """
-    Plot velocity profile for a specific event.
+    Plot velocity and acceleration profile for a specific event.
     
     Args:
         event: HA event to analyze
@@ -175,7 +175,7 @@ def plot_velocity_profile(
     """
     from movement_detection import calculate_velocity
     
-    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=figsize, sharex=True)
+    fig, (ax1, ax2, ax3) = plt.subplots(3, 1, figsize=figsize, sharex=True)
     
     # Get window data
     window_start = event['timestamp']
@@ -188,10 +188,11 @@ def plot_velocity_profile(
     if len(window_data) > 10:
         window_data = calculate_velocity(window_data)
         
-        # Plot pitch
+        # Plot pitch with fixed range
         ax1.plot(window_data['sensor_timestamp'], window_data['pitch'], 
                 'b-', linewidth=1.5)
         ax1.set_ylabel('Pitch (radians)', fontsize=11)
+        ax1.set_ylim(0, sensor_df['pitch'].max() * 1.1)  # 0 to max with padding
         ax1.grid(True, alpha=0.3)
         ax1.axvline(x=event['timestamp'], color='red', linestyle='--', 
                    alpha=0.7, label=f"{event['state'].capitalize()} command")
@@ -212,13 +213,30 @@ def plot_velocity_profile(
         ax2.axhline(y=0, color='black', linestyle='-', alpha=0.3, linewidth=0.5)
         
         ax2.set_ylabel('Pitch Velocity (rad/s)', fontsize=11)
-        ax2.set_xlabel('Time (UTC)', fontsize=11)
+        ax2.set_ylim(-0.1, 0.1)  # Fixed range for velocity
         ax2.grid(True, alpha=0.3)
         ax2.legend()
         
+        # Plot acceleration (signed)
+        ax3.plot(window_data['sensor_timestamp'], 
+                window_data['pitch_acceleration'], 
+                'c-', alpha=0.3, label='Raw acceleration')
+        ax3.plot(window_data['sensor_timestamp'], 
+                window_data['pitch_acceleration_smooth'], 
+                'm-', linewidth=1.5, label='Smoothed acceleration')
+        
+        # Add zero line
+        ax3.axhline(y=0, color='black', linestyle='-', alpha=0.3, linewidth=0.5)
+        
+        ax3.set_ylabel('Pitch Acceleration (rad/s²)', fontsize=11)
+        ax3.set_ylim(-0.4, 0.4)  # Fixed range for acceleration
+        ax3.set_xlabel('Time (UTC)', fontsize=11)
+        ax3.grid(True, alpha=0.3)
+        ax3.legend()
+        
         # Title
         event_time = event['timestamp'].strftime('%H:%M:%S')
-        fig.suptitle(f"Velocity Profile - {event['state'].capitalize()} at {event_time}", 
+        fig.suptitle(f"Movement Profile - {event['state'].capitalize()} at {event_time}", 
                     fontsize=13)
     
     plt.tight_layout()

@@ -25,7 +25,9 @@ class InterruptedMovementResult:
     
     # Timing measurements
     command_duration_s: float  # Time between movement and stop commands
+    start_delay_ms: float  # Time from command to actual movement start
     stop_delay_ms: float  # Time from stop command to actual stop
+    actual_start_time: pd.Timestamp
     actual_stop_time: pd.Timestamp
     
     # Position measurements  
@@ -41,16 +43,17 @@ class InterruptedMovementResult:
 
 def calculate_velocity(window_data: pd.DataFrame) -> pd.DataFrame:
     """
-    Calculate pitch velocity and smoothed velocity from sensor data.
+    Calculate pitch velocity, acceleration, and smoothed values from sensor data.
     
     Velocity is signed: positive for opening (pitch increasing), 
     negative for closing (pitch decreasing).
+    Acceleration is the derivative of velocity.
     
     Args:
         window_data: DataFrame with 'pitch' and 'sensor_timestamp' columns
         
     Returns:
-        DataFrame with additional velocity columns
+        DataFrame with additional velocity and acceleration columns
     """
     df = window_data.copy()
     df = df.reset_index(drop=True)
@@ -64,14 +67,20 @@ def calculate_velocity(window_data: pd.DataFrame) -> pd.DataFrame:
     df['pitch_velocity_abs'] = df['pitch_velocity'].abs()
     
     # Smooth the absolute velocity to reduce noise (for stop detection)
+    # Use backward-looking window to avoid time offset
     df['pitch_velocity_smooth'] = df['pitch_velocity_abs'].rolling(
-        window=5, center=True
+        window=5, center=False, min_periods=1
     ).mean()
     
-    # Also create smoothed signed velocity (for visualization)
-    df['pitch_velocity_signed_smooth'] = df['pitch_velocity'].rolling(
-        window=5, center=True
-    ).mean()
+    # No smoothing on signed velocity - use raw values
+    df['pitch_velocity_signed_smooth'] = df['pitch_velocity']  # Keep the name for compatibility
+    
+    # Calculate acceleration (derivative of velocity)
+    df['velocity_diff'] = df['pitch_velocity'].diff()
+    df['pitch_acceleration'] = df['velocity_diff'] / df['time_diff']
+    
+    # No smoothing on acceleration - use raw derivative
+    df['pitch_acceleration_smooth'] = df['pitch_acceleration']  # Keep the name for compatibility
     
     return df
 
@@ -328,9 +337,35 @@ def analyze_interrupted_movement(
     stop_command_time = stop_event['timestamp']
     movement_type = movement_event['state']
     
-    # Get pitch at movement start
+    # Get pitch at movement command
     idx_start = sensor_df['sensor_timestamp'].sub(movement_time).abs().idxmin()
     pitch_at_start = sensor_df.loc[idx_start, 'pitch']
+    
+    # Detect when movement becomes visible in sensor data
+    window_for_start = sensor_df[
+        (sensor_df['sensor_timestamp'] >= movement_time) &
+        (sensor_df['sensor_timestamp'] <= movement_time + pd.Timedelta(seconds=2))
+    ].copy()
+    
+    # Movement command time IS the start time
+    actual_start_time = movement_time
+    movement_detected_time = movement_time  # Default if no movement detected
+    start_delay_ms = 0.0
+    
+    if len(window_for_start) > 5:
+        # Calculate velocity to detect when movement actually starts
+        window_for_start = calculate_velocity(window_for_start)
+        
+        # Find when velocity becomes non-zero (movement actually starts)
+        velocity_threshold = 0.002  # rad/s - very small threshold to catch start
+        
+        for i in range(1, len(window_for_start)):
+            # Check velocity magnitude
+            vel = abs(window_for_start.iloc[i].get('pitch_velocity', 0))
+            if vel > velocity_threshold:
+                movement_detected_time = window_for_start.iloc[i]['sensor_timestamp']
+                start_delay_ms = (movement_detected_time - movement_time).total_seconds() * 1000
+                break
     
     # Get pitch at stop command
     idx_stop_cmd = sensor_df['sensor_timestamp'].sub(stop_command_time).abs().idxmin()
@@ -363,7 +398,9 @@ def analyze_interrupted_movement(
         stop_command_time=stop_command_time,
         movement_type=movement_type,
         command_duration_s=(stop_command_time - movement_time).total_seconds(),
+        start_delay_ms=start_delay_ms,
         stop_delay_ms=(actual_stop_time - stop_command_time).total_seconds() * 1000,
+        actual_start_time=actual_start_time,
         actual_stop_time=actual_stop_time,
         pitch_at_start=pitch_at_start,
         pitch_at_stop_command=pitch_at_stop_command,

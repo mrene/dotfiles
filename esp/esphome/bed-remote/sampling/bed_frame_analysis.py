@@ -199,7 +199,9 @@ def analyze_interrupted_events(
         config = MovementConfig()
     
     results = []
+    opening_start_delays = []
     opening_stop_delays = []
+    closing_start_delays = []
     closing_stop_delays = []
     opening_overruns = []
     closing_overruns = []
@@ -227,9 +229,11 @@ def analyze_interrupted_events(
                 
                 # Collect statistics
                 if result.movement_type == 'opening':
+                    opening_start_delays.append(result.start_delay_ms)
                     opening_stop_delays.append(result.stop_delay_ms)
                     opening_overruns.append(result.overrun_after_stop)
                 elif result.movement_type == 'closing':
+                    closing_start_delays.append(result.start_delay_ms)
                     closing_stop_delays.append(result.stop_delay_ms)
                     closing_overruns.append(result.overrun_after_stop)
     
@@ -239,6 +243,9 @@ def analyze_interrupted_events(
     if opening_stop_delays:
         statistics['opening_interrupted'] = {
             'count': len(opening_stop_delays),
+            'avg_start_delay_ms': np.mean(opening_start_delays) if opening_start_delays else 0,
+            'min_start_delay_ms': np.min(opening_start_delays) if opening_start_delays else 0,
+            'max_start_delay_ms': np.max(opening_start_delays) if opening_start_delays else 0,
             'avg_stop_delay_ms': np.mean(opening_stop_delays),
             'min_stop_delay_ms': np.min(opening_stop_delays),
             'max_stop_delay_ms': np.max(opening_stop_delays),
@@ -249,6 +256,9 @@ def analyze_interrupted_events(
     if closing_stop_delays:
         statistics['closing_interrupted'] = {
             'count': len(closing_stop_delays),
+            'avg_start_delay_ms': np.mean(closing_start_delays) if closing_start_delays else 0,
+            'min_start_delay_ms': np.min(closing_start_delays) if closing_start_delays else 0,
+            'max_start_delay_ms': np.max(closing_start_delays) if closing_start_delays else 0,
             'avg_stop_delay_ms': np.mean(closing_stop_delays),
             'min_stop_delay_ms': np.min(closing_stop_delays),
             'max_stop_delay_ms': np.max(closing_stop_delays),
