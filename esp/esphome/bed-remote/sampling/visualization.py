@@ -197,13 +197,20 @@ def plot_velocity_profile(
                    alpha=0.7, label=f"{event['state'].capitalize()} command")
         ax1.legend()
         
-        # Plot velocity
+        # Plot velocity (signed: positive=opening, negative=closing)
         ax2.plot(window_data['sensor_timestamp'], 
-                window_data['pitch_velocity_abs'], 
+                window_data['pitch_velocity'], 
                 'g-', alpha=0.3, label='Raw velocity')
         ax2.plot(window_data['sensor_timestamp'], 
-                window_data['pitch_velocity_smooth'], 
-                'r-', linewidth=1.5, label='Smoothed velocity')
+                window_data['pitch_velocity_signed_smooth'], 
+                'r-', linewidth=1.5, label='Smoothed velocity (signed)')
+        
+        # Add threshold lines
+        ax2.axhline(y=0.005, color='gray', linestyle=':', alpha=0.5, 
+                   label='Stop threshold (±0.005 rad/s)')
+        ax2.axhline(y=-0.005, color='gray', linestyle=':', alpha=0.5)
+        ax2.axhline(y=0, color='black', linestyle='-', alpha=0.3, linewidth=0.5)
+        
         ax2.set_ylabel('Pitch Velocity (rad/s)', fontsize=11)
         ax2.set_xlabel('Time (UTC)', fontsize=11)
         ax2.grid(True, alpha=0.3)
