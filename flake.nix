@@ -94,10 +94,10 @@
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    claude-code = {
-      url = "github:roman/claude-code.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # alaude-code = {
+    #   url = "github:roman/claude-code.nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     nixpak = {
       url = "github:nixpak/nixpak";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -64,6 +64,19 @@ wifi:
 api:
   encryption:
     key: !secret api_key
+  services:
+    - service: tx_strobe
+      variables:
+        pulses: int
+        head_direction: int
+        feet_direction: int
+      then:
+      - repeat:
+          count: !lambda 'return (uint32_t) pulses;'
+          then:
+            - lambda: |-
+                id(radio)->send_bed_command(0x87355555, head_direction, feet_direction, 54);
+            - delay: 50ms
 
 ota:
   - platform: esphome

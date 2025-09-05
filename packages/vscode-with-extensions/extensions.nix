@@ -74,7 +74,8 @@
   ]
   ++ lib.optionals (! (stdenv.isAarch64 && stdenv.isLinux)) [
     ms-vscode.cpptools
-    ms-python.python
+    # build issues
+    #ms-python.python
     ms-vsliveshare.vsliveshare
     ms-azuretools.vscode-docker
   ])

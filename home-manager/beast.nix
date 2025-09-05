@@ -12,8 +12,6 @@
     ./modules/wezterm.nix
     ./modules/zellij.nix
     ./modules/neofetch.nix
-
-    inputs.claude-code.homeManagerModules.claude-code
   ];
 
   programs.claude-code = {

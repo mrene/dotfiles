@@ -40,6 +40,7 @@
               unstablePkgs = import appdots.inputs.nixpkgs-unstable {
                 inherit system overlays; 
               };
+              cfg = { minimalNvim = false; };
             };
           };
           cfg = hm.config.programs.neovim;

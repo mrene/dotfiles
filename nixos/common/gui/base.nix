@@ -45,11 +45,6 @@
 
   security.polkit.enable = true;
 
-  programs.firefox = {
-    enable = true;
-    # TODO: Add extensions
-  };
-
   programs.chromium = {
     enable = true;
 
