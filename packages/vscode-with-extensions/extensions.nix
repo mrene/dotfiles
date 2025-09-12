@@ -23,7 +23,7 @@
   esphome.esphome-vscode
   vitest.explorer
   saoudrizwan.claude-dev # Cline
-  anthropic.claude-code
+  # anthropic.claude-code
 ])
 ++ (with vscode-extensions;
   [
@@ -71,6 +71,7 @@
 
     hashicorp.terraform
     hashicorp.hcl
+    antyos.openscad
   ]
   ++ lib.optionals (! (stdenv.isAarch64 && stdenv.isLinux)) [
     ms-vscode.cpptools

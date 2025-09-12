@@ -8,7 +8,7 @@
     ./ssh.nix
     #./jira
     inputs.humanfirst-dots.homeManagerModule
-    inputs.nix-index-database.hmModules.nix-index
+    inputs.nix-index-database.homeModules.nix-index
   ];
 
   humanfirst.enable = true;

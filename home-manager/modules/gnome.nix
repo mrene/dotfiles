@@ -200,8 +200,8 @@
       { package = gnomeExtensions.disable-workspace-animation; }
       { package = gnomeExtensions.smart-home; }
       { package = gnomeExtensions.advanced-alttab-window-switcher; }
-      #{ package = gnomeExtensions.blurt; } # speech-to-text extension
       { package = gnomeExtensions.set-monitor-ddc-brightnesscontrast-extra-dimming; }
+      { package = gnomeExtensions.panel-date-format; }
     ];
   };
 }
