@@ -155,6 +155,7 @@ in
           "bluetooth"
           "zha"
           "broadlink"
+          "airvisual"
         ];
         extraPackages = python3Packages: with python3Packages; [
           grpcio
@@ -179,6 +180,7 @@ in
           })
           inputs.mrene-nur.packages.${pkgs.system}.connectlife-ha
           inputs.mrene-nur.packages.${pkgs.system}.openrgb-ha
+          inputs.mrene-nur.packages.${pkgs.system}.ha-bambulab
         ];
         customLovelaceModules = (with pkgs.home-assistant-custom-lovelace-modules; [
           mini-graph-card
@@ -192,6 +194,7 @@ in
           lovelace-slider-entity-row
           timer-bar-card
           lovelace-mushroom
+          ha-bambulab.cards
         ]);
       };
 
