@@ -70,6 +70,13 @@
       overlay-key = "";
     };
 
+    "org/gnome/desktop/wm/keybindings" = {
+      switch-to-workspace-1 = [ "Tools" ];
+      switch-to-workspace-2 = [ "Launch5" ];
+      switch-to-workspace-3 = [ "Launch6" ];
+      switch-to-workspace-4 = [ "Launch7" ];
+    };
+
     "org/gnome/shell/extensions/tilingshell" = {
       inner-gaps = mkUint32 2;
       outer-gaps = mkUint32 0;
@@ -142,6 +149,7 @@
     "org.gnome.settings-daemon.plugins.media-keys" = {
       screen-brightness-up = "<Super>Vol+";
       screen-brightness-down = "<Super>Vol-";
+      control-center-static = [ "" ];
     };
 
     # Prevent auto-suspend

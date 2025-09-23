@@ -15,8 +15,5 @@
     gcc
     mypy
     glibc.dev
-
-    clang-tools_15
-    clang_15
   ];
 }
