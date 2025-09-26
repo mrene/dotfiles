@@ -30,7 +30,6 @@
     };
     minidsp = {
       url = "github:mrene/minidsp-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     fzf-nix = {
       url = "github:mrene/fzf-nix";

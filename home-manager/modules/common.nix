@@ -112,7 +112,6 @@
     ]
     ++ lib.optionals stdenv.isDarwin [
       coreutils # provides `dd` with --status=progress
-      wifi-password
     ]
     ++ lib.optionals stdenv.isLinux [
       iputils # provides `ping`, `ifconfig`, ...

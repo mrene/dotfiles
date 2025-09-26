@@ -3,8 +3,18 @@ _: let
 in {
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
 
     matchBlocks = {
+      "*" = {
+        # Default SSH configuration
+        hashKnownHosts = true;
+        userKnownHostsFile = "~/.ssh/known_hosts ~/.ssh/known_hosts2";
+        controlMaster = "auto";
+        controlPath = "~/.ssh/master-%r@%n:%p";
+        controlPersist = "10m";
+      };
+
       github = {
         hostname = "github.com";
         user = "git";

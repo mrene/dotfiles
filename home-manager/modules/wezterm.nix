@@ -1,7 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   programs.wezterm = {
     enable = true;
-    
+
     # System light/dark mode function
     # from https://wezfurlong.org/wezterm/config/lua/window/get_appearance.html
     extraConfig = ''
@@ -27,18 +28,11 @@
 
         return {
           color_scheme = 'Catppuccin Mocha',
-          font = wezterm.font 'IBM Plex Mono',
-          -- window_decorations = "RESIZE",
-
-          -- https://github.com/NixOS/nixpkgs/issues/336069
-          -- front_end = "WebGpu",
-          -- enable_wayland = false,
+          font = wezterm.font 'FiraCode Nerd Font Mono',
 
           window_frame = {
-            --active_titlebar_bg = '#3b4252',
-            --inactive_titlebar_bg = '#3b4252',
           },
         }
-        '';
+    '';
   };
 }

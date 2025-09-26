@@ -26,11 +26,11 @@
   wsl.useWindowsDriver = true;
 
   # https://github.com/nix-community/NixOS-WSL/issues/454#issuecomment-2059795181
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
 
     extraPackages = with pkgs; [
-      mesa.drivers
+      mesa
       libvdpau-va-gl
     ];
   };

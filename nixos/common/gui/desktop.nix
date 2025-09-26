@@ -1,10 +1,10 @@
 {pkgs, ...}: {
-  services.xserver.displayManager.gdm = {
+  services.displayManager.gdm = {
     enable = true;
     autoSuspend = false;
     wayland = false;
   };
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   xdg.portal = {
     enable = true;

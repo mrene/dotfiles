@@ -15,5 +15,6 @@
     # Part of powerline-fonts
     #hack-font
     fira-code
+    nerd-fonts.fira-code
   ];
 }
