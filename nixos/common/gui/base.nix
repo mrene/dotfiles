@@ -49,17 +49,15 @@
     enable = true;
 
     extensions = [
-      "aomjjhallfgjeglblehebfpbcfeobpgk" # 1password
+      "aeblfdkhhhdcdjpifhhbdiojplfjncoa" # 1password
       "gighmmpiobklfepjocnamgkkbiglidom" # adblock
-      "dcpbedhdekgkhigjgmlcbmcjoeaebbfm" # block and focus
       "eimadpbcbfnmbkopoojfekhnkhdbieeh" # dark reader
       "nakplnnackehceedgkgkokbgbmfghain" # fake spot
-      "blkggjdmcfjdbmmmlfcpplkchpeaiiab" # omnivore
       "kbmfpngjjgdllneeigpgjifpgocmfgmb" # reddit enhancement suite
       "ennpfpdlaclocpomkiablnmbppdnlhoh" # rust search extension
       "okphadhbbjadcifjplhifajfacbkkbod" # sabnzbd connect
       "mnjggcdmjocbbbhaepdhchncahnbgone" # sponsorblock
-      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+      "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
     ];
   };
 }
