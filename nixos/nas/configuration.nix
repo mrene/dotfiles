@@ -129,6 +129,25 @@
     enable = true;
   };
 
+  services.ncps = {
+    enable = true;
+    cache = {
+      hostName = "nas";
+      allowPutVerb = true;
+      maxSize = "100G";
+    };
+    upstream = {
+      caches = [
+        "https://cache.nixos.org/"
+        "https://nix-community.cachix.org"
+      ];
+      publicKeys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
+  };
+
   system.stateVersion = "23.11";
   nixpkgs.hostPlatform = "x86_64-linux";
 }
