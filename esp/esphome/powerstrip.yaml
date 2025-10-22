@@ -30,26 +30,32 @@ switch:
     id: switch_1
     name: Relay 1
     pin: P6
+    restore_mode: RESTORE_DEFAULT_OFF
   - platform: gpio
     id: switch_2
     name: Relay 2
     pin: P24
+    restore_mode: RESTORE_DEFAULT_OFF
   - platform: gpio
     id: switch_3
     name: Relay 3
     pin: P26
+    restore_mode: RESTORE_DEFAULT_OFF
   - platform: gpio
     id: switch_4
     name: Relay 4
     pin: P8
+    restore_mode: RESTORE_DEFAULT_OFF
   - platform: gpio
     id: switch_5
     name: Relay 5
     pin: P7
+    restore_mode: RESTORE_DEFAULT_OFF
   - platform: gpio
     id: switch_6
     name: Relay 6
     pin: P9
+    restore_mode: RESTORE_DEFAULT_OFF
 
 binary_sensor:
   - platform: gpio
