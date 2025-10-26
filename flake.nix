@@ -1,8 +1,6 @@
 {
   inputs = {
-    #nixpkgs.url = "github:NixOS/nixpkgs/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    #nixpkgs.url = "/home/mrene/nixpkgs";
     nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
 
     nixpkgs-unfree = {
@@ -40,11 +38,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # flake-compat = {
-    #   url = "github:inclyc/flake-compat";
-    #   flake = false;
-    # }; # Required for nixd
-
+    # Use flake-compat from Lix since it can be configured to skip copying things to the store
     flake-compat = {
       url = "https://git.lix.systems/lix-project/flake-compat/archive/main.tar.gz";
       flake = false;
@@ -93,10 +87,6 @@
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # alaude-code = {
-    #   url = "github:roman/claude-code.nix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     nixpak = {
       url = "github:nixpak/nixpak";
       inputs.nixpkgs.follows = "nixpkgs";

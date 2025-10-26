@@ -46,7 +46,7 @@
       batwatch
       batpipe
       batman
-      batgrep
+      #batgrep
       # Snapshot testing error on the reported version which is surely due to nix shenanigans
       (batdiff.overrideAttrs { doCheck = false; })
     ]);
