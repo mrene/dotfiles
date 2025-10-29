@@ -81,7 +81,7 @@
       nodePackages.vscode-langservers-extracted
 
       # github cli
-      gitAndTools.gh
+      gh
 
       #(update-nix-fetchgit.overrideAttrs(old: {
       #src = fetchFromGitHub {

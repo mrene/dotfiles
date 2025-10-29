@@ -33,6 +33,9 @@
     ../modules
   ];
 
+  # Increase nixos-rebuild build-vm memory size
+  virtualisation.vmVariant.virtualisation.memorySize = 16384; # MB
+
   homelab.sops.enable = true;
   sops.secrets."home-assistant/token" = {
     owner = config.users.users.mrene.name;
@@ -109,7 +112,7 @@
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      vaapiVdpau
+      libva-vdpau-driver
       libvdpau-va-gl
       vulkan-tools
       vulkan-caps-viewer

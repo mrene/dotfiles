@@ -28,7 +28,7 @@
 
       # Disk space estimators
       dua
-      du-dust
+      dust
 
       # JSON tooling
       jq

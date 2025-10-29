@@ -1083,6 +1083,26 @@
         "type": "github"
       }
     },
+    "nix2container": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1752002763,
+        "narHash": "sha256-JYAkdZvpdSx9GUoHPArctYMypSONob4DYKRkOubUWtY=",
+        "owner": "nlewo",
+        "repo": "nix2container",
+        "rev": "4f2437f6a1844b843b380d483087ae6d461240ee",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nlewo",
+        "repo": "nix2container",
+        "type": "github"
+      }
+    },
     "nixd": {
       "inputs": {
         "flake-parts": "flake-parts_4",
@@ -1445,11 +1465,11 @@
     },
     "nixpkgs_7": {
       "locked": {
-        "lastModified": 1761349956,
-        "narHash": "sha256-tH3wHnOJms+U4k/rK2Nn1RfBrhffX92jLP/2VndSn0w=",
+        "lastModified": 1761700793,
+        "narHash": "sha256-UsHvwRA3z3yvUxidUAIPpcLeTuaqpjJucJTRlf7zUmc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "02f2cb8e0feb4596d20cc52fda73ccee960e3538",
+        "rev": "699a727f426dfd3aa3ffa82ef68af1eeda2eacd2",
         "type": "github"
       },
       "original": {
@@ -1571,6 +1591,7 @@
         "nix-init": "nix-init",
         "nix-update": "nix-update",
         "nix-vscode-extensions": "nix-vscode-extensions",
+        "nix2container": "nix2container",
         "nixd": "nixd_2",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
