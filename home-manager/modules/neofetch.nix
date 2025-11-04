@@ -2,8 +2,8 @@
   themes = pkgs.fetchFromGitHub {
     owner = "Chick2D";
     repo = "neofetch-themes";
-    rev = "a52b4c23d26b0ccae8fce9a824dd2fbadcd9fe01";
-    sha256 = "0j9jg6q11z8b6dxz2qw5cc183abkz1m5wr7czc70dcnamhgkkh4m";
+    rev = "e9b1767932bad3f7f89869f040965160c8d03b3e";
+    sha256 = "19shawvpvik13sa9pf59djz2ymyrv0c7jqh3pd0knzla2sk40327";
   };
 in {
   #home.packages = [pkgs.neofetch];
