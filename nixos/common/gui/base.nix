@@ -1,3 +1,5 @@
+# REFACTOR PLAN: This file will become:
+#   - homelab.gui.base.enable (base GUI packages, fonts, chromium, 1password)
 {pkgs, ...}: {
   imports = [
     ../../../common/fonts.nix

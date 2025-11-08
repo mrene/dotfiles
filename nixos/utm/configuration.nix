@@ -13,13 +13,18 @@
 
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../common/minikube.nix
-    ../common/gui/desktop.nix
-    ../common/common.nix
-    ../common/packages.nix
-    ../common/vm/common.nix
-    ../common/gui/base.nix
+    ../modules
   ];
+
+  # Enable refactored homelab modules
+  homelab.vm-common.enable = true;
+  homelab.ssh-ca.enable = true;
+  homelab.common-packages.enable = true;
+  homelab.fonts.enable = true;
+  homelab.minikube.enable = true;
+  homelab.gui.desktop.enable = true;
+  homelab.gui.base.enable = true;
+  homelab.vm.common.enable = true;
   environment.systemPackages = [ pkgs.nix-output-monitor ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;

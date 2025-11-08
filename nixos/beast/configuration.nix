@@ -18,20 +18,24 @@
     ./rgb.nix
     ./bt-speaker.nix
 
-    ../common/nvidia.nix
-    ../common/distributed-build.nix
-    ../common/cachix.nix
-    ../common/minikube.nix
-    ../common/common.nix
-    ../common/packages.nix
-    ../common/gui/dev-kitchen-sink.nix
-    ../common/gui/desktop.nix
-    ../common/gui/base.nix
-    ../common/gui/messaging.nix
-
-    ../common/radio.nix
     ../modules
   ];
+
+  # Enable refactored homelab modules
+  homelab.vm-common.enable = true;
+  homelab.ssh-ca.enable = true;
+  homelab.common-packages.enable = true;
+  homelab.fonts.enable = true;
+  homelab.nvidia.enable = true;
+  homelab.radio.enable = true;
+  homelab.minikube.enable = true;
+  homelab.distributed-builds.enable = true;
+  homelab.cachix.enable = true;
+  homelab.gui.base.enable = true;
+  homelab.gui.desktop.enable = true;
+  homelab.gui.dev.enable = true;
+  homelab.gui.jetbrains.enable = true;  # Was part of dev-kitchen-sink
+  homelab.gui.messaging.enable = true;
 
   # Increase nixos-rebuild build-vm memory size
   virtualisation.vmVariant.virtualisation.memorySize = 16384; # MB

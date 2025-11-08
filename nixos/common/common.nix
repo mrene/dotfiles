@@ -1,3 +1,5 @@
+# REFACTOR PLAN: This file will be split into the following modules:
+# This file will be controlled via homelab.vm-common.enable 
 {
   lib,
   pkgs,

@@ -1,3 +1,5 @@
+# REFACTOR PLAN: This file will become:
+#   - homelab.gui.dev.enable (VSCode, Windsurf, dev tools)
 {
   pkgs,
   flakePackages,

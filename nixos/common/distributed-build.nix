@@ -1,3 +1,5 @@
+# REFACTOR PLAN: This file will become:
+#   - homelab.distributed-builds.enable
 {
   lib,
   config,

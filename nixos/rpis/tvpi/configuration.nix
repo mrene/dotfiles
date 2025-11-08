@@ -12,10 +12,13 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./home-assistant
-    ../../common/packages.nix
-    ../../common/common.nix
     ../../modules
   ];
+
+  # Enable refactored homelab modules
+  homelab.vm-common.enable = true;
+  homelab.ssh-ca.enable = true;
+  homelab.common-packages.enable = true;
 
   # Prevent a lot of superfluous FS from being compiled
   boot.supportedFilesystems = lib.mkForce ["ext4" "vfat"];

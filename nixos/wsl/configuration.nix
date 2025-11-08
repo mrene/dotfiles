@@ -10,15 +10,18 @@
 
 {
   imports = [
-    ../common/common.nix
-    ../common/packages.nix
-    ../common/distributed-build.nix
     ../modules
 
     # include NixOS-WSL modules
     inputs.nixos-wsl.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
   ];
+
+  # Enable refactored homelab modules
+  homelab.vm-common.enable = true;
+  homelab.ssh-ca.enable = true;
+  homelab.common-packages.enable = true;
+  homelab.distributed-builds.enable = true;
 
   wsl.enable = true;
   wsl.defaultUser = "mrene";

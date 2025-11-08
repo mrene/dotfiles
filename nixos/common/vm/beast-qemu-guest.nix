@@ -1,3 +1,5 @@
+# REFACTOR PLAN: This file will become:
+#   - homelab.vm.qemu-guest.enable (QEMU guest configuration)
 {modulesPath, ...}: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
