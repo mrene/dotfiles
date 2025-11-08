@@ -1,7 +1,19 @@
-{ config, pkgs, ... }:
-
 {
-  programs.zellij = {
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.homelab.terminal.zellij;
+in
+{
+  options.homelab.terminal.zellij = {
+    enable = lib.mkEnableOption "Enable zellij terminal multiplexer";
+  };
+
+  config = lib.mkIf cfg.enable {
+    programs.zellij = {
     enable = true;
     settings = {
       keybinds = {
@@ -61,5 +73,6 @@
         };
       };
     };
+  };
   };
 }

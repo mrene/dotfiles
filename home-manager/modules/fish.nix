@@ -1,9 +1,19 @@
 {
+  lib,
   config,
   pkgs,
   ...
-}: {
-  programs.fish = {
+}:
+let
+  cfg = config.homelab.shell.fish;
+in
+{
+  options.homelab.shell.fish = {
+    enable = lib.mkEnableOption "Enable fish shell configuration";
+  };
+
+  config = lib.mkIf cfg.enable {
+    programs.fish = {
     enable = true;
     package = pkgs.fish;
     interactiveShellInit = ''
@@ -159,12 +169,13 @@
     };
   };
 
-  programs.starship = {
-    enable = true;
-    settings = {
-      gcloud = {disabled = true;};
-      nix_shell = {disabled = true;};
-      package = {disabled = true;};
+    programs.starship = {
+      enable = true;
+      settings = {
+        gcloud = {disabled = true;};
+        nix_shell = {disabled = true;};
+        package = {disabled = true;};
+      };
     };
   };
 }

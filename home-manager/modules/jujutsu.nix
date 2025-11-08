@@ -1,7 +1,19 @@
-{ pkgs, ... }:
-
 {
-  programs.jujutsu = {
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.homelab.dev.jujutsu;
+in
+{
+  options.homelab.dev.jujutsu = {
+    enable = lib.mkEnableOption "Enable jujutsu version control";
+  };
+
+  config = lib.mkIf cfg.enable {
+    programs.jujutsu = {
     enable = true;
 
     # See https://github.com/jj-vcs/jj/blob/main/docs/config.md
@@ -19,5 +31,6 @@
         ];
       };
     };
+  };
   };
 }

@@ -1,4 +1,11 @@
-{pkgs, ...}: let
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.homelab.editor.vim;
   # ray-x-go-nvim = pkgs.vimUtils.buildVimPlugin {
   #   pname = "ray-x-go-nvim";
   #   version = "unstable-2024-12-01";
@@ -51,8 +58,14 @@
       sha256 = "0ghr4p4qjy8q6qc249mwws8ndq2xdyqjcp2myazdbdm709xgapi6";
     };
   });
-in {
-  programs.neovim = {
+in
+{
+  options.homelab.editor.vim = {
+    enable = lib.mkEnableOption "Enable neovim editor configuration";
+  };
+
+  config = lib.mkIf cfg.enable {
+    programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
@@ -158,6 +171,7 @@ in {
     ];
   };
 
-  # Create directory so startify can store its sessions
-  xdg.dataFile."nvim/session/.keep".text = "";
+    # Create directory so startify can store its sessions
+    xdg.dataFile."nvim/session/.keep".text = "";
+  };
 }

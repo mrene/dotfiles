@@ -1,13 +1,24 @@
 {
+  lib,
+  config,
   pkgs,
-  inputs,
+  inputs ? {},
   ...
-}: {
-  imports = [
+}:
+let
+  cfg = config.homelab.gui.hyprland;
+in
+{
+  imports = lib.optionals (inputs ? hyprland) [
     inputs.hyprland.homeManagerModules.default
   ];
 
-  wayland.windowManager.hyprland = {
+  options.homelab.gui.hyprland = {
+    enable = lib.mkEnableOption "Enable Hyprland Wayland compositor";
+  };
+
+  config = lib.mkIf cfg.enable {
+    wayland.windowManager.hyprland = {
     enable = true;
     extraConfig = builtins.readFile ./hyprland.conf;
   };
@@ -17,8 +28,9 @@
     XDG_SESSION_DESKTOP = "Hyprland";
   };
 
-  home.packages = with pkgs; [
-    kitty
-    wofi
-  ];
+    home.packages = with pkgs; [
+      kitty
+      wofi
+    ];
+  };
 }

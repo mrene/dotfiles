@@ -1,5 +1,12 @@
-{pkgs, ...}: let
-  inherit (pkgs) lib writeShellApplication dbus openrgb;
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.homelab.system.rgb;
+  inherit (pkgs) writeShellApplication dbus openrgb;
   rgb-auto-toggle = writeShellApplication {
     name = "rgb-auto-toggle";
     text = ''
@@ -22,8 +29,14 @@
       done
     '';
   };
-in {
-  systemd.user.services.rgb-auto-toggle = {
+in
+{
+  options.homelab.system.rgb = {
+    enable = lib.mkEnableOption "Enable RGB lighting auto-toggle on screen lock";
+  };
+
+  config = lib.mkIf cfg.enable {
+    systemd.user.services.rgb-auto-toggle = {
     Unit = {
       Description = "Toggle rgb on/off when the screensaver stops/starts";
       Wants = ["dbus.socket" "openrgb.service"];
@@ -38,5 +51,6 @@ in {
       Restart = "always";
       RestartSec = "5";
     };
+  };
   };
 }

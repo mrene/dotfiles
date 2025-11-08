@@ -1,18 +1,20 @@
 {lib, pkgs, inputs, ...}: {
   imports = [
-    ./modules/fish.nix
-    ./modules/git.nix
-    ./modules/jujutsu.nix
-    # ./modules/vim
-
-    ./modules/minimal.nix
-    ./modules/common.nix
-    ./modules/gnome.nix
-    ./modules/rofi
-    ./modules/wezterm.nix
-    ./modules/zellij.nix
-    ./modules/neofetch.nix
+    ./modules
   ];
+
+  # Enable homelab modules
+  homelab.shell.fish.enable = true;
+  homelab.dev.git.enable = true;
+  homelab.dev.jujutsu.enable = true;
+  # homelab.editor.vim.enable = true; # Commented out like before
+  homelab.minimal.enable = true;
+  homelab.common.enable = true;
+  homelab.gui.gnome.enable = true;
+  homelab.gui.rofi.enable = true;
+  homelab.terminal.wezterm.enable = true;
+  homelab.terminal.zellij.enable = true;
+  homelab.system.neofetch.enable = true;
 
   programs.claude-code = {
     enable = true;

@@ -1,5 +1,19 @@
-{pkgs, ...}: {
-  programs.rofi = {
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.homelab.gui.rofi;
+in
+{
+  options.homelab.gui.rofi = {
+    enable = lib.mkEnableOption "Enable rofi application launcher";
+  };
+
+  config = lib.mkIf cfg.enable {
+    programs.rofi = {
     enable = true;
     plugins = with pkgs; [
       rofi-top
@@ -25,5 +39,6 @@
       sorting=4
       ordering=1
     '';
+  };
   };
 }

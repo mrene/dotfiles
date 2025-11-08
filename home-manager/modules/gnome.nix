@@ -1,7 +1,20 @@
-{ lib, pkgs, ... }:
 {
-  # ...
-  gtk = {
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.homelab.gui.gnome;
+in
+{
+  options.homelab.gui.gnome = {
+    enable = lib.mkEnableOption "Enable GNOME desktop configuration";
+  };
+
+  config = lib.mkIf cfg.enable {
+    # ...
+    gtk = {
     enable = true;
 
     iconTheme = {
@@ -211,5 +224,6 @@
       { package = gnomeExtensions.set-monitor-ddc-brightnesscontrast-extra-dimming; }
       { package = gnomeExtensions.panel-date-format; }
     ];
+  };
   };
 }
