@@ -17,6 +17,7 @@ in
     bandwhich
     nixos-rebuild
     pkg-config
+    wezterm
   ];
 
   # Auto upgrade nix package and the daemon service.
@@ -86,7 +87,6 @@ in
   '';
 
   security.pam.services.sudo_local.touchIdAuth = true;
-
   programs = {
     fish.enable = true;
   };
