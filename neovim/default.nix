@@ -200,6 +200,7 @@ let
 
           pyright
           ruff
+          gh
         ])
         ++ (lib.optionals agenticEnabled [
           mcp-hub # via overlay
