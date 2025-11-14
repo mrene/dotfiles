@@ -30,7 +30,7 @@
     };
     in [
       pkgs.fishPlugins.foreign-env
-      inputs.app-nvim.packages.${pkgs.system}.default
+      inputs.self.packages.${pkgs.system}.nvim
       notify
     ]; 
 

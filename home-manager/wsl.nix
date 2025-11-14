@@ -12,7 +12,7 @@
 
   home.packages = with pkgs; [
     fishPlugins.foreign-env
-     inputs.app-nvim.packages.${pkgs.system}.default
+     inputs.self.packages.${pkgs.system}.nvim
   ];
   home.stateVersion = "20.09";
 }

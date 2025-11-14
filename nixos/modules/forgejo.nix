@@ -8,7 +8,7 @@
   };
 
   config = let 
-    cfg = config.homelab.forejo;
+    cfg = config.homelab.forgejo;
   in lib.mkIf cfg.enable {
     services.forgejo = {
       enable = true;
@@ -19,6 +19,6 @@
       };
     };
 
-    homelab.backups.paths = [ config.services.fogejo.stateDir ];
+    homelab.backups.paths = [ config.services.forgejo.stateDir ];
   };
 }

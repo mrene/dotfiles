@@ -51,8 +51,7 @@
     };
 
     devShells.installer = pkgs.mkShell {
-      buildInputs = with pkgs; [
-        inputs.nixos-generators.packages.${system}.nixos-generate
+      buildInputs = with pkgs; lib.optionals pkgs.stdenv.hostPlatform.isLinux [
         nixos-install-tools
       ];
     };
