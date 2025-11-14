@@ -95,6 +95,15 @@
       url = "github:nlewo/nix2container";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mcphub-nvim = {
+      url = "github:ravitemer/mcphub.nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mcp-hub = {
+      url = "github:ravitemer/mcp-hub";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {flake-parts, ...}:
@@ -105,9 +114,10 @@
         ./nixos
         ./darwin
         ./home-manager
-        ./vim
+        # ./vim
         ./devshell.nix
         ./common.nix
+        ./neovim
       ];
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
     };
