@@ -18,6 +18,7 @@
     ../modules
   ];
 
+
   boot = {
     loader = {
       grub = {
@@ -66,6 +67,7 @@
   homelab.attic.enable = true;
   homelab.caddy.enable = true;
   homelab.dyndns.enable = true;
+  homelab.forgejo.enable = true;
 
   services.openthread-border-router = {
     enable = true;
@@ -147,6 +149,8 @@
       ];
     };
   };
+
+  virtualisation.docker.enable = true;
 
   system.stateVersion = "23.11";
   nixpkgs.hostPlatform = "x86_64-linux";

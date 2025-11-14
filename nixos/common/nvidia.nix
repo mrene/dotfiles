@@ -2,7 +2,7 @@
   # Graphics
   hardware.graphics = {
     enable = true;
-    enable32Bit = true;
+    enable32Bit = false;
 
     extraPackages = with pkgs; [
       libva-vdpau-driver

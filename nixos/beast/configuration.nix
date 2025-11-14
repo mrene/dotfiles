@@ -110,7 +110,7 @@
   # Graphics
   hardware.graphics = {
     enable = true;
-    enable32Bit = true;
+    enable32Bit = false;
     extraPackages = with pkgs; [
       libva-vdpau-driver
       libvdpau-va-gl
@@ -130,7 +130,7 @@
   services.pipewire = {
     enable = true;
     alsa.enable = true;
-    alsa.support32Bit = true;
+    alsa.support32Bit = false;
     pulse.enable = true;
     jack.enable = true;
   };
