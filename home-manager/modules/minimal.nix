@@ -1,10 +1,20 @@
 {
+  lib,
   config,
   pkgs,
   ...
-}: {
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+}:
+let
+  cfg = config.homelab.minimal;
+in
+{
+  options.homelab.minimal = {
+    enable = lib.mkEnableOption "Enable minimal home-manager configuration";
+  };
+
+  config = lib.mkIf cfg.enable {
+    # Let Home Manager install and manage itself.
+    programs.home-manager.enable = true;
 
   home.packages = with pkgs;
     [
@@ -78,7 +88,8 @@
     clock24 = true;
   };
 
-  programs.dircolors = {
-    enable = true;
+    programs.dircolors = {
+      enable = true;
+    };
   };
 }

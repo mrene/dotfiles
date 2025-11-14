@@ -9,15 +9,17 @@
     inputs.home-manager.nixosModules.home-manager
     ./hardware-configuration.nix
     ./storage.nix
-    ../common/common.nix
-    ../common/packages.nix
-    ../common/nvidia.nix
-    ../common/distributed-build.nix
-    ../common/radio.nix
-    ../common/cachix.nix
     ../modules
   ];
 
+  # Enable refactored homelab modules
+  homelab.vm-common.enable = true;
+  homelab.ssh-ca.enable = true;
+  homelab.common-packages.enable = true;
+  homelab.nvidia.enable = true;
+  homelab.distributed-builds.enable = true;
+  homelab.radio.enable = true;
+  homelab.cachix.enable = true;
 
   boot = {
     loader = {

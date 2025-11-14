@@ -1,3 +1,5 @@
+# REFACTOR PLAN: This file will become:
+#   - homelab.cachix.enable (will keep dynamic imports from cachix/ subdirectory)
 {lib, ...}: let
   folder = ./cachix;
   toImport = name: _value: folder + ("/" + name);

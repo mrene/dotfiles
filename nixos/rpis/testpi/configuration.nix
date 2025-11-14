@@ -10,8 +10,12 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../common/common.nix
+    ../../modules
   ];
+
+  # Enable refactored homelab modules
+  homelab.vm-common.enable = true;
+  homelab.ssh-ca.enable = true;
 
   # NixOS wants to enable GRUB by default
   #boot.loader.grub.enable = false;

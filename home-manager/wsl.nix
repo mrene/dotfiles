@@ -1,11 +1,14 @@
 {pkgs, inputs, ...}: {
   imports = [
-    ./modules/fish.nix
-    ./modules/git.nix
-    ./modules/jujutsu.nix
-    ./modules/minimal.nix
-    ./modules/common.nix
+    ./modules
   ];
+
+  # Enable homelab modules
+  homelab.shell.fish.enable = true;
+  homelab.dev.git.enable = true;
+  homelab.dev.jujutsu.enable = true;
+  homelab.minimal.enable = true;
+  homelab.common.enable = true;
 
   home.packages = with pkgs; [
     fishPlugins.foreign-env

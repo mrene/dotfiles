@@ -1,3 +1,5 @@
+# REFACTOR PLAN: This file will become:
+#   - homelab.nvidia.enable
 {pkgs, config, ...}: {
   # Graphics
   hardware.graphics = {

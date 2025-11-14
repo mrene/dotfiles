@@ -1,3 +1,5 @@
+# REFACTOR PLAN: This file will become:
+#   - homelab.gui.jetbrains.enable (JetBrains IDEs)
 {pkgs, ...}: let
   ides = with pkgs; [
     jetbrains.webstorm

@@ -1,3 +1,4 @@
+# REFACTOR PLAN: Part of homelab.cachix.enable (dynamically imported)
 {
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];

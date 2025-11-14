@@ -1,12 +1,19 @@
-{ lib, pkgs, config, inputs, ... }: 
-
-let 
-  mkNixPak = inputs.nixpak.lib.nixpak { 
+{
+  lib,
+  config,
+  pkgs,
+  inputs ? {},
+  ...
+}:
+let
+  cfg = config.homelab.tools.claude;
+  hasNixpak = inputs ? nixpak;
+  mkNixPak = if hasNixpak then inputs.nixpak.lib.nixpak {
     inherit pkgs lib;
-  };
+  } else null;
 
 
-  claude-sandbox = mkNixPak {
+  claude-sandbox = if hasNixpak then mkNixPak {
     config = { sloth, ... }: {
       app.package = pkgs.claude-code;
       
@@ -35,10 +42,16 @@ let
         # ];
       };
     };
-  };
+  } else null;
 in
 {
-  home.packages = with pkgs; [
-    claude-sandbox.config.env
-  ];
+  options.homelab.tools.claude = {
+    enable = lib.mkEnableOption "Enable Claude Code IDE with nixpak sandboxing";
+  };
+
+  config = lib.mkIf (cfg.enable && hasNixpak) {
+    home.packages = with pkgs; [
+      claude-sandbox.config.env
+    ];
+  };
 }

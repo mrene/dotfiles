@@ -1,3 +1,5 @@
+# REFACTOR PLAN: This file will become:
+#   - homelab.vm.common.enable (relaxed VM user/security config)
 # Common relaxed configuration for use with VMs running on trusted hardware
 {
   common,

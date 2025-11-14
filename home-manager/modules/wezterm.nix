@@ -1,6 +1,19 @@
-{ pkgs, ... }:
 {
-  programs.wezterm = {
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.homelab.terminal.wezterm;
+in
+{
+  options.homelab.terminal.wezterm = {
+    enable = lib.mkEnableOption "Enable wezterm terminal emulator";
+  };
+
+  config = lib.mkIf cfg.enable {
+    programs.wezterm = {
     enable = true;
 
     # System light/dark mode function
@@ -34,5 +47,6 @@
           },
         }
     '';
+    };
   };
 }

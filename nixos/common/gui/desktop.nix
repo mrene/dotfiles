@@ -1,3 +1,5 @@
+# REFACTOR PLAN: This file will become:
+#   - homelab.gui.desktop.enable (GNOME desktop environment)
 {pkgs, ...}: {
   services.displayManager.gdm = {
     enable = true;

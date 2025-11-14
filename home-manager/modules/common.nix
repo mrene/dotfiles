@@ -1,18 +1,30 @@
 {
+  lib,
+  config,
   pkgs,
   inputs,
   ...
-}: {
+}:
+let
+  cfg = config.homelab.common;
+in
+{
   imports = [
-    ./minimal.nix
-    ./ssh.nix
-    #./jira
     inputs.humanfirst-dots.homeManagerModule
     inputs.nix-index-database.homeModules.nix-index
   ];
 
-  humanfirst.enable = true;
-  humanfirst.identity.email = "mathieu@humanfirst.ai";
+  options.homelab.common = {
+    enable = lib.mkEnableOption "Enable common development tools and packages";
+  };
+
+  config = lib.mkIf cfg.enable {
+    # Enable dependencies
+    homelab.minimal.enable = true;
+    homelab.system.ssh.enable = true;
+
+    humanfirst.enable = true;
+    humanfirst.identity.email = "mathieu@humanfirst.ai";
 
   # https://github.com/nix-community/nix-direnv#via-home-manager
   programs.direnv.enable = true;
@@ -118,4 +130,5 @@
       aider-chat
       libuuid # `uuidgen` (already pre-installed on mac)
     ];
+  };
 }

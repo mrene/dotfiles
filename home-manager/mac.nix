@@ -4,15 +4,17 @@
   ...
 }: {
   imports = [
-    ./modules/fish.nix
-    ./modules/git.nix
-   # ./modules/vim
-
-    ./modules/minimal.nix
-    ./modules/common.nix
-    ./modules/wezterm.nix
-    ./modules/jujutsu.nix
+    ./modules
   ];
+
+  # Enable homelab modules
+  homelab.shell.fish.enable = true;
+  homelab.dev.git.enable = true;
+  # homelab.editor.vim.enable = true; # Commented out like before
+  homelab.minimal.enable = true;
+  homelab.common.enable = true;
+  homelab.terminal.wezterm.enable = true;
+  homelab.dev.jujutsu.enable = true;
 
   home.username = "mrene";
   home.homeDirectory = "/Users/mrene";

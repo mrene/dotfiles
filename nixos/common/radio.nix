@@ -1,4 +1,6 @@
-{pkgs, ...}: 
+# REFACTOR PLAN: This file will become:
+#   - homelab.radio.enable
+{pkgs, ...}:
 let
   hardwarePackages = [
     pkgs.rtl-sdr
