@@ -12,7 +12,7 @@ in
     services.displayManager.gdm = {
       enable = true;
       autoSuspend = false;
-      wayland = false;
+      wayland = true;
     };
     services.desktopManager.gnome.enable = true;
 

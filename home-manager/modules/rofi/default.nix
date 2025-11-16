@@ -20,7 +20,8 @@ in
       rofimoji
     ];
     theme = "${./.}/theme.rasi";
-    #package = pkgs.rofi-wayland;
+    # package = if config.services.displayManager.gdm.wayland then pkgs.rofi-wayland else pkgs.rofi;
+    package = pkgs.rofi;
   };
 
   dconf.settings = {

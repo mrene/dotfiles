@@ -127,7 +127,7 @@ in
     ]
     ++ lib.optionals stdenv.isLinux [
       iputils # provides `ping`, `ifconfig`, ...
-      aider-chat
+      # aider-chat
       libuuid # `uuidgen` (already pre-installed on mac)
     ];
   };
