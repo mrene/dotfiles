@@ -12,6 +12,7 @@ in
   imports = [
     inputs.humanfirst-dots.homeManagerModule
     inputs.nix-index-database.homeModules.nix-index
+    inputs.self.homeManagerModules.neovim
   ];
 
   options.homelab.common = {

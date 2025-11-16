@@ -10,7 +10,7 @@
   homelab.minimal.enable = true;
   homelab.common.enable = true;
   homelab.system.neofetch.enable = true;
-
+  homelab.dev.jujutsu.enable = true;
   home.stateVersion = "20.09";
 
   home.username = "mrene";

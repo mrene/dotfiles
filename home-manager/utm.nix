@@ -1,7 +1,6 @@
 {inputs, pkgs, ...}: {
   imports = [
     ./modules
-    inputs.self.homeManagerModules.neovim
   ];
 
   # Enable homelab modules
