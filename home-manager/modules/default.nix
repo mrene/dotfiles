@@ -15,7 +15,7 @@
     # Development tools
     ./git.nix            # homelab.dev.git.enable
     ./jujutsu.nix        # homelab.dev.jujutsu.enable
-    ./vim               # homelab.editor.vim.enable
+    # ./vim               # homelab.editor.vim.enable
 
     # System utilities
     ./ssh.nix            # homelab.system.ssh.enable

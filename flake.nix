@@ -117,6 +117,9 @@
         ./devshell.nix
         ./common.nix
         ./neovim
+        # ({ config, ... }: {
+        #   flake.nixosConfigurations' = builtins.parallel config.flake.nixosConfigurations config.flake.nixosConfigurations;
+        # })
       ];
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
     };

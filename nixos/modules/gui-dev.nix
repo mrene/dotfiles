@@ -11,12 +11,12 @@ in
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       flakePackages.${system}.vscode-with-extensions
-      flakePackages.${system}.windsurf-with-extensions
 
-      # These need to be in the global PATH for goland to work correctly
       gcc
       mypy
       glibc.dev
+    ] ++ lib.optionals (pkgs.system != "aarch64-linux") [
+      flakePackages.${pkgs.system}.windsurf-with-extensions
     ];
   };
 }

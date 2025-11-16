@@ -6,7 +6,7 @@
   # Enable homelab modules
   homelab.shell.fish.enable = true;
   homelab.dev.git.enable = true;
-  homelab.editor.vim.enable = true;
+  # homelab.editor.vim.enable = true;
   homelab.minimal.enable = true;
   homelab.common.enable = true;
   homelab.system.neofetch.enable = true;
