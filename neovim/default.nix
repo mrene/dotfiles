@@ -9,12 +9,6 @@ let
   cfg = null;
   agenticEnabled = cfg == null || !cfg.minimalNvim;
 
-  includeLuaFile = path: ''
-    lua << END
-    ${builtins.readFile ./conf/${path}}
-    END
-  '';
-
   mkConfig =
     {pkgs, ... }:
     let
@@ -143,41 +137,39 @@ let
           pkgs.vimPlugins.claudecode-nvim
         ]);
 
-      extraConfig = (
-        builtins.concatStringsSep "\n" (
-          [
-            (includeLuaFile "base.lua")
-            # includeSecrets
-            (includeLuaFile "keymap.lua")
-            (includeLuaFile "theme.lua")
-            (includeLuaFile "buffers.lua")
-            (includeLuaFile "windows.lua")
-            (includeLuaFile "statusline.lua")
-            (includeLuaFile "tree.lua")
-            (includeLuaFile "sessions.lua")
-            (includeLuaFile "notify.lua")
-            (includeLuaFile "fzf.lua")
+      luaConfig = let
+        confDir = ./conf;
+      in ''
+        -- Load config files in order
+        local files = {
+          '${confDir}/base.lua',
+          '${confDir}/keymap.lua',
+          '${confDir}/theme.lua',
+          '${confDir}/buffers.lua',
+          '${confDir}/windows.lua',
+          '${confDir}/statusline.lua',
+          '${confDir}/tree.lua',
+          '${confDir}/sessions.lua',
+          '${confDir}/notify.lua',
+          '${confDir}/fzf.lua',
+          '${confDir}/treesitter.lua',
+          '${confDir}/git.lua',
+          '${confDir}/lang.lua',
+          '${confDir}/formatting.lua',
+          '${confDir}/linting.lua',
+          '${confDir}/copilot.lua',
+          '${confDir}/diag.lua',
+          '${confDir}/testing.lua',
+          '${confDir}/quickfix.lua',
+          '${confDir}/debugging.lua',
+          '${confDir}/profiling.lua',
+          ${lib.optionalString agenticEnabled "'${confDir}/agentic.lua',"}
+        }
 
-            (includeLuaFile "treesitter.lua")
-            (includeLuaFile "git.lua")
-            (includeLuaFile "lang.lua")
-            (includeLuaFile "formatting.lua")
-            (includeLuaFile "linting.lua")
-
-            (includeLuaFile "copilot.lua")
-
-            (includeLuaFile "diag.lua")
-            (includeLuaFile "testing.lua")
-            (includeLuaFile "quickfix.lua")
-            (includeLuaFile "debugging.lua")
-
-            (includeLuaFile "profiling.lua")
-          ]
-          ++ (lib.optionals agenticEnabled [
-            (includeLuaFile "agentic.lua")
-          ])
-        )
-      );
+        for _, file in ipairs(files) do
+          dofile(file)
+        end
+      '';
 
       extraPackages =
         (with pkgs; [
@@ -221,7 +213,8 @@ in
         vimAlias = true;
         defaultEditor = true;
 
-        inherit (neovimConfig) plugins extraConfig extraPackages;
+        inherit (neovimConfig) plugins extraPackages;
+        extraLuaConfig = neovimConfig.luaConfig;
       };
 
       # Force load after the rest
@@ -238,12 +231,12 @@ in
       neovimConfig = mkConfig { inherit pkgs; };
     in
 
-    (pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
+    pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
       inherit (neovimConfig) plugins extraPackages;
-      neovimRcContent = neovimConfig.extraConfig;
+      luaRcContent = neovimConfig.luaConfig;
       runtimeDeps = neovimConfig.extraPackages;
       wrapperArgs = "--suffix PATH : ${lib.makeBinPath neovimConfig.extraPackages}";
-    }); 
+    }; 
     
   };
 }

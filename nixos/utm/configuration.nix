@@ -5,6 +5,7 @@
   pkgs,
   common,
   inputs,
+  modulesPath,
   ...
 }: {
   imports = [
@@ -12,9 +13,19 @@
     inputs.vscode-server.nixosModule
 
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    # ./hardware-configuration.nix
     ../modules
+    "${modulesPath}/profiles/qemu-guest.nix"
+    "${modulesPath}/virtualisation/disk-image.nix"
   ];
+
+  virtualisation = {
+    diskSize = 128 * 1024;
+  };
+
+  nixpkgs.hostPlatform = "aarch64-linux";
+
+  services.qemuGuest.enable = true;
 
   # Enable refactored homelab modules
   homelab.vm-common.enable = true;
@@ -61,7 +72,7 @@
   };
 
   # Sign store builds for sharing across network
-  nix.settings.secret-key-files = "/var/secrets/cache-priv-key.pem";
+  #nix.settings.secret-key-files = "/var/secrets/cache-priv-key.pem";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
