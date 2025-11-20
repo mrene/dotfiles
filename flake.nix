@@ -103,6 +103,8 @@
       url = "github:ravitemer/mcp-hub";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";  
   };
 
   outputs = inputs @ {flake-parts, ...}:

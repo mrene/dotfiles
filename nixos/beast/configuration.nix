@@ -12,6 +12,7 @@
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.vscode-server.nixosModule
+		inputs.determinate.nixosModules.default
 
     ./hardware-configuration.nix
     ./ryzen.nix
@@ -57,7 +58,14 @@
 
   # Fixes: warning: download buffer is full; consider increasing the 'download-buffer-size' setting
   # when building
-  nix.settings.download-buffer-size = 524288000; # 500 MiB
+  nix.settings = {
+    download-buffer-size = 524288000; # 500 MiB
+
+    # Enable parallel evaluation across all cores
+    # See: https://determinate.systems/blog/changelog-determinate-nix-3111/
+    eval-cores = 0;
+    extra-experimental-features = ["parallel-eval"];
+  };
 
   homelab.dyndns.enable = true;
 
