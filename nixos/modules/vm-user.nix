@@ -12,7 +12,7 @@ in
     # Common relaxed configuration for use with VMs running on trusted hardware
     users = {
       users = {
-        mrene = {
+        mrene = lib.mkDefault {
           isNormalUser = true;
           description = "mathieu";
           extraGroups = [
@@ -21,7 +21,7 @@ in
             "networkmanager"
           ];
           openssh.authorizedKeys.keys = common.sshKeys;
-          initialHashedPassword = "";
+          initialHashedPassword = "$y$j9T$AcnJBxSOCjZeYq9fr0xrs1$KKmMGKzMhdg82/JvXVmT5PeFnco9q2HGNmRkrXqfHQ7";
         };
 
         root.password = "nixos";

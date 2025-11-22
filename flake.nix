@@ -111,6 +111,11 @@
     };
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";  
+
+    nixos-lima = {
+      url = "github:ciderale/nixos-lima";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
