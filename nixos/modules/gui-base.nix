@@ -37,7 +37,7 @@ in
       ]
       ++ pkgs.lib.optionals pkgs.stdenv.isx86_64 [
         keybase-gui
-        (google-chrome.override {commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode";})
+        (google-chrome.override {commandLineArgs = "--enable-features=WebUIDarkMode --force-dark-mode --ozone-platform=x11";})
       ];
 
     programs._1password = {

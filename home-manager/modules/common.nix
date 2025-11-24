@@ -119,7 +119,6 @@ in
       # TUI file browser
       yazi
       aichat
-      claude-code
       zellij
     ]
     ++ lib.optionals stdenv.isDarwin [

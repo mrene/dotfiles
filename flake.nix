@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-25.11";
     nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
 
     nixpkgs-unfree = {
@@ -48,10 +48,7 @@
       url = "github:msteen/nixos-vscode-server"; # NixOS fix so that vscode-server can run correctly
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-init = {
-      url = "github:nix-community/nix-init"; # Tool to scaffold new packages automatically
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
     # Pre-indexed nix-index db
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
