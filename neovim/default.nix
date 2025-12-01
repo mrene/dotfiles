@@ -10,10 +10,10 @@ let
   agenticEnabled = cfg == null || !cfg.minimalNvim;
 
   mkConfig =
-    {pkgs, ... }:
+    { pkgs, ... }:
     let
-        mcphub-nvim = inputs.mcphub-nvim.packages."${pkgs.stdenv.hostPlatform.system}".default;
-        mcp-hub = inputs.mcp-hub.packages."${pkgs.stdenv.hostPlatform.system}".default;
+      mcphub-nvim = inputs.mcphub-nvim.packages."${pkgs.stdenv.hostPlatform.system}".default;
+      mcp-hub = inputs.mcp-hub.packages."${pkgs.stdenv.hostPlatform.system}".default;
     in
     {
 
@@ -137,39 +137,41 @@ let
           pkgs.vimPlugins.claudecode-nvim
         ]);
 
-      luaConfig = let
-        confDir = ./conf;
-      in ''
-        -- Load config files in order
-        local files = {
-          '${confDir}/base.lua',
-          '${confDir}/keymap.lua',
-          '${confDir}/theme.lua',
-          '${confDir}/buffers.lua',
-          '${confDir}/windows.lua',
-          '${confDir}/statusline.lua',
-          '${confDir}/tree.lua',
-          '${confDir}/sessions.lua',
-          '${confDir}/notify.lua',
-          '${confDir}/fzf.lua',
-          '${confDir}/treesitter.lua',
-          '${confDir}/git.lua',
-          '${confDir}/lang.lua',
-          '${confDir}/formatting.lua',
-          '${confDir}/linting.lua',
-          '${confDir}/copilot.lua',
-          '${confDir}/diag.lua',
-          '${confDir}/testing.lua',
-          '${confDir}/quickfix.lua',
-          '${confDir}/debugging.lua',
-          '${confDir}/profiling.lua',
-          ${lib.optionalString agenticEnabled "'${confDir}/agentic.lua',"}
-        }
+      luaConfig =
+        let
+          confDir = ./conf;
+        in
+        ''
+          -- Load config files in order
+          local files = {
+            '${confDir}/base.lua',
+            '${confDir}/keymap.lua',
+            '${confDir}/theme.lua',
+            '${confDir}/buffers.lua',
+            '${confDir}/windows.lua',
+            '${confDir}/statusline.lua',
+            '${confDir}/tree.lua',
+            '${confDir}/sessions.lua',
+            '${confDir}/notify.lua',
+            '${confDir}/fzf.lua',
+            '${confDir}/treesitter.lua',
+            '${confDir}/git.lua',
+            '${confDir}/lang.lua',
+            '${confDir}/formatting.lua',
+            '${confDir}/linting.lua',
+            '${confDir}/copilot.lua',
+            '${confDir}/diag.lua',
+            '${confDir}/testing.lua',
+            '${confDir}/quickfix.lua',
+            '${confDir}/debugging.lua',
+            '${confDir}/profiling.lua',
+            ${lib.optionalString agenticEnabled "'${confDir}/agentic.lua',"}
+          }
 
-        for _, file in ipairs(files) do
-          dofile(file)
-        end
-      '';
+          for _, file in ipairs(files) do
+            dofile(file)
+          end
+        '';
 
       extraPackages =
         (with pkgs; [
@@ -225,18 +227,20 @@ in
       };
     };
 
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages.nvim =
+        let
+          neovimConfig = mkConfig { inherit pkgs; };
+        in
 
-  perSystem = { pkgs, ... }: {
-    packages.nvim = let
-      neovimConfig = mkConfig { inherit pkgs; };
-    in
+        pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
+          inherit (neovimConfig) plugins extraPackages;
+          luaRcContent = neovimConfig.luaConfig;
+          runtimeDeps = neovimConfig.extraPackages;
+          wrapperArgs = "--suffix PATH : ${lib.makeBinPath neovimConfig.extraPackages}";
+        };
 
-    pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
-      inherit (neovimConfig) plugins extraPackages;
-      luaRcContent = neovimConfig.luaConfig;
-      runtimeDeps = neovimConfig.extraPackages;
-      wrapperArgs = "--suffix PATH : ${lib.makeBinPath neovimConfig.extraPackages}";
-    }; 
-    
-  };
+    };
 }

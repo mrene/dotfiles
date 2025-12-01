@@ -1,8 +1,7 @@
-{ pkgs, ... }:
-
 {
+  # Import all NixOS modules as flake-parts modules
+  # Each module contributes to flake.nixosModules.all (merged by flake-parts)
   imports = [
-    # Existing modules
     ./sops.nix
     ./restic.nix
     ./attic.nix
@@ -12,30 +11,30 @@
     ./prs.nix
     ./brightness.nix
     ./screen-switch.nix
+    ./kanidm.nix
 
-    # New refactored modules from common/
     # Core modules
-    ./base.nix              # homelab.vm-common
-    ./ssh-ca.nix            # homelab.ssh-ca
-    ./common-packages.nix   # homelab.common-packages
-    ./fonts.nix             # homelab.fonts
+    ./base.nix
+    ./ssh-ca.nix
+    ./common-packages.nix
+    ./fonts.nix
 
     # Hardware modules
-    ./nvidia.nix            # homelab.nvidia
-    ./radio.nix             # homelab.radio
-    ./minikube.nix          # homelab.minikube
-    ./distributed-builds.nix # homelab.distributed-builds
-    ./cachix.nix            # homelab.cachix
+    ./nvidia.nix
+    ./radio.nix
+    ./minikube.nix
+    ./distributed-builds.nix
+    ./cachix.nix
 
     # GUI modules
-    ./gui-base.nix          # homelab.gui.base
-    ./gui-desktop.nix       # homelab.gui.desktop
-    ./gui-dev.nix           # homelab.gui.dev
-    ./gui-jetbrains.nix     # homelab.gui.jetbrains
-    ./gui-messaging.nix     # homelab.gui.messaging
+    ./gui-base.nix
+    ./gui-desktop.nix
+    ./gui-dev.nix
+    ./gui-jetbrains.nix
+    ./gui-messaging.nix
 
     # VM modules
-    ./vm-qemu-guest.nix     # homelab.vm.qemu-guest
-    ./vm-user.nix           # homelab.vm.common
+    ./vm-qemu-guest.nix
+    ./vm-user.nix
   ];
 }

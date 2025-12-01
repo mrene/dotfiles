@@ -8,7 +8,8 @@
   common,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -23,7 +24,8 @@
 
   # Override the kernel package to use the upstream nixos-raspberrypi prebuilt kernel (without
   # overriding nixpkgs)
-  boot.kernelPackages = inputs.nixos-raspberrypi-nofollows.packages.${pkgs.stdenv.hostPlatform.system}.linuxPackages_rpi5;
+  boot.kernelPackages =
+    inputs.nixos-raspberrypi-nofollows.packages.${pkgs.stdenv.hostPlatform.system}.linuxPackages_rpi5;
   hardware.enableRedistributableFirmware = true;
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
@@ -48,7 +50,10 @@
     ];
 
     defaultGateway = "192.168.1.1";
-    nameservers = ["1.1.1.1" "8.8.8.8"];
+    nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
   };
 
   # Enable nvme ssd
@@ -59,7 +64,8 @@
   };
 
   # Required for distributed builds
-  users.users.root.openssh.authorizedKeys.keys = common.builderKeys ++ common.sudoSshKeys ++ common.sshKeys;
+  users.users.root.openssh.authorizedKeys.keys =
+    common.builderKeys ++ common.sudoSshKeys ++ common.sshKeys;
   users.defaultUserShell = pkgs.fish;
   programs.fish.enable = true;
 

@@ -1,16 +1,16 @@
-{ lib
-, stdenv
-, fetchFromGitHub
-, cmake
-, pkg-config
-, gnuradio
-, spdlog
-, gmp
-, mpir
-, boost
-, volk
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  cmake,
+  pkg-config,
+  gnuradio,
+  spdlog,
+  gmp,
+  mpir,
+  boost,
+  volk,
 }:
-
 
 stdenv.mkDerivation rec {
   pname = "gr-foo";

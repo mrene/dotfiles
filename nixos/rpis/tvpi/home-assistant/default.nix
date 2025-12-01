@@ -1,5 +1,12 @@
-{pkgs, lib, config, inputs, ...}: let
-  sources = pkgs.callPackage ../../../../_sources {};
+{
+  pkgs,
+  lib,
+  config,
+  inputs,
+  ...
+}:
+let
+  sources = pkgs.callPackage ../../../../_sources { };
   hostBasePath = "/opt/homeassistant";
   themes = {
     catppuccin = pkgs.fetchFromGitHub {
@@ -13,84 +20,92 @@
     name = "home-assistant-themes";
     paths = (builtins.map (t: "${t}/themes") (builtins.attrValues themes));
   };
-in 
-  lib.mkMerge [
-    # Hydro Quebec Usage Importer
-    {
-      virtualisation.oci-containers.containers = {
-        hydroqc2mqtt = {
-          image = sources.dockerImageUrl "hydroqc2mqtt";
-          environment = {
-            TZ = "America/Montreal";
-            CONFIG_YAML = "/config/config.yaml"; # contains secrets, only deployed on device
-          };
-          volumes = [
-            "${hostBasePath}/hydroqc2mqtt:/config"
-          ];
-          extraOptions = [
-            "--network=host"
-          ];
+in
+lib.mkMerge [
+  # Hydro Quebec Usage Importer
+  {
+    virtualisation.oci-containers.containers = {
+      hydroqc2mqtt = {
+        image = sources.dockerImageUrl "hydroqc2mqtt";
+        environment = {
+          TZ = "America/Montreal";
+          CONFIG_YAML = "/config/config.yaml"; # contains secrets, only deployed on device
         };
+        volumes = [
+          "${hostBasePath}/hydroqc2mqtt:/config"
+        ];
+        extraOptions = [
+          "--network=host"
+        ];
       };
+    };
 
-      # Backed up via /opt/homeassistant below
-    }
+    # Backed up via /opt/homeassistant below
+  }
 
-    # Home Assistant Core
-    {
-      services.home-assistant = {
-        enable = true;
-        config = {
-          default_config = {};
-          automation = "!include automations.yaml";
-          scene = "!include scenes.yaml";
-          frontend = {
-            themes = "!include_dir_merge_named themes";
-          };
-          homeassistant = {
-            latitude = 45.475320;
-            longitude = -73.562210; 
-          };
-          homekit = [
-            {
-              filter = {
-                include_entity_globs = [
-                  "climate.heat_pump"
-                  "climate.nest"
-                  "fan.iqair_fan"
-                  "light.office_lamp"
-                  "light.office_rgb"
-                ];
-              };
-            }
-          ];
-          smartir = {};
-          climate = [{
-              platform = "smartir";
-              name = "Heat pump";
-              unique_id = "heat_pump";
-              device_code = "9999";
-              controller_data = "remote.2nd_floor_ir";
-              temperature_sensor = "sensor.2nd_floor_ir_temperature";
-              humidity_sensor = "sensor.2nd_floor_ir_humidity";
-            }];
-          wake_on_lan = {};
-          switch = [
-            {
-              platform = "wake_on_lan";
-              mac = "d8:bb:c1:14:45:79";
-              name = "beast";
-            }
-            {
-              platform ="wake_on_lan";
-              mac ="64:E4:A5:E2:38:F4";
-              name = "tv";
-            }
-          ];
-          "script ha" = "!include scripts.yaml";
-          script = let 
-            makeIrScript = { entity ? "remote.2nd_floor_ir", command }: {
-              sequence = [
+  # Home Assistant Core
+  {
+    services.home-assistant = {
+      enable = true;
+      config = {
+        default_config = { };
+        automation = "!include automations.yaml";
+        scene = "!include scenes.yaml";
+        frontend = {
+          themes = "!include_dir_merge_named themes";
+        };
+        homeassistant = {
+          latitude = 45.475320;
+          longitude = -73.562210;
+        };
+        homekit = [
+          {
+            filter = {
+              include_entity_globs = [
+                "climate.heat_pump"
+                "climate.nest"
+                "fan.iqair_fan"
+                "light.office_lamp"
+                "light.office_rgb"
+              ];
+            };
+          }
+        ];
+        smartir = { };
+        climate = [
+          {
+            platform = "smartir";
+            name = "Heat pump";
+            unique_id = "heat_pump";
+            device_code = "9999";
+            controller_data = "remote.2nd_floor_ir";
+            temperature_sensor = "sensor.2nd_floor_ir_temperature";
+            humidity_sensor = "sensor.2nd_floor_ir_humidity";
+          }
+        ];
+        wake_on_lan = { };
+        switch = [
+          {
+            platform = "wake_on_lan";
+            mac = "d8:bb:c1:14:45:79";
+            name = "beast";
+          }
+          {
+            platform = "wake_on_lan";
+            mac = "64:E4:A5:E2:38:F4";
+            name = "tv";
+          }
+        ];
+        "script ha" = "!include scripts.yaml";
+        script =
+          let
+            makeIrScript =
+              {
+                entity ? "remote.2nd_floor_ir",
+                command,
+              }:
+              {
+                sequence = [
                   {
                     service = "remote.send_command";
                     target = {
@@ -100,18 +115,18 @@ in
                       inherit command;
                     };
                   }
-              ];
-            };
-          in          
+                ];
+              };
+          in
           {
-            fan_power = makeIrScript { 
-              command = "b64:JgB4AAABIpIQOBMTERMSEhISEhITEhISEhISNxI3EjcROBA4ETgSNxE3ETgSExISEhISExETERQRExETETcSNxM3EDgSNxE3ETgSNhIUERMRExITERMRExETEhMRNxI3EDkSNxE4ETcSAAG0AAEjSRIADDcAASFKEgANBQ=="; 
+            fan_power = makeIrScript {
+              command = "b64:JgB4AAABIpIQOBMTERMSEhISEhITEhISEhISNxI3EjcROBA4ETgSNxE3ETgSExISEhISExETERQRExETETcSNxM3EDgSNxE3ETgSNhIUERMRExITERMRExETEhMRNxI3EDkSNxE4ETcSAAG0AAEjSRIADDcAASFKEgANBQ==";
             };
-            fan_speed = makeIrScript { 
-              command = "b64:JgB4AAABI5ESNxISEhMSExETERMSExETERMRNxI3EjcROBA4EzcRNxE3EjcRNxITERMSExETEhMRExISERMSNxE4ETcRNxI4EjcRNxI3ERMSExETEBQRExETEhQRExE3ETcTNxA4ETcRAAG1AAEjSREADDQAASJKDwANBQ=="; 
+            fan_speed = makeIrScript {
+              command = "b64:JgB4AAABI5ESNxISEhMSExETERMSExETERMRNxI3EjcROBA4EzcRNxE3EjcRNxITERMSExETEhMRExISERMSNxE4ETcRNxI4EjcRNxI3ERMSExETEBQRExETEhQRExE3ETcTNxA4ETcRAAG1AAEjSREADDQAASJKDwANBQ==";
             };
-            fan_rotate = makeIrScript { 
-              command = "b64:JgB4AAABI5EROBETERMSFBETERMRExITERMSNhI3ETcSOBI3ETcRNxI3ETgQFQ8VEjcRExETERMSEhITEjYROBITEjcRNxE3ETgSNhITEhMSNhISExISEhISEhITNhE4ERQRNxI3ETgRAAG0AAEjSREADDIAASNJEQANBQ=="; 
+            fan_rotate = makeIrScript {
+              command = "b64:JgB4AAABI5EROBETERMSFBETERMRExITERMSNhI3ETcSOBI3ETcRNxI3ETgQFQ8VEjcRExETERMSEhITEjYROBITEjcRNxE3ETgSNhITEhMSNhISExISEhISEhITNhE4ERQRNxI3ETgRAAG0AAEjSREADDIAASNJEQANBQ==";
             };
             fan_timer = makeIrScript {
               command = "b64:JgB4AAABIZMRNxISEhITEhISEhISEhIUEhIROBA4ETcSNxI3ETgRNxM3ETcQFBE3EhISFBISEhISEhMSEjYSEhI3ETgROBI2EjcRNxITETcSEhISEhQQFBISEhISNxETETgRNxE4EjcSAAG0AAEhShEADDIAASJKEQANBQ==";
@@ -120,10 +135,10 @@ in
               command = "b64:JgBwAAABIZMPOhAUEBQRExEUEBQRExETERQQORA4ETgROBE4EDcSOBE4ETcROBE4EBQRExAUERQQFBEVDxQRExI3ETgRNxE3ETkQORE4ETcRExAUEhMRExETERMQFhETEDgROBA4EjgQAAG1AAEiShEADQU=";
             };
           };
-        };
-        configWritable = true;
-        configDir = "/opt/homeassistant/config";
-        extraComponents = #lib.lists.subtractLists [ "raincloud" "tensorflow" "azure_devops" "azure_event_hub" "linode" "lyric" ] config.services.home-assistant.package.passthru.availableComponents;
+      };
+      configWritable = true;
+      configDir = "/opt/homeassistant/config";
+      extraComponents = # lib.lists.subtractLists [ "raincloud" "tensorflow" "azure_devops" "azure_event_hub" "linode" "lyric" ] config.services.home-assistant.package.passthru.availableComponents;
         [
           "default_config"
           "met"
@@ -158,37 +173,40 @@ in
           "airvisual"
           "openrgb"
         ];
-        extraPackages = python3Packages: with python3Packages; [
+      extraPackages =
+        python3Packages: with python3Packages; [
           grpcio
         ];
-        customComponents = with pkgs.home-assistant-custom-components; [
-          smartthinq-sensors
-          adaptive_lighting
-          (smartir.overrideAttrs { 
-            version = "1.18.0";
-            src = pkgs.fetchFromGitHub {
-              owner = "smartHomeHub";
-              repo = "SmartIR";
-              rev = "1.18.0";
-              hash = "sha256-Sy1wxVUApKWm9TlDia2Gwd+mIi7WbDkzJrAtyb0tTbM=";
-            };
-            patches = [ ./smartir-remove-distutils.diff ];
-            postInstall = ''
-              cp -r codes $out/custom_components/smartir/
-              cp -s ${./9999.json} $out/custom_components/smartir/codes/climate/9999.json
-              cp -s ${./9998.json} $out/custom_components/smartir/codes/fan/9998.json
-            '';
-          })
-          inputs.mrene-nur.packages.${pkgs.system}.connectlife-ha
-          inputs.mrene-nur.packages.${pkgs.system}.ha-bambulab
-        ];
-        customLovelaceModules = (with pkgs.home-assistant-custom-lovelace-modules; [
+      customComponents = with pkgs.home-assistant-custom-components; [
+        smartthinq-sensors
+        adaptive_lighting
+        (smartir.overrideAttrs {
+          version = "1.18.0";
+          src = pkgs.fetchFromGitHub {
+            owner = "smartHomeHub";
+            repo = "SmartIR";
+            rev = "1.18.0";
+            hash = "sha256-Sy1wxVUApKWm9TlDia2Gwd+mIi7WbDkzJrAtyb0tTbM=";
+          };
+          patches = [ ./smartir-remove-distutils.diff ];
+          postInstall = ''
+            cp -r codes $out/custom_components/smartir/
+            cp -s ${./9999.json} $out/custom_components/smartir/codes/climate/9999.json
+            cp -s ${./9998.json} $out/custom_components/smartir/codes/fan/9998.json
+          '';
+        })
+        inputs.mrene-nur.packages.${pkgs.system}.connectlife-ha
+        inputs.mrene-nur.packages.${pkgs.system}.ha-bambulab
+      ];
+      customLovelaceModules =
+        (with pkgs.home-assistant-custom-lovelace-modules; [
           mini-graph-card
           mini-media-player
           lg-webos-remote-control
           universal-remote-card
           card-mod
-        ]) ++ (with inputs.mrene-nur.packages.${pkgs.system}; [
+        ])
+        ++ (with inputs.mrene-nur.packages.${pkgs.system}; [
           clock-weather-card
           lovelace-auto-entities
           lovelace-slider-entity-row
@@ -196,93 +214,95 @@ in
           lovelace-mushroom
           ha-bambulab.cards
         ]);
-      };
+    };
 
-      systemd.tmpfiles.rules =  [ 
-        "L+ ${config.services.home-assistant.configDir}/themes - - - - ${joinedThemes}" 
-      ];
+    systemd.tmpfiles.rules = [
+      "L+ ${config.services.home-assistant.configDir}/themes - - - - ${joinedThemes}"
+    ];
 
-      homelab.backups.paths = [ hostBasePath ];
-    }
+    homelab.backups.paths = [ hostBasePath ];
+  }
 
-    {
-      services.matter-server = {
-        enable = true;
-        logLevel = "info";
-      };
+  {
+    services.matter-server = {
+      enable = true;
+      logLevel = "info";
+    };
 
-      # Override the launch params because "--vendorid 4939" prevents it from starting
-      # when using our config ported from the docker container
-      systemd.services.matter-server.serviceConfig.ExecStart = let 
+    # Override the launch params because "--vendorid 4939" prevents it from starting
+    # when using our config ported from the docker container
+    systemd.services.matter-server.serviceConfig.ExecStart =
+      let
         mcfg = config.services.matter-server;
         storagePath = "/var/lib/matter-server";
       in
-        lib.mkForce (
-          lib.concatStringsSep " " [
-            # `python-matter-server` writes to /data even when a storage-path
-            # is specified. This symlinks /data at the systemd-managed
-            # /var/lib/matter-server, so all files get dropped into the state
-            # directory.
-            "${pkgs.bash}/bin/sh"
-            "-c"
-            "'"
-            "${pkgs.coreutils}/bin/ln -s %S/matter-server/ %t/matter-server/root/data"
-            "&&"
-            "${mcfg.package}/bin/matter-server"
-            "--port"
-            (toString mcfg.port)
-            #"--vendorid"
-            #vendorId
-            "--storage-path"
-            storagePath
-            "--log-level"
-            "${mcfg.logLevel}"
-            "${lib.escapeShellArgs mcfg.extraArgs}"
-            "'"
-          ]
-        );
+      lib.mkForce (
+        lib.concatStringsSep " " [
+          # `python-matter-server` writes to /data even when a storage-path
+          # is specified. This symlinks /data at the systemd-managed
+          # /var/lib/matter-server, so all files get dropped into the state
+          # directory.
+          "${pkgs.bash}/bin/sh"
+          "-c"
+          "'"
+          "${pkgs.coreutils}/bin/ln -s %S/matter-server/ %t/matter-server/root/data"
+          "&&"
+          "${mcfg.package}/bin/matter-server"
+          "--port"
+          (toString mcfg.port)
+          #"--vendorid"
+          #vendorId
+          "--storage-path"
+          storagePath
+          "--log-level"
+          "${mcfg.logLevel}"
+          "${lib.escapeShellArgs mcfg.extraArgs}"
+          "'"
+        ]
+      );
 
-      # Backup its storage state
-      homelab.backups.paths = [ "/var/lib/matter-server" "/var/lib/private/matter-server" ];
-    }
+    # Backup its storage state
+    homelab.backups.paths = [
+      "/var/lib/matter-server"
+      "/var/lib/private/matter-server"
+    ];
+  }
 
-    {
-      services.openthread-border-router = {
-        enable = true;
-        backboneInterface = "eth0";
-        logLevel = "err";
-        radio =  {
-          device = "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231118192304-if00";
-          baudRate = 460800;
-          flowControl = true;
-          extraDevices = [ "trel://eth0" ];
-        };
-        rest = {
-          listenPort = 58081;
-        };
-        web = {
-          enable = true;
-          listenPort = 58082;
-        };
+  {
+    services.openthread-border-router = {
+      enable = true;
+      backboneInterface = "eth0";
+      logLevel = "err";
+      radio = {
+        device = "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231118192304-if00";
+        baudRate = 460800;
+        flowControl = true;
+        extraDevices = [ "trel://eth0" ];
       };
-
-      # Backup thread netdata (includes network credentials (aka "dataset"))
-      homelab.backups.paths = [ "/var/lib/thread" ];
-    }
-    {
-      services.mosquitto = {
-        enable = true;
-        listeners = [
-          {
-            acl = ["pattern readwrite #"];
-            omitPasswordAuth = true;
-            settings.allow_anonymous = true;
-          }
-        ];
+      rest = {
+        listenPort = 58081;
       };
-      # Backup internal state
-      homelab.backups.paths = [ "/var/lib/mosquitto" ];
-    }
-  ]
+      web = {
+        enable = true;
+        listenPort = 58082;
+      };
+    };
 
-
+    # Backup thread netdata (includes network credentials (aka "dataset"))
+    homelab.backups.paths = [ "/var/lib/thread" ];
+  }
+  {
+    services.mosquitto = {
+      enable = true;
+      listeners = [
+        {
+          acl = [ "pattern readwrite #" ];
+          omitPasswordAuth = true;
+          settings.allow_anonymous = true;
+        }
+      ];
+    };
+    # Backup internal state
+    homelab.backups.paths = [ "/var/lib/mosquitto" ];
+  }
+]

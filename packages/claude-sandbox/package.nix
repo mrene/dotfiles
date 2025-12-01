@@ -1,8 +1,13 @@
-{ lib, pkgs, inputs, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   # Use the locally built claude-code package
-  claudePkg = pkgs.callPackage ../claude-code/package.nix {};
+  claudePkg = pkgs.callPackage ../claude-code/package.nix { };
 
   # Create wrapper for claude with proper config dir
   claude-wrapped = pkgs.writeShellScriptBin "claude" ''
@@ -58,7 +63,12 @@ let
         # CA certificates for HTTPS
         pkgs.cacert
       ];
-      pathsToLink = [ "/bin" "/etc" "/share" "/lib" ];
+      pathsToLink = [
+        "/bin"
+        "/etc"
+        "/share"
+        "/lib"
+      ];
     };
 
     config = {

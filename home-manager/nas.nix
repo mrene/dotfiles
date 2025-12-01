@@ -1,7 +1,5 @@
-{pkgs, ...}: {
-  imports = [
-    ./modules
-  ];
+{ pkgs, ... }:
+{
 
   # Enable homelab modules
   homelab.shell.fish.enable = true;

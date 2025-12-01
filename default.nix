@@ -14,4 +14,4 @@ let
     }
   );
 in
-  flake.defaultNix
+flake.defaultNix

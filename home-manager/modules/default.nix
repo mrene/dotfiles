@@ -1,34 +1,34 @@
 {
-  # All home-manager modules with homelab.* namespace
-  # Enable modules by setting homelab.<category>.<name>.enable = true in host configs
+  # Import all home-manager modules as flake-parts modules
+  # Each module contributes to flake.modules.homeManager.all (merged by flake-parts)
 
   imports = [
     # Core modules
-    ./minimal.nix        # homelab.minimal.enable
-    ./common.nix         # homelab.common.enable
+    ./minimal.nix
+    ./common.nix
 
     # Shell and terminal
-    ./fish.nix           # homelab.shell.fish.enable
-    ./wezterm.nix        # homelab.terminal.wezterm.enable
-    ./zellij.nix         # homelab.terminal.zellij.enable
+    ./fish.nix
+    ./wezterm.nix
+    ./zellij.nix
 
     # Development tools
-    ./git.nix            # homelab.dev.git.enable
-    ./jujutsu.nix        # homelab.dev.jujutsu.enable
-    # ./vim               # homelab.editor.vim.enable
+    ./git.nix
+    ./jujutsu.nix
+    # ./vim
 
     # System utilities
-    ./ssh.nix            # homelab.system.ssh.enable
-    ./neofetch.nix       # homelab.system.neofetch.enable
-    ./rgb               # homelab.system.rgb.enable
+    ./ssh.nix
+    ./neofetch.nix
+    ./rgb
 
     # GUI applications
-    ./gnome.nix          # homelab.gui.gnome.enable
-    ./rofi              # homelab.gui.rofi.enable
-    ./hyprland          # homelab.gui.hyprland.enable
+    ./gnome.nix
+    ./rofi
+    ./hyprland
 
     # Tools
-    ./claude            # homelab.tools.claude.enable
-    ./jira              # homelab.tools.jira.enable
+    ./claude
+    ./jira
   ];
 }

@@ -1,7 +1,8 @@
 # REFACTOR PLAN: This file will become:
 #   - homelab.fonts.enable (font packages)
 # REFACTOR: beware - this file is shared between nix-darwin and nixos
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   fonts.packages = with pkgs; [
     jetbrains-mono
     noto-fonts

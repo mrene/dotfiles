@@ -3,13 +3,14 @@
   common,
   inputs,
   config,
+  self,
   ...
-}: {
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./hardware-configuration.nix
     ./storage.nix
-    ../modules
   ];
 
   # Enable refactored homelab modules
@@ -18,7 +19,6 @@
   homelab.common-packages.enable = true;
   homelab.nvidia.enable = true;
   homelab.distributed-builds.enable = true;
-  homelab.radio.enable = true;
   homelab.cachix.enable = true;
 
   boot = {
@@ -70,12 +70,13 @@
   homelab.caddy.enable = true;
   homelab.dyndns.enable = true;
   homelab.forgejo.enable = true;
+  # homelab.kanidm.enable = true;
 
   services.openthread-border-router = {
     enable = true;
     backboneInterface = "enp2s0";
     logLevel = "err";
-    radio =  {
+    radio = {
       device = "/dev/serial/by-id/usb-Nabu_Casa_SkyConnect_v1.0_a8cf5592bed8ed1198a76f6162c613ac-if00-port0";
       baudRate = 460800;
       extraDevices = [ "trel://enp2s0" ];
@@ -99,11 +100,16 @@
   users.users.root.openssh.authorizedKeys.keys = common.builderKeys ++ common.sudoSshKeys;
 
   home-manager = {
-    users.mrene = import ../../home-manager/nas.nix;
+    users.mrene = {
+      imports = [
+        self.modules.homeManager.all
+        ../../home-manager/nas.nix
+      ];
+    };
 
     useGlobalPkgs = true;
     verbose = true;
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = { inherit inputs self; };
   };
 
   services.tailscale.enable = true;
@@ -115,7 +121,7 @@
   # Required for nix-index
   programs.command-not-found.enable = false;
 
-  boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.nix-serve = {
     enable = true;
@@ -148,6 +154,7 @@
       publicKeys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "nas:bSV2Y2BE5ee3JToAg08jZ+DojOt1Yq/EFlw93RZHh8Q="
       ];
     };
   };

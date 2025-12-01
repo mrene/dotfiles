@@ -1,10 +1,9 @@
-
 {
   pkgs,
   callPackage,
 }:
 
-let 
+let
   vscode = pkgs.windsurf;
 in
 

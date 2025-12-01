@@ -3,32 +3,38 @@
   self,
   config,
   ...
-}: let
+}:
+let
   rpiOverlays = [
     (_final: super: {
       # Allow missing modules because the master module list is based on strings and the rpi kernel
       # is missing some
       # https://github.com/NixOS/nixpkgs/issues/154163
-      makeModulesClosure = x: super.makeModulesClosure (x // {allowMissing = true;});
+      makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
     })
   ];
-
 
   nixpkgs = inputs.nixpkgs;
   # https://github.com/nvmd/nixos-raspberrypi/issues/113
   lib = nixpkgs.lib;
   baseLib = nixpkgs.lib;
   origMkRemovedOptionModule = baseLib.mkRemovedOptionModule;
-  patchedLib = lib.extend (final: prev: {
-    mkRemovedOptionModule = optionName: replacementInstructions:
-      let
-        key = "removedOptionModule#" + final.concatStringsSep "_" optionName;
-      in
+  patchedLib = lib.extend (
+    final: prev: {
+      mkRemovedOptionModule =
+        optionName: replacementInstructions:
+        let
+          key = "removedOptionModule#" + final.concatStringsSep "_" optionName;
+        in
         { options, ... }:
         (origMkRemovedOptionModule optionName replacementInstructions { inherit options; })
-        // { inherit key; };
-  });
-in {
+        // {
+          inherit key;
+        };
+    }
+  );
+in
+{
   flake.nixosConfigurations = {
     # rpi4
     # tvpi = inputs.nixpkgs.lib.nixosSystem {
@@ -59,6 +65,7 @@ in {
       modules = [
         "${inputs.nixos-raspberrypi}/modules/installer/sd-card/sd-image-raspberrypi.nix"
         ./tvpi5/configuration.nix
+        config.flake.nixosModules.all
         (_: {
           imports = with inputs.nixos-raspberrypi.nixosModules; [
             raspberry-pi-5.base
