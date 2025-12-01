@@ -1,7 +1,10 @@
-{lib, pkgs, inputs, ...}: {
-  imports = [
-    ./modules
-  ];
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
 
   # Enable homelab modules
   homelab.shell.fish.enable = true;
@@ -21,18 +24,20 @@
     package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.claude-code;
   };
 
-  home.packages = let 
-    notify = pkgs.writeShellApplication {
-      name = "notify";
-      runtimeInputs = [ pkgs.libnotify ];
-      text = ''
-        notify-send "$@"
-      '';
-    };
-    in [
+  home.packages =
+    let
+      notify = pkgs.writeShellApplication {
+        name = "notify";
+        runtimeInputs = [ pkgs.libnotify ];
+        text = ''
+          notify-send "$@"
+        '';
+      };
+    in
+    [
       pkgs.fishPlugins.foreign-env
       notify
-    ]; 
+    ];
 
   home.stateVersion = "20.09";
 

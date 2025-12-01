@@ -1,9 +1,5 @@
-{inputs, pkgs, ...}: {
-  imports = [
-    ./modules
-     inputs.self.homeManagerModules.neovim
-  ];
-
+{ inputs, pkgs, ... }:
+{
   homelab.shell.fish.enable = true;
   homelab.dev.git.enable = true;
   homelab.minimal.enable = true;

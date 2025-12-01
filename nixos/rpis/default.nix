@@ -3,16 +3,16 @@
   self,
   config,
   ...
-}: let
+}:
+let
   rpiOverlays = [
     (_final: super: {
       # Allow missing modules because the master module list is based on strings and the rpi kernel
       # is missing some
       # https://github.com/NixOS/nixpkgs/issues/154163
-      makeModulesClosure = x: super.makeModulesClosure (x // {allowMissing = true;});
+      makeModulesClosure = x: super.makeModulesClosure (x // { allowMissing = true; });
     })
   ];
-
 
   nixpkgs = inputs.nixpkgs;
   # https://github.com/nvmd/nixos-raspberrypi/issues/113
@@ -59,6 +59,7 @@ in {
       modules = [
         "${inputs.nixos-raspberrypi}/modules/installer/sd-card/sd-image-raspberrypi.nix"
         ./tvpi5/configuration.nix
+        config.flake.nixosModules.all
         (_: {
           imports = with inputs.nixos-raspberrypi.nixosModules; [
             raspberry-pi-5.base

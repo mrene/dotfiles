@@ -1,4 +1,4 @@
-{...}:
+{ ... }:
 # Minimal home configuration to apply to random machines
 {
   imports = [

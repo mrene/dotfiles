@@ -2,7 +2,8 @@
   inputs,
   config,
   ...
-}: {
+}:
+{
   flake.darwinConfigurations = {
     # nix build .#darwinConfigurations.mbp2021.system
     # ./result/sw/bin/darwin-rebuild switch --flake .
@@ -18,9 +19,12 @@
       modules = [
         ./mbp2021/configuration.nix
         inputs.home-manager.darwinModules.home-manager
-        {home-manager.extraSpecialArgs = {inherit inputs;};}
+        {
+          home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.sharedModules = [ config.flake.modules.homeManager.all ];
+        }
       ];
-      specialArgs = {inherit inputs;};
+      specialArgs = { inherit inputs; };
     };
   };
 }

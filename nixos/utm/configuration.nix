@@ -1,13 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# and in the NixOS manual (accessible by running 'nixos-help').
 {
   lib,
   pkgs,
   common,
   inputs,
+  self,
   ...
-}: {
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.vscode-server.nixosModule
@@ -19,7 +21,6 @@
 
     # Include the results of the hardware scan.
     #./hardware-configuration.nix
-    ../modules
   ];
 
   lima.settings = {
@@ -52,9 +53,9 @@
 
   # Mount shared filesystem
   #fileSystems."/host" = {
-    #device = "share";
-    #fsType = "9p";
-    #options = ["trans=virtio" "version=9p2000.L" "cache=loose"];
+  #device = "share";
+  #fsType = "9p";
+  #options = ["trans=virtio" "version=9p2000.L" "cache=loose"];
   #};
 
   users.users.root.openssh.authorizedKeys.keys = common.builderKeys ++ common.sudoSshKeys;
@@ -68,12 +69,17 @@
   services.tailscale.enable = true;
 
   home-manager = {
-    users.mrene = import ../../home-manager/utm.nix;
+    users.mrene = {
+      imports = [
+        self.modules.homeManager.all
+        ../../home-manager/utm.nix
+      ];
+    };
 
     useGlobalPkgs = true;
     #useUserPackages = true;
     verbose = true;
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = { inherit inputs self; };
   };
 
   # Sign store builds for sharing across network
@@ -81,7 +87,7 @@
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # on your system were taken. It's perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).

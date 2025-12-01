@@ -8,24 +8,27 @@
 }:
 
 # Prefer extensions that are in nixpkgs, fallback to the marketplace source
-(with ((inputs.nix-vscode-extensions.overlays.default pkgs pkgs).forVSCodeVersion vscode.passthru.vscodeVersion).vscode-marketplace; [
-  donjayamanne.python-environment-manager
-  gaborv.flatbuffers
-  jeff-hykin.better-cpp-syntax
-  malmaud.tmux
-  ms-python.isort
-  ms-toolsai.jupyter-keymap
-  ms-vscode-remote.remote-containers
-  ms-vscode.cpptools-themes
-  ms-vscode.remote-explorer
-  tcwalther.cython
-  grafana.vscode-jsonnet
-  esphome.esphome-vscode
-  vitest.explorer
-  saoudrizwan.claude-dev # Cline
-  # anthropic.claude-code
-])
-++ (with vscode-extensions;
+(
+  with ((inputs.nix-vscode-extensions.overlays.default pkgs pkgs).forVSCodeVersion vscode.passthru.vscodeVersion)
+  .vscode-marketplace; [
+    donjayamanne.python-environment-manager
+    gaborv.flatbuffers
+    jeff-hykin.better-cpp-syntax
+    malmaud.tmux
+    ms-python.isort
+    ms-toolsai.jupyter-keymap
+    ms-vscode-remote.remote-containers
+    ms-vscode.cpptools-themes
+    ms-vscode.remote-explorer
+    tcwalther.cython
+    grafana.vscode-jsonnet
+    esphome.esphome-vscode
+    vitest.explorer
+    saoudrizwan.claude-dev # Cline
+    # anthropic.claude-code
+  ])
+++ (
+  with vscode-extensions;
   [
     github.copilot
     catppuccin.catppuccin-vsc
@@ -73,10 +76,11 @@
     hashicorp.hcl
     antyos.openscad
   ]
-  ++ lib.optionals (! (stdenv.isAarch64 && stdenv.isLinux)) [
+  ++ lib.optionals (!(stdenv.isAarch64 && stdenv.isLinux)) [
     ms-vscode.cpptools
     # build issues
     #ms-python.python
     ms-vsliveshare.vsliveshare
     ms-azuretools.vscode-docker
-  ])
+  ]
+)

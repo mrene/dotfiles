@@ -1,4 +1,3 @@
-
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
@@ -6,22 +5,28 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  self,
+  ...
+}:
 
 {
   imports = [
-    ../modules
-
     # include NixOS-WSL modules
     inputs.nixos-wsl.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  # Enable refactored homelab modules
+  # Enable homelab modules
   homelab.vm-common.enable = true;
   homelab.ssh-ca.enable = true;
   homelab.common-packages.enable = true;
   homelab.distributed-builds.enable = true;
+  homelab.cachix.enable = true;
 
   wsl.enable = true;
   wsl.defaultUser = "mrene";
@@ -40,7 +45,7 @@
 
   users.defaultUserShell = pkgs.fish;
 
-  programs.nix-ld  = {
+  programs.nix-ld = {
     enable = true;
   };
   environment.variables = {
@@ -48,11 +53,16 @@
   };
 
   home-manager = {
-    users.mrene = import ../../home-manager/wsl.nix;
+    users.mrene = {
+      imports = [
+        self.modules.homeManager.all
+        ../../home-manager/wsl.nix
+      ];
+    };
 
     useGlobalPkgs = true;
     verbose = true;
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = { inherit inputs self; };
     backupFileExtension = "hmbak";
   };
 

@@ -7,12 +7,12 @@
   pkgs,
   common,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./home-assistant
-    ../../modules
   ];
 
   # Enable refactored homelab modules
@@ -21,12 +21,15 @@
   homelab.common-packages.enable = true;
 
   # Prevent a lot of superfluous FS from being compiled
-  boot.supportedFilesystems = lib.mkForce ["ext4" "vfat"];
+  boot.supportedFilesystems = lib.mkForce [
+    "ext4"
+    "vfat"
+  ];
   hardware.enableRedistributableFirmware = true;
 
   # Override this so ttyAMA0 isn't used for a console, since its shared with the
   # bluetooth controller.
-  boot.kernelParams = lib.mkForce ["console=tty0"];
+  boot.kernelParams = lib.mkForce [ "console=tty0" ];
 
   # Enables the generation of /boot/extlinux/extlinux.conf
   # which is laoded by u-boot
@@ -61,11 +64,15 @@
     ];
 
     defaultGateway = "192.168.1.1";
-    nameservers = ["1.1.1.1" "8.8.8.8"];
+    nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
   };
 
   # Required for distributed builds
-  users.users.root.openssh.authorizedKeys.keys = common.builderKeys ++ common.sudoSshKeys ++ common.sshKeys;
+  users.users.root.openssh.authorizedKeys.keys =
+    common.builderKeys ++ common.sudoSshKeys ++ common.sshKeys;
   users.defaultUserShell = pkgs.fish;
 
   users.users.mrene = {

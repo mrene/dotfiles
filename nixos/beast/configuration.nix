@@ -1,12 +1,13 @@
 # edit this configuration file to define what should be installed on
 # your system.  help is available in the configuration.nix(5) man page
-# and in the nixos manual (accessible by running ‘nixos-help’).
+# and in the nixos manual (accessible by running 'nixos-help').
 {
   lib,
   config,
   common,
   pkgs,
   inputs,
+  self,
   ...
 }:
 {
@@ -19,8 +20,6 @@
     ./ryzen.nix
     ./rgb.nix
     ./bt-speaker.nix
-
-    ../modules
   ];
 
   # Enable refactored homelab modules
@@ -167,7 +166,7 @@
     users = [ "mrene" ];
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with 'passwd'.
   users = {
     users = {
       mrene = {
@@ -192,11 +191,16 @@
   };
 
   home-manager = {
-    users.mrene = import ../../home-manager/beast.nix;
+    users.mrene = {
+      imports = [
+        self.modules.homeManager.all
+        ../../home-manager/beast.nix
+      ];
+    };
 
     useGlobalPkgs = true;
     verbose = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs self; };
   };
 
   security.sudo.wheelNeedsPassword = true;
@@ -276,7 +280,7 @@
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # on your system were taken. It's perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).

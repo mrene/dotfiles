@@ -1,9 +1,9 @@
 _: {
   boot = {
-    supportedFilesystems = ["zfs"];
+    supportedFilesystems = [ "zfs" ];
     zfs = {
       forceImportRoot = false;
-      extraPools = ["bulk"];
+      extraPools = [ "bulk" ];
     };
   };
 

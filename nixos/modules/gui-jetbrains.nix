@@ -1,26 +1,30 @@
-{ lib, config, pkgs, ... }:
-
-let
-  cfg = config.homelab.gui.jetbrains;
-
-  ides = with pkgs; [
-    jetbrains.webstorm
-    jetbrains.goland
-    jetbrains.pycharm-professional
-    jetbrains.datagrip
-    jetbrains.clion
-  ];
-in
+{ lib, ... }:
 {
-  options.homelab.gui.jetbrains = {
-    enable = lib.mkEnableOption "Enable homelab JetBrains IDEs";
-  };
+  flake.nixosModules.all =
+    { config, pkgs, ... }:
+    let
+      cfg = config.homelab.gui.jetbrains;
 
-  config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs;
-      [
+      ides = with pkgs; [
+        jetbrains.webstorm
+        jetbrains.goland
+        jetbrains.pycharm-professional
         jetbrains.datagrip
-      ]
-      ++ builtins.map (ide: (jetbrains.plugins.addPlugins ide ["ideavim"])) ides;
-  };
+        jetbrains.clion
+      ];
+    in
+    {
+      options.homelab.gui.jetbrains = {
+        enable = lib.mkEnableOption "Enable homelab JetBrains IDEs";
+      };
+
+      config = lib.mkIf cfg.enable {
+        environment.systemPackages =
+          with pkgs;
+          [
+            jetbrains.datagrip
+          ]
+          ++ builtins.map (ide: (jetbrains.plugins.addPlugins ide [ "ideavim" ])) ides;
+      };
+    };
 }

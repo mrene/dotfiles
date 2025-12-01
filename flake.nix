@@ -62,7 +62,7 @@
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
-    }; 
+    };
     humanfirst-dots = {
       url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -75,7 +75,7 @@
       url = "github:Mic92/nix-update";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-vscode-extensions = { 
+    nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -110,7 +110,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";  
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
     nixos-lima = {
       url = "github:ciderale/nixos-lima";
@@ -127,9 +127,11 @@
     ];
   };
 
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    inputs@{ flake-parts, ... }:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
+        flake-parts.flakeModules.modules
         ./packages.nix
         ./overlays
         ./nixos
@@ -139,16 +141,20 @@
         ./devshell.nix
         ./common.nix
         ./neovim
-        ({ config, ... }: 
+        ({ config, ... }:
         let
             allTopLevels = (inputs.nixpkgs.lib.mapAttrsToList (k: v: v.config.system.build.toplevel.drvPath) config.flake.nixosConfigurations);
-        in  
+        in
         {
-          flake.nixosConfigurations' = builtins.parallel 
+          flake.nixosConfigurations' = builtins.parallel
             allTopLevels
             (config.flake.nixosConfigurations.beast.pkgs.symlinkJoin { name = "all"; paths = allTopLevels; });
         })
       ];
-      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "aarch64-darwin"
+      ];
     };
 }

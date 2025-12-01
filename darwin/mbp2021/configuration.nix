@@ -3,7 +3,7 @@
   pkgs,
   inputs,
   ...
-}: 
+}:
 let
   flakes = lib.filterAttrs (_: v: (v._type or "") == "flake") inputs;
 in
@@ -33,7 +33,10 @@ in
     enable = true;
     # package = pkgs.nixVersions.nix_2_22;
     settings = {
-      experimental-features = ["flakes" "nix-command"];
+      experimental-features = [
+        "flakes"
+        "nix-command"
+      ];
       # Disable since it causes issues
       # https://github.com/NixOS/nix/issues/7273
       # "error: cannot link '/nix/store/.tmp-link' to '/nix/store/.links/...': File exists"
@@ -42,7 +45,8 @@ in
       trusted-public-keys = [
         "utm:TNhc0y1cxi+iR7IgKFRUTkXkEf6lzRqhTyk7Nl03Piw=" # aarch64 builds on laptop vm
         "beast:CO98mFl5tv8ky4Msn/ftNi3WK+PW1y3Xm1BUkT2L7yY="
-        "nas:AKbMvZhFWLMEqMCt9TLcN7Ha62q9jf4+XhHH3VVO+kI="
+        "nas:AKbMvZhFWLMEqMCt9TLcN7Ha62q9jf4+XhHH3VVO+kI=" # attic
+        "nas:bSV2Y2BE5ee3JToAg08jZ+DojOt1Yq/EFlw93RZHh8Q=" # ncps
       ];
 
       # This line is a prerequisite
@@ -54,18 +58,17 @@ in
       ephemeral = true;
       maxJobs = 4;
       #config = {
-        #virtualisation = {
-          #darwin-builder = {
-            #diskSize = 40 * 1024;
-            #memorySize = 8 * 1024;
-          #};
-          #cores = 6;
-        #};
+      #virtualisation = {
+      #darwin-builder = {
+      #diskSize = 40 * 1024;
+      #memorySize = 8 * 1024;
+      #};
+      #cores = 6;
+      #};
       #};
     };
 
-
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakes;
+    registry = lib.mapAttrs (_: flake: { inherit flake; }) flakes;
     nixPath = lib.mapAttrsToList (x: _: "${x}=flake:${x}") flakes;
 
     extraOptions = ''
@@ -91,7 +94,7 @@ in
     fish.enable = true;
   };
 
-  environment.shells = [pkgs.fish];
+  environment.shells = [ pkgs.fish ];
   system.primaryUser = "mrene";
   users.users.mrene = {
     home = "/Users/mrene";
