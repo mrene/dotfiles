@@ -10,7 +10,7 @@
   };
 
   # Since we patched the service to support notify in the overlay
-  systemd.services.openrgb.serviceConfig.Type = "notify";
+  # systemd.services.openrgb.serviceConfig.Type = "notify";
 
   # systemd.services.openrgbprofile = {
   #   description = "apply openrgb profile main";

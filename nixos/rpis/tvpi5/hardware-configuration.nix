@@ -33,6 +33,5 @@
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
 
-  nixpkgs.hostPlatform = lib.mkDefault "armv6l-linux";
-  nixpkgs.buildPlatform = lib.mkDefault "x86_64-linux";
+  nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
 }

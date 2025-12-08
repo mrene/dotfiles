@@ -18,6 +18,11 @@
     # nixos-generators.url = "github:nix-community/nixos-generators"; # Generate vm images and initial boot media
     # Raspberry Pi 4 modules
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-raspberrypi = {
+      url = "github:nvmd/nixos-raspberrypi/main";
+      # https://github.com/nvmd/nixos-raspberrypi/issues/90
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
     darwin = {
       url = "github:lnl7/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -102,6 +107,15 @@
     };
 
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";  
+  };
+
+  nixConfig = {
+    extra-substituters = [
+      "https://nixos-raspberrypi.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+    ];
   };
 
   outputs = inputs @ {flake-parts, ...}:

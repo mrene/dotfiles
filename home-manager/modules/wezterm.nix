@@ -19,8 +19,6 @@ in
     # System light/dark mode function
     # from https://wezfurlong.org/wezterm/config/lua/window/get_appearance.html
     extraConfig = ''
-      local wezterm = require 'wezterm'
-
       function scheme_for_appearance(appearance)
           if appearance:find 'Dark' then
             return 'Catppuccin Mocha'
