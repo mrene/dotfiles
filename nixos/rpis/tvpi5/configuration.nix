@@ -6,74 +6,57 @@
   config,
   pkgs,
   common,
+  inputs,
   ...
 }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # ../tvpi/home-assistant
-    # ../../modules
+    ../tvpi/home-assistant
+    ../../modules
   ];
 
   # Enable refactored homelab modules
-  # homelab.vm-common.enable = true;
-  # homelab.ssh-ca.enable = true;
-  # homelab.common-packages.enable = true;
+  homelab.vm-common.enable = true;
+  homelab.ssh-ca.enable = true;
+  homelab.common-packages.enable = true;
 
-  # Prevent a lot of superfluous FS from being compiled
-  # boot.supportedFilesystems = lib.mkForce ["ext4" "vfat"];
+  # Override the kernel package to use the upstream nixos-raspberrypi prebuilt kernel (without
+  # overriding nixpkgs)
+  boot.kernelPackages = inputs.nixos-raspberrypi-nofollows.packages.${pkgs.stdenv.hostPlatform.system}.linuxPackages_rpi5;
   hardware.enableRedistributableFirmware = true;
-
-  # Override this so ttyAMA0 isn't used for a console, since its shared with the
-  # bluetooth controller.
-  # boot.kernelParams = lib.mkForce ["console=tty0"];
-
-  # Enables the generation of /boot/extlinux/extlinux.conf
-  # which is laoded by u-boot
-  # boot.loader.generic-extlinux-compatible.enable = true;
-
-  # !!! If your board is a Raspberry Pi 1, select this:
-  #boot.kernelPackages = pkgs.linuxPackages_rpi;
-
-  # Use the systemd-boot EFI boot loader.
-  # boot.loader.timeout = 5;
-
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;
 
-  # homelab.sops.enable = true;
-  # sops.secrets."home-assistant/token" = {
-  #   owner = config.users.users.mrene.name;
-  # };
+  homelab.sops.enable = true;
+  sops.secrets."home-assistant/token" = {
+    owner = config.users.users.mrene.name;
+  };
 
-  # homelab.backups.enable = true;
-  # homelab.dyndns.enable = true;
+  homelab.backups.enable = true;
+  homelab.dyndns.enable = true;
 
   networking = {
-    hostName = "tvpi5";
+    hostName = "tvpi";
     usePredictableInterfaceNames = false;
 
-    # interfaces.eth0.ipv4.addresses = [
-    #   {
-    #     address = "192.168.1.245";
-    #     prefixLength = 24;
-    #   }
-    # ];
+    interfaces.eth0.ipv4.addresses = [
+      {
+        address = "192.168.1.245";
+        prefixLength = 24;
+      }
+    ];
 
     defaultGateway = "192.168.1.1";
     nameservers = ["1.1.1.1" "8.8.8.8"];
   };
 
+  # Enable nvme ssd
   hardware.raspberry-pi.config.all.base-dt-params = {
     pciex1 = {
       enable = true;
     };
   };
-  boot.kernelParams = [
-    "pcie_aspm=off"
-    "pci=pcie_bus_perf"
-    "pci=earlydump"
-  ];
 
   # Required for distributed builds
   users.users.root.openssh.authorizedKeys.keys = common.builderKeys ++ common.sudoSshKeys ++ common.sshKeys;
@@ -89,21 +72,7 @@
     openssh.authorizedKeys.keys = common.sshKeys;
   };
 
-  # sdImage = {
-  #   firmwareSize = 100;
-  #   compressImage = false;
-  # };
-
-  # hardware.bluetooth.enable = true;
-
-  # services.pipewire = {
-  #   enable = true;
-  #   alsa.enable = true;
-  #   alsa.support32Bit = true;
-  #   pulse.enable = true;
-  #   socketActivation = false;
-  # };
-  # services.pipewire.systemWide = true;
+  hardware.bluetooth.enable = true;
 
   networking.firewall.enable = false;
   services.tailscale = {

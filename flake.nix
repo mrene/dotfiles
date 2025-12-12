@@ -21,7 +21,11 @@
     nixos-raspberrypi = {
       url = "github:nvmd/nixos-raspberrypi/main";
       # https://github.com/nvmd/nixos-raspberrypi/issues/90
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    # Direct reference to CI-built nixos-raspberrypi to avoid rebuilding the kernel
+    nixos-raspberrypi-nofollows = {
+      url = "github:nvmd/nixos-raspberrypi/main";
     };
     darwin = {
       url = "github:lnl7/nix-darwin/master";
