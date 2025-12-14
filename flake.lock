@@ -170,6 +170,27 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixos-lima",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1762276996,
+        "narHash": "sha256-TtcPgPmp2f0FAnc+DMEw4ardEgv1SGNR3/WFGH0N19M=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "af087d076d3860760b3323f6b583f4d828c1ac17",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -976,6 +997,27 @@
         "type": "github"
       }
     },
+    "nixos-lima": {
+      "inputs": {
+        "disko": "disko",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1764199797,
+        "narHash": "sha256-b/QqKVmgYIf05tUvo7Mk0vYZHYF6ec5fxpDi7P6CEmc=",
+        "owner": "ciderale",
+        "repo": "nixos-lima",
+        "rev": "266c496e01af552ea9f3d1171736642ce9726e77",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ciderale",
+        "repo": "nixos-lima",
+        "type": "github"
+      }
+    },
     "nixos-raspberrypi": {
       "inputs": {
         "argononed": "argononed",
@@ -1345,6 +1387,7 @@
         "nix2container": "nix2container",
         "nixd": "nixd",
         "nixos-hardware": "nixos-hardware",
+        "nixos-lima": "nixos-lima",
         "nixos-raspberrypi": "nixos-raspberrypi",
         "nixos-raspberrypi-nofollows": "nixos-raspberrypi-nofollows",
         "nixos-wsl": "nixos-wsl",
