@@ -8,11 +8,12 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.vscode-server.nixosModule
-		inputs.determinate.nixosModules.default
+    inputs.determinate.nixosModules.default
 
     ./hardware-configuration.nix
     ./ryzen.nix
@@ -35,7 +36,7 @@
   homelab.gui.base.enable = true;
   homelab.gui.desktop.enable = true;
   homelab.gui.dev.enable = true;
-  homelab.gui.jetbrains.enable = true;  # Was part of dev-kitchen-sink
+  homelab.gui.jetbrains.enable = true; # Was part of dev-kitchen-sink
   homelab.gui.messaging.enable = true;
 
   # Increase nixos-rebuild build-vm memory size
@@ -64,28 +65,38 @@
     # Enable parallel evaluation across all cores
     # See: https://determinate.systems/blog/changelog-determinate-nix-3111/
     eval-cores = 0;
-    extra-experimental-features = ["parallel-eval"];
+    extra-experimental-features = [ "parallel-eval" ];
   };
 
   homelab.dyndns.enable = true;
 
   # On windows, the volume is changed on the usb device while on gnome it's changed inside pipewire.
   # Reset the hw volume to 100% so we have enough headroom.
-  systemd.services.minidsp-amixer-volume = let
-    minidsp-amixer-volume = pkgs.writeShellApplication {
-      name = "minidsp-amixer-volume";
-      runtimeInputs = [ pkgs.alsa-utils ];
-      text = ''amixer -c Flex set 'miniDSP Flex' 100%'';
+  systemd.services.minidsp-amixer-volume =
+    let
+      minidsp-amixer-volume = pkgs.writeShellApplication {
+        name = "minidsp-amixer-volume";
+        runtimeInputs = [
+          pkgs.alsa-utils
+          pkgs.gawk
+        ];
+        text = ''
+          sleep 2  # Wait for ALSA to detect the card
+          card=$(awk '/miniDSP/ {print $1; exit}' /proc/asound/cards || true)
+          if [ -n "$card" ]; then
+            amixer -c "$card" set 'miniDSP Flex' 100%
+          fi
+        '';
+      };
+    in
+    {
+      description = "Set miniDSP volume using amixer";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${lib.getExe minidsp-amixer-volume}";
+      };
+      wantedBy = [ "multi-user.target" ];
     };
-  in {
-    description = "Set miniDSP volume using amixer";
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${lib.getExe minidsp-amixer-volume}";
-      RemainAfterExit = true;
-    };
-    wantedBy = [ "multi-user.target" ];
-  };
 
   programs.nh = {
     enable = true;
@@ -108,13 +119,18 @@
   };
   boot.kernelParams = [ ];
 
-  swapDevices = [{ device = "/swap"; size = 65536; }];
+  swapDevices = [
+    {
+      device = "/swap";
+      size = 65536;
+    }
+  ];
 
   # Expose external monitor brightness control
   hardware.ddcci.enable = true;
 
   # Sensors
-  boot.kernelModules = ["nct6775"];
+  boot.kernelModules = [ "nct6775" ];
 
   networking.networkmanager.enable = true;
   networking.hostName = "beast";
@@ -133,7 +149,7 @@
     ];
   };
   services.xserver.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   nixpkgs.config.cudaSupport = true;
 
   services.pulseaudio.enable = false;
@@ -148,7 +164,7 @@
 
   hardware.openrazer = {
     enable = true;
-    users = ["mrene"];
+    users = [ "mrene" ];
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -157,7 +173,13 @@
       mrene = {
         isNormalUser = true;
         description = "mathieu";
-        extraGroups = ["networkmanager" "wheel" "docker" "dialout" "plugdev"];
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+          "docker"
+          "dialout"
+          "plugdev"
+        ];
         openssh.authorizedKeys.keys = common.sshKeys;
         initialHashedPassword = "";
       };
@@ -174,14 +196,14 @@
 
     useGlobalPkgs = true;
     verbose = true;
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = { inherit inputs; };
   };
 
   security.sudo.wheelNeedsPassword = true;
   security.pam.sshAgentAuth.enable = true;
   # Prevent authorized keys from containing files in the user directory, as they could be
   # used to escalate privileges to root.
-  services.openssh.authorizedKeysFiles = lib.mkForce ["/etc/ssh/authorized_keys.d/%u"];
+  services.openssh.authorizedKeysFiles = lib.mkForce [ "/etc/ssh/authorized_keys.d/%u" ];
 
   virtualisation.docker.enable = true;
   hardware.nvidia-container-toolkit = {
@@ -219,7 +241,6 @@
     virtiofsd
   ];
 
-
   programs.nix-ld.enable = true;
 
   services.openssh.enable = true;
@@ -238,17 +259,20 @@
   virtualisation.libvirtd.enable = true;
 
   networking.firewall.enable = false;
-  networking.firewall.allowedTCPPorts = [8501];
+  networking.firewall.allowedTCPPorts = [ 8501 ];
   networking.hosts = {
-    "192.168.1.10" = ["localhost.humanfirst.ai"];
-    "127.0.0.1" = ["istio-ingressgateway.istio-system.svc.cluster.local"];
+    "192.168.1.10" = [ "localhost.humanfirst.ai" ];
+    "127.0.0.1" = [ "istio-ingressgateway.istio-system.svc.cluster.local" ];
   };
 
   programs.command-not-found.enable = false;
   homelab.screen-input-switcher.enable = true;
 
   # Allow running aarch64 binaries
-  boot.binfmt.emulatedSystems = ["aarch64-linux" "armv6l-linux"];
+  boot.binfmt.emulatedSystems = [
+    "aarch64-linux"
+    "armv6l-linux"
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mrene-nur = {
@@ -139,9 +139,15 @@
         ./devshell.nix
         ./common.nix
         ./neovim
-        # ({ config, ... }: {
-        #   flake.nixosConfigurations' = builtins.parallel config.flake.nixosConfigurations config.flake.nixosConfigurations;
-        # })
+        ({ config, ... }: 
+        let
+            allTopLevels = (inputs.nixpkgs.lib.mapAttrsToList (k: v: v.config.system.build.toplevel.drvPath) config.flake.nixosConfigurations);
+        in  
+        {
+          flake.nixosConfigurations' = builtins.parallel 
+            allTopLevels
+            (config.flake.nixosConfigurations.beast.pkgs.symlinkJoin { name = "all"; paths = allTopLevels; });
+        })
       ];
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
     };

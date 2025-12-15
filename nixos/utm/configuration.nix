@@ -77,7 +77,7 @@
   };
 
   # Sign store builds for sharing across network
-  nix.settings.secret-key-files = "/var/secrets/cache-priv-key.pem";
+  # nix.settings.secret-key-files = "/var/secrets/cache-priv-key.pem";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

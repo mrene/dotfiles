@@ -113,6 +113,7 @@ in
       nix-init
       alejandra
       deadnix
+      nixfmt
       statix
       entr
       inputs.fzf-nix.packages.${system}.fzf-nix
