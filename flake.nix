@@ -61,10 +61,6 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    humanfirst-dots = {
-      url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     devshell = {
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";

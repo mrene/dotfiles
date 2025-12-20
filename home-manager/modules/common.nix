@@ -7,7 +7,7 @@
     in
     {
       imports = [
-        inputs.humanfirst-dots.homeManagerModule
+        # inputs.humanfirst-dots.homeManagerModule
         inputs.nix-index-database.homeModules.nix-index
         inputs.self.homeManagerModules.neovim
       ];
@@ -21,8 +21,8 @@
         homelab.minimal.enable = true;
         homelab.system.ssh.enable = true;
 
-        humanfirst.enable = true;
-        humanfirst.identity.email = "mathieu@humanfirst.ai";
+        # humanfirst.enable = true;
+        # humanfirst.identity.email = "mathieu@humanfirst.ai";
 
         # https://github.com/nix-community/nix-direnv#via-home-manager
         programs.direnv.enable = true;
