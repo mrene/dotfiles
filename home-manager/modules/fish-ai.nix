@@ -10,13 +10,13 @@
     let
       cfg = config.homelab.shell.fish;
 
-      version = "2.5.0";
+      version = "unstable-2025-12-19";
 
       src = pkgs.fetchFromGitHub {
         owner = "Realiserad";
         repo = "fish-ai";
-        rev = "v${version}";
-        sha256 = "sha256-PuCYaNpKr9vk+AKfDg0YYQtepyjcHFvgwKLZMwTRb8c=";
+        rev = "d47357c5bd78563737c31f8b6c5fee9dff73197d";
+        sha256 = "1n3cw363qvlp917hrvn55h4njxnps79vv4lc06bwmcbqr0frg844";
       };
 
       python = pkgs.python312;
