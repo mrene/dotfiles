@@ -46,13 +46,11 @@
       url = "github:nix-community/nixd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     # Use flake-compat from Lix since it can be configured to skip copying things to the store
     flake-compat = {
       url = "https://git.lix.systems/lix-project/flake-compat/archive/main.tar.gz";
       flake = false;
     };
-
     vscode-server = {
       url = "github:msteen/nixos-vscode-server"; # NixOS fix so that vscode-server can run correctly
       inputs.nixpkgs.follows = "nixpkgs";
@@ -104,17 +102,19 @@
       url = "github:ravitemer/mcphub.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     mcp-hub = {
       url = "github:ravitemer/mcp-hub";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-
     nixos-lima = {
       url = "github:ciderale/nixos-lima";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    clan-core = {
+      url = "https://git.clan.lol/clan/clan-core/archive/main.tar.gz";
+      # inputs.nixpkgs.follows = "nixpkgs"; # Avoid this if using nixpkgs stable.
+      inputs.flake-parts.follows = "flake-parts";
     };
   };
 
@@ -132,6 +132,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         flake-parts.flakeModules.modules
+        inputs.clan-core.flakeModules.default
         ./packages.nix
         ./overlays
         ./nixos
