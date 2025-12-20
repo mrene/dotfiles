@@ -9,6 +9,7 @@
 
     # Shell and terminal
     ./fish.nix
+    ./fish-ai.nix
     ./wezterm.nix
     ./zellij.nix
 
