@@ -125,8 +125,9 @@
 
   outputs =
     inputs@{ flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    let
       imports = [
+        { flake.flakeModules.default = { inherit imports; }; }
         flake-parts.flakeModules.modules
         inputs.clan-core.flakeModules.default
         ./packages.nix
@@ -157,6 +158,9 @@
           }
         )
       ];
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      inherit imports;
       systems = [
         "x86_64-linux"
         "aarch64-linux"
