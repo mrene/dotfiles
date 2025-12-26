@@ -280,11 +280,13 @@ lib.mkMerge [
         extraDevices = [ "trel://eth0" ];
       };
       rest = {
-        listenPort = 58081;
+        listenAddress = "0.0.0.0";
+        listenPort = 8081;
       };
       web = {
         enable = true;
-        listenPort = 58082;
+        listenAddress = "0.0.0.0";
+        listenPort = 8082;
       };
     };
 

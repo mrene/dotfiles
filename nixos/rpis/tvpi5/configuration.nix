@@ -14,7 +14,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../tvpi/home-assistant
-    ../../modules
   ];
 
   # Enable refactored homelab modules
