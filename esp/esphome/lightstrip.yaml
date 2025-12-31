@@ -1,0 +1,35 @@
+esphome:
+  name: test
+
+esp32:
+  variant: esp32h2
+  framework:
+    type: esp-idf
+
+network:
+  enable_ipv6: true
+
+logger:
+  level: DEBUG
+
+debug:
+  update_interval: 5s
+
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+api:
+ encryption:
+   key: !secret api_key
+
+openthread:
+  tlv: !secret ot_tlv
+
+light:
+  - platform: esp32_rmt_led_strip
+    rgb_order: GRB
+    pin: GPIO1
+    num_leds: 10
+    chipset: ws2812
+    name: "Strip"

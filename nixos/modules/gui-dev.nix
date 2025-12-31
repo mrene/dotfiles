@@ -16,18 +16,13 @@
       };
 
       config = lib.mkIf cfg.enable {
-        environment.systemPackages =
-          with pkgs;
-          [
-            flakePackages.${system}.vscode-with-extensions
+        environment.systemPackages = with pkgs; [
+          flakePackages.${system}.vscode-with-extensions
 
-            gcc
-            mypy
-            glibc.dev
-          ]
-          ++ lib.optionals (pkgs.system != "aarch64-linux") [
-            flakePackages.${pkgs.system}.windsurf-with-extensions
-          ];
+          gcc
+          mypy
+          glibc.dev
+        ];
       };
     };
 }

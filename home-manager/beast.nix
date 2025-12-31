@@ -5,12 +5,9 @@
   ...
 }:
 {
-
-  # Enable homelab modules
   homelab.shell.fish.enable = true;
   homelab.dev.git.enable = true;
   homelab.dev.jujutsu.enable = true;
-  # homelab.editor.vim.enable = true; # Commented out like before
   homelab.minimal.enable = true;
   homelab.common.enable = true;
   homelab.gui.gnome.enable = true;

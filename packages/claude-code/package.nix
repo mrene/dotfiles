@@ -14,16 +14,16 @@ in
 
 buildNpmPackage rec {
   pname = "claude-code";
-  version = "2.0.74";
+  version = "2.0.76";
 
   nodejs = nodejs_20; # required for sandboxed Nix builds on Darwin
 
   src = fetchzip {
     url = "https://registry.npmjs.org/@anthropic-ai/claude-code/-/claude-code-${version}.tgz";
-    hash = "sha256-J3m1KUO8Bkzwh3fLI96LoWw6VsSwoETcSq2IufeRW9E=";
+    hash = "sha256-46IqiGJZrZM4vVcanZj/vY4uxFH3/4LxNA+Qb6iIHDk=";
   };
 
-  npmDepsHash = "sha256-EwL/sQkZU4IeQtPGJFdKjLLk6LzEhm5wHjRfCD6a484=";
+  npmDepsHash = "sha256-lA4yNolTGML7BxjgSf0UKlbxRMFwIgQEOvmXNwKVa5M=";
 
   postPatch = ''
     cp ${./package-lock.json} package-lock.json

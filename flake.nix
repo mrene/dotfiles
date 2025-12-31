@@ -15,7 +15,6 @@
       url = "github:mrene/nur-packages";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nixos-generators.url = "github:nix-community/nixos-generators"; # Generate vm images and initial boot media
     # Raspberry Pi 4 modules
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixos-raspberrypi = {
@@ -86,10 +85,6 @@
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpak = {
-      url = "github:nixpak/nixpak";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix2container = {
       url = "github:nlewo/nix2container";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -109,8 +104,15 @@
     };
     clan-core = {
       url = "https://git.clan.lol/clan/clan-core/archive/main.tar.gz";
-      # inputs.nixpkgs.follows = "nixpkgs"; # Avoid this if using nixpkgs stable.
+      inputs.nixpkgs.follows = "nixpkgs"; # Avoid this if using nixpkgs stable.
       inputs.flake-parts.follows = "flake-parts";
+      inputs.nix-darwin.follows = "darwin";
+    };
+    humanfirst-dots = {
+      url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
+      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs."home-manager/nixpkgs".follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
   };
 
