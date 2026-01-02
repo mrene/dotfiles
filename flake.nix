@@ -1,172 +1,109 @@
+# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
 
-    nixpkgs-unfree = {
-      url = "github:numtide/nixpkgs-unfree";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    mrene-nur = {
-      url = "github:mrene/nur-packages";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # Raspberry Pi 4 modules
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixos-raspberrypi = {
-      url = "github:nvmd/nixos-raspberrypi/main";
-      # https://github.com/nvmd/nixos-raspberrypi/issues/90
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # Direct reference to CI-built nixos-raspberrypi to avoid rebuilding the kernel
-    nixos-raspberrypi-nofollows = {
-      url = "github:nvmd/nixos-raspberrypi/main";
-    };
-    darwin = {
-      url = "github:lnl7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    attic = {
-      url = "github:zhaofengli/attic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    minidsp = {
-      url = "github:mrene/minidsp-rs";
-    };
-    fzf-nix = {
-      url = "github:mrene/fzf-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixd = {
-      url = "github:nix-community/nixd";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # Use flake-compat from Lix since it can be configured to skip copying things to the store
-    flake-compat = {
-      url = "https://git.lix.systems/lix-project/flake-compat/archive/main.tar.gz";
-      flake = false;
-    };
-    vscode-server = {
-      url = "github:msteen/nixos-vscode-server"; # NixOS fix so that vscode-server can run correctly
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Pre-indexed nix-index db
-    nix-index-database = {
-      url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    devshell = {
-      url = "github:numtide/devshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-update = {
-      url = "github:Mic92/nix-update";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix2container = {
-      url = "github:nlewo/nix2container";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    mcphub-nvim = {
-      url = "github:ravitemer/mcphub.nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    mcp-hub = {
-      url = "github:ravitemer/mcp-hub";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-    nixos-lima = {
-      url = "github:ciderale/nixos-lima";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    clan-core = {
-      url = "https://git.clan.lol/clan/clan-core/archive/main.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs"; # Avoid this if using nixpkgs stable.
-      inputs.flake-parts.follows = "flake-parts";
-      inputs.nix-darwin.follows = "darwin";
-    };
-    humanfirst-dots = {
-      url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
-      inputs.nixpkgs.follows = "nixpkgs";
-      # inputs."home-manager/nixpkgs".follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-  };
+  outputs = inputs: import ./outputs.nix inputs;
 
   nixConfig = {
-    extra-substituters = [
-      "https://nixos-raspberrypi.cachix.org"
-    ];
+    extra-substituters = [ "https://nixos-raspberrypi.cachix.org" ];
     extra-trusted-public-keys = [
       "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
     ];
   };
 
-  outputs =
-    inputs@{ flake-parts, ... }:
-    let
-      imports = [
-        { flake.flakeModules.default = { inherit imports; }; }
-        flake-parts.flakeModules.modules
-        inputs.clan-core.flakeModules.default
-        ./packages.nix
-        ./overlays
-        ./nixos
-        ./darwin
-        ./home-manager
-        # ./vim
-        ./devshell.nix
-        ./common.nix
-        ./neovim
-        (
-          { config, ... }:
-          let
-            allTopLevels = (
-              inputs.nixpkgs.lib.mapAttrsToList (
-                k: v: v.config.system.build.toplevel.drvPath
-              ) config.flake.nixosConfigurations
-            );
-          in
-          {
-            flake.nixosConfigurations' = builtins.parallel allTopLevels (
-              config.flake.nixosConfigurations.beast.pkgs.symlinkJoin {
-                name = "all";
-                paths = allTopLevels;
-              }
-            );
-          }
-        )
-      ];
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      inherit imports;
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "aarch64-darwin"
-      ];
+  inputs = {
+    attic = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:zhaofengli/attic";
     };
+    clan-core = {
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nix-darwin.follows = "darwin";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "https://git.clan.lol/clan/clan-core/archive/main.tar.gz";
+    };
+    darwin = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:lnl7/nix-darwin/master";
+    };
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    devshell = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:numtide/devshell";
+    };
+    flake-aspects.url = "github:vic/flake-aspects";
+    flake-compat = {
+      flake = false;
+      url = "https://git.lix.systems/lix-project/flake-compat/archive/main.tar.gz";
+    };
+    flake-file.url = "github:vic/flake-file";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    fzf-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:mrene/fzf-nix";
+    };
+    home-manager = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager/release-25.11";
+    };
+    humanfirst-dots = {
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
+    };
+    import-tree.url = "github:vic/import-tree";
+    mcp-hub = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:ravitemer/mcp-hub";
+    };
+    mcphub-nvim = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:ravitemer/mcphub.nvim";
+    };
+    minidsp.url = "github:mrene/minidsp-rs";
+    mrene-nur = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:mrene/nur-packages";
+    };
+    nix-index-database = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Mic92/nix-index-database";
+    };
+    nix-update = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Mic92/nix-update";
+    };
+    nix-vscode-extensions = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nix-vscode-extensions";
+    };
+    nixos-lima = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:ciderale/nixos-lima";
+    };
+    nixos-raspberrypi = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nvmd/nixos-raspberrypi/main";
+    };
+    nixos-raspberrypi-nofollows.url = "github:nvmd/nixos-raspberrypi/main";
+    nixos-wsl = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/NixOS-WSL";
+    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
+    sops-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:Mic92/sops-nix";
+    };
+    vscode-server = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:msteen/nixos-vscode-server";
+    };
+  };
+
 }

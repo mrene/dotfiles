@@ -1,5 +1,11 @@
 { inputs, ... }:
 {
+  # Declare inputs used by this module for flake-file tracking
+  flake-file.inputs.nix-vscode-extensions = {
+    url = "github:nix-community/nix-vscode-extensions";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   perSystem =
     {
       lib,

@@ -1,5 +1,17 @@
 { inputs, ... }:
 {
+  # Declare inputs used by this module for flake-file tracking
+  flake-file.inputs = {
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-update = {
+      url = "github:Mic92/nix-update";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   imports = [
     inputs.devshell.flakeModule
   ];
