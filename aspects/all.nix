@@ -1,6 +1,6 @@
 # This aspect bundles all other aspects together using flake-aspects includes.
-# Hosts can import `self.modules.nixos.all` or `self.modules.homeManager.all`
-# to get all aspect modules at once.
+# Hosts can import `self.modules.nixos.all`, `self.modules.darwin.all`,
+# or `self.modules.homeManager.all` to get all aspect modules at once.
 { ... }:
 {
   flake.aspects =
@@ -9,6 +9,7 @@
       all = {
         # Empty modules that will have includes resolved into them
         nixos = { };
+        darwin = { };
         homeManager = { };
         includes = with aspects; [
           # Core
@@ -44,6 +45,7 @@
           infra-cachix
           infra-distributed-builds
           infra-minikube
+          infra-tailscale-networking
           infra-vm-qemu-guest
           infra-vm-user
 

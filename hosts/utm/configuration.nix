@@ -13,7 +13,7 @@
       imports = [
         inputs.home-manager.nixosModules.home-manager
         inputs.nixos-lima.nixosModules.lima
-        inputs.nixos-lima.nixosModules.disk-default
+        # disk-default removed - using hardware-configuration.nix instead
         inputs.nixos-lima.nixosModules.impure-config
         inputs.nixos-lima.nixosModules.lima-container
       ];

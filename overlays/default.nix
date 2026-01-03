@@ -5,6 +5,10 @@
     nixpkgs.config.allowUnfree = true;
   };
 
+  flake.darwinModules.overlay = _: {
+    nixpkgs.config.allowUnfree = true;
+  };
+
   flake.overlays = {
     # openrgb = import ./openrgb;
   };

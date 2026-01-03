@@ -39,7 +39,10 @@
             prefixLength = 24;
           }
         ];
-        defaultGateway = "192.168.1.1";
+        defaultGateway = {
+          address = "192.168.1.1";
+          interface = "eth0";
+        };
         nameservers = [
           "1.1.1.1"
           "8.8.8.8"

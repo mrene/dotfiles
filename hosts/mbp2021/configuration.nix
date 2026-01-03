@@ -12,7 +12,9 @@
       flakes = lib.filterAttrs (_: v: (v._type or "") == "flake") inputs;
     in
     {
+      nixpkgs.hostPlatform = "aarch64-darwin";
       homelab.fonts.enable = true;
+      homelab.tailscale-networking.enable = true;
 
       environment.systemPackages = with pkgs; [
         fish

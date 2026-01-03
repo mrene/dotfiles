@@ -1,29 +1,8 @@
 {
   inputs,
-  self,
   config,
   ...
 }:
-let
-  # https://github.com/nvmd/nixos-raspberrypi/issues/113
-  inherit (inputs) nixpkgs;
-  inherit (nixpkgs) lib;
-
-  patchedLib = lib.extend (
-    final: prev: {
-      mkRemovedOptionModule =
-        optionName: replacementInstructions:
-        let
-          key = "removedOptionModule#" + final.concatStringsSep "_" optionName;
-        in
-        { options, ... }:
-        (lib.mkRemovedOptionModule optionName replacementInstructions { inherit options; })
-        // {
-          inherit key;
-        };
-    }
-  );
-in
 {
   # Declare inputs used by this host for flake-file tracking
   flake-file.inputs = {
@@ -35,28 +14,21 @@ in
     nixos-raspberrypi-nofollows.url = "github:nvmd/nixos-raspberrypi/main";
   };
 
-  flake.nixosConfigurations = {
-    tvpi = inputs.nixos-raspberrypi.lib.nixosSystem {
-      system = "aarch64-linux";
-      lib = patchedLib;
-      specialArgs = {
-        inherit (self) common;
-        inherit inputs;
-        inherit (inputs) nixos-raspberrypi;
-      };
-      modules = [
-        "${inputs.nixos-raspberrypi}/modules/installer/sd-card/sd-image-raspberrypi.nix"
-        config.flake.modules.nixos.tvpi
-        inputs.sops-nix.nixosModules.sops
-        config.flake.modules.nixos.all
-        (_: {
-          imports = with inputs.nixos-raspberrypi.nixosModules; [
-            raspberry-pi-5.base
-            raspberry-pi-5.bluetooth
-          ];
-          nixpkgs.config.allowUnfree = true;
-        })
-      ];
-    };
-  };
+  clan.machines.tvpi.imports = [
+    # Required: Add necessary overlays with kernel, firmware, vendor packages
+    inputs.nixos-raspberrypi.lib.inject-overlays
+    # Binary cache with prebuilt packages
+    inputs.nixos-raspberrypi.nixosModules.trusted-nix-caches
+    # RPi5 hardware modules
+    inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.base
+    inputs.nixos-raspberrypi.nixosModules.raspberry-pi-5.bluetooth
+    # SD card image builder
+    "${inputs.nixos-raspberrypi}/modules/installer/sd-card/sd-image-raspberrypi.nix"
+    # Standard modules
+    config.flake.modules.nixos.all
+    config.flake.modules.nixos.tvpi
+    config.flake.nixosModules.overlay
+    # Rpi-specific config
+    { nixpkgs.config.allowUnfree = true; }
+  ];
 }

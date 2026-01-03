@@ -10,6 +10,9 @@ _: {
         (modulesPath + "/profiles/qemu-guest.nix")
       ];
 
+      boot.loader.systemd-boot.enable = true;
+      boot.loader.efi.canTouchEfiVariables = true;
+
       boot.initrd.availableKernelModules = [
         "xhci_pci"
         "virtio_pci"

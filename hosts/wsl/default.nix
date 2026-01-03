@@ -1,7 +1,5 @@
 {
-  inputs,
   config,
-  self,
   ...
 }:
 {
@@ -11,17 +9,9 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  flake.nixosConfigurations.wsl = inputs.nixpkgs.lib.nixosSystem {
-    specialArgs = {
-      inherit (self) common;
-      inherit inputs self;
-      flakePackages = config.flake.packages;
-    };
-    modules = [
-      config.flake.modules.nixos.wsl
-      inputs.sops-nix.nixosModules.sops
-      self.nixosModules.overlay
-      config.flake.modules.nixos.all
-    ];
-  };
+  clan.machines.wsl.imports = [
+    config.flake.modules.nixos.all
+    config.flake.modules.nixos.wsl
+    config.flake.nixosModules.overlay
+  ];
 }

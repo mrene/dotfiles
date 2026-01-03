@@ -26,7 +26,7 @@
     };
     darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:lnl7/nix-darwin/master";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     };
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     devshell = {
@@ -82,7 +82,10 @@
       url = "github:nix-community/nix-vscode-extensions";
     };
     nixos-lima = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        disko.follows = "clan-core/disko";
+        nixpkgs.follows = "nixpkgs";
+      };
       url = "github:ciderale/nixos-lima";
     };
     nixos-raspberrypi = {

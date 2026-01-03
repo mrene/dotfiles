@@ -20,6 +20,7 @@
     {
       system,
       pkgs,
+      inputs',
       ...
     }:
     {
@@ -53,7 +54,8 @@
         ];
 
         packages = [
-          inputs.nix-update.packages.${system}.default
+          inputs'.nix-update.packages.default
+          inputs'.clan-core.packages.default
           pkgs.nvfetcher
           pkgs.sops
           pkgs.ssh-to-age
