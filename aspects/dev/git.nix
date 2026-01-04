@@ -1,9 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.dev-git.homeManager =
-    { config, pkgs, ... }:
+    { pkgs, ... }:
     let
-      cfg = config.homelab.dev.git;
       delta = pkgs.fetchFromGitHub {
         owner = "dandavison";
         repo = "delta";
@@ -12,11 +11,6 @@
       };
     in
     {
-      options.homelab.dev.git = {
-        enable = lib.mkEnableOption "Enable git configuration with delta";
-      };
-
-      config = lib.mkIf cfg.enable {
         programs.git = {
           enable = true;
           lfs.enable = true;
@@ -52,6 +46,5 @@
             features = "chameleon-mod";
           };
         };
-      };
     };
 }

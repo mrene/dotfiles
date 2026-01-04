@@ -9,9 +9,16 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  clan.machines.wsl.imports = [
-    config.flake.modules.nixos.all
-    config.flake.modules.nixos.wsl
+  clan.machines.wsl.imports = with config.flake.modules.nixos; [
+    core-base
+    core-ssh-ca
+
+    system-common-packages
+
+    infra-distributed-builds
+    infra-cachix
+
+    wsl
     config.flake.nixosModules.overlay
   ];
 }

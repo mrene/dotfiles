@@ -1,4 +1,4 @@
-{ lib, ... }:
+_:
 let
   # Shared font packages for both NixOS and nix-darwin
   fontPackages = pkgs: with pkgs; [
@@ -16,18 +16,9 @@ let
 
   # Shared module definition for both platforms
   mkFontsModule =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.fonts;
-    in
+    { pkgs, ... }:
     {
-      options.homelab.fonts = {
-        enable = lib.mkEnableOption "Enable homelab font packages";
-      };
-
-      config = lib.mkIf cfg.enable {
-        fonts.packages = fontPackages pkgs;
-      };
+      fonts.packages = fontPackages pkgs;
     };
 in
 {

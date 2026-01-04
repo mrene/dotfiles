@@ -1,20 +1,11 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.infra-vm-qemu-guest.nixos =
-    { config, modulesPath, ... }:
-    let
-      cfg = config.homelab.vm.qemu-guest;
-    in
+    { modulesPath, ... }:
     {
       imports = [
         (modulesPath + "/profiles/qemu-guest.nix")
       ];
-
-      options.homelab.vm.qemu-guest = {
-        enable = lib.mkEnableOption "Enable homelab QEMU guest configuration";
-      };
-
-      config = lib.mkIf cfg.enable {
         services.xserver.videoDrivers = [
           "qxl"
           "virtio"
@@ -36,6 +27,5 @@
             "msize=104857600"
           ];
         };
-      };
     };
 }

@@ -1,20 +1,11 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.infra-minikube.nixos =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.minikube;
-    in
+    { pkgs, ... }:
     {
-      options.homelab.minikube = {
-        enable = lib.mkEnableOption "Enable homelab minikube and related tools";
-      };
-
-      config = lib.mkIf cfg.enable {
-        environment.systemPackages = with pkgs; [
-          minikube
-          conntrack-tools
-        ];
-      };
+      environment.systemPackages = with pkgs; [
+        minikube
+        conntrack-tools
+      ];
     };
 }

@@ -13,8 +13,6 @@
     in
     {
       nixpkgs.hostPlatform = "aarch64-darwin";
-      homelab.fonts.enable = true;
-      homelab.tailscale-networking.enable = true;
 
       environment.systemPackages = with pkgs; [
         fish
@@ -45,12 +43,6 @@
             "nas:bSV2Y2BE5ee3JToAg08jZ+DojOt1Yq/EFlw93RZHh8Q="
           ];
           trusted-users = [ "@admin" ];
-        };
-
-        linux-builder = {
-          enable = false;
-          ephemeral = true;
-          maxJobs = 4;
         };
 
         registry = lib.mapAttrs (_: flake: { inherit flake; }) flakes;

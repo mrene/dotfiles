@@ -14,13 +14,7 @@
         inputs.home-manager.nixosModules.home-manager
       ];
 
-      # Enable refactored homelab modules
-      homelab.vm-common.enable = true;
-      homelab.ssh-ca.enable = true;
-      homelab.common-packages.enable = true;
-      homelab.nvidia.enable = true;
-      homelab.distributed-builds.enable = true;
-      homelab.cachix.enable = true;
+      # Aspects are now imported in default.nix
 
       boot = {
         loader = {
@@ -57,7 +51,6 @@
         defaultUserShell = pkgs.fish;
       };
 
-      homelab.sops.enable = true;
       homelab.backups = {
         enable = true;
         paths = [
@@ -65,10 +58,11 @@
           "/var/lib/thread"
         ];
       };
-      homelab.attic.enable = true;
-      homelab.caddy.enable = true;
-      homelab.dyndns.enable = true;
-      homelab.forgejo.enable = true;
+
+      homelab.attic = {
+        enable = true;
+        domain = "nas.tailc705a.ts.net";
+      };
 
       services.openthread-border-router = {
         enable = true;
@@ -94,9 +88,14 @@
 
       home-manager = {
         users.mrene = {
-          imports = [
-            self.modules.homeManager.all
-            self.modules.homeManager.nas
+          imports = with self.modules.homeManager; [
+            core-minimal
+            core-ssh
+            shell-fish
+            dev-git
+            dev-jujutsu
+            system-common
+            nas
           ];
         };
         useGlobalPkgs = true;

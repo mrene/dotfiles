@@ -8,21 +8,10 @@ let
   );
 in
 {
-  flake.aspects.infra-cachix.nixos =
-    { config, ... }:
-    let
-      cfg = config.homelab.cachix;
-    in
-    {
-      # Dynamically import all .nix files from ./_cachix/
-      imports = cachixImports;
+  flake.aspects.infra-cachix.nixos = _: {
+    # Dynamically import all .nix files from ./_cachix/
+    imports = cachixImports;
 
-      options.homelab.cachix = {
-        enable = lib.mkEnableOption "Enable homelab cachix binary caches";
-      };
-
-      config = lib.mkIf cfg.enable {
-        nix.settings.substituters = [ "https://cache.nixos.org/" ];
-      };
-    };
+    nix.settings.substituters = [ "https://cache.nixos.org/" ];
+  };
 }

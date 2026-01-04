@@ -4,24 +4,45 @@
   ...
 }:
 {
-  # Set machine class to darwin for macOS
   clan.inventory.machines.mbp2021.machineClass = "darwin";
+  clan.machines.mbp2021 = {
+    clan.core.networking = {
+      buildHost = "mrene@mathieus-macbook-pro";
+      targetHost = "mrene@mathieus-macbook-pro";
+    };
+    imports = [
+      inputs.home-manager.darwinModules.home-manager
+      # Darwin aspects
+      config.flake.modules.darwin.desktop-fonts
+      config.flake.modules.darwin.infra-tailscale-networking
+      # Host-specific
+      config.flake.modules.darwin.mbp2021
+      config.flake.darwinModules.overlay
+      (
+        { self, ... }:
+        {
+          home-manager.extraSpecialArgs = { inherit inputs self; };
+          home-manager.sharedModules = with self.modules.homeManager; [
+            # Core
+            core-minimal
+            core-ssh
 
-  # Define the darwin machine configuration
-  # Build: nix build .#darwinConfigurations.mbp2021.system
-  # Switch: darwin-rebuild switch --flake .#mbp2021
-  clan.machines.mbp2021.imports = [
-    inputs.home-manager.darwinModules.home-manager
-    config.flake.modules.darwin.all
-    config.flake.modules.darwin.mbp2021
-    config.flake.darwinModules.overlay
-    ({ self, ... }: {
-      home-manager.extraSpecialArgs = { inherit inputs self; };
-      home-manager.sharedModules = [ config.flake.modules.homeManager.all ];
-    })
-  ];
+            # Shell
+            shell-fish
+            shell-wezterm
+
+            # Dev
+            dev-git
+            dev-jujutsu
+
+            # System
+            system-common
+          ];
+        }
+      )
+    ];
+  };
 
   # Alias for the actual hostname
-  flake.darwinConfigurations.Mathieus-MacBook-Pro =
-    config.flake.darwinConfigurations.mbp2021;
+  flake.darwinConfigurations.Mathieus-MacBook-Pro = config.flake.darwinConfigurations.mbp2021;
 }

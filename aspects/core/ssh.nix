@@ -1,17 +1,11 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.core-ssh.homeManager =
     { config, ... }:
     let
-      cfg = config.homelab.system.ssh;
       tailscaleDNS = name: name + ".tailc705a.ts.net";
     in
     {
-      options.homelab.system.ssh = {
-        enable = lib.mkEnableOption "Enable SSH configuration with Tailscale DNS";
-      };
-
-      config = lib.mkIf cfg.enable {
         programs.ssh = {
           enable = true;
           enableDefaultConfig = false;
@@ -56,6 +50,5 @@
             };
           };
         };
-      };
     };
 }

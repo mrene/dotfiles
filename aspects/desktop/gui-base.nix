@@ -1,16 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.desktop-gui-base.nixos =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.gui.base;
-    in
+    { pkgs, ... }:
     {
-      options.homelab.gui.base = {
-        enable = lib.mkEnableOption "Enable homelab base GUI packages (chromium, 1password, terminals, etc)";
-      };
-
-      config = lib.mkIf cfg.enable {
         # Fonts are provided by homelab.fonts module
         fonts.fontconfig = {
           enable = true;
@@ -73,6 +65,5 @@
             "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
           ];
         };
-      };
     };
 }

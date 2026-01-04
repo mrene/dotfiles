@@ -1,18 +1,9 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.hardware-brightness.nixos =
-    { config, pkgs, ... }:
-    let
-      cfg = config.hardware.ddcci;
-    in
+    { config, pkgs, lib, ... }:
     {
-      options.hardware.ddcci = {
-        enable = lib.mkEnableOption "DDCCI hardware support";
-      };
-
-      config = lib.mkIf cfg.enable {
-
-        # From: https://github.com/nullbytepl/.nixconf/blob/main/fragments/ddcci.nix
+      # From: https://github.com/nullbytepl/.nixconf/blob/main/fragments/ddcci.nix
         # https://gitlab.com/ddcci-driver-linux/ddcci-driver-linux/-/merge_requests/17
         # Fix ddcci on 6.11+ (temporary until the patch is merged and nixpkgs switches to a newer version)
         nixpkgs.overlays = [
@@ -73,7 +64,5 @@
           options ddcci dyndbg
           options ddcci-backlight dyndbg
         '';
-
-      };
     };
 }

@@ -15,13 +15,6 @@
         inputs.home-manager.nixosModules.home-manager
       ];
 
-      # Enable homelab modules
-      homelab.vm-common.enable = true;
-      homelab.ssh-ca.enable = true;
-      homelab.common-packages.enable = true;
-      homelab.distributed-builds.enable = true;
-      homelab.cachix.enable = true;
-
       wsl.enable = true;
       wsl.defaultUser = "mrene";
       wsl.useWindowsDriver = true;
@@ -43,9 +36,23 @@
 
       home-manager = {
         users.mrene = {
-          imports = [
-            self.modules.homeManager.all
-            self.modules.homeManager.wsl
+          imports = with self.modules.homeManager; [
+            # Core
+            core-minimal
+            core-ssh
+
+            # Shell
+            shell-fish
+
+            # Dev
+            dev-git
+            dev-jujutsu
+
+            # System
+            system-common
+
+            # Host-specific
+            wsl
           ];
         };
         useGlobalPkgs = true;

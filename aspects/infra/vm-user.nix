@@ -2,20 +2,11 @@
 {
   flake.aspects.infra-vm-user.nixos =
     {
-      config,
       pkgs,
       common,
       ...
     }:
-    let
-      cfg = config.homelab.vm.common;
-    in
     {
-      options.homelab.vm.common = {
-        enable = lib.mkEnableOption "Enable homelab relaxed VM configuration (for VMs on trusted hardware)";
-      };
-
-      config = lib.mkIf cfg.enable {
         # Common relaxed configuration for use with VMs running on trusted hardware
         users = {
           users = {
@@ -42,6 +33,5 @@
 
         services.openssh.enable = true;
         networking.networkmanager.enable = true;
-      };
     };
 }

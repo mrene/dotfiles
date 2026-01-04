@@ -1,9 +1,8 @@
 { lib, ... }:
 {
   flake.aspects.hardware-rgb.homeManager =
-    { config, pkgs, ... }:
+    { pkgs, ... }:
     let
-      cfg = config.homelab.system.rgb;
       inherit (pkgs) writeShellApplication dbus openrgb;
       rgb-auto-toggle = writeShellApplication {
         name = "rgb-auto-toggle";
@@ -29,11 +28,6 @@
       };
     in
     {
-      options.homelab.system.rgb = {
-        enable = lib.mkEnableOption "Enable RGB lighting auto-toggle on screen lock";
-      };
-
-      config = lib.mkIf cfg.enable {
         systemd.user.services.rgb-auto-toggle = {
           Unit = {
             Description = "Toggle rgb on/off when the screensaver stops/starts";
@@ -53,6 +47,5 @@
             RestartSec = "5";
           };
         };
-      };
     };
 }

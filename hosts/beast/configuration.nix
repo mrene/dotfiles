@@ -16,33 +16,17 @@
         inputs.determinate.nixosModules.default
       ];
 
-      # Enable refactored homelab modules
-      homelab.vm-common.enable = true;
-      homelab.ssh-ca.enable = true;
-      homelab.common-packages.enable = true;
-      homelab.fonts.enable = true;
-      homelab.nvidia.enable = true;
-      homelab.radio.enable = true;
-      homelab.minikube.enable = true;
-      homelab.distributed-builds.enable = true;
-      homelab.cachix.enable = true;
-      homelab.gui.base.enable = true;
-      homelab.gui.desktop.enable = true;
-      homelab.gui.dev.enable = true;
-      homelab.gui.jetbrains.enable = true;
-      homelab.gui.messaging.enable = true;
-      homelab.vscode-server.enable = true;
-
       # Increase nixos-rebuild build-vm memory size
       virtualisation.vmVariant.virtualisation.memorySize = 16384; # MB
 
-      homelab.sops.enable = true;
+      # Sops secrets (services-sops aspect provides base config)
       sops.secrets."home-assistant/token" = {
         owner = config.users.users.mrene.name;
       };
 
       programs.corefreq.enable = true;
 
+      # Restic backups (services-restic aspect is imported in default.nix)
       homelab.backups = {
         enable = true;
         paths = [
@@ -58,7 +42,6 @@
         extra-experimental-features = [ "parallel-eval" ];
       };
 
-      homelab.dyndns.enable = true;
 
       # Reset miniDSP volume to 100% so we have enough headroom
       systemd.services.minidsp-amixer-volume =
@@ -114,7 +97,7 @@
         }
       ];
 
-      hardware.ddcci.enable = true;
+      # hardware-brightness aspect is imported in default.nix
       boot.kernelModules = [ "nct6775" ];
 
       networking.networkmanager.enable = true;
@@ -175,9 +158,31 @@
 
       home-manager = {
         users.mrene = {
-          imports = [
-            self.modules.homeManager.all
-            self.modules.homeManager.beast
+          imports = with self.modules.homeManager; [
+            # Core
+            core-minimal
+            core-ssh
+
+            # Shell
+            shell-fish
+            shell-fish-ai
+            shell-wezterm
+            shell-zellij
+
+            # Dev
+            dev-git
+            dev-jujutsu
+
+            # Desktop
+            desktop-gnome
+            desktop-rofi
+
+            # System
+            system-common
+            system-neofetch
+
+            # Host-specific
+            beast
           ];
         };
         useGlobalPkgs = true;
@@ -241,7 +246,7 @@
       };
 
       programs.command-not-found.enable = false;
-      homelab.screen-input-switcher.enable = true;
+      # hardware-screen-switch aspect is imported in default.nix
 
       boot.binfmt.emulatedSystems = [
         "aarch64-linux"

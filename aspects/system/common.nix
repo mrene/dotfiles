@@ -22,10 +22,7 @@
   };
 
   flake.aspects.system-common.homeManager =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.common;
-    in
+    { pkgs, ... }:
     {
       imports = [
         inputs.humanfirst-dots.homeManagerModule
@@ -33,16 +30,7 @@
         inputs.self.homeManagerModules.neovim
       ];
 
-      options.homelab.common = {
-        enable = lib.mkEnableOption "Enable common development tools and packages";
-      };
-
-      config = lib.mkIf cfg.enable {
-        # Enable dependencies
-        homelab.minimal.enable = true;
-        homelab.system.ssh.enable = true;
-
-        humanfirst.enable = true;
+      humanfirst.enable = true;
         humanfirst.identity.email = "mathieu@humanfirst.ai";
 
         # https://github.com/nix-community/nix-direnv#via-home-manager
@@ -151,6 +139,5 @@
             # aider-chat
             libuuid # `uuidgen` (already pre-installed on mac)
           ];
-      };
     };
 }

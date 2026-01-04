@@ -1,16 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.desktop-gui-desktop.nixos =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.gui.desktop;
-    in
+    { pkgs, ... }:
     {
-      options.homelab.gui.desktop = {
-        enable = lib.mkEnableOption "Enable homelab GNOME desktop environment";
-      };
-
-      config = lib.mkIf cfg.enable {
         services.displayManager.gdm = {
           enable = true;
           autoSuspend = false;
@@ -27,6 +19,5 @@
         environment.systemPackages = with pkgs; [
           gnome-tweaks
         ];
-      };
     };
 }

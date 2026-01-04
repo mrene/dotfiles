@@ -12,18 +12,6 @@ homeassistant:
   latitude: 45.475320
   longitude: -73.562210 
 
-influxdb:
-  api_version: 2
-  ssl: false
-  host: 192.168.1.245
-  port: 8086
-  token: EB2H_cZoyIUSO4d9Dd2NMkRXziMbyVlAvqehmK_zMERJVyOocNorfZaq34hpEfaoXsgZZ2p_j39tDYcL6-C6uw==
-  organization: home
-  bucket: ha
-  tags:
-    source: HA
-  default_measurement: units
-
 smartir:
 climate:
   - platform: smartir

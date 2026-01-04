@@ -1,16 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.shell-fish.homeManager =
     { config, pkgs, ... }:
-    let
-      cfg = config.homelab.shell.fish;
-    in
     {
-      options.homelab.shell.fish = {
-        enable = lib.mkEnableOption "Enable fish shell configuration";
-      };
-
-      config = lib.mkIf cfg.enable {
         programs.fish = {
           enable = true;
           package = pkgs.fish;
@@ -190,6 +182,5 @@
             };
           };
         };
-      };
     };
 }

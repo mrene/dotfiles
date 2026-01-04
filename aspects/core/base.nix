@@ -8,15 +8,9 @@
       ...
     }:
     let
-      cfg = config.homelab.vm-common;
       flakes = lib.filterAttrs (_: v: (v._type or "") == "flake") inputs;
     in
     {
-      options.homelab.vm-common = {
-        enable = lib.mkEnableOption "Enable homelab common configuration (Nix, locale, fish, avahi, fstrim, firewall)";
-      };
-
-      config = lib.mkIf cfg.enable {
         nix = {
           # package = pkgs.nixVersions.latest; # or versioned attributes like nix_2_4
           settings = {
@@ -95,6 +89,5 @@
             enable = true;
           };
         };
-      };
     };
 }

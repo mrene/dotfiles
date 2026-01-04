@@ -1,16 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.core-minimal.homeManager =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.minimal;
-    in
+    { pkgs, ... }:
     {
-      options.homelab.minimal = {
-        enable = lib.mkEnableOption "Enable minimal home-manager configuration";
-      };
-
-      config = lib.mkIf cfg.enable {
         # Let Home Manager install and manage itself.
         programs.home-manager.enable = true;
 
@@ -90,6 +82,5 @@
         };
 
         programs.dircolors.enable = true;
-      };
     };
 }

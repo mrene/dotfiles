@@ -2,15 +2,7 @@
 {
   flake.aspects.infra-distributed-builds.nixos =
     { config, ... }:
-    let
-      cfg = config.homelab.distributed-builds;
-    in
     {
-      options.homelab.distributed-builds = {
-        enable = lib.mkEnableOption "Enable homelab distributed builds configuration";
-      };
-
-      config = lib.mkIf cfg.enable {
         # To add a machine, don't forget to add the key to common.nix
         #nix.buildMachines =
         #lib.optionals (config.networking.hostName != "beast") [{
@@ -51,6 +43,5 @@
         nix.settings.substituters = lib.optionals (false && config.networking.hostName != "nas") [
           "http://nas.local:5000"
         ];
-      };
     };
 }

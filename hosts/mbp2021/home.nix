@@ -1,18 +1,9 @@
 { inputs, ... }:
 {
   flake.modules.homeManager.mbp2021 =
+    { pkgs, ... }:
     {
-      pkgs,
-      inputs,
-      ...
-    }:
-    {
-      homelab.shell.fish.enable = true;
-      homelab.dev.git.enable = true;
-      homelab.minimal.enable = true;
-      homelab.common.enable = true;
-      homelab.terminal.wezterm.enable = true;
-      homelab.dev.jujutsu.enable = true;
+      # Aspects are now imported via home-manager.sharedModules in default.nix
 
       home.username = "mrene";
       home.homeDirectory = "/Users/mrene";

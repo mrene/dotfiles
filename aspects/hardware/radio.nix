@@ -1,10 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.hardware-radio.nixos =
-    { config, pkgs, ... }:
+    { pkgs, ... }:
     let
-      cfg = config.homelab.radio;
-
       hardwarePackages = [
         pkgs.rtl-sdr
         pkgs.libbladeRF
@@ -29,19 +27,13 @@
       '';
     in
     {
-      options.homelab.radio = {
-        enable = lib.mkEnableOption "Enable homelab software-defined radio (SDR) support";
-      };
-
-      config = lib.mkIf cfg.enable {
-        hardware.rtl-sdr.enable = true;
-        hardware.bladeRF.enable = true;
-        services.udev.packages = hardwarePackages;
-        environment.systemPackages = hardwarePackages;
-        environment.variables = {
-          BLADERF_SEARCH_DIR = bladerf-search-dir;
-          SOAPY_SDR_PLUGIN_PATH = pkgs.lib.makeSearchPath pkgs.soapysdr.passthru.searchPath soapysdrPackages;
-        };
+      hardware.rtl-sdr.enable = true;
+      hardware.bladeRF.enable = true;
+      services.udev.packages = hardwarePackages;
+      environment.systemPackages = hardwarePackages;
+      environment.variables = {
+        BLADERF_SEARCH_DIR = bladerf-search-dir;
+        SOAPY_SDR_PLUGIN_PATH = pkgs.lib.makeSearchPath pkgs.soapysdr.passthru.searchPath soapysdrPackages;
       };
     };
 }

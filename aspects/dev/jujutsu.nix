@@ -1,16 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.dev-jujutsu.homeManager =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.dev.jujutsu;
-    in
+    { ... }:
     {
-      options.homelab.dev.jujutsu = {
-        enable = lib.mkEnableOption "Enable jujutsu version control";
-      };
-
-      config = lib.mkIf cfg.enable {
         programs.jujutsu = {
           enable = true;
 
@@ -30,6 +22,5 @@
             };
           };
         };
-      };
     };
 }

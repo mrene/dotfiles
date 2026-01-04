@@ -10,11 +10,6 @@
       ...
     }:
     {
-      # Enable refactored homelab modules
-      homelab.vm-common.enable = true;
-      homelab.ssh-ca.enable = true;
-      homelab.common-packages.enable = true;
-
       # Override the kernel package to use the upstream nixos-raspberrypi prebuilt kernel
       boot.kernelPackages =
         inputs.nixos-raspberrypi-nofollows.packages.${pkgs.stdenv.hostPlatform.system}.linuxPackages_rpi5;
@@ -22,13 +17,9 @@
       services.openssh.enable = true;
       services.openssh.settings.PasswordAuthentication = false;
 
-      homelab.sops.enable = true;
       sops.secrets."home-assistant/token" = {
         owner = config.users.users.mrene.name;
       };
-
-      homelab.backups.enable = true;
-      homelab.dyndns.enable = true;
 
       networking = {
         hostName = "tvpi";
@@ -54,7 +45,6 @@
         pciex1.enable = true;
       };
 
-      # Required for distributed builds
       users.users.root.openssh.authorizedKeys.keys =
         common.builderKeys ++ common.sudoSshKeys ++ common.sshKeys;
       users.defaultUserShell = pkgs.fish;

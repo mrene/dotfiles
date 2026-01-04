@@ -1,16 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.desktop-rofi.homeManager =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.gui.rofi;
-    in
+    { pkgs, ... }:
     {
-      options.homelab.gui.rofi = {
-        enable = lib.mkEnableOption "Enable rofi application launcher";
-      };
-
-      config = lib.mkIf cfg.enable {
         programs.rofi = {
           enable = true;
           plugins = with pkgs; [
@@ -39,6 +31,5 @@
             ordering=1
           '';
         };
-      };
     };
 }

@@ -1,16 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.hardware-screen-switch.nixos =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.screen-input-switcher;
-    in
+    { pkgs, lib, ... }:
     {
-      options.homelab.screen-input-switcher = {
-        enable = lib.mkEnableOption "automatically switch the screen's input based on the presence of a USB device";
-      };
-
-      config = lib.mkIf cfg.enable {
         services.udev.extraRules = ''
           ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="05e3", ATTRS{idProduct}=="0626", TAG+="systemd", ENV{SYSTEMD_WANTS}="screen-input-switch-add.service"
           ACTION=="remove", SUBSYSTEM=="usb", ATTRS{idVendor}=="05e3", ATTRS{idProduct}=="0626", RUN+="${pkgs.systemd}/bin/systemctl start screen-input-switch-remove.service"
@@ -38,6 +30,5 @@
             '';
           };
         };
-      };
     };
 }

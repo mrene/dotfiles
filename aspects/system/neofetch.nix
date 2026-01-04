@@ -1,9 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.system-neofetch.homeManager =
-    { config, pkgs, ... }:
+    { pkgs, ... }:
     let
-      cfg = config.homelab.system.neofetch;
       themes = pkgs.fetchFromGitHub {
         owner = "Chick2D";
         repo = "neofetch-themes";
@@ -12,15 +11,8 @@
       };
     in
     {
-      options.homelab.system.neofetch = {
-        enable = lib.mkEnableOption "Enable neofetch system info tool";
-      };
-
-      config = lib.mkIf cfg.enable {
-        #home.packages = [pkgs.neofetch];
-        xdg.configFile."neofetch/config.conf" = {
-          source = "${themes}/normal/config.conf";
-        };
+      xdg.configFile."neofetch/config.conf" = {
+        source = "${themes}/normal/config.conf";
       };
     };
 }

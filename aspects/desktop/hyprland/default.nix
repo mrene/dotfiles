@@ -1,20 +1,11 @@
 { lib, inputs, ... }:
 {
   flake.aspects.desktop-hyprland.homeManager =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.gui.hyprland;
-    in
+    { pkgs, ... }:
     {
       imports = lib.optionals (inputs ? hyprland) [
         inputs.hyprland.homeManagerModules.default
       ];
-
-      options.homelab.gui.hyprland = {
-        enable = lib.mkEnableOption "Enable Hyprland Wayland compositor";
-      };
-
-      config = lib.mkIf cfg.enable {
         wayland.windowManager.hyprland = {
           enable = true;
           extraConfig = builtins.readFile ./hyprland.conf;
@@ -29,6 +20,5 @@
           kitty
           wofi
         ];
-      };
     };
 }

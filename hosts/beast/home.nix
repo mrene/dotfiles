@@ -8,17 +8,6 @@
       ...
     }:
     {
-      homelab.shell.fish.enable = true;
-      homelab.dev.git.enable = true;
-      homelab.dev.jujutsu.enable = true;
-      homelab.minimal.enable = true;
-      homelab.common.enable = true;
-      homelab.gui.gnome.enable = true;
-      homelab.gui.rofi.enable = true;
-      homelab.terminal.wezterm.enable = true;
-      homelab.terminal.zellij.enable = true;
-      homelab.system.neofetch.enable = true;
-
       programs.claude-code = {
         enable = true;
         package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.claude-code;

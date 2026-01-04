@@ -1,16 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.work-jira.homeManager =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.tools.jira;
-    in
+    { pkgs, ... }:
     {
-      options.homelab.tools.jira = {
-        enable = lib.mkEnableOption "Enable Jira CLI integration";
-      };
-
-      config = lib.mkIf cfg.enable {
         # TODO: Add api token via sops-nix
         xdg.configFile.".jira/.config.yaml".source = ./config.yml;
 
@@ -31,6 +23,5 @@
             --bind 'm:execute(jira issue move {1})' \
             --header '<m> Move to column | <C-r> Reload'
         '';
-      };
     };
 }

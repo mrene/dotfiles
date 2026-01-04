@@ -1,25 +1,16 @@
-{ lib, inputs, ... }:
+{ inputs, ... }:
 {
   # Declare inputs used by this aspect for flake-file tracking
   flake-file.inputs.minidsp.url = "github:mrene/minidsp-rs";
 
   flake.aspects.system-common-packages.nixos =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.common-packages;
-    in
+    { pkgs, ... }:
     {
       imports = [
         # Include modules that aren't enabled-by-default
         inputs.minidsp.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
       ];
-
-      options.homelab.common-packages = {
-        enable = lib.mkEnableOption "Enable homelab common package set";
-      };
-
-      config = lib.mkIf cfg.enable {
         programs.command-not-found.enable = false; # conflicts with nix-index
         environment.systemPackages = with pkgs; [
           wget
@@ -62,6 +53,5 @@
         #viAlias = true;
         #vimAlias = true;
         #};
-      };
     };
 }

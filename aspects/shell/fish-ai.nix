@@ -1,15 +1,13 @@
-{ lib, ... }:
+_:
 {
+  # This aspect depends on shell-fish - they should be imported together
   flake.aspects.shell-fish-ai.homeManager =
     {
       config,
       pkgs,
-      osConfig,
       ...
     }:
     let
-      cfg = config.homelab.shell.fish;
-
       version = "unstable-2025-12-19";
 
       src = pkgs.fetchFromGitHub {
@@ -80,33 +78,31 @@
       };
     in
     {
-      config = lib.mkIf cfg.enable {
-        # Deploy fish-ai data files to ~/.local/share/fish-ai
-        xdg.dataFile."fish-ai".source = fishAiEnv;
+      # Deploy fish-ai data files to ~/.local/share/fish-ai
+      xdg.dataFile."fish-ai".source = fishAiEnv;
 
-        programs.fish = {
-          plugins = [
-            {
-              name = "fish-ai";
-              src = fishAiPlugin.src;
-            }
-          ];
+      programs.fish = {
+        plugins = [
+          {
+            name = "fish-ai";
+            src = fishAiPlugin.src;
+          }
+        ];
 
-          # Fish AI bindings (don't work in vi mode by default)
-          interactiveShellInit = ''
-            bind -M insert ctrl-p _fish_ai_codify_or_explain
-            bind -M insert ctrl-alt-space _fish_ai_autocomplete_or_fix
-          '';
-        };
-
-        # sops.templates."fish-ai.ini" = {
-        #   content = /* ini */ ''
-        #     [anthropic]
-        #     provider = anthropic
-        #     api_key = ${osConfig.sops.placeholder.anthropic.api_key}
-        #   '';
-        #   path = "${config.xdg.configHome}/fish-ai.ini";
-        # };
+        # Fish AI bindings (don't work in vi mode by default)
+        interactiveShellInit = ''
+          bind -M insert ctrl-p _fish_ai_codify_or_explain
+          bind -M insert ctrl-alt-space _fish_ai_autocomplete_or_fix
+        '';
       };
+
+      # sops.templates."fish-ai.ini" = {
+      #   content = /* ini */ ''
+      #     [anthropic]
+      #     provider = anthropic
+      #     api_key = ${osConfig.sops.placeholder.anthropic.api_key}
+      #   '';
+      #   path = "${config.xdg.configHome}/fish-ai.ini";
+      # };
     };
 }

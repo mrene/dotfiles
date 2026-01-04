@@ -32,14 +32,7 @@
 
       documentation.enable = false;
 
-      # Enable refactored homelab modules
-      homelab.vm-common.enable = true;
-      homelab.ssh-ca.enable = true;
-      homelab.common-packages.enable = true;
-      homelab.fonts.enable = true;
-      homelab.minikube.enable = true;
-      homelab.vm.common.enable = true;
-      homelab.vscode-server.enable = true;
+      # Aspects are now imported in default.nix
       environment.systemPackages = [ pkgs.nix-output-monitor ];
 
       users.users.root.openssh.authorizedKeys.keys = common.builderKeys ++ common.sudoSshKeys;
@@ -53,9 +46,22 @@
 
       home-manager = {
         users.mrene = {
-          imports = [
-            self.modules.homeManager.all
-            self.modules.homeManager.utm
+          imports = with self.modules.homeManager; [
+            # Core
+            core-minimal
+            core-ssh
+
+            # Shell
+            shell-fish
+
+            # Dev
+            dev-git
+
+            # System
+            system-common
+
+            # Host-specific
+            utm
           ];
         };
         useGlobalPkgs = true;

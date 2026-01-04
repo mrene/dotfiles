@@ -1,10 +1,8 @@
-{ lib, ... }:
+_:
 {
   flake.aspects.dev-gui-jetbrains.nixos =
-    { config, pkgs, ... }:
+    { pkgs, ... }:
     let
-      cfg = config.homelab.gui.jetbrains;
-
       ides = with pkgs; [
         jetbrains.webstorm
         jetbrains.goland
@@ -14,17 +12,11 @@
       ];
     in
     {
-      options.homelab.gui.jetbrains = {
-        enable = lib.mkEnableOption "Enable homelab JetBrains IDEs";
-      };
-
-      config = lib.mkIf cfg.enable {
-        environment.systemPackages =
-          with pkgs;
-          [
-            jetbrains.datagrip
-          ]
-          ++ builtins.map (ide: (jetbrains.plugins.addPlugins ide [ "ideavim" ])) ides;
-      };
+      environment.systemPackages =
+        with pkgs;
+        [
+          jetbrains.datagrip
+        ]
+        ++ builtins.map (ide: (jetbrains.plugins.addPlugins ide [ "ideavim" ])) ides;
     };
 }

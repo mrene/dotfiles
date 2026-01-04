@@ -1,16 +1,8 @@
 { lib, ... }:
 {
   flake.aspects.desktop-gnome.homeManager =
-    { config, pkgs, ... }:
-    let
-      cfg = config.homelab.gui.gnome;
-    in
+    { pkgs, ... }:
     {
-      options.homelab.gui.gnome = {
-        enable = lib.mkEnableOption "Enable GNOME desktop configuration";
-      };
-
-      config = lib.mkIf cfg.enable {
         # ...
         gtk = {
           enable = true;
@@ -223,6 +215,5 @@
             { package = gnomeExtensions.panel-date-format; }
           ];
         };
-      };
     };
 }
