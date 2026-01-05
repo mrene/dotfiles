@@ -56,6 +56,10 @@
       url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
     };
     import-tree.url = "github:vic/import-tree";
+    llm-agents = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:numtide/llm-agents.nix";
+    };
     mcp-hub = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:ravitemer/mcp-hub";

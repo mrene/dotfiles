@@ -8,11 +8,6 @@
       ...
     }:
     {
-      programs.claude-code = {
-        enable = true;
-        package = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.claude-code;
-      };
-
       home.packages =
         let
           notify = pkgs.writeShellApplication {

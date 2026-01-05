@@ -8,7 +8,7 @@
   clan.machines.mbp2021 = {
     clan.core.networking = {
       buildHost = "mrene@mathieus-macbook-pro";
-      targetHost = "mrene@mathieus-macbook-pro";
+      targetHost = "root@mathieus-macbook-pro";
     };
     imports = [
       inputs.home-manager.darwinModules.home-manager

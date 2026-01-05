@@ -170,6 +170,7 @@
             shell-zellij
 
             # Dev
+            dev-ai
             dev-git
             dev-jujutsu
 
