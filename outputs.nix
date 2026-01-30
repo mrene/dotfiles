@@ -1,26 +1,7 @@
 inputs@{ flake-parts, import-tree, flake-aspects, flake-file, ... }:
 let
-  # https://github.com/nvmd/nixos-raspberrypi/issues/113
-  # Patch lib.mkRemovedOptionModule to add a `key` attribute for module deduplication
-  patchedLib = inputs.nixpkgs.lib.extend (
-    final: prev: {
-      mkRemovedOptionModule =
-        optionName: replacementInstructions:
-        let
-          key = "removedOptionModule#" + final.concatStringsSep "_" optionName;
-        in
-        { options, ... }:
-        (inputs.nixpkgs.lib.mkRemovedOptionModule optionName replacementInstructions { inherit options; })
-        // {
-          inherit key;
-        };
-    }
-  );
-
-  # Inject patched lib into nixpkgs input so clan uses it
-  patchedInputs = inputs // {
-    nixpkgs = inputs.nixpkgs // { lib = patchedLib; };
-  };
+  patchNixpkgs = import ./lib/patch-nixpkgs.nix { inherit (inputs.nixpkgs) lib; };
+  patchedInputs = patchNixpkgs.patchInputs inputs;
 
   imports = [
     # Declare global/infrastructure inputs for flake-file
