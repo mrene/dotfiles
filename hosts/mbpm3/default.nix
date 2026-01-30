@@ -4,11 +4,11 @@
   ...
 }:
 {
-  clan.inventory.machines.mbp2021.machineClass = "darwin";
-  clan.machines.mbp2021 = {
+  clan.inventory.machines.mbpm3.machineClass = "darwin";
+  clan.machines.mbpm3 = {
     clan.core.networking = {
-      buildHost = "root@mathieus-macbook-pro";
-      targetHost = "root@mathieus-macbook-pro";
+      buildHost = "mrene@mrene-mbp-m3";
+      targetHost = "root@mrene-mbp-m3";
     };
     imports = [
       inputs.home-manager.darwinModules.home-manager
@@ -16,7 +16,7 @@
       config.flake.modules.darwin.desktop-fonts
       config.flake.modules.darwin.infra-tailscale-networking
       # Host-specific
-      config.flake.modules.darwin.mbp2021
+      config.flake.modules.darwin.mbpm3
       config.flake.darwinModules.overlay
       (
         { self, ... }:
@@ -44,5 +44,5 @@
   };
 
   # Alias for the actual hostname
-  flake.darwinConfigurations.Mathieus-MacBook-Pro = config.flake.darwinConfigurations.mbp2021;
+  flake.darwinConfigurations.mrene-mbp-m3 = config.flake.darwinConfigurations.mbpm3;
 }

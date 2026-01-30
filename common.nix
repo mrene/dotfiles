@@ -3,6 +3,7 @@ _: {
     sshKeys = [
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMDK9LCwU62BIcyn73TcaQlMqr12GgYnHYcw5dbDDNmYnpp2n/jfDQ5hEkXd945dcngW6yb7cmgsa8Sx9T1Uuo4= secretive@mbp2021"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAeSvwegmfet4Rw8OBFEVUfx+5WmVcYR4/n20QSh4tAs mrene@beast"
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCmQLKx+P0Q639e0Ybm+Q1lLIWzNrgsGBzbFHePL031hVurqmWSsXx+ZHtO48F+vrLwrxudCCPJpqEVEPDUFtDA= default@secretive.mrene-mbp-m3.local"
     ];
 
     builderKeys = [
@@ -12,6 +13,7 @@ _: {
 
     sudoSshKeys = [
       "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMpIqFppmJu+oXgUA9t+KK7xY07FAy1ZpMQ2xe03fhnaufg8UAT35cTMvf5KpCDRiCRsdv37tXpmfmgV27eiFWA= Remote-sudo@secretive.Mathieu’s-MacBook-Pro.local"
+      "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBCmQLKx+P0Q639e0Ybm+Q1lLIWzNrgsGBzbFHePL031hVurqmWSsXx+ZHtO48F+vrLwrxudCCPJpqEVEPDUFtDA= default@secretive.mrene-mbp-m3.local"
     ];
   };
 }

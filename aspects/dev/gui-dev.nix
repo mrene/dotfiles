@@ -1,5 +1,4 @@
-_:
-{
+_: {
   flake.aspects.dev-gui-dev.nixos =
     {
       pkgs,
@@ -8,7 +7,7 @@ _:
     }:
     {
       environment.systemPackages = with pkgs; [
-        flakePackages.${system}.vscode-with-extensions
+        flakePackages.${stdenv.hostPlatform.system}.vscode-with-extensions
 
         gcc
         mypy

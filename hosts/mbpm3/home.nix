@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.homeManager.mbp2021 =
+  flake.modules.homeManager.mbpm3 =
     { pkgs, ... }:
     {
       # Aspects are now imported via home-manager.sharedModules in default.nix
@@ -27,6 +27,6 @@
         inputs.mrene-nur.packages.${system}.pathfind
       ];
 
-      home.stateVersion = "20.09";
+      home.stateVersion = "25.11";
     };
 }

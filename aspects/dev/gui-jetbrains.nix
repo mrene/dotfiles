@@ -1,12 +1,11 @@
-_:
-{
+_: {
   flake.aspects.dev-gui-jetbrains.nixos =
     { pkgs, ... }:
     let
       ides = with pkgs; [
         jetbrains.webstorm
         jetbrains.goland
-        jetbrains.pycharm-professional
+        jetbrains.pycharm
         jetbrains.datagrip
         jetbrains.clion
       ];
