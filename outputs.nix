@@ -1,4 +1,10 @@
-inputs@{ flake-parts, import-tree, flake-aspects, flake-file, ... }:
+inputs@{
+  flake-parts,
+  import-tree,
+  flake-aspects,
+  flake-file,
+  ...
+}:
 let
   patchNixpkgs = import ./lib/patch-nixpkgs.nix { inherit (inputs.nixpkgs) lib; };
   patchedInputs = patchNixpkgs.patchInputs inputs;
@@ -16,13 +22,13 @@ let
 
         inputs = {
           # Core
-          nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+          nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
           home-manager = {
-            url = "github:nix-community/home-manager/release-25.11";
+            url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs";
           };
           darwin = {
-            url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+            url = "github:nix-darwin/nix-darwin/master";
             inputs.nixpkgs.follows = "nixpkgs";
           };
           sops-nix = {

@@ -26,7 +26,7 @@
     };
     darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+      url = "github:nix-darwin/nix-darwin/master";
     };
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     devshell = {
@@ -46,7 +46,7 @@
     };
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
     };
     humanfirst-dots = {
       inputs = {
@@ -101,7 +101,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/NixOS-WSL";
     };
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
     sops-nix = {
       inputs.nixpkgs.follows = "nixpkgs";

@@ -18,7 +18,7 @@
   clan.machines.tvpi = {
     clan.core.networking = {
       buildHost = "mrene@utm";
-      targetHost = "root@tvpi";
+      targetHost = "root@tvpi.tailc705a.ts.net";
     };
 
     imports =

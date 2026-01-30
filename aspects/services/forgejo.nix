@@ -14,7 +14,7 @@
           DOMAIN = config.networking.hostName;
         };
       };
-      services.openssh.settings.AcceptEnv = "GIT_PROTOCOL";
+      services.openssh.settings.AcceptEnv = [ "GIT_PROTOCOL" ];
 
       homelab.backups.paths = [ config.services.forgejo.stateDir ];
     };

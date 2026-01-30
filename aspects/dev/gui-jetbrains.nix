@@ -11,11 +11,11 @@ _: {
       ];
     in
     {
-      environment.systemPackages =
-        with pkgs;
-        [
-          jetbrains.datagrip
-        ]
-        ++ builtins.map (ide: (jetbrains.plugins.addPlugins ide [ "ideavim" ])) ides;
+      # environment.systemPackages =
+      #   with pkgs;
+      #   [
+      #     jetbrains.datagrip
+      #   ]
+      #   ++ builtins.map (ide: (jetbrains.plugins.addPlugins ide [ "ideavim" ])) ides;
     };
 }
