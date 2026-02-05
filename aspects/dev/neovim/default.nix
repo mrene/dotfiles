@@ -1,30 +1,13 @@
 {
   lib,
-  inputs,
   ...
 }:
 
 let
-  secrets = null;
-  cfg = null;
-  agenticEnabled = cfg == null || !cfg.minimalNvim;
 
   mkConfig =
     { pkgs, ... }:
-    let
-      mcphub-nvim = inputs.mcphub-nvim.packages."${pkgs.stdenv.hostPlatform.system}".default;
-      mcp-hub = inputs.mcp-hub.packages."${pkgs.stdenv.hostPlatform.system}".default;
-    in
     {
-
-      includeSecrets = lib.optionalString (secrets != null) ''
-        if filereadable("${secrets.common.nvimSecrets}")
-          lua dofile("${secrets.common.nvimSecrets}")
-        else
-          lua print("nvim secrets not found!!")
-        endif
-      '';
-
       plugins =
         (with pkgs.vimPlugins; [
           # Theme
@@ -34,9 +17,10 @@ let
 
           # Layout
           nvim-tree-lua
-          lualine-nvim # https://github.com/nvim-lualine/lualine.nvim
-          auto-session # automatically restore last session
           zen-mode-nvim
+          mini-nvim # tabline, bufremove, etc.
+          lualine-nvim # https://github.com/nvim-lualine/lualine.nvim
+          nvim-navic # symbol breadcrumbs in statusline
 
           # Tools
           fzf-lua
@@ -44,14 +28,12 @@ let
           which-key-nvim # show keymap hints
           todo-comments-nvim # highlight TODO, FIXME, etc
           multicursors-nvim
-          mini-nvim # tabline, bufremove, etc.
-          snacks-nvim # profiler
+          auto-session # automatically restore last session
 
           # Notifications
           (nvim-notify.overrideAttrs (_: {
             doCheck = false; # flaky on ci
           }))
-          nvim-lsp-notify
 
           # Diagnostics
           trouble-nvim
@@ -70,9 +52,9 @@ let
           neotest-python
           rustaceanvim
           conform-nvim # formatting
-          nvim-navic # symbol breadcrumbs in statusline
           render-markdown-nvim
-          nvim-lint
+          nvim-lint # linting
+          nvim-lsp-notify # lsp notifications
 
           # Autocomplete
           nvim-cmp # https://github.com/hrsh7th/nvim-cmp
@@ -89,12 +71,19 @@ let
           cmp_luasnip
           friendly-snippets # easy load from vscode, languages, etc.
 
+          # AI assistants
+          codecompanion-nvim
+          claudecode-nvim
+
           # Debugging
           nvim-dap
           nvim-dap-ui
           nvim-dap-go
           nvim-dap-python
           nvim-dap-virtual-text
+
+          # Profiling
+          snacks-nvim # nvim profiler
 
           # Syntax
           (nvim-treesitter.withPlugins (p: [
@@ -130,11 +119,6 @@ let
             p.yaml
           ]))
           nvim-treesitter-textobjects # provides object manipulation
-        ])
-        ++ (lib.optionals agenticEnabled [
-          pkgs.vimPlugins.codecompanion-nvim
-          mcphub-nvim
-          pkgs.vimPlugins.claudecode-nvim
         ]);
 
       luaConfig =
@@ -154,18 +138,20 @@ let
             '${confDir}/sessions.lua',
             '${confDir}/notify.lua',
             '${confDir}/fzf.lua',
+            '${confDir}/projects.lua',
             '${confDir}/treesitter.lua',
             '${confDir}/git.lua',
+            '${confDir}/quickfix.lua',
+            '${confDir}/diag.lua',
             '${confDir}/lang.lua',
             '${confDir}/formatting.lua',
             '${confDir}/linting.lua',
             '${confDir}/copilot.lua',
-            '${confDir}/diag.lua',
+            '${confDir}/agentic.lua',
             '${confDir}/testing.lua',
-            '${confDir}/quickfix.lua',
             '${confDir}/debugging.lua',
             '${confDir}/profiling.lua',
-            ${lib.optionalString agenticEnabled "'${confDir}/agentic.lua',"}
+            '${confDir}/pkms.lua',
           }
 
           for _, file in ipairs(files) do
@@ -177,7 +163,7 @@ let
         (with pkgs; [
           nixd # nix lsp
 
-          marksman # markdown lsp
+          markdown-oxide # markdown lsp
           markdownlint-cli # via nvim-lint
 
           nodejs # for copilot
@@ -195,26 +181,10 @@ let
           pyright
           ruff
           gh
-        ])
-        ++ (lib.optionals agenticEnabled [
-          mcp-hub # via overlay
-          pkgs.uv # for `uvx` for some MCPs
         ]);
     };
 in
 {
-  # Declare inputs used by this aspect for flake-file tracking
-  flake-file.inputs = {
-    mcphub-nvim = {
-      url = "github:ravitemer/mcphub.nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    mcp-hub = {
-      url = "github:ravitemer/mcp-hub";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  };
-
   flake.homeManagerModules.neovim =
     { pkgs, ... }:
     let

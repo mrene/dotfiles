@@ -13,8 +13,10 @@ end, { desc = "Dismiss all notifications" })
 -- lsp-notify
 -- Show LSP related messages and progress
 -- https://github.com/brianhuster/nvim-lsp-notify
-require("lsp-notify").setup({
-	excludes = {
-		"buf_ls", -- spams on each change
-	},
-})
+if not vim.g.minimal_nvim then
+	require("lsp-notify").setup({
+		excludes = {
+			"buf_ls", -- spams on each change
+		},
+	})
+end

@@ -1,7 +1,7 @@
 require("which-key").add({
 	{ "<leader>r", group = "Execute" },
 	{ "<leader>T", group = "Toggle" },
-	{ "<leader>m", group = "Marks" },
+	{ "<leader>M", group = "Marks" },
 	{ "<leader>q", group = "Quit..." },
 	{ "<leader>y", group = "Clipboard" },
 })
@@ -11,7 +11,7 @@ vim.keymap.set("n", "<Leader>qa", ":qa!<CR>", { silent = true, desc = "Quit nvim
 vim.keymap.set("n", "<Leader>qs", ":SessionDelete<CR>:qa<CR>", { silent = true, desc = "Clear session & quit nvim" })
 
 -- Marks (m[a-z0-9A-Z], 'a-z0-9A-Z)
-vim.keymap.set("n", "<Leader>mk", ":delmarks a-z0-9A-Z<CR>", { silent = true, desc = "Marks: delete all" })
+vim.keymap.set("n", "<Leader>Mk", ":delmarks a-z0-9A-Z<CR>", { silent = true, desc = "Marks: delete all" })
 
 -- Command-line mappings for "sudo save" and quick quit commands
 vim.cmd([[
@@ -81,6 +81,10 @@ vim.keymap.set("v", "<Leader>rl", send_visual_to_sh, { silent = true, desc = "Ex
 vim.keymap.set("n", "<Leader>rb", send_block_to_sh, { silent = true, desc = "Execute code block" })
 vim.keymap.set("n", "<C-_>", ":nohlsearch<CR>", { silent = true, desc = "Clear search highlight" }) -- C-/
 
+-- Navigation
+vim.keymap.set("n", "<A-j>", "5j", { silent = true, desc = "Down 5 lines" })
+vim.keymap.set("n", "<A-k>", "5k", { silent = true, desc = "Up 5 lines" })
+
 -- Clipboard / yanking
 local function copy_selection_to_clipboard()
 	local selected = get_selected_visual()
@@ -139,21 +143,28 @@ local function toggle_numbers()
 end
 vim.keymap.set("n", "<Leader>Tn", toggle_numbers, { silent = true, desc = "Toggle line numbers" })
 
+-- Diff ignore whitespace with toggling
+vim.opt.diffopt:append("iwhite")
+vim.keymap.set("n", "<Leader>Tdw", function()
+	local has_iwhite = vim.tbl_contains(vim.opt.diffopt:get(), "iwhite")
+	if has_iwhite then
+		vim.opt.diffopt:remove("iwhite")
+		vim.notify("Diff: Ignoring whitespace OFF")
+	else
+		vim.opt.diffopt:append("iwhite")
+		vim.notify("Diff: Ignoring whitespace ON")
+	end
+end, { silent = true, desc = "Toggle diff ignore whitespace" })
+
 -- Spellcheck
 vim.keymap.set("n", "<Leader>Ts", ":set spell!<CR>", { silent = true, desc = "Toggle spellcheck" })
 
--- Window navigation from terminal mode
--- local function term_nav_keymap(lhs, rhs)
--- 	vim.keymap.set("t", lhs, "<C-\\><C-n>" .. rhs, { noremap = true, silent = true })
--- end
--- term_nav_keymap("<C-w>h", "<C-w>h")
--- term_nav_keymap("<C-w>j", "<C-w>j")
--- term_nav_keymap("<C-w>k", "<C-w>k")
--- term_nav_keymap("<C-w>l", "<C-w>l")
--- term_nav_keymap("<C-w><Left>", "<C-w>h")
--- term_nav_keymap("<C-w><Down>", "<C-w>j")
--- term_nav_keymap("<C-w><Up>", "<C-w>k")
--- term_nav_keymap("<C-w><Right>", "<C-w>l")
+-- Show and copy current file's absolute path
+vim.keymap.set("n", "<Leader>yf", function()
+	local path = vim.fn.expand("%:p")
+	vim.fn.system("echo -n " .. vim.fn.shellescape(path) .. " | pbcopy")
+	vim.notify(path)
+end, { silent = true, desc = "Yank file path" })
 
 -- Multicursors
 -- https://github.com/smoka7/multicursors.nvim

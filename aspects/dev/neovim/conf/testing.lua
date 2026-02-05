@@ -15,8 +15,7 @@ Neotest.setup({
 		require("neotest-golang")({
 			go_test_args = {
 				"-v",
-				"-count=1",
-				"-timeout=10s",
+				"-timeout=60s",
 			},
 			warn_test_name_dupes = false,
 		}),

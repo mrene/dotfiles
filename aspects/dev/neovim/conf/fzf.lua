@@ -48,12 +48,19 @@ require("which-key").add({
 	{ "<leader>f", group = "FZF Search" },
 })
 
+local function lsp_document_symbols()
+	fzf.lsp_document_symbols({
+		-- Hide filepath and line:col, show symbol fields (last 2 tab-delimited fields)
+		fzf_opts = { ["--delimiter"] = "\\t", ["--with-nth"] = "-2.." },
+	})
+end
+
 -- Quick keybindings
 vim.keymap.set("n", "<C-p>", fzf.files, { desc = "FZF: Files" })
 vim.keymap.set("n", "<C-l>", fzf.lgrep_curbuf, { desc = "FZF: Live grep file" })
 vim.keymap.set("n", "<C-g>", fzf.live_grep, { desc = "FZF: Live grep workspace" })
 vim.keymap.set("n", "<C-b>", fzf.buffers, { desc = "FZF: Buffers" })
-vim.keymap.set("n", "<C-s>", fzf.lsp_document_symbols, { desc = "FZF: LSP document symbols" })
+vim.keymap.set("n", "<C-s>", lsp_document_symbols, { desc = "FZF: LSP document symbols" })
 vim.keymap.set("n", "<C-n>", fzf.tabs, { desc = "FZF: Tabs" })
 vim.keymap.set("n", "<C-h>", fzf.oldfiles, { desc = "FZF: Old files" })
 
@@ -77,7 +84,7 @@ vim.keymap.set("n", "<leader>fx", fzf.quickfix, { desc = "FZF: Quickfix list" })
 vim.keymap.set("n", "<leader>fxl", fzf.quickfix, { desc = "FZF: Quickfix list" })
 vim.keymap.set("n", "<leader>fxs", fzf.quickfix_stack, { desc = "FZF: Quickfix stack" })
 
-vim.keymap.set("n", "<leader>fls", fzf.lsp_document_symbols, { desc = "FZF: LSP document symbols" })
+vim.keymap.set("n", "<leader>fls", lsp_document_symbols, { desc = "FZF: LSP document symbols" })
 vim.keymap.set("n", "<leader>flS", fzf.lsp_live_workspace_symbols, { desc = "FZF: LSP workspace symbols" })
 vim.keymap.set("n", "<leader>flr", fzf.lsp_references, { desc = "FZF: LSP references" })
 vim.keymap.set("n", "<leader>flc", fzf.lsp_incoming_calls, { desc = "FZF: LSP incoming calls" })

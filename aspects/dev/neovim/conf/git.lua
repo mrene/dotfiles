@@ -60,7 +60,7 @@ end
 require("which-key").add({
 	{ "<leader>gd", group = "Diff view" },
 })
-vim.keymap.set("n", "<Leader>gdw", open_diffview_working, { desc = "Git: open diff view against working dir" })
+vim.keymap.set("n", "<Leader>gdw", open_diffview_working, { desc = "Git: open diff view against working set" })
 vim.keymap.set("n", "<Leader>gdm", open_diffview_main, { desc = "Git: open diff view against main branch" })
 vim.keymap.set("n", "<Leader>gdp", open_diffview_prev, { desc = "Git: open diff view against previous branch" })
 vim.keymap.set("n", "<Leader>gdf", open_diffview_file_history, { desc = "Git: open file history" })
@@ -110,7 +110,7 @@ end
 
 vim.keymap.set("n", "<Leader>ggm", switch_gutter_base_main, { silent = true, desc = "Git: switch gutter base gainst main branch" })
 vim.keymap.set("n", "<Leader>ggp", switch_gutter_base_prev, { silent = true, desc = "Git: switch gutter base against previous branch" })
-vim.keymap.set("n", "<Leader>ggw", switch_gutter_base_default, { silent = true, desc = "Git: switch gutter base to working dir" })
+vim.keymap.set("n", "<Leader>ggw", switch_gutter_base_default, { silent = true, desc = "Git: switch gutter base to working set" })
 
 -- Octo.nvim
 -- https://github.com/pwntester/octo.nvim
@@ -143,7 +143,8 @@ local function git_main_branch_ask()
 		vim.g.main_branch_override = branch
 		vim.notify("Main branch set to " .. branch)
 	else
-		vim.notify("No main branch set")
+		vim.g.main_branch_override = ""
+		vim.notify("Defaulting to default main branch")
 	end
 
 	switch_gutter_base_main()

@@ -2,6 +2,7 @@
 -- https://github.com/stevearc/conform.nvim
 local auto_formatting = true
 require("conform").setup({
+	-- log_level = vim.log.levels.DEBUG,
 	formatters_by_ft = {
 		lua = { "stylua" },
 		python = { "isort", "black" },
@@ -9,14 +10,20 @@ require("conform").setup({
 		javascriptreact = { "prettier" },
 		typescript = { "prettier" },
 		typescriptreact = { "prettier" },
-		sh = { "shfmt" },
 		rust = { "rustfmt", lsp_format = "fallback" },
-		go = { "hfgofmt", "gofmt", "goimports" },
+		sh = { "treefmt_nix", "shfmt", stop_after_first = true },
+		go = { "treefmt_nix", "hfgofmt", "gofmt", "goimports", stop_after_first = true },
+		nix = { "treefmt_nix", "nixfmt" },
 	},
 	formatters = {
-		-- humanfirst one
 		hfgofmt = {
 			command = "hfgofmt",
+		},
+		treefmt_nix = {
+			command = "treefmt",
+			args = { "--stdin", "$FILENAME" },
+			require_cwd = true,
+			cwd = require("conform.util").root_file({ "devenv.nix" }),
 		},
 	},
 	format_on_save = function()

@@ -78,11 +78,11 @@ function AwaitBufferChange(fn)
 	end
 end
 
-function FloatingWindowText(content)
-	local buf = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(content, "\n"))
+-- Create a centered floating window with given buffer (or new scratch buffer if nil).
+-- Returns buf, win. Sets 'q' to close.
+function FloatingWindow(buf)
+	buf = buf or vim.api.nvim_create_buf(false, true)
 
-	-- Open in floating window
 	local width = math.floor(vim.o.columns * 0.8)
 	local height = math.floor(vim.o.lines * 0.8)
 	local row = math.floor((vim.o.lines - height) / 2)
@@ -97,9 +97,6 @@ function FloatingWindowText(content)
 		border = "rounded",
 	})
 
-	vim.bo[buf].modifiable = false
-	vim.bo[buf].bufhidden = "wipe"
-
 	vim.api.nvim_buf_set_keymap(buf, "n", "q", "", {
 		noremap = true,
 		silent = true,
@@ -108,6 +105,14 @@ function FloatingWindowText(content)
 		end,
 	})
 
+	return buf, win
+end
+
+function FloatingWindowText(content)
+	local buf, win = FloatingWindow()
+	vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.split(content, "\n"))
+	vim.bo[buf].modifiable = false
+	vim.bo[buf].bufhidden = "wipe"
 	return buf, win
 end
 
@@ -127,3 +132,25 @@ end
 function PPrintFloat(v)
 	FloatingWindowText(vim.inspect(v))
 end
+
+-- Clean undo files older than 7 days on startup
+-- They can leak old data and take up space
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		local undodir = vim.fn.fnamemodify(vim.o.undodir, ":p")
+		if vim.fn.isdirectory(undodir) == 0 then
+			return
+		end
+
+		local cutoff = os.time() - (7 * 24 * 60 * 60)
+		for name, type in vim.fs.dir(undodir) do
+			if type == "file" then
+				local path = undodir .. name
+				local stat = vim.uv.fs_stat(path)
+				if stat and stat.mtime.sec < cutoff then
+					os.remove(path)
+				end
+			end
+		end
+	end,
+})

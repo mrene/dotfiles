@@ -5,19 +5,12 @@ require("which-key").add({
 -- codecompanion
 -- https://codecompanion.olimorris.dev/getting-started.html
 require("codecompanion").setup({
+	ignore_warnings = true, -- ignore future deprecation warnings from 18.0.0 (https://github.com/olimorris/codecompanion.nvim/pull/2439)
 	strategies = {
 		chat = {
 			adapter = "copilot",
 			model = "gpt-5",
-			tools = {
-				["mcp"] = {
-					callback = require("mcphub.extensions.codecompanion"),
-					description = "Call tools and resources from the MCP Servers",
-					opts = {
-						requires_approval = true,
-					},
-				},
-			},
+			tools = {},
 		},
 		inline = {
 			adapter = "copilot",
@@ -48,10 +41,6 @@ vim.keymap.set("v", "<leader>ae", function()
 		end
 	end)
 end, { silent = true, desc = "CodeCompanion: Inline edit with prompt" })
-
--- MCPHub
-require("mcphub").setup({})
-vim.keymap.set("n", "<Leader>au", ":<CR>:MCPHub<CR>", { silent = true, desc = "Open MCPHub" })
 
 -- ClaudeCode.nvim
 -- https://github.com/coder/claudecode.nvim

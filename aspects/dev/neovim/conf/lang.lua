@@ -10,10 +10,17 @@ vim.lsp.config["ts_ls"] = {
 }
 
 -- Markdown
-vim.lsp.config["marksman"] = {
-	cmd = { "marksman", "server" },
-	root_markers = { ".marksman.toml", ".git" },
+vim.lsp.config["markdown_oxide"] = {
+	cmd = { "markdown-oxide" },
+	root_markers = { ".moxide.toml", ".obsidian", ".git" },
 	filetypes = { "markdown", "markdown.mdx" },
+	capabilities = {
+		workspace = {
+			didChangeWatchedFiles = {
+				dynamicRegistration = true,
+			},
+		},
+	},
 }
 
 -- Nix
@@ -25,7 +32,7 @@ vim.lsp.config["nixd"] = {
 
 -- Protobuf
 vim.lsp.config["buf_ls"] = {
-	cmd = { "bufls", "serve" },
+	cmd = { "buf", "lsp", "serve" },
 	root_markers = { "buf.work.yaml", "buf.yaml", ".git" },
 	filetypes = { "proto" },
 }
@@ -116,7 +123,7 @@ vim.lsp.config["lua_ls"] = {
 
 -- Enable all LSP servers
 vim.lsp.enable("ts_ls")
-vim.lsp.enable("marksman")
+vim.lsp.enable("markdown_oxide")
 vim.lsp.enable("nixd")
 vim.lsp.enable("buf_ls")
 vim.lsp.enable("bashls")
