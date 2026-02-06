@@ -94,7 +94,7 @@
           mise
 
           # markdown lsp
-          marksman
+          #extraLuaConfig marksman
           # Rust
           rust-analyzer
           cargo-edit

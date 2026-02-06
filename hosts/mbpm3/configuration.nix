@@ -21,6 +21,8 @@
         nixos-rebuild
         pkg-config
         wezterm
+        scroll-reverser
+        logseq
       ];
 
       nixpkgs.flake = {

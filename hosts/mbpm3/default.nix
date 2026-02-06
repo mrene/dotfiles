@@ -32,6 +32,7 @@
             shell-wezterm
 
             # Dev
+            dev-ai
             dev-git
             dev-jujutsu
 
