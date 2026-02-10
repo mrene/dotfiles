@@ -178,6 +178,9 @@
             desktop-gnome
             desktop-rofi
 
+            # Infra
+            infra-syncthing
+
             # System
             system-common
             system-neofetch

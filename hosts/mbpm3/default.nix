@@ -36,6 +36,9 @@
             dev-git
             dev-jujutsu
 
+            # Infra
+            infra-syncthing
+
             # System
             system-common
           ];

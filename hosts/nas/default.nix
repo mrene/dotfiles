@@ -15,6 +15,7 @@
 
     infra-distributed-builds
     infra-cachix
+    infra-syncthing
 
     services-sops
     services-restic
