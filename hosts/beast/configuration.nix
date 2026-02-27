@@ -42,7 +42,6 @@
         extra-experimental-features = [ "parallel-eval" ];
       };
 
-
       # Reset miniDSP volume to 100% so we have enough headroom
       systemd.services.minidsp-amixer-volume =
         let
@@ -170,7 +169,9 @@
             shell-zellij
 
             # Dev
-            dev-ai
+            # dev-ai
+            shell-workmux
+            dev-claude
             dev-git
             dev-jujutsu
 

@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "alwaysThinkingEnabled": true,
+  "enabledPlugins": {
+    "plugin-dev@claude-plugins-official": true
+  },
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "command": "jq -r '.message' | xargs -I _ notify \"_\"",
+            "type": "command"
+          }
+        ],
+        "matcher": ""
+      },
+      {
+        "hooks": [
+          {
+            "command": "workmux set-window-status waiting",
+            "type": "command"
+          }
+        ],
+        "matcher": "permission_prompt|elicitation_dialog"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "command": "workmux set-window-status working",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "command": "echo '{\"additionalContext\": \"COMPACTION JUST OCCURRED. You MUST run /ctx-load NOW before any other action to reload project context.\"}'",
+            "type": "command"
+          }
+        ],
+        "matcher": "compact"
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "command": "workmux set-window-status done",
+            "type": "command"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "command": "workmux set-window-status working",
+            "type": "command"
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "additionalDirectories": [
+      "~/dotfiles"
+    ],
+    "allow": [
+      "mcp__ide__getDiagnostics",
+      "Bash(notify:*)",
+      "Bash(lsof:*)",
+      "Bash(readlink:*)",
+      "Bash(echo:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(sed:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(tail:*)",
+      "Bash(ln -s * proj)",
+      "Bash(jj log:*)",
+      "Bash(jj show:*)",
+      "Bash(jj diff:*)",
+      "Bash(jj status:*)",
+      "Bash(jj commit:*)",
+      "Bash(jj new:*)",
+      "Bash(jj squash:*)",
+      "Bash(jj ls)",
+      "Bash(jj st)",
+      "Bash(jj describe:*)",
+      "Bash(jj-main-branch:*)",
+      "Bash(jj-current-branch:*)",
+      "Bash(jj-prev-branch:*)",
+      "Bash(jj-stacked-branches:*)",
+      "Bash(jj-diff-working:*)",
+      "Bash(jj-diff-branch:*)",
+      "Bash(jj-stacked-stats:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr review:*)",
+      "Bash(claude-proj-docs:*)",
+      "Bash(nix eval:*)",
+      "Bash(nix build:*)",
+      "Bash(nix flake:*)",
+      "Bash(nix develop:*)",
+      "Bash(nix run:*)",
+      "Bash(nix shell:*)",
+      "Bash(nix repl:*)",
+      "Bash(cargo test:*)",
+      "Bash(cargo check:*)",
+      "Bash(cargo clippy:*)",
+      "Bash(cargo fmt:*)",
+      "Bash(cargo build:*)",
+      "Bash(cargo tree:*)",
+      "Bash(go build:*)",
+      "Bash(go fmt:*)",
+      "Bash(go mod:*)",
+      "Bash(go test:*)",
+      "Bash(go doc:*)",
+      "Bash(go vet:*)",
+      "Bash(staticcheck:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run test:*)",
+      "Edit(~/Library/Caches/**)",
+      "Edit(~/.cache/**)",
+      "Edit(~/.cargo/**)",
+      "Edit(~/.npm/**)",
+      "Edit(~/go/**)",
+      "Edit(~/dotfiles/**)",
+      "Edit(//tmp/**)",
+      "Edit(~/.config/jj/repos/)",
+      "Read(~/.claude/**)",
+      "Read(//nix/**)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:gist.github.com)",
+      "WebFetch(domain:codeload.github.com)",
+      "WebFetch(domain:channels.nixos.org)",
+      "WebFetch(domain:registry.npmjs.org)",
+      "WebFetch(domain:code.claude.com)",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:nixos.org)",
+      "WebFetch(domain:wiki.nixos.org)",
+      "WebFetch(domain:search.nixos.org)",
+      "WebFetch(domain:discourse.nixos.org)",
+      "WebFetch(domain:proxy.golang.org)",
+      "WebFetch(domain:sum.golang.org)",
+      "WebFetch(domain:stackoverflow.com)",
+      "WebFetch(domain:index.crates.io)",
+      "WebFetch(domain:static.crates.io)",
+      "WebFetch(domain:docs.rs)",
+      "WebFetch(domain:jj-vcs.github.io)",
+      "WebFetch(domain:docs.jj-vcs.dev)",
+      "Skill(ctx-load)",
+      "Skill(ctx-save)",
+      "Skill(review-search)",
+      "Skill(mem-editing)",
+      "Skill(proj-editing)"
+    ],
+    "defaultMode": "acceptEdits",
+    "deny": []
+  },
+  "sandbox": {
+    "autoAllowBashIfSandboxed": true,
+    "enabled": false,
+    "network": {
+      "allowLocalBinding": true,
+      "allowUnixSockets": [
+        "/nix/var/nix/daemon-socket/socket"
+      ]
+    }
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "statusLine": {
+    "command": "~/.claude/statusline.sh",
+    "type": "command"
+  }
+}

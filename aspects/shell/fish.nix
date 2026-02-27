@@ -117,14 +117,8 @@ _:
               };
             }
             {
-              # Run bash utilities in fish via `bass source script.sh`
               name = "bass";
-              src = pkgs.fetchFromGitHub {
-                owner = "edc";
-                repo = "bass";
-                rev = "79b62958ecf4e87334f24d6743e5766475bcf4d0";
-                hash = "sha256-3d/qL+hovNA4VMWZ0n1L+dSM1lcz7P5CQJyy+/8exTc=";
-              };
+              src = pkgs.fishPlugins.bass;
             }
           ];
 
