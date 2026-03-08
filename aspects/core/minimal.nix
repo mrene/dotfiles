@@ -15,7 +15,6 @@ _: {
           ripgrep
           fd
           eza
-          neofetch # fancy system + hardware info
           tealdeer # fast tldr
           zoxide # habitual `cd`
           any-nix-shell # allows using fish for `nix shell`
