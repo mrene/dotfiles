@@ -13,6 +13,7 @@
       # Override the kernel package to use the upstream nixos-raspberrypi prebuilt kernel
       boot.kernelPackages =
         inputs.nixos-raspberrypi-nofollows.packages.${pkgs.stdenv.hostPlatform.system}.linuxPackages_rpi5;
+      boot.supportedFilesystems.zfs = false;
       hardware.enableRedistributableFirmware = true;
       services.openssh.enable = true;
       services.openssh.settings.PasswordAuthentication = false;
