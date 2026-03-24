@@ -32,9 +32,9 @@
             shell-wezterm
 
             # Dev
-            dev-ai
             dev-git
             dev-jujutsu
+            dev-claude
 
             # Infra
             infra-syncthing
