@@ -184,6 +184,12 @@ _:
             package = {
               disabled = true;
             };
+
+            env_var.NONO_CAP_FILE = {
+              symbol = "󰒃 ";
+              format = "[$symbol]($style)";
+              style = "bold red";
+            };
           };
         };
     };

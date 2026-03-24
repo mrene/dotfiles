@@ -1,15 +1,13 @@
 { config, ... }:
-{
-  flake.nixosModules.overlay = _: {
+
+let
+  overlay = _: {
     # nixpkgs.overlays = with config.flake.overlays; [openrgb];
     nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.permittedInsecurePackages = [ "electron-38.8.4" ];
   };
-
-  flake.darwinModules.overlay = _: {
-    nixpkgs.config.allowUnfree = true;
-  };
-
-  flake.overlays = {
-    # openrgb = import ./openrgb;
-  };
+in
+{
+  flake.nixosModules.overlay = overlay;
+  flake.darwinModules.overlay = overlay;
 }

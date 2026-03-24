@@ -14,7 +14,6 @@
     {
       imports = [ inputs.determinate.darwinModules.default ];
       nixpkgs.hostPlatform = "aarch64-darwin";
-      nixpkgs.config.permittedInsecurePackages = [ "electron-38.8.4" ];
 
       environment.systemPackages = with pkgs; [
         fish

@@ -198,7 +198,7 @@ in
         defaultEditor = true;
 
         inherit (neovimConfig) plugins extraPackages;
-        initLua = neovimConfig.luaConfig;
+        extraLuaConfig = neovimConfig.luaConfig;
       };
 
       # Force load after the rest

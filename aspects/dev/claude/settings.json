@@ -118,25 +118,6 @@
             "command": "jq -r '.message' | xargs -I _ notify \"_\""
           }
         ]
-      },
-      {
-        "matcher": "permission_prompt|elicitation_dialog",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "workmux set-window-status waiting"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "workmux set-window-status working"
-          }
-        ]
       }
     ],
     "SessionStart": [
@@ -150,22 +131,13 @@
         ]
       }
     ],
-    "Stop": [
+    "PostToolUseFailure": [
       {
+        "matcher": "Read|Write|Edit|Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "workmux set-window-status done"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "workmux set-window-status working"
+            "command": "$HOME/.claude/hooks/nono-hook.sh"
           }
         ]
       }
@@ -191,5 +163,6 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "voiceEnabled": true
 }
