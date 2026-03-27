@@ -1,0 +1,39 @@
+{
+  "extends": "claude-code",
+  "meta": {
+    "name": "backend-dev"
+  },
+  "security": {
+    "groups": []
+  },
+  "policy": {
+    "add_allow_read": [ ]
+  },
+  "workdir": {
+    "access": "readwrite"
+  },
+  "filesystem": {
+    "allow": [
+      "$HOME/.cache/golangci-lint",
+      "$HOME/.cache/go",
+      "$HOME/.cache/nix",
+      "$HOME/.cache/go-build",
+      "$HOME/spaces/bare",
+      "$HOME/.local/share/fish",
+      "$HOME/.local/share/nix",
+      "$HOME/.claude",
+      "$HOME/.cargo"
+    ],
+    "read": [
+      "/proc",
+      "/nix",
+      "$HOME/.nix-profile/bin",
+      "$HOME/.config/fish",
+      "$HOME/.config/jj",
+      "$HOME/nixworld"
+    ],
+    "read_file": [
+      "$HOME/.config/starship.toml"
+    ]
+   }
+}
