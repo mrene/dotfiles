@@ -21,5 +21,6 @@
 
     utm
     config.flake.nixosModules.overlay
+    config.flake.nixosModules.hmUnstable
   ];
 }

@@ -55,7 +55,6 @@
             wsl
           ];
         };
-        useGlobalPkgs = true;
         verbose = true;
         extraSpecialArgs = { inherit inputs self; };
         backupFileExtension = "hmbak";

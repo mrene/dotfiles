@@ -72,7 +72,6 @@
 
       home-manager = {
         users.mrene = self.modules.homeManager.mbp2021;
-        useGlobalPkgs = true;
         verbose = true;
         backupFileExtension = "bak";
       };

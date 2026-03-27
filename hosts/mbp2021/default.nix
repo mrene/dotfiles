@@ -18,6 +18,7 @@
       # Host-specific
       config.flake.modules.darwin.mbp2021
       config.flake.darwinModules.overlay
+      config.flake.darwinModules.hmUnstable
       (
         { self, ... }:
         {

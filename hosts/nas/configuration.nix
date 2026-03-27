@@ -98,7 +98,6 @@
             nas
           ];
         };
-        useGlobalPkgs = true;
         verbose = true;
         extraSpecialArgs = { inherit inputs self; };
       };

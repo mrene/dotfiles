@@ -79,7 +79,6 @@
 
       home-manager = {
         users.mrene = self.modules.homeManager.mbpm3;
-        useGlobalPkgs = true;
         verbose = true;
         backupFileExtension = "bak";
       };

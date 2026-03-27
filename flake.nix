@@ -41,32 +41,32 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     fzf-nix = {
       url = "github:mrene/fzf-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     humanfirst-dots = {
       url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
       inputs = {
         home-manager.follows = "home-manager";
-        nixpkgs.follows = "nixpkgs";
+        nixpkgs.follows = "nixpkgs-unstable";
       };
     };
     import-tree.url = "github:vic/import-tree";
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     minidsp.url = "github:mrene/minidsp-rs";
     mrene-nur = {
       url = "github:mrene/nur-packages";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nix-update = {
       url = "github:Mic92/nix-update";
@@ -94,6 +94,7 @@
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-pr-openthread.url = "github:mrene/nixpkgs?ref=openthread-border-router";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";

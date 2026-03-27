@@ -54,6 +54,7 @@
         # Host-specific
         beast
         self.nixosModules.overlay
+        self.nixosModules.hmUnstable
       ];
     };
   };
