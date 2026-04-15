@@ -101,8 +101,8 @@
 
           # Microsoft's python LSP
           pyright
-          nodePackages.typescript-language-server
-          nodePackages.vscode-langservers-extracted
+          # nodePackages.typescript-language-server
+          # nodePackages.vscode-langservers-extracted
 
           # github cli
           gh

@@ -39,6 +39,8 @@
       "Bash(gh pr checks:*)",
       "Bash(gh pr diff:*)",
       "Bash(gh pr review:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh api:*)",
       "Bash(claude-proj-docs:*)",
       "Bash(nix eval:*)",
       "Bash(nix build:*)",
@@ -163,6 +165,10 @@
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
   "skipDangerousModePermissionPrompt": true,
   "voiceEnabled": true
 }

@@ -16,7 +16,8 @@ Fetch unresolved GitHub PR review comments and import them into the codebase as 
 
 2. 🔳 Get PR info
    - Current branch: !`jj-current-branch`
-   - Current PR number: !`gh pr view $(jj-current-branch) --json number --jq '.number'`
+   - Then use the branch name above to get the PR number:
+     `gh pr view <BRANCH> --json number --jq '.number'`
    - Repo owner: !`gh repo view --json owner --jq '.owner.login'`
    - Repo name: !`gh repo view --json name --jq '.name'`
 
