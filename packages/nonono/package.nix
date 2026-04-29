@@ -2,11 +2,12 @@
   lib,
   writeShellApplication,
   bubblewrap,
-  callPackage,
+  inputs,
+  stdenv,
 }:
 
 let
-  nono = callPackage ../nono/package.nix { };
+  nono = inputs.llm-agents.packages.${stdenv.hostPlatform.system}.nono;
   profile = ./nono-profile.json;
 in
 
