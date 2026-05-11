@@ -3,11 +3,8 @@
   "meta": {
     "name": "backend-dev"
   },
-  "security": {
-    "groups": []
-  },
-  "policy": {
-    "add_allow_read": [ ]
+  "groups": {
+    "include": []
   },
   "workdir": {
     "access": "readwrite"

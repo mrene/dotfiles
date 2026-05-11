@@ -159,9 +159,11 @@
         claude-proj-docs
         pkgs.socat
         inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.workmux
+        inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.nono
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [
         pkgs.bubblewrap
+        inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.nonono
       ];
     };
 }
