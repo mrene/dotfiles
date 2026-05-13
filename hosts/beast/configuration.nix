@@ -192,6 +192,7 @@
         };
         verbose = true;
         extraSpecialArgs = { inherit inputs self; };
+        backupFileExtension = "hmbak";
       };
 
       security.sudo.wheelNeedsPassword = true;
