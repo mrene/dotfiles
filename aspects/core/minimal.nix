@@ -79,16 +79,24 @@ _: {
         clock24 = true;
         extraConfig = ''
           set -s extended-keys on
-          set -s extended-keys-format xterm
+          set -s extended-keys-format csi-u
           set -as terminal-features 'xterm-ghostty:extkeys'
 
-          bind -n C-S-Left  select-pane -L
-          bind -n C-S-Down  select-pane -D
-          bind -n C-S-Up    select-pane -U
-          bind -n C-S-Right select-pane -R
+          # C-S-Arrow: tmux has no named key for these combinations on arrows.
+          # Map the raw XTerm modifier-6 sequences Ghostty emits to UserN keys.
+          # Modifier 6 = Shift(1) + Ctrl(4) + bias(1); A=Up B=Down C=Right D=Left.
+          set -s user-keys[0] "\e[1;6A"
+          set -s user-keys[1] "\e[1;6B"
+          set -s user-keys[2] "\e[1;6C"
+          set -s user-keys[3] "\e[1;6D"
 
-          bind -n 'C-"' split-window -v -c "#{pane_current_path}"
-          bind -n 'C-%' split-window -h -c "#{pane_current_path}"
+          bind -n User0 select-pane -U
+          bind -n User1 select-pane -D
+          bind -n User2 select-pane -R
+          bind -n User3 select-pane -L
+
+          bind -n 'C-|' split-window -h -c "#{pane_current_path}"
+          bind -n 'C-_' split-window -v -c "#{pane_current_path}"
         '';
       };
 
