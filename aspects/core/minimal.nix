@@ -80,7 +80,11 @@ _: {
         extraConfig = ''
           set -s extended-keys on
           set -s extended-keys-format csi-u
-          set -as terminal-features 'xterm-ghostty:extkeys'
+          # Intentionally NOT advertising 'extkeys' in terminal-features:
+          # the modifyOtherKeys negotiation makes Ghostty bypass its own
+          # csi:/text: keybinds inside tmux, breaking the split chords.
+          # Ghostty already emits \e[1;6<A-D> for Ctrl+Shift+Arrow by default
+          # so user-keys[0..3] still match without the negotiation.
 
           # tmux has no named key for shifted arrows or for shifted-punctuation
           # chords with multiple modifiers. Map the raw sequences to UserN keys.
