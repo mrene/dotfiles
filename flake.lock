@@ -740,11 +740,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1776729138,
-        "narHash": "sha256-JzhiujS1coH5tIiBLRtKgNobBq14djvFjVUvp2G8pxI=",
+        "lastModified": 1778871657,
+        "narHash": "sha256-nbZ4kmkffEu1MYt1ChNqg9heu6DmI95o6sT3A+q2Ob8=",
         "owner": "mrene",
         "repo": "minidsp-rs",
-        "rev": "e3d448e18005d41113cb7351525d2cef7e51ccc7",
+        "rev": "9603b7860525620e206a77ede83ff6f306f40173",
         "type": "github"
       },
       "original": {

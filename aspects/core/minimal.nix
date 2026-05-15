@@ -79,7 +79,7 @@ _: {
         clock24 = true;
         extraConfig = ''
           set -s extended-keys on
-          set -s extended-keys-format csi-u
+          set -s extended-keys-format xterm
           set -as terminal-features 'xterm-ghostty:extkeys'
 
           bind -n C-S-Left  select-pane -L
