@@ -96,8 +96,8 @@ _: {
           set -s user-keys[1] "\e[1;6B"
           set -s user-keys[2] "\e[1;6C"
           set -s user-keys[3] "\e[1;6D"
-          set -s user-keys[4] "\e[39;8u"
-          set -s user-keys[5] "\e[53;8u"
+          set -s user-keys[4] "\e[39;8z"
+          set -s user-keys[5] "\e[53;8z"
 
           bind -n User0 select-pane -U
           bind -n User1 select-pane -D

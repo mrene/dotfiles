@@ -16,13 +16,14 @@ _:
             "ctrl+shift+arrow_left=unbind"
             "ctrl+shift+arrow_right=unbind"
 
-            # Custom CSI sequences for tmux splits. Ghostty's legacy keyboard
-            # mode doesn't encode shifted-punctuation chords with multiple
-            # modifiers, so emit our own. tmux user-keys binds these.
-            # Format mimics kitty CSI-u: <keycode>;<mod>u. Keycode is the
-            # unshifted ASCII; mod 8 = shift(1)+alt(2)+ctrl(4)+bias(1).
-            "ctrl+shift+alt+'=csi:39;8u"
-            "ctrl+shift+alt+5=csi:53;8u"
+            # Custom CSI sequences for tmux splits. Final byte 'z' (not 'u'
+            # or '~') is critical: tmux's tty_keys_extended_key parser only
+            # accepts u/~ as CSI-u terminators, so 'z' falls through to the
+            # user-keys lookup. With 'u', tmux would decode \e[39;8u as
+            # Ctrl+Alt+Shift+' then re-encode to \e' (dropping Shift+Ctrl
+            # per input_key_vt10x), bypassing user-keys entirely.
+            "ctrl+shift+alt+'=text:\\x1b[39;8z"
+            "ctrl+shift+alt+5=text:\\x1b[53;8z"
           ];
         };
       };
