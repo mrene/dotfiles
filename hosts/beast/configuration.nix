@@ -165,6 +165,7 @@
             # Shell
             shell-fish
             shell-fish-ai
+            shell-ghostty
             shell-wezterm
             shell-zellij
 

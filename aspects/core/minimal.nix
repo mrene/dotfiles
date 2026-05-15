@@ -77,6 +77,19 @@ _: {
       programs.tmux = {
         enable = true;
         clock24 = true;
+        extraConfig = ''
+          set -s extended-keys on
+          set -s extended-keys-format csi-u
+          set -as terminal-features 'xterm-ghostty:extkeys'
+
+          bind -n C-S-Left  select-pane -L
+          bind -n C-S-Down  select-pane -D
+          bind -n C-S-Up    select-pane -U
+          bind -n C-S-Right select-pane -R
+
+          bind -n 'C-"' split-window -v -c "#{pane_current_path}"
+          bind -n 'C-%' split-window -h -c "#{pane_current_path}"
+        '';
       };
 
       programs.dircolors.enable = true;
