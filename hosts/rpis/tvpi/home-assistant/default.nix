@@ -173,6 +173,7 @@
             "airvisual"
             "openrgb"
             "wled"
+            "lg_thinq"
           ];
           extraPackages =
             python3Packages: with python3Packages; [
@@ -228,31 +229,12 @@
         services.matter-server = {
           enable = true;
           logLevel = "info";
+          # Existing fabric in /var/lib/matter-server was registered under
+          # the Matter test vendor 0xFFF1 (65521). The upstream module
+          # defaults to the home-assistant vendor 4939, which causes a
+          # fabricId=1 collision on load.
+          extraArgs.vendorid = 65521;
         };
-
-        systemd.services.matter-server.serviceConfig.ExecStart =
-          let
-            mcfg = config.services.matter-server;
-            storagePath = "/var/lib/matter-server";
-          in
-          lib.mkForce (
-            lib.concatStringsSep " " [
-              "${pkgs.bash}/bin/sh"
-              "-c"
-              "'"
-              "${pkgs.coreutils}/bin/ln -s %S/matter-server/ %t/matter-server/root/data"
-              "&&"
-              "${mcfg.package}/bin/matter-server"
-              "--port"
-              (toString mcfg.port)
-              "--storage-path"
-              storagePath
-              "--log-level"
-              "${mcfg.logLevel}"
-              "${lib.escapeShellArgs mcfg.extraArgs}"
-              "'"
-            ]
-          );
 
         homelab.backups.paths = [
           "/var/lib/matter-server"
