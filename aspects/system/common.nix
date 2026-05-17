@@ -14,11 +14,6 @@
       url = "github:mrene/nur-packages";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    humanfirst-dots = {
-      url = "git+ssh://git@github.com/zia-ai/shared-dotfiles";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.home-manager.follows = "home-manager";
-    };
   };
 
   flake.aspects.system-common.homeManager =
@@ -28,13 +23,9 @@
     in
     {
       imports = [
-        inputs.humanfirst-dots.homeManagerModule
         inputs.nix-index-database.homeModules.nix-index
         inputs.self.homeManagerModules.neovim
       ];
-
-      humanfirst.enable = true;
-      humanfirst.identity.email = "mathieu@humanfirst.ai";
 
       # https://github.com/nix-community/nix-direnv#via-home-manager
       programs.direnv.enable = true;

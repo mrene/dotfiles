@@ -43,6 +43,7 @@
         inputs.nixos-raspberrypi.nixosModules.trusted-nix-caches
         config.flake.modules.nixos.tvpi
         "${inputs.nixos-raspberrypi}/modules/installer/sd-card/sd-image-raspberrypi.nix"
+        { _module.args.nixos-raspberrypi = inputs.nixos-raspberrypi; }
         { nixpkgs.config.allowUnfree = true; }
       ];
   };

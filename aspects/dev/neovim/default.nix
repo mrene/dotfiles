@@ -196,6 +196,7 @@ in
         viAlias = true;
         vimAlias = true;
         defaultEditor = true;
+        withPython3 = false;
 
         inherit (neovimConfig) plugins extraPackages;
         extraLuaConfig = neovimConfig.luaConfig;

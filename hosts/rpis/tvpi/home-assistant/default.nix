@@ -172,6 +172,7 @@
             "broadlink"
             "airvisual"
             "openrgb"
+            "wled"
           ];
           extraPackages =
             python3Packages: with python3Packages; [
@@ -262,7 +263,7 @@
       {
         services.openthread-border-router = {
           enable = true;
-          backboneInterface = "eth0";
+          backboneInterfaces = [ "eth0" ];
           logLevel = "err";
           radio = {
             device = "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231118192304-if00";

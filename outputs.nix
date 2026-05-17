@@ -22,14 +22,14 @@ let
 
         inputs = {
           # Core
-          nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+          nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
           nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
           home-manager = {
             url = "github:nix-community/home-manager";
             inputs.nixpkgs.follows = "nixpkgs-unstable";
           };
           darwin = {
-            url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+            url = "github:nix-darwin/nix-darwin";
             inputs.nixpkgs.follows = "nixpkgs";
           };
           sops-nix = {
