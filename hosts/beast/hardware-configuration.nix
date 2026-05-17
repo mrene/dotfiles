@@ -36,6 +36,7 @@ _: {
       fileSystems."/var/lib/docker" = {
         device = "/bulk/docker";
         options = [ "bind" ];
+        fsType = "none";
       };
 
       fileSystems."/boot/efi" = {
