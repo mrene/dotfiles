@@ -1,6 +1,6 @@
 _:
 {
-  flake.aspects.desktop-gui-messaging.nixos =
+  flake.modules.nixos.desktop-gui =
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [

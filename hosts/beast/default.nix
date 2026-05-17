@@ -26,9 +26,7 @@
 
         # Desktop
         desktop-fonts
-        desktop-gui-base
-        desktop-gui-desktop
-        desktop-gui-messaging
+        desktop-gui
 
         # Hardware
         hardware-nvidia
