@@ -1,6 +1,6 @@
 _:
 {
-  flake.aspects.hardware-radio.nixos =
+  flake.modules.nixos.beast =
     { pkgs, ... }:
     let
       hardwarePackages = [

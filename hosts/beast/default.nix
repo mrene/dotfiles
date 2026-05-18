@@ -30,9 +30,6 @@
 
         # Hardware
         hardware-nvidia
-        hardware-radio
-        hardware-brightness
-        hardware-screen-switch
 
         # Infra
         infra-minikube
