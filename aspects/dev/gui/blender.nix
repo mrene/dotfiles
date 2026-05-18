@@ -1,5 +1,5 @@
 _: {
-  flake.aspects.dev-gui-dev.nixos =
+  flake.modules.nixos.dev-gui =
     {
       pkgs,
       flakePackages,

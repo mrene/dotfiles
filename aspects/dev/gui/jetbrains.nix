@@ -1,5 +1,5 @@
 _: {
-  flake.aspects.dev-gui-jetbrains.nixos =
+  flake.modules.nixos.dev-gui =
     { pkgs, ... }:
     let
       ides = with pkgs; [

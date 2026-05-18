@@ -40,9 +40,7 @@
         infra-cachix
 
         # Dev
-        dev-gui-dev
-        dev-gui-jetbrains
-        dev-vscode-server
+        dev-gui
 
         # Services
         services-sops
