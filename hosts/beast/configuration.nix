@@ -177,8 +177,7 @@
             dev-jujutsu
 
             # Desktop
-            desktop-gnome
-            desktop-rofi
+            desktop-userspace
 
             # Infra
             infra-syncthing

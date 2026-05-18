@@ -1,9 +1,8 @@
 { lib, ... }:
 {
-  flake.aspects.desktop-gnome.homeManager =
+  flake.modules.homeManager.desktop-userspace =
     { pkgs, ... }:
     {
-      # ...
       gtk = {
         enable = true;
 
@@ -36,7 +35,6 @@
       home.sessionVariables.GTK_THEME = "Catppuccin-Mocha-Standard-Pink-Dark";
 
       dconf.settings = with lib.gvariant; {
-        # ...
         "org/gnome/shell" = {
 
           favorite-apps = [
@@ -110,6 +108,12 @@
           isolate-workspaces = true;
           group-apps = false;
           stockgs-keep-top-panel = true;
+          panel-sizes = ''{"0":32,"1":32}'';
+          panel-positions = true;
+          multi-monitors = true;
+          dot-style-unfocused = "DOTS";
+          dot-style-focused = "CILIORA";
+          show-window-previews-timeout = 125;
         };
 
         "org/gnome/shell/extensions/user-theme" = {
@@ -122,15 +126,6 @@
 
         "org/gnome/desktop/interface/gtk-theme" = {
           name = "Catppuccin-Pink-Dark";
-        };
-
-        "org/gnome/shell/extensions/dash-to-panel" = {
-          panel-sizes = ''{"0":32,"1":32}'';
-          panel-positions = true;
-          multi-monitors = true;
-          dot-style-unfocused = "DOTS";
-          dot-style-focused = "CILIORA";
-          show-window-previews-timeout = 125;
         };
 
         "org/gnome/desktop/wm/preferences" = {
@@ -195,18 +190,6 @@
           app-switcher-popup-win-counter = true;
           app-switcher-popup-hide-win-counter-for-single-window = true;
         };
-
-        # "org/gnome/shell/extensions/smart-home" = {
-        #   "remember-opened-submenu" = true;
-        #   "menu-selection" = {
-        #     "http://tvpi_home-assistant" = {
-        #       group = "office";
-        #     };
-        #     "smart-home-universal_smart-home-universal" = {
-        #       group = "Office";
-        #     };
-        #   };
-        # };
       };
 
       programs.gnome-shell = {
