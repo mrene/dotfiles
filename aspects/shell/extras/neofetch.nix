@@ -1,12 +1,12 @@
-_: {
+{
   flake.modules.homeManager.shell-extras =
     { pkgs, ... }:
     let
       themes = pkgs.fetchFromGitHub {
         owner = "Chick2D";
         repo = "neofetch-themes";
-        rev = "f3e79d3f36aec02cf42fc772984091990f27a1a3";
-        sha256 = "11mkp1g2vc0311lrjhgacrpbl69anpcl6p1qz323i8lgqasja43x";
+        rev = "ee84d0907ec3f91a95b78bce2a3cefa2f60e540e";
+        sha256 = "1w93j276r54z98d0flvzpljimyc08xs5pnp5q2mjlp8a8aiacxsf";
       };
     in
     {

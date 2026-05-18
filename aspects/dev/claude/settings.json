@@ -160,6 +160,8 @@
     "mode": "hold"
   },
   "skipDangerousModePermissionPrompt": true,
+  "agentPushNotifEnabled": true,
   "voiceEnabled": true,
-  "agentPushNotifEnabled": true
+  "editorMode": "vim",
+  "preferredNotifChannel": "notifications_disabled"
 }

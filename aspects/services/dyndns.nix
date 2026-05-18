@@ -1,4 +1,4 @@
-_: {
+{
   flake.aspects.services-dyndns.nixos =
     { config, ... }:
     {

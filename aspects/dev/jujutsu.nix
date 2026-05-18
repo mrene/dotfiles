@@ -1,4 +1,4 @@
-_: {
+{
   flake.aspects.dev.homeManager =
     { pkgs, ... }:
     {

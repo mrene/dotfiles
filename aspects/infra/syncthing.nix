@@ -1,5 +1,3 @@
-_:
-
 let
   domain = "tailc705a.ts.net";
 

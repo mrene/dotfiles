@@ -1,4 +1,4 @@
-_: {
+{
   flake.modules.nixos.desktop-gui =
     { pkgs, ... }:
     {
@@ -6,6 +6,7 @@ _: {
         slack
         discord
         element-desktop
+        signal-desktop
       ];
     };
 }

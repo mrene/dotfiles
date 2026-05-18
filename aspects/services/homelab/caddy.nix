@@ -1,4 +1,4 @@
-_: {
+{
   flake.modules.nixos.services-homelab = {
     services.caddy = {
       enable = true;
