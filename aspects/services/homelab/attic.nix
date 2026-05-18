@@ -6,7 +6,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  flake.aspects.services-attic.nixos =
+  flake.modules.nixos.services-homelab =
     {
       config,
       pkgs,

@@ -1,6 +1,6 @@
 { lib, ... }:
 {
-  flake.aspects.services-forgejo.nixos =
+  flake.modules.nixos.services-homelab =
     { config, ... }:
     {
       services.forgejo = {

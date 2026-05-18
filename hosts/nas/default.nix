@@ -19,11 +19,9 @@
 
     services-sops
     services-restic
-    services-attic
-    services-caddy
     services-dyndns
-    services-forgejo
     services-prs
+    services-homelab
 
     nas
 

@@ -1,8 +1,7 @@
 _:
 {
-  flake.aspects.services-caddy.nixos = _: {
+  flake.modules.nixos.services-homelab = _: {
     services.caddy = {
-
       enable = true;
       email = "mathieu.rene@gmail.com";
     };
