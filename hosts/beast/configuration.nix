@@ -173,7 +173,7 @@
             dev-jujutsu
 
             # Desktop
-            desktop-userspace
+            desktop-gnome
 
             # Infra
             infra-syncthing

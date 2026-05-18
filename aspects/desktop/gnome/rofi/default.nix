@@ -1,6 +1,6 @@
 _:
 {
-  flake.modules.homeManager.desktop-userspace =
+  flake.modules.homeManager.desktop-gnome =
     { pkgs, ... }:
     {
       programs.rofi = {
