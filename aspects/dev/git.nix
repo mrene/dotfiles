@@ -1,5 +1,4 @@
-_:
-{
+_: {
   flake.aspects.dev.homeManager =
     { pkgs, ... }:
     let
@@ -11,40 +10,40 @@ _:
       };
     in
     {
-        programs.git = {
-          enable = true;
-          lfs.enable = true;
+      programs.git = {
+        enable = true;
+        lfs.enable = true;
 
-          settings = {
-            user = {
-              name = "Mathieu Rene";
-              email = "mathieu.rene@gmail.com";
-            };
+        settings = {
+          user = {
+            name = "Mathieu Rene";
+            email = "mathieu.rene@gmail.com";
+          };
 
-            github.user = "mrene";
-            push.autoSetupRemote = true;
+          github.user = "mrene";
+          push.autoSetupRemote = true;
 
-            core = {
-              editor = "nvim";
-              fileMode = false;
-              ignorecase = false;
-            };
+          core = {
+            editor = "nvim";
+            fileMode = false;
+            ignorecase = false;
+          };
 
-            include = {
-              path = "${./delta}/themes.gitconfig";
-            };
+          include = {
+            path = "${./delta}/themes.gitconfig";
           };
         };
+      };
 
-        programs.delta = {
-          enable = true;
-          enableGitIntegration = true;
-          options = {
-            navigate = true; # N to switch files
-            syntax-theme = "Nord";
-            side-by-side = false;
-            features = "chameleon-mod";
-          };
+      programs.delta = {
+        enable = true;
+        enableGitIntegration = true;
+        options = {
+          navigate = true; # N to switch files
+          syntax-theme = "Nord";
+          side-by-side = false;
+          features = "chameleon-mod";
         };
+      };
     };
 }

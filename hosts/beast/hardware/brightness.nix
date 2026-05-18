@@ -1,7 +1,11 @@
-_:
-{
+_: {
   flake.modules.nixos.beast =
-    { config, pkgs, lib, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     {
       # From: https://github.com/nullbytepl/.nixconf/blob/main/fragments/ddcci.nix
       # https://gitlab.com/ddcci-driver-linux/ddcci-driver-linux/-/merge_requests/17

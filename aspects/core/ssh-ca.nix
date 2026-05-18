@@ -1,5 +1,4 @@
-_:
-{
+_: {
   flake.aspects.core-ssh-ca.nixos = _: {
     environment.etc."ssh/trusted-user-ca-keys.pem".text =
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGxadtHiu72FNZY+fjEJlqj5r3YInyuAjr04/kiTw0zw";

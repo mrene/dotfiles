@@ -85,7 +85,7 @@
           deadnix
           nixfmt
           statix
-          
+
           nurl
           jsonnet-language-server
           buf

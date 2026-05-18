@@ -11,41 +11,41 @@
         inputs.minidsp.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
       ];
-        programs.command-not-found.enable = false; # conflicts with nix-index
-        environment.systemPackages = with pkgs; [
-          wget
-          curl
-          direnv
-          nix-direnv
-          git
-          zip
-          unzip
+      programs.command-not-found.enable = false; # conflicts with nix-index
+      environment.systemPackages = with pkgs; [
+        wget
+        curl
+        direnv
+        nix-direnv
+        git
+        zip
+        unzip
 
-          usbutils
-          pciutils
-          lm_sensors
-          lshw
-          file
-          lsof
-          unixtools.xxd
+        usbutils
+        pciutils
+        lm_sensors
+        lshw
+        file
+        lsof
+        unixtools.xxd
 
-          yq-go
-          jq
+        yq-go
+        jq
 
-          btop
-          man-pages
-          sysstat
-          dool
-          dtool
-          bat
-          eza
-          fd
-          tmux-xpanes
-          ipset
-          iptables
-          ethtool
-        ];
+        btop
+        man-pages
+        sysstat
+        dool
+        dtool
+        bat
+        eza
+        fd
+        tmux-xpanes
+        ipset
+        iptables
+        ethtool
+      ];
 
-        programs.mtr.enable = true;
+      programs.mtr.enable = true;
     };
 }

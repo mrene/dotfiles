@@ -1,5 +1,4 @@
-_:
-{
+_: {
   flake.modules.nixos.beast =
     { pkgs, ... }:
     let

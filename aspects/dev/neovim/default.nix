@@ -8,8 +8,9 @@ let
   mkConfig =
     { pkgs, ... }:
     {
-      plugins =
-        (with pkgs.vimPlugins; [
+      plugins = (
+        with pkgs.vimPlugins;
+        [
           # Theme
           catppuccin-nvim
           nvim-web-devicons
@@ -119,7 +120,8 @@ let
             p.yaml
           ]))
           nvim-treesitter-textobjects # provides object manipulation
-        ]);
+        ]
+      );
 
       luaConfig =
         let
@@ -159,8 +161,9 @@ let
           end
         '';
 
-      extraPackages =
-        (with pkgs; [
+      extraPackages = (
+        with pkgs;
+        [
           nixd # nix lsp
 
           markdown-oxide # markdown lsp
@@ -181,7 +184,8 @@ let
           pyright
           ruff
           gh
-        ]);
+        ]
+      );
     };
 in
 {

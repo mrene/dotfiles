@@ -5,7 +5,7 @@ let
   mkFontsModule =
     { pkgs, ... }:
     {
-      fonts.packages = with pkgs;[
+      fonts.packages = with pkgs; [
         jetbrains-mono
         noto-fonts
         noto-fonts-cjk-sans

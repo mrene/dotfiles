@@ -17,8 +17,14 @@ let
   sharedSettings = {
     devices = {
       # "beast" = mkDevice { id = "DEVICE-ID"; host = "beast"; };
-      "mbpm3" = mkDevice { id = "YMRJF6X-Q6NAE6V-5UDGE2J-4HJYRA4-DE42KSE-CIJKHVG-3CTASBE-RIFMCQB"; host = "mrene-mbp-m3"; };
-      "nas" = mkDevice { id = "FZAM63C-L35LMXT-BQKLMFI-A3ZGPGI-NWZ74I2-SAJIKW7-DWUR5IP-US52MQF"; host = "nas"; };
+      "mbpm3" = mkDevice {
+        id = "YMRJF6X-Q6NAE6V-5UDGE2J-4HJYRA4-DE42KSE-CIJKHVG-3CTASBE-RIFMCQB";
+        host = "mrene-mbp-m3";
+      };
+      "nas" = mkDevice {
+        id = "FZAM63C-L35LMXT-BQKLMFI-A3ZGPGI-NWZ74I2-SAJIKW7-DWUR5IP-US52MQF";
+        host = "nas";
+      };
     };
 
     options = {
