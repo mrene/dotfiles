@@ -1,6 +1,6 @@
 _:
 {
-  flake.aspects.system-neofetch.homeManager =
+  flake.modules.homeManager.shell-extras =
     { pkgs, ... }:
     let
       themes = pkgs.fetchFromGitHub {

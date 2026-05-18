@@ -1,7 +1,7 @@
 _:
 {
-  # This aspect depends on shell-fish - they should be imported together
-  flake.aspects.shell-fish-ai.homeManager =
+  # Depends on shell-fish — import alongside it.
+  flake.modules.homeManager.shell-extras =
     {
       config,
       pkgs,

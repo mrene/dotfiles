@@ -1,6 +1,6 @@
 _:
 {
-  flake.aspects.shell-ghostty.homeManager =
+  flake.modules.homeManager.shell-extras =
     { ... }:
     {
       programs.ghostty = {

@@ -164,14 +164,10 @@
 
             # Shell
             shell-fish
-            shell-fish-ai
-            shell-ghostty
             shell-wezterm
-            shell-zellij
+            shell-extras
 
             # Dev
-            # dev-ai
-            shell-workmux
             dev-claude
             dev-git
             dev-jujutsu
@@ -184,7 +180,6 @@
 
             # System
             system-common
-            system-neofetch
 
             # Host-specific
             beast
