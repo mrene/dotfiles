@@ -168,9 +168,7 @@
             shell-extras
 
             # Dev
-            dev-claude
-            dev-git
-            dev-jujutsu
+            dev
 
             # Desktop
             desktop-gnome

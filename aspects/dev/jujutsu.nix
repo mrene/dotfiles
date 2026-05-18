@@ -1,6 +1,6 @@
 _:
 {
-  flake.aspects.dev-jujutsu.homeManager =
+  flake.aspects.dev.homeManager =
     { ... }:
     {
         programs.jujutsu = {

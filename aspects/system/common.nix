@@ -39,6 +39,7 @@
           comma # run any command with `, command`
           #nix-index # and nix-locate, search within prebuilt packages filenames
           cachix # Alternative prebuilt cache for nix
+          devenv
 
           # Ops tools
           sops
@@ -76,61 +77,40 @@
           pigz # parallel gzip
           lz4
 
-          # Nix LSPs
+          # Nix & Nix LSPs
           nixd
-          nixpkgs-fmt
+          nix-output-monitor
+          nix-init
+          nix-update
+          deadnix
+          nixfmt
+          statix
+          
           nurl
           jsonnet-language-server
           buf
-          mise
 
-          # markdown lsp
-          #extraLuaConfig marksman
           # Rust
           rust-analyzer
           cargo-edit
 
           # Microsoft's python LSP
           pyright
-          # nodePackages.typescript-language-server
-          # nodePackages.vscode-langservers-extracted
-
-          # github cli
           gh
-
-          #(update-nix-fetchgit.overrideAttrs(old: {
-          #src = fetchFromGitHub {
-          #owner = "expipiplus1";
-          #repo = "update-nix-fetchgit";
-          #rev = "78133d1b61c05cfe0a251defb3bcd4729fab9513";
-          #sha256 = _;
-          #};
-          #}))
           update-nix-fetchgit
 
-          # Copilot requirement
-          nodejs
-
-          nix-output-monitor
-          nix-init
-          alejandra
-          deadnix
-          nixfmt
-          statix
           entr
           inputs.fzf-nix.packages.${system}.fzf-nix
 
           # TUI file browser
           yazi
-          aichat
-          zellij
         ]
         ++ lib.optionals stdenv.isDarwin [
           coreutils # provides `dd` with --status=progress
         ]
         ++ lib.optionals stdenv.isLinux [
           iputils # provides `ping`, `ifconfig`, ...
-          # aider-chat
+          net-tools # netstat & co
           libuuid # `uuidgen` (already pre-installed on mac)
         ];
     };

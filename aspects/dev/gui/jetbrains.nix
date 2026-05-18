@@ -1,21 +1,13 @@
-_: {
+{
   flake.modules.nixos.dev-gui =
     { pkgs, ... }:
-    let
-      ides = with pkgs; [
+    {
+      environment.systemPackages = with pkgs; [
         jetbrains.webstorm
         jetbrains.goland
         jetbrains.pycharm
         jetbrains.datagrip
         jetbrains.clion
       ];
-    in
-    {
-      # environment.systemPackages =
-      #   with pkgs;
-      #   [
-      #     jetbrains.datagrip
-      #   ]
-      #   ++ builtins.map (ide: (jetbrains.plugins.addPlugins ide [ "ideavim" ])) ides;
     };
 }

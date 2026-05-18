@@ -1,11 +1,5 @@
 { lib, ... }:
 {
-  # Declare inputs used by this aspect for flake-file tracking
-  flake-file.inputs.attic = {
-    url = "github:zhaofengli/attic";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   flake.modules.nixos.services-homelab =
     {
       config,
@@ -17,10 +11,6 @@
       cfg = config.homelab.attic;
     in
     {
-      imports = [
-        # inputs.attic.nixosModules.atticd
-      ];
-
       options.homelab.attic = {
         enable = lib.mkEnableOption "Enable homelab attic configuration";
         domain = lib.mkOption {

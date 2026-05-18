@@ -33,8 +33,7 @@
             shell-wezterm
 
             # Dev
-            dev-git
-            dev-jujutsu
+            dev
 
             # System
             system-common

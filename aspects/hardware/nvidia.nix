@@ -1,4 +1,3 @@
-_:
 {
   flake.aspects.hardware-nvidia.nixos =
     { config, pkgs, ... }:

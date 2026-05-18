@@ -5,7 +5,7 @@
     inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
-  flake.aspects.dev-claude.homeManager =
+  flake.aspects.dev.homeManager =
     { pkgs, config, ... }:
     let
       dotfilesPath = "${config.home.homeDirectory}/nixworld/dotfiles";

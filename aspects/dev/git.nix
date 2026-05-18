@@ -1,6 +1,6 @@
 _:
 {
-  flake.aspects.dev-git.homeManager =
+  flake.aspects.dev.homeManager =
     { pkgs, ... }:
     let
       delta = pkgs.fetchFromGitHub {

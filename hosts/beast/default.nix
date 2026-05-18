@@ -31,11 +31,6 @@
         # Hardware
         hardware-nvidia
 
-        # Infra
-        infra-minikube
-        infra-distributed-builds
-        infra-cachix
-
         # Dev
         dev-gui
 

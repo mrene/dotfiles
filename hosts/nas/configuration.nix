@@ -92,8 +92,7 @@
             core-minimal
             core-ssh
             shell-fish
-            dev-git
-            dev-jujutsu
+            dev
             system-common
             nas
           ];

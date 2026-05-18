@@ -19,7 +19,7 @@ _: {
           zoxide # habitual `cd`
           any-nix-shell # allows using fish for `nix shell`
 
-          # igrep # interactive grep
+          igrep # interactive grep
 
           nvd # nix package diff tool
 

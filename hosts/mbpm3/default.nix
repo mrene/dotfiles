@@ -33,9 +33,7 @@
             shell-wezterm
 
             # Dev
-            dev-git
-            dev-jujutsu
-            dev-claude
+            dev
 
             # Infra
             infra-syncthing

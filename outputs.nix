@@ -6,9 +6,6 @@ inputs@{
   ...
 }:
 let
-  patchNixpkgs = import ./lib/patch-nixpkgs.nix { inherit (inputs.nixpkgs) lib; };
-  patchedInputs = patchNixpkgs.patchInputs inputs;
-
   imports = [
     # Declare global/infrastructure inputs for flake-file
     {
@@ -91,7 +88,7 @@ let
     )
   ];
 in
-flake-parts.lib.mkFlake { inputs = patchedInputs; } {
+flake-parts.lib.mkFlake { inherit inputs; } {
   inherit imports;
   systems = [
     "x86_64-linux"

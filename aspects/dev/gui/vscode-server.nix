@@ -5,7 +5,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  flake.modules.nixos.dev-gui = _: {
+  flake.modules.nixos.dev-gui = {
     imports = lib.optionals (inputs ? vscode-server) [
       inputs.vscode-server.nixosModule
     ];
