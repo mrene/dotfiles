@@ -52,6 +52,12 @@ let
             inputs.nix-darwin.follows = "darwin";
           };
 
+          # Externally-resolved values (e.g. prefetched OCI images)
+          nix-externals = {
+            url = "github:mrene/nix-externals";
+            inputs.nixpkgs.follows = "nixpkgs";
+          };
+
           # Determinate (top-level)
           determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
         };
@@ -62,6 +68,8 @@ let
     flake-aspects.flakeModule
     flake-file.flakeModules.default
     inputs.clan-core.flakeModules.default
+    inputs.nix-externals.flakeModule
+    { perSystem = _: { externals.stateDir = ./_externals; }; }
     ./packages.nix
     ./overlays
     (import-tree ./aspects)
