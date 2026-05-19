@@ -1,5 +1,3 @@
-_:
-
 let
   # Shared module definition for both platforms
   mkFontsModule =

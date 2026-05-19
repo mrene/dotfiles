@@ -1,6 +1,6 @@
 # General
 
-* Name: AP
+* Name: Mathieu
 * Environment:
   * OS: NixOS + MacOS (home manager, nix darwin)
   * Shell: fish
