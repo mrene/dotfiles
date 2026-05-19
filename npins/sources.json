@@ -12,9 +12,9 @@
       "release_prefix": null,
       "submodules": false,
       "version": "2.1.0",
-      "revision": "0000000000000000000000000000000000000000",
+      "revision": "5f8436c4c937f89fe1fcb718027c664505961b3d",
       "url": "https://gitlab.com/api/v4/projects/hydroqc%2Fhydroqc2mqtt/repository/archive.tar.gz?sha=2.1.0",
-      "hash": "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+      "hash": "sha256-tLaoK7MpBCR9pjcAJSgDzyYO9cAz+RDnW4590I1/aQA="
     }
   },
   "version": 7

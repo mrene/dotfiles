@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   perSystem =
     {
@@ -6,8 +7,7 @@
       ...
     }:
     let
-      npins = import ../../../../npins;
-      inherit (npins.hydroqc2mqtt) version;
+      inherit (config.npins.hydroqc2mqtt) version;
     in
     {
       externals.hydroqc2mqtt = {

@@ -70,6 +70,17 @@ let
     inputs.clan-core.flakeModules.default
     inputs.nix-externals.flakeModule
     { perSystem = _: { externals.stateDir = ./_externals; }; }
+    (
+      { lib, ... }:
+      {
+        options.npins = lib.mkOption {
+          type = lib.types.anything;
+          default = import ./npins;
+          readOnly = true;
+          description = "Sources pinned via `npins`, accessible as `config.npins.<name>`.";
+        };
+      }
+    )
     ./packages.nix
     ./overlays
     (import-tree ./aspects)
