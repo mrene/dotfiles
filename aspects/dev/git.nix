@@ -1,13 +1,9 @@
+{ config, ... }:
 {
   flake.aspects.dev.homeManager =
     { pkgs, ... }:
     let
-      delta = pkgs.fetchFromGitHub {
-        owner = "dandavison";
-        repo = "delta";
-        rev = "f85c46ba8b913aa3208af0f3573db90286e56e18";
-        sha256 = "18hbmsq0qsm1j7948r0dk0mvnghagy1r6pgdcfzzgqafjgbg1w27";
-      };
+      inherit (config.npins) delta;
     in
     {
       programs.git = {
