@@ -1,4 +1,3 @@
-{ inputs, ... }:
 {
   flake.modules.nixos.tvpi =
     {
@@ -9,7 +8,7 @@
       ...
     }:
     let
-      hydroqc2mqttImage = pkgs.dockerTools.pullImage (import ../../../../_externals/hydroqc2mqtt.nix);
+      hydroqc2mqttImage = pkgs.dockerTools.pullImage config.externals.hydroqc2mqtt.nixValue;
       hostBasePath = "/opt/homeassistant";
       themes = {
         catppuccin = pkgs.fetchFromGitHub {
@@ -21,7 +20,7 @@
       };
       joinedThemes = pkgs.symlinkJoin {
         name = "home-assistant-themes";
-        paths = (builtins.map (t: "${t}/themes") (builtins.attrValues themes));
+        paths = (map (t: "${t}/themes") (builtins.attrValues themes));
       };
     in
     lib.mkMerge [
