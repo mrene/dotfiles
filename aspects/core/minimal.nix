@@ -1,4 +1,5 @@
-_: {
+{ config, ... }:
+{
   flake.aspects.core-minimal.homeManager =
     { pkgs, ... }:
     {
@@ -59,18 +60,13 @@ _: {
 
         themes =
           let
-            cattpuccin = pkgs.fetchFromGitHub {
-              owner = "catppuccin";
-              repo = "bat";
-              rev = "6810349b28055dce54076712fc05fc68da4b8ec0";
-              sha256 = "1y5sfi7jfr97z1g6vm2mzbsw59j1jizwlmbadvmx842m0i5ak5ll";
-            };
+            inherit (config.npins) catppuccin-bat;
           in
           {
-            Catppuccin-latte.src = "${cattpuccin}/Catppuccin-latte.tmTheme";
-            Catppuccin-frappe.src = "${cattpuccin}/Catppuccin-frappe.tmTheme";
-            Catppuccin-macchiato.src = "${cattpuccin}/Catppuccin-macchiato.tmTheme";
-            Catppuccin-mocha.src = "${cattpuccin}/Catppuccin-mocha.tmTheme";
+            Catppuccin-latte.src = "${catppuccin-bat}/Catppuccin-latte.tmTheme";
+            Catppuccin-frappe.src = "${catppuccin-bat}/Catppuccin-frappe.tmTheme";
+            Catppuccin-macchiato.src = "${catppuccin-bat}/Catppuccin-macchiato.tmTheme";
+            Catppuccin-mocha.src = "${catppuccin-bat}/Catppuccin-mocha.tmTheme";
           };
       };
 
