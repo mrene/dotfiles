@@ -63,13 +63,14 @@ let
         };
       };
     }
+    { debug = true; }
     { flake.flakeModules.default = { inherit imports; }; }
     flake-parts.flakeModules.modules
     flake-aspects.flakeModule
     flake-file.flakeModules.default
     inputs.clan-core.flakeModules.default
     inputs.nix-externals.flakeModule
-    { perSystem = _: { externals.stateDir = ./_externals; }; }
+    { externals.stateDir = ./_externals; }
     (
       { lib, ... }:
       {

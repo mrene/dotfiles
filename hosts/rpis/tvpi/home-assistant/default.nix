@@ -1,4 +1,5 @@
-flakeArgs: {
+flakeParts@{ withSystem, ... }:
+{
   flake.modules.nixos.tvpi =
     {
       pkgs,
@@ -8,8 +9,8 @@ flakeArgs: {
       ...
     }:
     let
-      npins = flakeArgs.config.npins;
-      hydroqc2mqttImage = pkgs.dockerTools.pullImage config.externals.hydroqc2mqtt.nixValue;
+      npins = flakeParts.config.npins;
+      hydroqc2mqttImage = pkgs.dockerTools.pullImage flakeParts.config.externals.hydroqc2mqtt.nixValue;
       hostBasePath = "/opt/homeassistant";
       themes = {
         catppuccin = npins.catppuccin-home-assistant;
