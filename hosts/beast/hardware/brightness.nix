@@ -1,4 +1,4 @@
-_: {
+flakeArgs: {
   flake.modules.nixos.beast =
     {
       config,
@@ -17,12 +17,7 @@ _: {
               ddcci-driver = super.linuxPackages_latest.ddcci-driver.overrideAttrs (oldAttrs: {
                 version = super.linuxPackages_latest.ddcci-driver.version + "-FIXED";
 
-                src = pkgs.fetchFromGitLab {
-                  owner = "ddcci-driver-linux";
-                  repo = "ddcci-driver-linux";
-                  rev = "0233e1ee5eddb4b8a706464f3097bad5620b65f4";
-                  hash = "sha256-Osvojt8UE+cenOuMoSY+T+sODTAAKkvY/XmBa5bQX88=";
-                };
+                src = flakeArgs.config.npins.ddcci-driver-linux;
 
                 patches = [
                   (pkgs.fetchpatch {
