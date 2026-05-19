@@ -54,9 +54,6 @@
             # Shell
             shell-fish
 
-            # Dev
-            dev-git
-
             # System
             system-common
 

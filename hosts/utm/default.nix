@@ -16,7 +16,6 @@
 
     system-common-packages
 
-    infra-minikube
     infra-vm-user
 
     utm

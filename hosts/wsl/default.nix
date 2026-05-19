@@ -15,9 +15,6 @@
 
     system-common-packages
 
-    infra-distributed-builds
-    infra-cachix
-
     wsl
     config.flake.nixosModules.overlay
     config.flake.nixosModules.hmUnstable

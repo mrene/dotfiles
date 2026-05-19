@@ -35,7 +35,6 @@
           services-sops
           services-restic
           services-dyndns
-          services-prs
           ;
       })
       ++ [
