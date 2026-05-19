@@ -1,6 +1,9 @@
-_: {
+flakeArgs: {
   flake.aspects.shell-fish.homeManager =
     { config, pkgs, ... }:
+    let
+      inherit (flakeArgs.config) npins;
+    in
     {
       programs.fish = {
         enable = true;
@@ -70,50 +73,25 @@ _: {
         plugins = [
           {
             name = "bobthefish";
-            src = pkgs.fetchFromGitHub {
-              owner = "oh-my-fish";
-              repo = "theme-bobthefish";
-              rev = "c5efbe05aed81b201454c0ae1190ba91ea1970ac";
-              sha256 = "1m98g825zjr3l2jr7gqh7glabaqrm0by9l2z5l4a9spjggixsrfp";
-            };
+            src = npins.theme-bobthefish;
           }
           {
             name = "fish-docker";
-            src = pkgs.fetchFromGitHub {
-              owner = "halostatue";
-              repo = "fish-docker";
-              rev = "4eaabc8df954b1fafb3efcc10545b9c7c2dc4c55";
-              sha256 = "1hgn1ly1q0a0cbq8lihrrg4m3kclr8xp1n4yx9150v701cqfa6my";
-            };
+            src = npins.fish-docker;
           }
           {
             name = "cattpuccin";
-            src = pkgs.fetchFromGitHub {
-              owner = "catppuccin";
-              repo = "fish";
-              rev = "5fc5ae9c2ec22eb376cb03ce76f0d262a38960f3";
-              sha256 = "19qd700wj0h7k68fs27qa1b1qzs8ccd8rw6qpml3ccyffxhmd8yw";
-            };
+            src = npins.catppuccin-fish;
           }
           {
             name = "fzf-fish";
-            src = pkgs.fetchFromGitHub {
-              owner = "PatrickF1";
-              repo = "fzf.fish";
-              rev = "f9e2e48a54199fe7c6c846556a12003e75ab798e";
-              hash = "sha256-CqRSkwNqI/vdxPKrShBykh+eHQq9QIiItD6jWdZ/DSM=";
-            };
+            src = npins.fzf-fish;
           }
           {
             # Syncs fish_completion_path from XDG_DATA_DIR, this makes completions
             # work with direnv (if the package is added to nativeBuildInputs)
             name = "fish-completion-sync";
-            src = pkgs.fetchFromGitHub {
-              owner = "pfgray";
-              repo = "fish-completion-sync";
-              rev = "f75ed04e98b3b39af1d3ce6256ca5232305565d8";
-              hash = "sha256-wmtMUVi/NmbvJtrPbORPhAwXgnILvm4rjOtjl98GcWA=";
-            };
+            src = npins.fish-completion-sync;
           }
           {
             name = "bass";
