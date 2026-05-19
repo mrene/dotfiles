@@ -76,10 +76,6 @@ flakeArgs: {
             src = npins.theme-bobthefish;
           }
           {
-            name = "fish-docker";
-            src = npins.fish-docker;
-          }
-          {
             name = "cattpuccin";
             src = npins.catppuccin-fish;
           }

@@ -1,23 +1,17 @@
 { inputs, lib, ... }:
 {
-  flake-file.inputs.llm-agents = {
-    url = "github:numtide/llm-agents.nix";
-    inputs.nixpkgs.follows = "nixpkgs-unstable";
-  };
-
   flake.aspects.dev.homeManager =
     { pkgs, config, ... }:
     let
       dotfilesPath = "${config.home.homeDirectory}/nixworld/dotfiles";
 
-      # Symlink config files from the dotfiles repo so claude can edit them in place
       mkClaudeConfSymlinks =
-        paths:
+        basePath: paths:
         lib.listToAttrs (
           map (path: {
             name = ".claude/${path}";
             value = {
-              source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/aspects/dev/claude/${path}";
+              source = config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/aspects/${basePath}/${path}";
             };
           }) paths
         );
@@ -143,15 +137,18 @@
       };
     in
     lib.optionalAttrs (inputs ? llm-agents) {
-      home.file = mkClaudeConfSymlinks [
-        "settings.json"
-        "commands"
-        "docs"
-        "agents"
-        "skills"
-        "CLAUDE.md"
-        "statusline.sh"
-      ];
+      home.file =
+        (mkClaudeConfSymlinks "dev/claude" [
+          "settings.json"
+          "commands"
+          "agents"
+          "CLAUDE.md"
+          "statusline.sh"
+        ])
+        // (mkClaudeConfSymlinks "dev/llm/shared" [
+          "docs"
+          "skills"
+        ]);
 
       home.packages = [
         claude-sandboxed

@@ -35,9 +35,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "e877188ca467e7bbe8991440f6b5f6b3d30347fc",
-      "url": "https://github.com/catppuccin/home-assistant/archive/e877188ca467e7bbe8991440f6b5f6b3d30347fc.tar.gz",
-      "hash": "sha256-eUqYlaXNLPfaKn3xcRm5AQwTOKf70JF8cepibBb9KXc="
+      "revision": "b37ada06d011fe02d487719b06e70e98ded76149",
+      "url": "https://github.com/catppuccin/home-assistant/archive/b37ada06d011fe02d487719b06e70e98ded76149.tar.gz",
+      "hash": "sha256-+m6lWer9a4AwmTgckhSHOKd0Oo6x9N0jjza4/F0ye3E="
     },
     "ddcci-driver-linux": {
       "type": "Git",
@@ -48,9 +48,9 @@
       },
       "branch": "master",
       "submodules": false,
-      "revision": "0233e1ee5eddb4b8a706464f3097bad5620b65f4",
-      "url": "https://gitlab.com/api/v4/projects/ddcci-driver-linux%2Fddcci-driver-linux/repository/archive.tar.gz?sha=0233e1ee5eddb4b8a706464f3097bad5620b65f4",
-      "hash": "sha256-Osvojt8UE+cenOuMoSY+T+sODTAAKkvY/XmBa5bQX88="
+      "revision": "bbb7553373f815d78e93a4a9f071ce968563694a",
+      "url": "https://gitlab.com/api/v4/projects/ddcci-driver-linux%2Fddcci-driver-linux/repository/archive.tar.gz?sha=bbb7553373f815d78e93a4a9f071ce968563694a",
+      "hash": "sha256-fQjsDjbtFKhs0bUCFfKRgCg516TXdwIkhKEbIISjgs0="
     },
     "delta": {
       "type": "Git",
@@ -78,19 +78,6 @@
       "url": "https://github.com/pfgray/fish-completion-sync/archive/f75ed04e98b3b39af1d3ce6256ca5232305565d8.tar.gz",
       "hash": "sha256-wmtMUVi/NmbvJtrPbORPhAwXgnILvm4rjOtjl98GcWA="
     },
-    "fish-docker": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "halostatue",
-        "repo": "fish-docker"
-      },
-      "branch": "master",
-      "submodules": false,
-      "revision": "4eaabc8df954b1fafb3efcc10545b9c7c2dc4c55",
-      "url": "https://github.com/halostatue/fish-docker/archive/4eaabc8df954b1fafb3efcc10545b9c7c2dc4c55.tar.gz",
-      "hash": "sha256-vhrlMAvgbFBC6p7YcDvKlM1RycsZRorwYkABHDwN9sE="
-    },
     "fzf-fish": {
       "type": "Git",
       "repository": {
@@ -100,9 +87,9 @@
       },
       "branch": "main",
       "submodules": false,
-      "revision": "f9e2e48a54199fe7c6c846556a12003e75ab798e",
-      "url": "https://github.com/PatrickF1/fzf.fish/archive/f9e2e48a54199fe7c6c846556a12003e75ab798e.tar.gz",
-      "hash": "sha256-CqRSkwNqI/vdxPKrShBykh+eHQq9QIiItD6jWdZ/DSM="
+      "revision": "0069dbbe06cc05482bfb13063b4b4eac26318992",
+      "url": "https://github.com/PatrickF1/fzf.fish/archive/0069dbbe06cc05482bfb13063b4b4eac26318992.tar.gz",
+      "hash": "sha256-H7HgYT+okuVXo2SinrSs+hxAKCn4Q4su7oMbebKd/7s="
     },
     "hydroqc2mqtt": {
       "type": "GitRelease",
@@ -144,10 +131,10 @@
       "version_upper_bound": null,
       "release_prefix": null,
       "submodules": false,
-      "version": "1.18.0",
-      "revision": "58d5c5e5589b6f9a053b95817cbbe79d28e6efcd",
-      "url": "https://api.github.com/repos/smartHomeHub/SmartIR/tarball/refs/tags/1.18.0",
-      "hash": "sha256-Sy1wxVUApKWm9TlDia2Gwd+mIi7WbDkzJrAtyb0tTbM="
+      "version": "1.18.1",
+      "revision": "878df57d82cca1a458fab2de491de3dd6e670771",
+      "url": "https://api.github.com/repos/smartHomeHub/SmartIR/tarball/refs/tags/1.18.1",
+      "hash": "sha256-gi5xlBOY6ek5roQKNqL7I0jrmJNPrxHHwEqOB/n2Itk="
     },
     "theme-bobthefish": {
       "type": "Git",
