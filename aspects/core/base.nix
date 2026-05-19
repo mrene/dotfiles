@@ -2,7 +2,6 @@
 {
   flake.aspects.core-base.nixos =
     {
-      config,
       pkgs,
       inputs,
       ...

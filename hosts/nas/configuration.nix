@@ -1,11 +1,10 @@
-{ inputs, ... }:
+{ ... }:
 {
   flake.modules.nixos.nas =
     {
       pkgs,
       common,
       inputs,
-      config,
       self,
       ...
     }:

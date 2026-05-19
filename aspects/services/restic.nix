@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   flake.aspects.services-restic.nixos =
-    { config, pkgs, ... }:
+    { config, ... }:
     let
       cfg = config.homelab.backups;
     in

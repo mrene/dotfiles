@@ -1,8 +1,7 @@
-{ inputs, ... }:
+{ ... }:
 {
   flake.modules.nixos.tvpi =
     {
-      lib,
       config,
       pkgs,
       common,

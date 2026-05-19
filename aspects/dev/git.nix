@@ -1,10 +1,7 @@
 { config, ... }:
 {
   flake.aspects.dev.homeManager =
-    { pkgs, ... }:
-    let
-      inherit (config.npins) delta;
-    in
+    { ... }:
     {
       programs.git = {
         enable = true;

@@ -18,7 +18,6 @@
 
   perSystem =
     {
-      system,
       pkgs,
       inputs',
       ...

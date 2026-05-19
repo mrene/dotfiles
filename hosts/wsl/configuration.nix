@@ -1,8 +1,7 @@
-{ inputs, ... }:
+{ ... }:
 {
   flake.modules.nixos.wsl =
     {
-      config,
       lib,
       pkgs,
       inputs,

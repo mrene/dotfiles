@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ ... }:
 {
   flake.modules.darwin.mbpm3 =
     {
@@ -8,9 +8,6 @@
       self,
       ...
     }:
-    let
-      flakes = lib.filterAttrs (_: v: (v._type or "") == "flake") inputs;
-    in
     {
       imports = [ inputs.determinate.darwinModules.default ];
       nixpkgs.hostPlatform = "aarch64-darwin";

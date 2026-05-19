@@ -11,10 +11,10 @@ flakeArgs: {
       # https://gitlab.com/ddcci-driver-linux/ddcci-driver-linux/-/merge_requests/17
       # Fix ddcci on 6.11+ (temporary until the patch is merged and nixpkgs switches to a newer version)
       nixpkgs.overlays = [
-        (self: super: {
+        (_self: super: {
           linuxPackages_latest = super.linuxPackages_latest.extend (
-            lpself: lpsuper: {
-              ddcci-driver = super.linuxPackages_latest.ddcci-driver.overrideAttrs (oldAttrs: {
+            _lpself: _lpsuper: {
+              ddcci-driver = super.linuxPackages_latest.ddcci-driver.overrideAttrs (_oldAttrs: {
                 version = super.linuxPackages_latest.ddcci-driver.version + "-FIXED";
 
                 src = flakeArgs.config.npins.ddcci-driver-linux;

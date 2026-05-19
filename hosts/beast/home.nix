@@ -1,10 +1,9 @@
-{ inputs, ... }:
+{ ... }:
 {
   flake.modules.homeManager.beast =
     {
       lib,
       pkgs,
-      inputs,
       ...
     }:
     {

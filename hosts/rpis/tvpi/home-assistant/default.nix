@@ -1,4 +1,4 @@
-flakeParts@{ withSystem, ... }:
+flakeParts@{ ... }:
 {
   flake.modules.nixos.tvpi =
     {

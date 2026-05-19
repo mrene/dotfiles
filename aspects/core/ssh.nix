@@ -1,6 +1,6 @@
 _: {
   flake.aspects.core-ssh.homeManager =
-    { config, ... }:
+    { ... }:
     let
       tailscaleDNS = name: name + ".tailc705a.ts.net";
     in

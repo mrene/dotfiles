@@ -93,7 +93,7 @@ let
       let
         allTopLevels = (
           inputs.nixpkgs.lib.mapAttrsToList (
-            k: v: v.config.system.build.toplevel.drvPath
+            _k: v: v.config.system.build.toplevel.drvPath
           ) config.flake.nixosConfigurations
         );
       in
