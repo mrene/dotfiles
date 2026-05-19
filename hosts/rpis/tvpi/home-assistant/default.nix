@@ -9,7 +9,7 @@
       ...
     }:
     let
-      sources = pkgs.callPackage ../../../../_sources { };
+      hydroqc2mqttImage = pkgs.dockerTools.pullImage (import ../../../../_externals/hydroqc2mqtt.nix);
       hostBasePath = "/opt/homeassistant";
       themes = {
         catppuccin = pkgs.fetchFromGitHub {
@@ -29,7 +29,7 @@
       {
         virtualisation.oci-containers.containers = {
           hydroqc2mqtt = {
-            image = sources.dockerImageUrl "hydroqc2mqtt";
+            image = hydroqc2mqttImage.sourceURL;
             environment = {
               TZ = "America/Montreal";
               CONFIG_YAML = "/config/config.yaml";

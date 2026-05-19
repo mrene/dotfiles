@@ -1,0 +1,21 @@
+{
+  "pins": {
+    "hydroqc2mqtt": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitLab",
+        "repo_path": "hydroqc/hydroqc2mqtt",
+        "server": "https://gitlab.com/"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "submodules": false,
+      "version": "2.1.0",
+      "revision": "0000000000000000000000000000000000000000",
+      "url": "https://gitlab.com/api/v4/projects/hydroqc%2Fhydroqc2mqtt/repository/archive.tar.gz?sha=2.1.0",
+      "hash": "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+    }
+  },
+  "version": 7
+}

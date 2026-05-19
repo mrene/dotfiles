@@ -53,6 +53,10 @@
       url = "github:mrene/nur-packages";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    nix-externals = {
+      url = "github:mrene/nix-externals";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs-unstable";

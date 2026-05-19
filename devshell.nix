@@ -28,7 +28,7 @@
         commands = [
           {
             name = "update-all";
-            command = "update-git && update-sources && update-flake";
+            command = "update-git && update-pins && update-externals && update-flake";
             help = "Run all update commands";
           }
           {
@@ -47,16 +47,21 @@
             help = "<package> Updates local package (from packages/) using nix-update";
           }
           {
-            name = "update-sources";
-            command = "nvfetcher";
-            help = "Updates all sources defined in nvfetcher.toml";
+            name = "update-pins";
+            command = "npins --directory $PRJ_ROOT/npins update";
+            help = "Update npins-managed sources";
+          }
+          {
+            name = "update-externals";
+            command = "nix run $PRJ_ROOT#externals-run";
+            help = "Materialize entries in _externals/ whose cacheKey changed";
           }
         ];
 
         packages = [
           inputs'.nix-update.packages.default
           inputs'.clan-core.packages.default
-          pkgs.nvfetcher
+          pkgs.npins
           pkgs.sops
           pkgs.ssh-to-age
           pkgs.age
