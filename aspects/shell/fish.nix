@@ -43,7 +43,7 @@ flakeArgs: {
                 eval (direnv hook fish)
             end
 
-            # Enable zoxice `z` (https://github.com/ajeetdsouza/zoxide)
+            # Enable zoxide `z` (https://github.com/ajeetdsouza/zoxide)
             if command -v zoxide &>/dev/null
               zoxide init fish | source
             end
