@@ -1,4 +1,4 @@
-{
+flakeArgs: {
   flake.modules.nixos.tvpi =
     {
       pkgs,
@@ -8,15 +8,11 @@
       ...
     }:
     let
+      npins = flakeArgs.config.npins;
       hydroqc2mqttImage = pkgs.dockerTools.pullImage config.externals.hydroqc2mqtt.nixValue;
       hostBasePath = "/opt/homeassistant";
       themes = {
-        catppuccin = pkgs.fetchFromGitHub {
-          owner = "catppuccin";
-          repo = "home-assistant";
-          rev = "e877188ca467e7bbe8991440f6b5f6b3d30347fc";
-          hash = "sha256-eUqYlaXNLPfaKn3xcRm5AQwTOKf70JF8cepibBb9KXc=";
-        };
+        catppuccin = npins.catppuccin-home-assistant;
       };
       joinedThemes = pkgs.symlinkJoin {
         name = "home-assistant-themes";
@@ -182,13 +178,8 @@
             smartthinq-sensors
             adaptive_lighting
             (smartir.overrideAttrs {
-              version = "1.18.0";
-              src = pkgs.fetchFromGitHub {
-                owner = "smartHomeHub";
-                repo = "SmartIR";
-                rev = "1.18.0";
-                hash = "sha256-Sy1wxVUApKWm9TlDia2Gwd+mIi7WbDkzJrAtyb0tTbM=";
-              };
+              version = npins.smartir.version;
+              src = npins.smartir;
               patches = [ ./smartir-remove-distutils.diff ];
               postInstall = ''
                 cp -r codes $out/custom_components/smartir/
