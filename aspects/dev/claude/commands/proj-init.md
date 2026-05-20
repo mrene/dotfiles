@@ -6,18 +6,17 @@ argument-hint: [task-description]
 
 # Project Initialization
 
-Create project folder with project doc and phase doc(s). Structure from @/.claude/docs/project-doc.md.
+Create project folder with project doc and phase doc(s). Structure follows project-doc.md rules.
 
 Task: $ARGUMENTS
 Current date: !`date +%Y/%m/%d`
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. 🔳 Load `proj-editing` skill using the `Skill` tool
-   - Read @/.claude/docs/project-doc.md completely for full understanding of doc structure
+   - Reference the project-doc.md rules for the standard structure
 
 3. 🔳 Ensure **high level** task description is clear so that we can name it properly
    - If empty, use `AskUserQuestion` to clarify
@@ -25,7 +24,7 @@ Current date: !`date +%Y/%m/%d`
 
 4. 🔳 Set up project folder
    - Derive name from `jj-current-branch`, confirm with `AskUserQuestion`
-   - Create directory per `File Location` in @/.claude/docs/project-doc.md
+   - Create directory per `File Location` in the project-doc rules
    - Create symlink: `ln -s <project-folder> proj`
    - Commit symlink: `jj commit -m "private: proj - <project-name>"`
 
@@ -36,12 +35,12 @@ Current date: !`date +%Y/%m/%d`
      - Update docs after each clarification
 
 6. 🔳 Create project doc (00-<name>.md)
-   - Follow project doc structure from @/.claude/docs/project-doc.md
+   - Follow the project-doc.md rules for project doc structure
    - Add phase references in Phases section
 
 7. 🔳 Create phase doc(s) (01-<name>.md, etc.)
-   - Follow phase doc structure from @/.claude/docs/project-doc.md
+   - Follow the project-doc.md rules for phase doc structure
    - Confirm phase name(s) with `AskUserQuestion`
    - Commit docs: `jj commit -m "private: claude: docs - <project-name>"`
 
-8. **STOP AND WAIT** - User decides when to `/implement`
+8. **GATE**: User decides when to `/implement`

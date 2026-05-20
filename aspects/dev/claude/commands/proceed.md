@@ -12,8 +12,7 @@ After instructions & tasks loaded, you are free to 🚀 Engage thrusters
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. 🔳 Clear gate tasks
    - Check `TaskList` for any "Await /proceed" tasks

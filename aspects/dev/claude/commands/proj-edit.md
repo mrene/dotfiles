@@ -12,8 +12,7 @@ Target: `$ARGUMENTS`
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. 🔳 Load skills using the `Skill` tool
    - `proj-editing` - for doc structure and validation
@@ -34,6 +33,6 @@ Target: `$ARGUMENTS`
 5. 🔳 Report proposed changes
    - Show before/after for each change
 
-6. **STOP AND WAIT** - Await `/proceed` confirmation before applying changes
+6. **GATE**: Await `/proceed` before applying changes
 
 7. 🔳 Apply with proj-editing skill

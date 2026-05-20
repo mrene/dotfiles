@@ -1,6 +1,7 @@
 ---
 name: ctx-improve
 description: Improve context by asking clarifying questions
+effort: xhigh
 ---
 
 # Improve Context
@@ -11,8 +12,7 @@ Important: any modifications to project or phase docs need to be done via `proj-
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. 🔳 Check current understanding
    - If 10/10 understanding, tell me and stop here
@@ -34,6 +34,7 @@ Important: any modifications to project or phase docs need to be done via `proj-
 5. 🔳 Update project doc
    - If working on a planned task, update with new context
    - Add/update requirements as R-numbered items (R1, R2, R1.1) for task traceability
+   - Add ACs to tasks: specific verifiable conditions that define done per task
    - Requirements describe behavior (WHAT), not implementation (HOW)
 
 6. Report 10/10 understanding achieved. User decides next action (may run /implement, /ctx-plan, or give direction).

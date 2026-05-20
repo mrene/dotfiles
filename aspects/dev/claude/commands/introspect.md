@@ -2,6 +2,7 @@
 name: introspect
 description: Reflect on an error or undesired behavior to propose instruction improvements
 argument-hint: [description of issue]
+effort: xhigh
 ---
 
 # Introspect
@@ -12,8 +13,7 @@ Issue: `$ARGUMENTS`
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. If issue empty, use `AskUserQuestion` to get description
 

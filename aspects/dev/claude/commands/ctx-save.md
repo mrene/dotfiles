@@ -1,6 +1,7 @@
 ---
 name: ctx-save
 description: Update project and phase docs with current state and progress
+effort: medium
 ---
 
 # Save Context
@@ -12,8 +13,7 @@ Project files: !`claude-proj-docs`
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. 🔳 Load `proj-editing` skill using the `Skill` tool
       It's is crucial to use this skill to edit project and phase docs and strictly follow the
@@ -24,6 +24,7 @@ Project files: !`claude-proj-docs`
 4. 🔳 Update current phase doc(s):
    * Tasks: mark completed `[x]`, add new tasks discovered
      * If all done, confirmed via `AskUserQuestion`, update phase in next step
+   * Capture unresolved uncertainties and completed investigations in Questions & Investigations section
    * Files: update with changes
      * Use `branch-diff-summarizer` agent if needed not aware of files or may be missing some from
        your context)
@@ -36,7 +37,7 @@ Project files: !`claude-proj-docs`
    * Requirements
      * Read current requirements carefully
      * Update or add new ones if needed based on work done
-   * Questions
+   * Questions & Investigations
      * Add resolved questions if any
      * Add new questions if arose during work
    * Phases

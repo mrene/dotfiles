@@ -11,8 +11,7 @@ Must have imported comments using `pr-import-comments` command first.
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. 🔳 Find imported comments
    - Search for REVIEW: pr-import-comments pattern:

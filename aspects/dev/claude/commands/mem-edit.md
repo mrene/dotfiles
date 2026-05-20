@@ -12,8 +12,7 @@ Target: `$ARGUMENTS`
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. 🔳 Load skills using the `Skill` tool
     * `mem-editing` - editing guidelines and supporting files
@@ -28,7 +27,7 @@ Target: `$ARGUMENTS`
    * Apply `mem-editing` guidelines: check for ambiguity, cross-file conflicts, redundancy
    * Use the `<deep-thinking>` procedure
 
-5. **STOP AND WAIT** - Await `/proceed` confirmation before applying changes
+5. **GATE**: Await `/proceed` before applying changes
 
 6. 🔳 Apply changes
    * Follow `mem-editing` guidelines during edits

@@ -1,6 +1,7 @@
 ---
 name: review-plan
 description: Research REVIEW comments, present plan, then fix after /implement
+effort: xhigh
 ---
 
 # Plan and Fix Review Comments
@@ -14,23 +15,24 @@ They aren't left for future consideration nor to be ignored.
 
 ### Phase 1: Plan
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. 🔳 Ensure REVIEW comments found
-   - Use `/review-search` unless we just searched
-   - If launching via forked, ask agents to use `/review-search`
+   - Follow the searching procedure from the reviewing doc unless we just searched
+   - If launching via forked, ask agents to follow the same procedure
      Never roll your own search
 
 3. 🔳 Research each comment
    - Read surrounding code to understand the issue
    - Check related files if change has broader impact
    - Identify dependencies between review items
+   - Identify if any comment is invalid or debatable
 
 4. 🔳 Categorize and prioritize
    - **Priority**: High (critical/security), Medium (important), Low (minor/stylistic)
    - **Effort**: Quick Win, Moderate, Extensive
    - **Dependencies**: Note order requirements
+   - **Validity**: If you believe a comment is invalid or debatable, explain why and let user decide
 
 5. 🔳 Check requirements
    - Verify fixes don't contradict existing requirements
@@ -42,7 +44,7 @@ They aren't left for future consideration nor to be ignored.
 7. 🔳 Present plan
    - Show prioritized list with research findings
 
-8. **STOP AND WAIT** - Wait for `/implement`
+8. **GATE**: Wait for `/implement`
 
 ### Phase 2: Execute
 

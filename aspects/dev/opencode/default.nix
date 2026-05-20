@@ -175,14 +175,14 @@
       opencodePkg = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
 
       nonoOpencode = pkgs.writeShellScriptBin "nono-opencode" ''
-        export OPENCODE_ENABLE_EXA=1
+        # export OPENCODE_ENABLE_EXA=1
         export OPENCODE_DISABLE_CLAUDE_CODE_SKILLS=1
         export OPENCODE_CONFIG=${nonoOpencodeJson}
-        exec ${nonoPkg}/bin/nono shell --allow-cwd -p ${nonoProfile} -- ${opencodePkg}/bin/opencode "$@"
+        exec ${nonoPkg}/bin/nono run --allow-cwd -p ${nonoProfile} -- ${opencodePkg}/bin/opencode "$@"
       '';
 
       opencode = pkgs.writeShellScriptBin "opencode" ''
-        export OPENCODE_ENABLE_EXA=1
+        # export OPENCODE_ENABLE_EXA=1
         export OPENCODE_DISABLE_CLAUDE_CODE_SKILLS=1
         exec ${opencodePkg}/bin/opencode "$@"
       '';

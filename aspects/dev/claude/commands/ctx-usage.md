@@ -12,8 +12,7 @@ Complements `/context` which covers static categories (memory files, skills, age
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. 🔳 Verify `/context` was run
    - Look in conversation history for `/context` output (local-command-stdout with token breakdown)

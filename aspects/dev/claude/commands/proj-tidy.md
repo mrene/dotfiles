@@ -1,22 +1,21 @@
 ---
 name: proj-tidy
 description: Validate and fix project doc consistency against standard structure
-context: fork
+effort: xhigh
 ---
 
 # Project Tidy
 
-Validate project doc against standard structure in @~/.claude/docs/project-doc.md and fix inconsistencies.
+Validate project doc against the standard structure (per project-doc rules) and fix inconsistencies.
 
 Current project files: !`claude-proj-docs`
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. 🔳 Load `proj-editing` skill using the `Skill` tool
-   - Read @~/.claude/docs/project-doc.md completely for standard structure reference
+   - Reference the project-doc.md rules for the standard structure
 
 3. 🔳 Read project docs
    - Read project doc (`00-*.md`) and all phase docs (`01-*.md`, etc.)
@@ -32,6 +31,7 @@ Current project files: !`claude-proj-docs`
    - Flag overlapping requirements as potential conflicts
    - Phase doc requirements must derive from parent R-numbers (e.g., `R5.A:` not `R1:`)
    - Project doc references phase doc when phase expands requirements
+   - Tasks without AC sub-items: warn if tasks lack acceptance criteria
 
 6. 🔳 Check completable items
    - Flag phases where all tasks `[x]` but phase still 🔄

@@ -2,33 +2,36 @@
 name: think
 description: Trigger deep thinking mode for complex problems
 argument-hint: [problem or context]
+effort: xhigh
 ---
 
-# Deep Think
+# Think
 
-Enter a state of thorough, rigorous thinking. Use when tackling complex problems or when shallow
-thinking isn't cutting it.
+Thorough, rigorous analysis for complex problems where shallow thinking isn't cutting it.
+
+**NEVER**: Never modify files, run side-effect commands, or start implementation
 
 Context: `$ARGUMENTS`
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
-Apply all steps in `deep-thinking` block, then:
+2. If context empty or unclear, use `AskUserQuestion` to clarify
 
-2. **Understand the ACTUAL problem**: What is really being asked? What would success look like?
+3. 🔳 Research and understand
+   * Apply <deep-thinking> procedure
+   * Use sub-agents to explore codebase, read files, do research
+   * What is really being asked? What would success look like?
+   * Map full scope: files involved, related files, cross-file concepts
 
-3. **Map the full scope**: Files involved, potentially related files, cross-file concepts
+4. 🔳 Analyze and evaluate
+   * Question assumptions: what haven't you verified? Simplest explanation?
+   * Consider 2-3 alternative approaches, why one is better
+   * Draft solution mentally, then critique it. What could go wrong?
 
-4. **Question assumptions**: What haven't you verified? Simplest explanation? Over/under-complicating?
+5. 🔳 Present findings with structure
+   * Show reasoning, what was considered, why this approach
+   * Challenge assumptions
 
-5. **Consider alternatives**: 2-3 other approaches, why yours is better
-
-6. **Draft, then critique**: Write solution mentally, attack it. What could go wrong?
-
-7. **Present with structure**: Show reasoning. What did you consider? Why this approach?
-
-**DO NOT**: Modify files, run side-effect commands, or start implementation. This command is for
-THINKING, not DOING. Present findings and await user direction.
+6. **STOP**: User will decide next steps

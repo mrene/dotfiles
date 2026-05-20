@@ -2,6 +2,7 @@
 name: ask
 description: Think about a topic and provide feedback without acting
 argument-hint: [question or topic]
+effort: high
 ---
 
 # Ask
@@ -12,8 +13,7 @@ Provide thoughtful analysis on a given question or topic without taking further 
 
 ## Instructions
 
-1. STOP, follow pre-flight instructions
-   THEN, continue
+1. Pre-flight then continue
 
 2. If topic empty or unclear, use `AskUserQuestion` to clarify
 
