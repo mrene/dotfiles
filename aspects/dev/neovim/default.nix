@@ -204,7 +204,7 @@ in
         withRuby = false;
 
         inherit (neovimConfig) plugins extraPackages;
-        extraLuaConfig = neovimConfig.luaConfig;
+        initLua = neovimConfig.luaConfig;
       };
 
       # Force load after the rest

@@ -251,7 +251,7 @@
       ];
 
       # Attempt at stopping LLMNR resolution from getting non-interface-qualified link-local ipv6
-      services.resolved.llmnr = "false";
+      services.resolved.settings.Resolve.LLMNR = "false";
 
       system.stateVersion = "22.11";
     };

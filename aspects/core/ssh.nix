@@ -9,7 +9,7 @@ _: {
         enable = true;
         enableDefaultConfig = false;
 
-        matchBlocks = {
+        settings = {
           "*" = {
             # Default SSH configuration
             hashKnownHosts = true;

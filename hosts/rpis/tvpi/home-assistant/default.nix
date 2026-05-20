@@ -188,8 +188,8 @@ flakeParts@{ ... }:
                 cp -s ${./9998.json} $out/custom_components/smartir/codes/fan/9998.json
               '';
             })
-            inputs.mrene-nur.packages.${pkgs.system}.connectlife-ha
-            inputs.mrene-nur.packages.${pkgs.system}.ha-bambulab
+            inputs.mrene-nur.packages.${pkgs.stdenv.hostPlatform.system}.connectlife-ha
+            inputs.mrene-nur.packages.${pkgs.stdenv.hostPlatform.system}.ha-bambulab
           ];
           customLovelaceModules =
             (with pkgs.home-assistant-custom-lovelace-modules; [
@@ -199,7 +199,7 @@ flakeParts@{ ... }:
               universal-remote-card
               card-mod
             ])
-            ++ (with inputs.mrene-nur.packages.${pkgs.system}; [
+            ++ (with inputs.mrene-nur.packages.${pkgs.stdenv.hostPlatform.system}; [
               clock-weather-card
               lovelace-auto-entities
               lovelace-slider-entity-row
