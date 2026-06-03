@@ -26,7 +26,7 @@ writeShellApplication {
       --tmpfs /run \
       --ro-bind /run/current-system /run/current-system \
       --ro-bind /run/systemd/resolve /run/systemd/resolve -- \
-      sh -c 'mkdir -p /run/user/$(id -u) && nono shell --allow-cwd -p ${profile} "$@"' -- "$@"
+      sh -c 'mkdir -p /run/user/$(id -u) && nono run --allow-cwd -p ${profile} "$@"' -- "$@"
   '';
 
   meta = {

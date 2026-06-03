@@ -207,7 +207,6 @@
       home.packages = [
         nonoOpencode
         opencode
-        nonoPkg
       ];
     };
 }

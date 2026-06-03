@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ inputs, lib, ... }:
 {
   flake.aspects.dev.homeManager =
     { pkgs, config, ... }:
@@ -30,7 +30,7 @@
         ) cfg.profiles;
 
         home.packages = [
-          pkgs.nono
+          inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.nono
         ];
 
         dotfiles.nono.profiles.coding-agent = {

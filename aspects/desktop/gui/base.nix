@@ -22,6 +22,7 @@ _: {
           wezterm
           flameshot # Screenshot software
           simplescreenrecorder
+          vlc
 
           keybase
 

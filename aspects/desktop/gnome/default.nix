@@ -39,29 +39,12 @@
 
       dconf.settings = with lib.gvariant; {
         "org/gnome/shell" = {
-
           favorite-apps = [
             "org.wezfurlong.wezterm.desktop"
             "Logseq.desktop"
             "slack.desktop"
             "google-chrome.desktop"
           ];
-
-          # should be managed by programs.gnome-shells.extensions
-          # disable-user-extensions = false;
-          # `gnome-extensions list` for a list
-          # enabled-extensions = [
-          #   "tilingshell@ferrarodomenico.com"
-          #   "user-theme@gnome-shell-extensions.gcampax.github.com"
-          #   "trayIconsReloaded@selfmade.pl"
-          #   "Vitals@CoreCoding.com"
-          #   "dash-to-panel@jderose9.github.com"
-          #   "sound-output-device-chooser@kgshank.net"
-          #   "space-bar@luchrioh"
-          #   "disable-workspace-animation@ethnarque"
-          #   "alttab-mod@leleat-on-github"
-          #   "smart-home@chlumskyvaclav.gmail.com"
-          # ];
         };
 
         # Disable middle click paste
@@ -208,7 +191,6 @@
           { package = gnomeExtensions.disable-workspace-animation; }
           { package = gnomeExtensions.smart-home; }
           { package = gnomeExtensions.advanced-alttab-window-switcher; }
-          { package = gnomeExtensions.set-monitor-ddc-brightnesscontrast-extra-dimming; }
           { package = gnomeExtensions.panel-date-format; }
           { package = gnomeExtensions.rectangle; }
         ];

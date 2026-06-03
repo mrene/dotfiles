@@ -5,7 +5,6 @@ _: {
       services.displayManager.gdm = {
         enable = true;
         autoSuspend = false;
-        wayland = true;
       };
       services.desktopManager.gnome.enable = true;
 
